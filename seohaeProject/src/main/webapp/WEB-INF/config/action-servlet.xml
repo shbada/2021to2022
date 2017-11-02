@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	">
+	
+	<!-- 컴포넌트(java bean) 자동 검색해서 객체를 생성 해준다 -->
+	<!-- 프로젝트에서 패키지 추가 시 등록  -->
+	<!-- ex) <context:component-scan base-package="com.co.kr2" /> 새로운 패키지 -->	
+	<!-- base-package로 부터 스캔을 할 때, spring mvc에 관련된 Controller 타입만 스캔 한다.
+	기본 필터의 사용을 false로 지정하면 @Component, @Repository, @Service, @Controller
+	어노테이션을 사용하는 클래스를 bean으로 인식하지 않는다. -->
+	<context:component-scan base-package="com.co.kr" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<context:component-scan base-package="com.co.kr">
+		<context:include-filter  type="annotation"  expression="org.springframework.stereotype.Component"/>
+		<context:include-filter  type="annotation"  expression="org.springframework.stereotype.Service"/>
+		<context:include-filter  type="annotation"  expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	
+	<!-- <mvc:annotation-driven /> -->
+	<annotation-driven />
+	
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- URI path를 잡아준다 -->
+<!-- 	<interceptors>
+		<interceptor>
+			<mapping path="/**" />
+			<beans:bean class="com.co.kr.common.session.controller.SessionMgrController"></beans:bean>
+		</interceptor>
+	</interceptors> -->
+    
+    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+    <beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+    
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- view resolver(뷰 리졸버, 뷰 해석기) beans 테그를 읽어서 메모리에 올린다. -->
+    <beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1" 
+    	p:viewClass="org.springframework.web.servlet.view.JstlView" 
+    	p:prefix="/WEB-INF/views/" 
+    	p:suffix=".jsp">
+   	</beans:bean>
+   	
+   	<beans:bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<beans:property name="alwaysUseFullPath" value="true"/>
+	</beans:bean>
+   	
+   	<!-- Json data를 받기 위한 설정 -->
+   	<beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="alwaysUseFullPath" value="true"/>
+		<beans:property name="messageConverters">
+			<beans:list>
+     			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+     				<beans:property name="supportedMediaTypes">
+				     <beans:list>
+				      <beans:value>text/plain;charset=UTF-8</beans:value>
+				      <beans:value>text/html</beans:value> 
+				      <beans:value>application/json;charset=UTF-8</beans:value> 
+				      <beans:value>application/x-www-form-urlencoded</beans:value>
+				     </beans:list>
+				    </beans:property>
+     			</beans:bean>
+    		</beans:list>
+   		</beans:property>
+	</beans:bean>
+	
+	<!-- 다국어 처리 위한 메세지 설정 -->
+	<!-- ResourceBundleMessageSource 부분이 바로 위에서 저장된 messages파일들을 읽어오는 부분이다. 해당언어의 파일들이 존재하면 된다. basenames에서 경로/파일명앞부분를 적어준다. -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+	     	<beans:list>
+				<beans:value>locale/messages/message-common</beans:value>
+	     	</beans:list>
+     	</beans:property>
+     	<beans:property name="cacheSeconds">
+     		<beans:value>60</beans:value>
+     	</beans:property>
+	</beans:bean>
+	
+	<!-- localeResolver에서 다국어처리 방법을 선택한다. localeResolver는 3가지 종류가 있다. 디폴트는 AceeptHeaderLocaleResolver이다. 
+	즉, localeResolver를 별도로 구현하지 않으면 AceeptHeaderLocaleResolver가 브라우저의 설정된 언어값으로 읽어들여 처리한다. 이 값은 변경이 불가능하다.
+	따라서 사용자가 링크를 통해서 영어, 한국어, 일어등으로 자유롭게 변경하려면 localeResolver를 AceeptHeaderLocaleResolver가 아닌 다른 것으로 선언해야 한다.
+	반면에 그냥 브라우저에 세팅된 언어로 설정하려면 localeResolver를 없애면 된다. -->
+	
+	<!-- SessionLocaleResolver request가 가지고 있는 session으로 부터 locale정보를 가져온다.
+	session에 있는 값을 가져오되, 만약 값이 없다면 defaultLocale로 설정을 지정할 수 있다. 아마 맨처음 접근시에는 session값이 없으므로 defaultLocale를 읽게 된다.
+	위에서는 SessionLocaleResolver를 정의하고 defaultLocale를 ko로 했으므로 브라우저에 세팅된 언어보다 아래에 설정된 언어로 표시하게 된다. -->
+	 <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="ko" />
+	</beans:bean>
+	
+	<!-- CookieLocaleResolver는 이름에서 알수있듯이 언어를 변경하고 쿠키에 값을 저장한다. -->
+	<!--
+	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" >
+		<beans:property name="defaultLocale" value="ko" />
+	    <beans:property name="cookieName" value="home-lang"/>   
+	    <beans:property name="cookieMaxAge" value="-1"/>
+	    <beans:property name="cookiePath" value="/"/>
+	</beans:bean>
+ 	-->
+ 	<!-- 만약 저장된 쿠키값이 없어서 특정값으로 세팅하고자 한다면 defaultLocale를 추가하면 된다. -->
+	<!-- <beans:property name="defaultLocale" value="ko" /> -->
+	<!-- SessionLocaleResolver나 CookieLocaleResolver에 defaultLocale이 없다면 브라우저의 언어설정을 따르게 된다. -->
+	
+	<mvc:interceptors>
+    	<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    		<beans:property name="paramName" value="lang" />
+    	</beans:bean>
+    </mvc:interceptors>
+	
+	<!-- 모든 페이지에서 post방식으로 전송 한 경우 뒤로가기 버튼 누르면 만료된 페이지로 뜸 (no cache) 뒤로가기 막기-->
+	<!-- <interceptors> 
+		<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+		 <beans:property name="cacheSeconds" value="0"/>
+		 <beans:property name="useExpiresHeader" value="true"/>
+		 <beans:property name="useCacheControlHeader" value="true"/>
+		 <beans:property name="useCacheControlNoStore" value="true"/>
+		</beans:bean>
+	</interceptors> -->
+	<!-- 특정 url만 캐시사용안함 (만료 시킴) -->
+	<interceptors>
+		 <interceptor>
+		 	<mapping path="/main/freeBoardSelectList"/>
+		 	<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+				 <beans:property name="cacheSeconds" value="0"/>
+				 <beans:property name="useExpiresHeader" value="true"/>
+				 <beans:property name="useCacheControlHeader" value="true"/>
+				 <beans:property name="useCacheControlNoStore" value="true"/>
+			</beans:bean>
+		 </interceptor>
+	</interceptors>
+	
+	<mvc:resources mapping="/favicon.ico" location="../favicon.ico" />
+
+</beans:beans>
