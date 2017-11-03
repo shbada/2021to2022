@@ -2,7 +2,7 @@
 /**
  * 메인페이지 상단 부분
  * @author seohae
- * @since 2017. 11. 02.
+ * @since 2017. 11. 03.
  * @version 1.0
  * @see
  *
@@ -33,7 +33,7 @@
 	                                    <span class="icon-bar"></span>
 	                                    <span class="icon-bar"></span>
 	                                </button>
-	                                <a class="navbar-brand" href="#home">
+	                                <a class="navbar-brand" href="/main.do">
 	                                    <img src="assets/images/logo.png"/>
 	                                </a>
 	                            </div>
@@ -45,9 +45,9 @@
 	                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	
 	                                <ul class="nav navbar-nav navbar-right">
-	                                    <li><a href="#home">HOME</a></li>
-	                                    <li><a href="#history">ABOUT US</a></li>
-	                                    <li><a href="#portfolio">PORTFOLIO</a></li>
+	                                    <li><a href="/main.do">HOME</a></li>
+	                                    <li><a href="/noticeList.do">공지사항</a></li>
+	                                    <li><a href="#portfolio">자유게시판</a></li>
 	                                    <li><a href="#pricing">PRICING</a></li>
 	                                    <li><a href="#team">TEAM</a></li>
 	                                    <li><a href="#blog">BLOG</a></li>
@@ -83,8 +83,8 @@
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
 	                                    <div class="home_btn">
-	                                        <a href="" class="btn btn-lg m_t_10">GET STARTED NOW</a>
-	                                        <a href="" class="btn btn-default">LEARN MORE</a>
+	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
 	                                    </div>
 	
 	                                </div>
@@ -98,8 +98,8 @@
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
 	                                    <div class="home_btn">
-	                                        <a href="" class="btn btn-lg m_t_10">GET STARTED NOW</a>
-	                                        <a href="" class="btn btn-default">LEARN MORE</a>
+	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
 	                                    </div>
 	
 	                                </div>
@@ -113,8 +113,8 @@
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
 	                                    <div class="home_btn">
-	                                        <a href="" class="btn btn-lg m_t_10">GET STARTED NOW</a>
-	                                        <a href="" class="btn btn-default">LEARN MORE</a>
+	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
 	                                    </div>
 	
 	                                </div>

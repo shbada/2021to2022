@@ -14,41 +14,33 @@
  * </pre>
  */
 
-package com.co.kr.main.controller;
+package com.co.kr.user.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.co.kr.user.vo.UserVo;
+
 @Controller
-public class MainController {
+public class MemberController {
 	
-	private Log log = LogFactory.getLog(MainController.class);
-	
-	/**
-	    * @Method mainSelectView
-	    * @Date 2017. 11. 02.
-	    * @Writter seohae
-	    * @Discript 메인페이지
-	    * @Return String
-	  */
-	
-	@RequestMapping(value="/main")
-	public String MainSelectView() {
-		return "main/mainPage";
-	}
+	private Log log = LogFactory.getLog(MemberController.class);
 	
 	/**
-	    * @Method MainTop
+	    * @Method CreateUser
 	    * @Date 2017. 11. 03.
 	    * @Writter seohae
-	    * @Discript 메인페이지 상단부분
+	    * @Discript 회원가입 페이지
 	    * @Return String
 	  */
 	
-	@RequestMapping(value="/mainTop")
-	public String MainTop() {
-		return "main/mainTopPage";
+	@RequestMapping(value="/createUser")
+	public String CreateUser(@ModelAttribute("userVo") UserVo userVo, Model model) {
+		return "member/createUser";
 	}
+	
 }

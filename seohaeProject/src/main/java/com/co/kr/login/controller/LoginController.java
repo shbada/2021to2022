@@ -14,7 +14,7 @@
  * </pre>
  */
 
-package com.co.kr.main.controller;
+package com.co.kr.login.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,33 +22,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainController {
+public class LoginController {
 	
-	private Log log = LogFactory.getLog(MainController.class);
-	
-	/**
-	    * @Method mainSelectView
-	    * @Date 2017. 11. 02.
-	    * @Writter seohae
-	    * @Discript 메인페이지
-	    * @Return String
-	  */
-	
-	@RequestMapping(value="/main")
-	public String MainSelectView() {
-		return "main/mainPage";
-	}
+	private Log log = LogFactory.getLog(LoginController.class);
 	
 	/**
-	    * @Method MainTop
+	    * @Method LoginPage
 	    * @Date 2017. 11. 03.
 	    * @Writter seohae
-	    * @Discript 메인페이지 상단부분
+	    * @Discript 로그인 페이지
 	    * @Return String
 	  */
 	
-	@RequestMapping(value="/mainTop")
-	public String MainTop() {
-		return "main/mainTopPage";
+	@RequestMapping(value="/login")
+	public String LoginPage() {
+		return "login/login";
 	}
+	
 }
