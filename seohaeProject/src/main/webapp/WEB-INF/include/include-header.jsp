@@ -29,6 +29,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 <title>서해 프로젝트 (2017.11.02~)</title>
+
+<link rel="stylesheet" href="/assets/css/iconfont.css">
+<link rel="stylesheet" href="/assets/css/slick/slick.css">
+<link rel="stylesheet" href="/assets/css/slick/slick-theme.css">
+<link rel="stylesheet" href="/assets/css/stylesheet.css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="/assets/css/plugins.css" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/responsive.css" />
+
+<script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<script src="/assets/js/vendor/jquery-1.11.2.min.js"></script>
+<script src="/assets/js/vendor/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<script src="/assets/js/jquery.mixitup.min.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/jquery.masonry.min.js"></script>
+<script src="/assets/css/slick/slick.js"></script>
+<script src="/assets/css/slick/slick.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
  
 </head>
 <body>

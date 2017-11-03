@@ -35,7 +35,12 @@ public class MainController {
 	  */
 	
 	@RequestMapping(value="/main")
-	public String mainSelectView() {
+	public String MainSelectView() {
 		return "main/mainPage";
+	}
+	
+	@RequestMapping(value="/mainTop")
+	public String MainTop() {
+		return "main/mainTopPage";
 	}
 }
