@@ -16,6 +16,25 @@
  %>
  
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+function sessionLogOut() {
+	var goUrl = 'http://' + $(location).attr('host') + '/main.do';
+    if (confirm('로그아웃 하시겠습니까?')) {
+      $.ajax({
+           type:"POST",
+           url:"/logOut.do",
+           dataType:"JSON",
+           async: false,
+           complete: function() {
+              location.href = goUrl;
+           },
+           error: function(xhs, status, error) {
+         }
+        });
+   }
+}
+</script>
 <div class='preloader'><div class='loaded'>&nbsp;</div></div>
 	<div class="culmn">
 	    <header id="main_menu" class="header navbar-fixed-top">            
@@ -82,11 +101,18 @@
 	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <div class="home_btn">
-	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
-	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
-	                                    </div>
-	
+	                                    <c:if test="${sessionScope.userId  == null }">
+		                                    <div class="home_btn">
+		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
+		                                    </div>
+	                                    </c:if>
+	                                    <c:if test="${sessionScope.userId  != null }">
+		                                    <div class="home_btn">
+		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                    </div>
+	                                    </c:if>
 	                                </div>
 	                            </div>
 	                            <div class="single_home_slider">
@@ -97,11 +123,18 @@
 	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <div class="home_btn">
-	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
-	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
-	                                    </div>
-	
+	                                    <c:if test="${sessionScope.userId  == null }">
+		                                    <div class="home_btn">
+		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
+		                                    </div>
+	                                    </c:if>
+	                                    <c:if test="${sessionScope.userId  != null }">
+		                                    <div class="home_btn">
+		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                    </div>
+	                                    </c:if>
 	                                </div>
 	                            </div>
 	                            <div class="single_home_slider">
@@ -112,11 +145,18 @@
 	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
 	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <div class="home_btn">
-	                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
-	                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
-	                                    </div>
-	
+	                                    <c:if test="${sessionScope.userId  == null }">
+		                                    <div class="home_btn">
+		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
+		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
+		                                    </div>
+	                                    </c:if>
+	                                    <c:if test="${sessionScope.userId  != null }">
+		                                    <div class="home_btn">
+		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                    </div>
+	                                    </c:if>
 	                                </div>
 	                            </div>
 	                        </div>

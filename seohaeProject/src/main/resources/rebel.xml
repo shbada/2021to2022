@@ -13,11 +13,6 @@
 
 	<web>
 		<link target="/">
-			<dir name="C:/Users/seohae/Desktop/seohae Project/git/seohaeProject/target/m2e-wtp/web-resources">
-				<exclude name="/"/>
-			</dir>
-		</link>
-		<link target="/">
 			<dir name="C:/Users/seohae/Desktop/seohae Project/git/seohaeProject/src/main/webapp">
 			</dir>
 		</link>
