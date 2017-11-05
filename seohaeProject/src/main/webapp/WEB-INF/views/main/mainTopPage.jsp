@@ -19,19 +19,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 function sessionLogOut() {
-	var goUrl = 'http://' + $(location).attr('host') + '/main.do';
     if (confirm('로그아웃 하시겠습니까?')) {
-      $.ajax({
-           type:"POST",
-           url:"/logOut.do",
-           dataType:"JSON",
-           async: false,
-           complete: function() {
-              location.href = goUrl;
-           },
-           error: function(xhs, status, error) {
-         }
-        });
+     	location.href="/logOut.do";
    }
 }
 </script>
@@ -109,7 +98,7 @@ function sessionLogOut() {
 	                                    </c:if>
 	                                    <c:if test="${sessionScope.userId  != null }">
 		                                    <div class="home_btn">
-		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
 		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
 		                                    </div>
 	                                    </c:if>
@@ -131,7 +120,7 @@ function sessionLogOut() {
 	                                    </c:if>
 	                                    <c:if test="${sessionScope.userId  != null }">
 		                                    <div class="home_btn">
-		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
 		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
 		                                    </div>
 	                                    </c:if>
@@ -153,7 +142,7 @@ function sessionLogOut() {
 	                                    </c:if>
 	                                    <c:if test="${sessionScope.userId  != null }">
 		                                    <div class="home_btn">
-		                                        <a href="#" class="btn btn-lg m_t_10">회원정보수정</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
 		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
 		                                    </div>
 	                                    </c:if>

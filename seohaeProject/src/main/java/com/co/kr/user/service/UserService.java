@@ -15,4 +15,18 @@ public interface UserService {
 	public UserVo findAccount(String email);
 
 	public void userChangePwUpdate(UserVo userVo);
+	
+	public UserVo editUser(String userId);
+
+	public void editUserSave(UserVo userVo);
+
+	public UserVo CheckEmail(UserVo userVo);
+
+	public UserVo memberEmailCheck(UserVo userVo);
+	
+	void memberDelete(UserVo userVo);
+
+	void pwUpdateOk(UserVo userVo);
+	
+	UserVo CheckPw(UserVo userVo);
 }

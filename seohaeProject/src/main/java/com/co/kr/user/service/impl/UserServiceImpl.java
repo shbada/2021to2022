@@ -46,4 +46,42 @@ public class UserServiceImpl implements UserService {
 	public void userChangePwUpdate(UserVo userVo) {
 		userDao.userChangePwUpdate(userVo);
 	}
+	
+	@Override
+	public UserVo editUser(String userId) {
+		return userDao.editUser(userId);
+	}
+
+	@Override
+	public void editUserSave(UserVo userVo) {
+		userDao.editUserSave(userVo);
+	}
+	
+	@Override
+	public UserVo CheckEmail(UserVo userVo) {
+		return userDao.CheckEmail(userVo);
+	}
+	
+	@Override
+	public UserVo memberEmailCheck(UserVo userVo) {
+		return userDao.memberEmailCheck(userVo);
+	}
+	
+	/** 비밀번호 체크 */ 
+	@Override
+	public UserVo CheckPw(UserVo userVo) {
+		return userDao.CheckPw(userVo);
+	}
+	
+	/** 회원 탈퇴 */
+	@Override
+	public void memberDelete(UserVo userVo) {
+		userDao.memberDelete(userVo);
+	}
+	
+	/** 비밀번호 변경 */
+	@Override
+	public void pwUpdateOk(UserVo userVo) {
+		userDao.pwUpdateOk(userVo);
+	}
 }

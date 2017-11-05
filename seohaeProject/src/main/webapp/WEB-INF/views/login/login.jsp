@@ -141,8 +141,8 @@
                             <h2>LOGIN</h2>
                         </div>
                         <p> 가입하신 회원님의 아이디와 비밀번호를 입력해주세요. 가입하지않은 회원님께서는 <a href="/createUser.do" style="color: red">회원가입</a> 페이지를 통해 회원가입 부탁드립니다.
-                        	아이디를 잊으셨으면, <a href="/createUser.do" style="color: red">아이디 찾기</a> 게시판으로 이동해주세요. 
-                        	비밀번호를 잊으셨으면, <a href="/createUser.do" style="color: red">비밀번호 찾기</a> 게시판으로 이동해주세요.</p>
+                        	아이디를 잊으셨으면, <a href="/idFind.do" style="color: red">아이디 찾기</a> 게시판으로 이동해주세요. 
+                        	비밀번호를 잊으셨으면, <a href="/pwFind.do" style="color: red">비밀번호 찾기</a> 게시판으로 이동해주세요.</p>
 
                         <a href="" class="btn btn-lg">1:1 문의게시판</a>
                     </div>

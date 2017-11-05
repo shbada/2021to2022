@@ -54,6 +54,7 @@
 <script src="/assets/css/slick/slick.min.js"></script>
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
+<script src="/common/common.js"></script>
  
 </head>
 <body>

@@ -17,7 +17,9 @@
 package com.co.kr.login.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.co.kr.login.LoginManager;
 import com.co.kr.login.service.LoginService;
@@ -121,7 +124,7 @@ public class LoginController {
 				loginVo.setIpAddr(getClientIP(request));
 			}
 		}
-
+		
 		return redirectUrl;
 	}
 	
@@ -159,11 +162,13 @@ public class LoginController {
 		* @Discript 로그아웃
 		* @Return String
 		*/
-		@RequestMapping(value="/logOut", method=RequestMethod.POST)
-		@ResponseBody
-		public String Logout(HttpSession session) throws IOException{
-			session.invalidate(); //세션 종료시킴 -> 로그아웃
-			return "ok";
+	   
+	   @RequestMapping(value = "/logOut", method = RequestMethod.GET)
+		public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		   	HttpSession session = request.getSession();
+			session.invalidate();
+			
+			return "main/mainPage";
 		}
 }
-	

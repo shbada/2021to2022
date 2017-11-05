@@ -89,4 +89,77 @@
 			WHERE USER_ID = #{userId}
 		/*com.co.kr.user.dao.userDao.userChangePwUpdate - 회원 비밀번호 변경 */
 	</update>
+	
+	<select id="editUser" resultType="com.co.kr.user.vo.UserVo">
+		SELECT
+			USER_ID,
+			USER_NM,
+			USER_EMAIL,
+			USER_PHONE,
+			USER_ZIP_CODE,
+			USER_FIRST_ADDR,
+			USER_SECOND_ADDR
+			FROM USERS
+		WHERE USER_ID = #{userId}
+		
+		/*com.co.kr.user.dao.userDao.editUser - 회원정보 조회 */
+	</select>
+	
+	<update id="editUserSave">
+		UPDATE USERS
+			SET USER_NM = #{userNm},
+				USER_EMAIL = #{userEmail},
+				USER_PW = #{userPw},
+				USER_PHONE = #{userPhone},
+				USER_ZIP_CODE = #{userZipCode},
+				USER_FIRST_ADDR = #{userFirstAddr},
+				USER_SECOND_ADDR = #{userSecondAddr}
+			WHERE USER_ID = #{userId}
+			
+		/*com.co.kr.user.dao.userDao.editUserSave - 회원정보 수정완료 */
+	</update>
+	
+	<select id="CheckEmail" parameterType="com.co.kr.user.vo.UserVo" resultType="com.co.kr.user.vo.UserVo">
+		   	SELECT
+		       USER_EMAIL
+			FROM USERS 
+				WHERE USER_ID=#{userId}
+		
+		/* com.co.kr.USERS.controller.USERSController.CheckEmail - 변경할 이메일이 원래 이메일과 같은지 확인*/
+   </select>
+   
+	<select id="USERSEmailCheck" resultType="com.co.kr.user.vo.UserVo">
+		SELECT USER_EMAIL
+		FROM USERS
+		WHERE USER_EMAIL = #{userEmail}
+
+		/* com.co.kr.user.dao.USERSEmailCheck - 변경할 이메일의 중복확인*/
+	</select>
+	
+   <select id="CheckPw" parameterType="com.co.kr.user.vo.UserVo" resultType="com.co.kr.user.vo.UserVo">
+		SELECT USER_PW
+			FROM USERS
+				WHERE USER_ID = #{userId}
+
+		/* com.co.kr.user.controller.USERSController.CheckPw - 비밀번호 체크*/
+	</select>
+
+	<update id="memberDelete">
+		UPDATE USERS
+			SET USER_DEL_YN ='Y',
+				USER_DEL_DE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+					WHERE user_id = #{userId}
+					
+		/* com.co.kr.user.controller.USERSController.USERSDelete - 회원 탈퇴 */
+	</update>
+	
+	<update id="pwUpdateOk" parameterType="com.co.kr.user.vo.UserVo">
+		<![CDATA[
+			UPDATE USERS
+				SET 
+					USER_PW = #{userPw}
+				WHERE USER_ID = #{userId}
+		]]>
+       /* com.co.kr.user.controller.USERSController.pwUpdate - 비밀번호 변경 */
+	</update>
 </mapper>

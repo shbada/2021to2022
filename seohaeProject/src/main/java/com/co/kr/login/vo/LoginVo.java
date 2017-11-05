@@ -40,6 +40,8 @@ public class LoginVo {
 	private String userSecondAddr;
 	@Comment("마지막 접속일")
 	private String lastContactFmtDt;
+	@Comment("자동로그인")
+	private boolean useCookie;
 
 	public int getRegistNo() {
 		return registNo;
@@ -185,6 +187,14 @@ public class LoginVo {
 		this.lastContactFmtDt = lastContactFmtDt;
 	}
 
+	public boolean isUseCookie() {
+		return useCookie;
+	}
+
+	public void setUseCookie(boolean useCookie) {
+		this.useCookie = useCookie;
+	}
+
 	@Override
 	public String toString() {
 		return "LoginVo [registNo=" + registNo + ", userId=" + userId + ", userPw=" + userPw + ", tmprPwNo=" + tmprPwNo
@@ -192,7 +202,6 @@ public class LoginVo {
 				+ userLevel + ", userDelYn=" + userDelYn + ", userDelDe=" + userDelDe + ", regDe=" + regDe
 				+ ", passwordLastChangeDe=" + passwordLastChangeDe + ", failCnt=" + failCnt + ", ipAddr=" + ipAddr
 				+ ", userZipCode=" + userZipCode + ", userFirstAddr=" + userFirstAddr + ", userSecondAddr="
-				+ userSecondAddr + ", lastContactFmtDt=" + lastContactFmtDt + "]";
+				+ userSecondAddr + ", lastContactFmtDt=" + lastContactFmtDt + ", useCookie=" + useCookie + "]";
 	}
-
 }

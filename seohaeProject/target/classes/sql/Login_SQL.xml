@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="loginSql">
+   <select id="selectUserLoginCheck" parameterType="com.co.kr.login.vo.LoginVo" resultType="com.co.kr.login.vo.LoginVo">
+		   	SELECT REGIST_NO
+		       ,USER_ID
+		       ,USER_PW
+		       ,TMPR_PW_NO
+		       ,USER_NM
+		       ,USER_EMAIL
+		       ,USER_PHONE
+		       ,USER_FIRST_ADDR
+		       ,USER_SECOND_ADDR
+		       ,LAST_CONTACT_FMT_DT
+		FROM USERS 
+		WHERE USER_ID=#{userId}
+		AND USER_DEL_YN ='N'
+				
+		/* com.co.kr.common.login.dao.LoginDao.selectUserLoginCheck - 로그인 체크 */
+   </select>
+   
+   <update id="keepLogin">
+		update users set sessionKey = #{sessionId},
+		sessionLimit = #{next} where
+		user_id = #{user_id}
+		
+		/* com.co.kr.common.login.dao.LoginDao.keepLogin - 자동로그인 */
+	</update>
+</mapper>
