@@ -23,6 +23,10 @@ function sessionLogOut() {
      	location.href="/logOut.do";
    }
 }
+
+function MessageList(){ 
+	window.open("/messageList.do","쪽지함","width=650, height=600, top:100, left:100");
+}
 </script>
 <div class='preloader'><div class='loaded'>&nbsp;</div></div>
 	<div class="culmn">
@@ -51,6 +55,7 @@ function sessionLogOut() {
 	                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                            	<c:if test="${sessionScope.userId  != null }">
 		                           		<ul class="nav navbar-nav navbar-left">
+		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
 		                                    <li><a href="/editUser.do" >회원정보수정</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
@@ -61,7 +66,7 @@ function sessionLogOut() {
 	                                    <li><a href="#portfolio">자유게시판</a></li>
 	                                    <li><a href="#portfolio">자격증 정보</a></li>
 	                                    <li><a href="#pricing">취업 정보</a></li>
-	                                    <li><a href="#blog">교재구매</a></li>
+	                                    <li><a href="/bookList.do">교재구매</a></li>
 	                                    <li><a href="#team">고객센터</a></li>
 	                                </ul>
 	                            </div>

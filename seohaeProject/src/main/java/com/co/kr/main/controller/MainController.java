@@ -16,15 +16,28 @@
 
 package com.co.kr.main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.co.kr.message.service.MessageService;
+import com.co.kr.message.vo.MessageVo;
+import com.co.kr.user.vo.UserVo;
 
 @Controller
 public class MainController {
 	
 	private Log log = LogFactory.getLog(MainController.class);
+	
+	@Autowired
+	private MessageService messageService;
 	
 	/**
 	    * @Method mainSelectView
@@ -47,8 +60,17 @@ public class MainController {
 	    * @Return String
 	  */
 	
-	@RequestMapping(value="/mainTop")
-	public String MainTop() {
+	@RequestMapping(value="/mainTop", method={RequestMethod.GET, RequestMethod.POST})
+	public String MainTop(@ModelAttribute MessageVo messageVo, HttpSession session, Model model) {
+		if(session.getAttribute("userId") == null) {
+			return "main/mainTopPage";
+		}
+		String user_id = (String) session.getAttribute("userId");
+		
+		int messageCount = messageService.messageNewCount(user_id);
+		System.out.println(messageCount);
+		
+		model.addAttribute("messageCount", messageCount);
 		return "main/mainTopPage";
 	}
 }
