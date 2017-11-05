@@ -48,30 +48,28 @@ function sessionLogOut() {
 	
 	                            <!-- Collect the nav links, forms, and other content for toggling -->
 	
-	
-	
 	                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	
+	                            	<c:if test="${sessionScope.userId  != null }">
+		                           		<ul class="nav navbar-nav navbar-left">
+		                                    <li><a href="/editUser.do" >회원정보수정</a></li>
+		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
+		                                </ul>
+	                                </c:if>
 	                                <ul class="nav navbar-nav navbar-right">
 	                                    <li><a href="/main.do">HOME</a></li>
 	                                    <li><a href="/noticeList.do">공지사항</a></li>
 	                                    <li><a href="#portfolio">자유게시판</a></li>
-	                                    <li><a href="#pricing">PRICING</a></li>
-	                                    <li><a href="#team">TEAM</a></li>
-	                                    <li><a href="#blog">BLOG</a></li>
-	                                    <li><a href="#contact">CONTACT</a></li>
+	                                    <li><a href="#portfolio">자격증 정보</a></li>
+	                                    <li><a href="#pricing">취업 정보</a></li>
+	                                    <li><a href="#blog">교재구매</a></li>
+	                                    <li><a href="#team">고객센터</a></li>
 	                                </ul>
-	
-	
 	                            </div>
-	
 	                        </div>
 	                    </nav>
 	                </div>	
 	            </div>
-	
 	        </div>
-	
 	    </div>
 	</header> <!--End of header -->
 	<!--home Section -->
@@ -82,72 +80,87 @@ function sessionLogOut() {
 	                <div class="row">
 	                    <div class="col-sm-12 ">
 	                        <div class="main_home_slider text-center">
-	                            <div class="single_home_slider">
-	                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-	                                    <h3>Our Clients Are Our First Priority</h3>
-	                                    <h1>WELCOME TO BINO</h1>
-	                                    <div class="separator"></div>
-	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
-	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <c:if test="${sessionScope.userId  == null }">
+	                        	<c:if test="${sessionScope.userId  == null }">
+		                            <div class="single_home_slider">
+		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+		                                    <h3>Our Clients Are Our First Priority</h3>
+		                                    <h1>WELCOME TO BINO</h1>
+		                                    <div class="separator"></div>
+		                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+		                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
+		                                        of type and scrambled it to make a type specimen book.</p>
 		                                    <div class="home_btn">
 		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
 		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
 		                                    </div>
-	                                    </c:if>
-	                                    <c:if test="${sessionScope.userId  != null }">
-		                                    <div class="home_btn">
-		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
-		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                </div>
+		                            </div>
+		                        </c:if>
+		                        <!--  -->
+		                        <c:if test="${sessionScope.userId  != null }">
+		                            <div class="single_home_slider">
+		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+		                                	<div class="home_btn">
+		                                    	<a href="#" class="btn btn-default">기초 개발 언어의 질문과 답변</a>
 		                                    </div>
-	                                    </c:if>
-	                                </div>
-	                            </div>
-	                            <div class="single_home_slider">
-	                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-	                                    <h3>Our Clients Are Our First Priority</h3>
-	                                    <h1>WELCOME TO BINO</h1>
-	                                    <div class="separator"></div>
-	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
-	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <c:if test="${sessionScope.userId  == null }">
+		                                    <div class="separator"></div>
+		                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+		                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
+		                                        of type and scrambled it to make a type specimen book.</p>
 		                                    <div class="home_btn">
-		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
-		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">JAVA</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">C</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Python</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Ruby</a>
 		                                    </div>
-	                                    </c:if>
-	                                    <c:if test="${sessionScope.userId  != null }">
+		                                </div>
+		                            </div>
+		                        </c:if>
+		                        <!--  -->
+		                        <c:if test="${sessionScope.userId  != null }">
+		                            <div class="single_home_slider">
+		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
 		                                    <div class="home_btn">
-		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
-		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                    	<a href="#" class="btn btn-default">개발 분야별 언어의 질문과 답변</a>
 		                                    </div>
-	                                    </c:if>
-	                                </div>
-	                            </div>
-	                            <div class="single_home_slider">
-	                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-	                                    <h3>Our Clients Are Our First Priority</h3>
-	                                    <h1>WELCOME TO BINO</h1>
-	                                    <div class="separator"></div>
-	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-	                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
-	                                        of type and scrambled it to make a type specimen book.</p>
-	                                    <c:if test="${sessionScope.userId  == null }">
+		                                    <div class="separator"></div>
+		                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+		                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
+		                                        of type and scrambled it to make a type specimen book.</p>
 		                                    <div class="home_btn">
-		                                        <a href="/login.do" class="btn btn-lg m_t_10">로그인</a>
-		                                        <a href="/createUser.do" class="btn btn-default">회원가입</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Web</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Android</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Network</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Database</a>
 		                                    </div>
-	                                    </c:if>
-	                                    <c:if test="${sessionScope.userId  != null }">
+		                                </div>
+		                            </div>
+		                        </c:if>
+		                        <!--  -->
+		                        <c:if test="${sessionScope.userId  != null }">
+		                            <div class="single_home_slider">
+		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
 		                                    <div class="home_btn">
-		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">회원정보수정</a>
-		                                        <a href="#" class="btn btn-default" onclick="javascript:sessionLogOut()">로그아웃</a>
+		                                    	<a href="#" class="btn btn-default">프로그래밍 언어 무료 강의</a>
 		                                    </div>
-	                                    </c:if>
-	                                </div>
-	                            </div>
+		                                    <div class="separator"></div>
+		                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+		                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
+		                                        of type and scrambled it to make a type specimen book.</p>
+		                                    <div class="home_btn">
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">JAVA</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">C</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Python</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">JSP</a>
+		                                        <br/>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">SPRING</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Html&Css</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Javascript</a>
+		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Database</a>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </c:if>
 	                        </div>
 	                    </div>
 	                </div>
