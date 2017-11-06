@@ -57,6 +57,7 @@ function MessageList(){
 		                           		<ul class="nav navbar-nav navbar-left">
 		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
 		                                    <li><a href="/editUser.do" >회원정보수정</a></li>
+		                                    <li><a href="/cartList.do" >장바구니</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
 	                                </c:if>

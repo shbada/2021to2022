@@ -1,15 +1,15 @@
 <%    
 /**
- * 공지사항 리스트 페이지
+ * 판매교재 목록
  * @author seohae
- * @since 2017. 11. 03.
+ * @since 2017. 11. 06.
  * @version 1.0
  * @see
  *
  * <pre>
  * << 개정이력(Modification Information) >>
  *   
- *  1. (2017. 11. 03 / seohae / 최초생성)
+ *  1. (2017. 11. 06 / seohae / 최초생성)
  *
  * </pre>
  */
@@ -18,6 +18,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <jsp:include page="/mainTop.do" />
+<script>
+$(function(){
+	$("#upload").click(function(){
+		location.href="bookUpload.do";
+	});
+	
+});
+
+function btnAdd(idx){
+	if(confirm("해당 교재를 장바구니에 담겠습니까?") == true){
+		$.ajax({
+			type:"POST",
+			url : "/cartInsert.do?pdNo="+idx,
+			success: function(result){
+				if(result == 'ok'){
+					 alert("정상적으로 장바구니에 담았습니다.");
+					 location.href="/cartList.do";
+				}
+				if(result == 'fal'){
+					alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+					location.href="/login.do";
+				}
+			},
+			error: function(result){
+				alert('에러가 발생하였습니다.');
+				return;
+			},
+		});
+	}
+}
+
+function listUpdate(idx){ 
+	document.viewTable.pdNo.value = idx;
+	document.viewTable.method="POST";   		
+	document.viewTable.action="<c:url value='/bookUpdate.do' />";   		
+	document.viewTable.submit();
+}
+</script>
 <!-- History section -->
 <section id="history" class="history sections">
     <div class="container">
@@ -61,33 +99,48 @@
                 </div>
                 <div class="work_menu text-center">
                     <div id="filters" class="toolbar mb2 mt2">
-                        <a href="/productList.do" class="btn-md fil-cat filter active" data-filter="all">ALL</a>
-                        <a href="/viewLowPrice" class="btn-md fil-cat filter" data-rel="web" data-filter=".web">낮은가격</a>
-                        <a href="/viewHighPrice" class="btn-md fil-cat filter" data-rel="design" data-filter=".design">높은가격</a>
-                        <a href="/viewName.do" class="btn-md fil-cat filter" data-rel="flyers" data-filter=".flyers">상품명</a>
+                        <button class="btn-md fil-cat filter active" data-filter="all">ALL</button>
+                        <button class="btn-md fil-cat filter" data-rel="web" data-filter=".web">낮은가격</button>
+                        <button class="btn-md fil-cat filter" data-rel="design" data-filter=".design">높은가격</button>
+                        <button class="btn-md fil-cat filter" data-rel="flyers" data-filter=".flyers">상품명</button>
                     </div> 
-
                 </div>
-
+				
                 <div style="clear:both;"></div>     
-                <div id="portfoliowork"> 
-                	<c:forEach var="row" items="${list}">
-	                    <div class="single_portfolio tile scale-anm web grid-item-width2 video" >
-	                       <a href="#" class="link" onclick="javacscript:listDetail('${row.product_no }');">
-								<img src="<c:url value="/img/${row.product_url}" />" width="430px" height="550px">
-							</a>
-	                        <a href="/img/${row.product_url}" class="portfolio-img">
-	                            <div class="grid_item_overlay">
-	                                <div class="separator4"></div>
-	                                <h3>${row.product_name}</h3>
-	                                <p>${row.product_price}원</p>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </c:forEach>
-                </div>
-
-                <div style="clear:both;"></div>  
+                <form name="viewTable" onsubmit="return flase;">
+					<input type="hidden" name="pdNo" value="1">
+		                <div id="portfoliowork"> 
+		                	<c:forEach var="row" items="${list}">
+		                		<input type="hidden" name="pdAmount" value="1">
+                                <input type="hidden" name="pdNo" value="${row.pdNo}">
+								<input type="hidden" name="pdName" value="${row.pdName}">
+								<input type="hidden" name="pdUrl" value="${row.pdUrl}">
+								<input type="hidden" name="pdPrice" value="${row.pdPrice}">
+								
+			                    <div class="single_portfolio tile scale-anm web grid-item-width2 video" >
+			                    	<c:if test="${sessionScope.userId == 'admin' }">
+			                        	<a href="#" class="add_to_cart_button" onclick="javacscript:listUpdate('${row.pdNo }');">상품수정</a>                    
+			                    	</c:if>   
+									<img src="<c:url value="/img/${row.pdUrl}" />" width="430px" height="550px">
+			                            <div class="grid_item_overlay">
+			                                <div class="separator4"></div>
+			                                <h3>[ ${row.pdCg} ] > ${row.pdName}</h3>
+			                                <h4>${row.pdPrice}원</h4>
+			                                <p>${row.pdInfo}</p>
+											
+			                                <button type="button" class="btn btn-lg m_t_10" id="LikeUp">후기댓글</button>
+											<button type="button" class="btn btn-lg m_t_10" onclick="javascript:btnAdd('${row.pdNo}');">장바구니</button>
+			                            </div>
+			                    </div>
+			                </c:forEach>
+		                </div>
+		            </form>
+		            <c:if test="${sessionScope.userId == 'admin' }">
+						<div class="loginButton" style="text-align: center">
+		                    <input style="margin: 10px 0 10px 0" type="button" class="btn btn-lg m_t_10" id="upload" value="상품등록" />
+		                </div>
+	                </c:if>
+	                <div style="clear:both;"></div>  
             </div>
         </div>
     </div><!-- End off container --> 
