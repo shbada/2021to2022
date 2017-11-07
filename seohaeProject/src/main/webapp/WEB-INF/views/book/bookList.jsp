@@ -55,6 +55,30 @@ function listUpdate(idx){
 	document.viewTable.action="<c:url value='/bookUpdate.do' />";   		
 	document.viewTable.submit();
 }
+
+function reviewList(idx){
+	$.ajax({
+		type:"POST",
+		url : "/reviewListCheck.do",
+		success: function(result){
+			if(result == 'ok'){
+				alert("후기댓글을 작성하시면 10 bino가 적립됩니다.");
+				document.viewTable.pdNo.value = idx;
+				document.viewTable.method="POST";   		
+				document.viewTable.action="<c:url value='/reviewList.do' />";   		
+				document.viewTable.submit();
+			}
+			if(result == 'fal'){
+				alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+				location.href="/login.do";
+			}
+		},
+		error: function(result){
+			alert('에러가 발생하였습니다.');
+			return;
+		},
+	});
+}
 </script>
 <!-- History section -->
 <section id="history" class="history sections">
@@ -108,14 +132,10 @@ function listUpdate(idx){
 				
                 <div style="clear:both;"></div>     
                 <form name="viewTable" onsubmit="return flase;">
-					<input type="hidden" name="pdNo" value="1">
+                		<input type="hidden" name="pdAmount" value="1">
+		                <input type="hidden" name="pdNo" value="1">
 		                <div id="portfoliowork"> 
 		                	<c:forEach var="row" items="${list}">
-		                		<input type="hidden" name="pdAmount" value="1">
-                                <input type="hidden" name="pdNo" value="${row.pdNo}">
-								<input type="hidden" name="pdName" value="${row.pdName}">
-								<input type="hidden" name="pdUrl" value="${row.pdUrl}">
-								<input type="hidden" name="pdPrice" value="${row.pdPrice}">
 								
 			                    <div class="single_portfolio tile scale-anm web grid-item-width2 video" >
 			                    	<c:if test="${sessionScope.userId == 'admin' }">
@@ -128,7 +148,7 @@ function listUpdate(idx){
 			                                <h4>${row.pdPrice}원</h4>
 			                                <p>${row.pdInfo}</p>
 											
-			                                <button type="button" class="btn btn-lg m_t_10" id="LikeUp">후기댓글</button>
+			                                <button type="button" class="btn btn-lg m_t_10" onclick="javascript:reviewList('${row.pdNo}');">후기댓글</button>
 											<button type="button" class="btn btn-lg m_t_10" onclick="javascript:btnAdd('${row.pdNo}');">장바구니</button>
 			                            </div>
 			                    </div>
