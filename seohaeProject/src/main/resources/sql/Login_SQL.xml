@@ -13,6 +13,7 @@
 		       ,USER_FIRST_ADDR
 		       ,USER_SECOND_ADDR
 		       ,LAST_CONTACT_FMT_DT
+		       ,USER_LEVEL
 		FROM USERS 
 		WHERE USER_ID=#{userId}
 		AND USER_DEL_YN ='N'

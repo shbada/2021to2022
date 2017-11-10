@@ -53,11 +53,21 @@ function MessageList(){
 	                            <!-- Collect the nav links, forms, and other content for toggling -->
 	
 	                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	                            	<c:if test="${sessionScope.userId  != null }">
+	                            	<c:if test="${sessionScope.userId  != null && sessionScope.userLevel == 'USER'}">
 		                           		<ul class="nav navbar-nav navbar-left">
 		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
 		                                    <li><a href="/editUser.do" >회원정보수정</a></li>
 		                                    <li><a href="/cartList.do" >장바구니</a></li>
+		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
+		                                </ul>
+	                                </c:if>
+	                            	<c:if test="${sessionScope.userLevel  == 'ADMIN' }">
+		                           		<ul class="nav navbar-nav navbar-left">
+		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
+		                                    <li><a href="/allMemberList.do" >모든회원관리</a></li>
+		                                    <li><a href="/allBinoList.do" >bino 전체내역</a></li>
+		                                    <li><a href="/cartList.do" >모든구매내역</a></li>
+		                                    <li><a href="/cartList.do" >1:1 문의내역</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
 	                                </c:if>

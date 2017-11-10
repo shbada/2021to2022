@@ -24,7 +24,7 @@ public interface UserService {
 
 	public UserVo memberEmailCheck(UserVo userVo);
 	
-	void memberDelete(UserVo userVo);
+	void memberDirDelete(UserVo userVo);
 
 	void pwUpdateOk(UserVo userVo);
 	

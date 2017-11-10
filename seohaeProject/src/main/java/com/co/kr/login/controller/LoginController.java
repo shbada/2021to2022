@@ -115,6 +115,7 @@ public class LoginController {
 				session.setAttribute("lastContactFmtDt", checkLoginVo.getLastContactFmtDt());
 				session.setAttribute("userId", checkLoginVo.getUserId());
 				session.setAttribute("userNm", checkLoginVo.getUserNm());
+				session.setAttribute("userLevel", checkLoginVo.getUserLevel());
 				session.setAttribute("userFirstAddr", checkLoginVo.getUserFirstAddr());
 				session.setAttribute("userSecondAddr", checkLoginVo.getUserSecondAddr());
 				session.setAttribute("divGb", userAuthVo.getDivGb());

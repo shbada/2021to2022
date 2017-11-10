@@ -83,7 +83,7 @@ function listDetail(qIdx){
 								<!-- <input type="hidden" name="password" id="password" value="" /> -->
 								<table class="table table-striped b-t text-sm">
 									<colgroup>
-										<c:if test="${sessionScope.userId == 'admin' }">
+										<c:if test="${sessionScope.userLevel == 'ADMIN' }">>
 											<col width="20" />
 										</c:if>
 										<col width="30" />
@@ -98,7 +98,7 @@ function listDetail(qIdx){
 
 									<thead>
 										<tr>
-											<c:if test="${sessionScope.userId == 'admin' }">
+											<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 												<th><input type="checkbox" id="checkall" name="checkall"></th>
 											</c:if>
 											<th>번호</th>
@@ -114,7 +114,7 @@ function listDetail(qIdx){
 									<tbody>
 										<c:forEach var="i" items="${questionList}" varStatus="cnt">
 											<tr>
-												<c:if test="${sessionScope.userId == 'admin' }">
+												<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 													<td><input type="checkbox" name="chkArray" value="${i.qIdx}"></td>
 												</c:if>
 												<td>${i.qIdx}</td>
@@ -124,12 +124,7 @@ function listDetail(qIdx){
 														${i.qTitle}
 													</a>
 												</td>
-												<c:if test="${i.qUserId == 'admin' }">
-													<td>관리자</td>
-												</c:if>
-												<c:if test="${i.qUserId != 'admin' }">
 													<td>${i.qUserId}</td>
-												</c:if>
 												<td>${i.qViewCnt}</td>
 												<c:if test="${i.qAnsYn == 'Y' }">
 													<td>완료</td>

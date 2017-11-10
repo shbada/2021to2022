@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService {
 	
 	/** 회원 탈퇴 */
 	@Override
-	public void memberDelete(UserVo userVo) {
-		userDao.memberDelete(userVo);
+	public void memberDirDelete(UserVo userVo) {
+		userDao.memberDirDelete(userVo);
 	}
 	
 	/** 비밀번호 변경 */

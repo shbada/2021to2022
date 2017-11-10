@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminSql">
+	<!-- 전체 회원 목록 -->
+	<select id="allMemberList" resultType="com.co.kr.user.vo.UserVo">
+		SELECT 		
+				REGIST_NO
+		       ,USER_ID
+		       ,USER_PW
+		       ,TMPR_PW_NO
+		       ,USER_NM
+		       ,USER_EMAIL
+		       ,USER_PHONE
+		       ,USER_FIRST_ADDR
+		       ,USER_SECOND_ADDR
+		       ,LAST_CONTACT_FMT_DT
+		       ,USER_LEVEL
+		       ,BINO
+		       ,USER_DEL_YN
+		       ,REG_DE
+		FROM USERS
+		ORDER BY REGIST_NO asc
+	</select>
+	
+	<delete id="allListDelete" parameterType="com.co.kr.user.vo.UserVo">
+		UPDATE USERS SET USER_DEL_YN = 'Y' WHERE user_id = #{userId}		
+	</delete>		
+	
+	<select id="memberDetail" parameterType="com.co.kr.user.vo.UserVo" resultType="com.co.kr.user.vo.UserVo">
+		SELECT 		
+			REGIST_NO
+		       ,USER_ID
+		       ,USER_PW
+		       ,TMPR_PW_NO
+		       ,USER_NM
+		       ,USER_EMAIL
+		       ,USER_PHONE
+		       ,USER_FIRST_ADDR
+		       ,USER_SECOND_ADDR
+		       ,LAST_CONTACT_FMT_DT
+		       ,USER_LEVEL
+		       ,BINO
+		       ,USER_DEL_YN
+		       ,REG_DE
+		FROM USERS
+		WHERE user_id = #{userId}
+	</select>
+	
+	<update id="memberDelete" parameterType="com.co.kr.user.vo.UserVo">
+		UPDATE USERS SET USER_DEL_YN = 'Y' WHERE user_id = #{userId}		
+	</update>
+	
+	<update id="memberDown" parameterType="com.co.kr.user.vo.UserVo">
+		UPDATE USERS SET USER_LEVEL='USER' WHERE user_id = #{userId}		
+	</update>
+
+	<update id="memberUp" parameterType="com.co.kr.user.vo.UserVo">
+		UPDATE USERS SET USER_LEVEL='ADMIN' WHERE user_id = #{userId}	
+	</update>
+	
+	<select id="binoList" resultType="com.co.kr.bino.vo.BinoVo">
+   		SELECT 
+   				BINO_NO,
+	            BINO,
+				USER_ID,
+				BINO_REGDATE,
+				BINO_YN,
+				BINO_CG
+		FROM BINO
+		ORDER BY BINO_NO
+    
+    /* com.co.kr.bino.dao.BinoDao.userBinoUpdate - 회원 bino 내역 조회 */  
+   </select>
+</mapper>

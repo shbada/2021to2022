@@ -222,7 +222,7 @@ public class UserController {
 	}
 	
 	/**
-	 * @Method MemberDelete
+	 * @Method MemberDirDelete
 	 * @Date 2017. 11. 04.
 	 * @Writter seohae
 	 * @Param 
@@ -232,10 +232,10 @@ public class UserController {
 	 * @Return String
 	 */
 	
-	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
+	@RequestMapping(value="/memberDirDelete", method=RequestMethod.POST)
 	@ResponseBody
-	public String MemberDelete(@ModelAttribute UserVo userVo) throws IOException{
-		userService.memberDelete(userVo);
+	public String MemberDirDelete(@ModelAttribute UserVo userVo) throws IOException{
+		userService.memberDirDelete(userVo);
 		return "ok";
 	}
 	

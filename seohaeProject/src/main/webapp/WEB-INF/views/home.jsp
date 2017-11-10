@@ -76,6 +76,4 @@
         </div>
     </div>
 </section><!-- End of contact section -->
-
-
 <%@ include file="/WEB-INF/include/include-footer.jsp" %>

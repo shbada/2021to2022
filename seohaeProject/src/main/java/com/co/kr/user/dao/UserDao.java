@@ -64,8 +64,8 @@ public class UserDao extends AbstractDAO {
 	}
 	
 	/** 회원 탈퇴 */
-	public void memberDelete(UserVo userVo) {
-		update("userSql.memberDelete", userVo);
+	public void memberDirDelete(UserVo userVo) {
+		update("userSql.memberDirDelete", userVo);
 	}
 	
 	/** 비밀번호 변경 */

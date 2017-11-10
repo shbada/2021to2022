@@ -148,7 +148,7 @@ function listDetail(no){
 								<!-- <input type="hidden" name="password" id="password" value="" /> -->
 								<table class="table table-striped b-t text-sm">
 									<colgroup>
-										<c:if test="${sessionScope.userId == 'admin' }">
+										<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 											<col width="20" />
 										</c:if>
 										<col width="30" />
@@ -161,7 +161,7 @@ function listDetail(no){
 
 									<thead>
 										<tr>
-											<c:if test="${sessionScope.userId == 'admin' }">
+											<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 												<th><input type="checkbox" id="checkall" name="checkall"></th>
 											</c:if>
 											<th>NO</th>
@@ -176,7 +176,7 @@ function listDetail(no){
 									<tbody>
 										<c:forEach var="i" items="${noticeList}" varStatus="cnt">
 											<tr>
-												<c:if test="${sessionScope.userId == 'admin' }">
+												<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 													<td><input type="checkbox" name="chkArray" value="${i.no}"></td>
 												</c:if>
 												<td>${i.no}</td>
@@ -189,12 +189,7 @@ function listDetail(no){
 															</c:if> ${i.title}
 														</a>
 												</td>
-												<c:if test="${i.writer == 'admin' }">
-													<td>관리자</td>
-												</c:if>
-												<c:if test="${i.writer != 'admin' }">
-													<td>${i.writer}</td>
-												</c:if>
+												<td>관리자</td>
 												<td>${i.viewCnt}</td>
 												<td>${i.likeCnt}</td>
 												<td>${i.regdate}</td>
@@ -256,7 +251,7 @@ function listDetail(no){
 							
                             </div>
                         </div>
-                        <c:if test="${sessionScope.userId == 'admin' }">
+                        <c:if test="${sessionScope.userLevel == 'ADMIN' }">
 	                        <div class="loginButton" style="text-align: center">
 	                          <button type="button" class="btn btn-lg m_t_10" name="write" id="write" data-toggle="tooltip" data-placement="bottom">작성</button>
 		                      <button type="button" class="btn btn-lg m_t_10" name="delete" id="delete" data-toggle="tooltip" data-placement="bottom">삭제</button>

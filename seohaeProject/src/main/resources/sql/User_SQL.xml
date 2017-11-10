@@ -144,13 +144,13 @@
 		/* com.co.kr.user.controller.USERSController.CheckPw - 비밀번호 체크*/
 	</select>
 
-	<update id="memberDelete">
+	<update id="memberDirDelete">
 		UPDATE USERS
 			SET USER_DEL_YN ='Y',
 				USER_DEL_DE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 					WHERE user_id = #{userId}
 					
-		/* com.co.kr.user.controller.USERSController.USERSDelete - 회원 탈퇴 */
+		/* com.co.kr.user.controller.USERSController.memberDirDelete - 회원 탈퇴 */
 	</update>
 	
 	<update id="pwUpdateOk" parameterType="com.co.kr.user.vo.UserVo">

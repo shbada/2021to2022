@@ -38,7 +38,7 @@ $(function(){
 				var formData = $("form[name=frm]").serialize(); //값을 다가지고와서 변수에 담는다 (리스트형식으로 값이 들어감)
 				$.ajax({
 					type:"POST",
-					url:"/memberDelete.do",
+					url:"/memberDirDelete.do",
 					dataType:"text",
 					data: formData,
 					success: function(result){

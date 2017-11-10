@@ -228,7 +228,7 @@ function fileDownload(idx){
 							</form>
 	                        	<div class="loginButton" style="text-align: center">
 		                          	 <button type="button" class="btn btn-lg m_t_10" name="list" id="list" data-toggle="tooltip" data-placement="bottom" >목록</button>
-		                          	  <c:if test="${sessionScope.userId == 'admin' }">
+		                          	  <c:if test="${sessionScope.userLevel == 'ADMIN' }">
 			                          	 <button type="button" class="btn btn-lg m_t_10" name="update" id="update" data-toggle="tooltip" data-placement="bottom" >수정</button>
 				                     	 <button type="button" class="btn btn-lg m_t_10" id="delete" data-toggle="tooltip" data-placement="bottom">삭제</button>
 			                     	 </c:if>

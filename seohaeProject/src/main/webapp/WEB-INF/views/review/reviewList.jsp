@@ -194,7 +194,7 @@ function reviewWrite(no){
 								<!-- <input type="hidden" name="password" id="password" value="" /> -->
 								<table class="table table-striped b-t text-sm">
 									<colgroup>
-										<c:if test="${sessionScope.userId == 'admin' }">
+										<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 											<col width="5%" />
 										</c:if>
 										<col width="5%" />
@@ -204,11 +204,11 @@ function reviewWrite(no){
 										<col width="70%" />
 										<col width="20%" />
 									</colgroup>
-									<c:if test="${sessionScope.userId == 'admin' }">
+									<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 										<tfoot>
 											<tr>
 												<c:choose>
-													<c:when test="${sessionScope.userId == 'admin' }">
+													<c:when test="${sessionScope.userLevel == 'ADMIN' }">
 														<td colspan="7">
 													</c:when>
 													<c:otherwise>
@@ -221,7 +221,7 @@ function reviewWrite(no){
 									</c:if>
 									<thead>
 										<tr>
-											<c:if test="${sessionScope.userId == 'admin' }">
+											<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 												<th><input type="checkbox" id="checkall"
 													name="checkall"></th>
 											</c:if>
@@ -237,7 +237,7 @@ function reviewWrite(no){
 									<tbody>
 										<c:forEach var="i" items="${reviewList}" varStatus="cnt">
 											<tr>
-												<c:if test="${sessionScope.userId == 'admin' }">
+												<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 													<td><input type="checkbox" name="chkArray" value="${i.no}"></td>
 												</c:if>
 												<td>${i.rm}</td>

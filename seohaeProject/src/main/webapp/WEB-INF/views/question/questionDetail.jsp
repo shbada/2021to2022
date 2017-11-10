@@ -213,7 +213,7 @@ function listDetail(aIdx){
 		                       	<table class="table table-striped b-t text-sm">
 									<thead>
 										<tr>
-											<c:if test="${sessionScope.userId == 'admin' }">
+											<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 												<th><input type="checkbox" id="checkall" name="checkall"></th>
 											</c:if>
 											<th>채택여부</th>
@@ -227,7 +227,7 @@ function listDetail(aIdx){
 									<tbody>
 										<c:forEach var="i" items="${answerList}" varStatus="cnt">
 											<tr>
-												<c:if test="${sessionScope.userId == 'admin' }">
+												<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 													<td><input type="checkbox" name="chkArray" value="${i.qIdx}"></td>
 												</c:if>
 												<c:if test="${i.aYn == 'Y' }">

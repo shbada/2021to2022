@@ -138,7 +138,7 @@ function reviewList(idx){
 		                	<c:forEach var="row" items="${list}">
 								
 			                    <div class="single_portfolio tile scale-anm web grid-item-width2 video" >
-			                    	<c:if test="${sessionScope.userId == 'admin' }">
+			                    	<c:if test="${sessionScope.userLevel == 'ADMIN' }">
 			                        	<a href="#" class="add_to_cart_button" onclick="javacscript:listUpdate('${row.pdNo }');">상품수정</a>                    
 			                    	</c:if>   
 									<img src="<c:url value="/img/${row.pdUrl}" />" width="430px" height="550px">
@@ -155,7 +155,7 @@ function reviewList(idx){
 			                </c:forEach>
 		                </div>
 		            </form>
-		            <c:if test="${sessionScope.userId == 'admin' }">
+		            <c:if test="${sessionScope.userLevel == 'ADMIN' }">
 						<div class="loginButton" style="text-align: center">
 		                    <input style="margin: 10px 0 10px 0" type="button" class="btn btn-lg m_t_10" id="upload" value="상품등록" />
 		                </div>

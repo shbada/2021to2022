@@ -373,7 +373,7 @@ function listDetail(idx){ //글 상세보기
 										</c:forEach>
 											<c:if test="${empty boardList }">
 												<c:choose>
-												<c:when test="${sessionScope.userId == 'admin'}">
+												<c:when test="${sessionScope.userLevel == 'ADMIN'}">
 													<tr>
 														<td colspan="7" style="text-align:center"><span class="noData">검색 조건에 맞는 데이터가 없습니다.</span></td>
 													</tr>
