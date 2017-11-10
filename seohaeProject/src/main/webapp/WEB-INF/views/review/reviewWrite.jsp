@@ -27,12 +27,14 @@ $(function(){
 	  obj.submit();
     });
     
-    $("#list").click(function(){
-    	location.href="/reviewList.do";
-    })
-
 });
 
+function list(idx){ 
+	document.hiddenFrm.pdNo.value = idx;
+	document.hiddenFrm.method="POST";   		
+	document.hiddenFrm.action="<c:url value='/reviewList.do' />";   		
+	document.hiddenFrm.submit();
+}
 </script>
 <!-- History section -->
 <section id="history" class="history sections">
@@ -80,7 +82,7 @@ $(function(){
                                		<input type="hidden" name="pdName" value="${book.pdName}">
 									<input type="hidden" name="pdUrl" value="${book.pdUrl}">
 									<input type="hidden" name="pdInfo" value="${book.pdInfo}">
-					               	<input type="hidden" name="pdNo" value="${book.pdNo}">
+									<input type="hidden" name="pdNo" value="${book.pdNo}">
 									<table class="table table-striped b-t text-sm">
 					                  <colgroup>
 					                     <col width="100" />
@@ -94,7 +96,7 @@ $(function(){
 					                  <tbody>
 									  <tr>
 					                     <th scope="row">교재이름</th>
-					                     <td colspan="2"><input type="text" name="subject" class="form-control" size="50" value="${book.pdName}" readonly/></td>
+					                     <td colspan="2"><input type="text" name="pdName" class="form-control" size="50" value="${book.pdName}" readonly/></td>
 					                  </tr>
 					                  <tr>
 					                  <th scope="row">교재</th>
@@ -139,8 +141,11 @@ $(function(){
                         </div>
                         <div class="loginButton" style="text-align: center">
                            <button type="button" class="btn btn-lg m_t_10" name="save" id="save" >저장</button>
-                           <button type="button" class="btn btn-lg m_t_10" name="list" id="list" >목록</button>
+                           <button type="button" class="btn btn-lg m_t_10" onclick="javascript:list('${book.pdNo}');">목록</button>
                         </div>
+                        <form name="hiddenFrm">
+							<input type="hidden" name="pdNo" value="1">
+						</form>
                     </div>
                 </div>
             </div>

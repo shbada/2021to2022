@@ -18,6 +18,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <jsp:include page="/mainTop.do" />
+<script>
+
+</script>
 <!-- History section -->
 <section id="history" class="history sections">
     <div class="container">
@@ -32,11 +35,12 @@
                 <div class="col-sm-6">
                     <div class="single_history_content">
                         <div class="head_title">
-                            <h2>NOTICE</h2>
+                            <h2>FREE BOARD</h2>
                         </div>
-                        <p> 공지사항 게시판입니다. 공지사항 게시글을 반드시 숙지해주시고, 공지사항 게시글을 읽지 않아 불이익을 당한 회원은 당사자에게 책임이 있음을 알려드립니다.</p>
+                        <p> 자유게시판 입니다. BINO에서는 회원분들의 친목, 공부법 공유, 질문과답변 등 회원님들끼리의 관계가 중요하다고 생각되는 만큼, 자유게시판을 통해
+                        	회원분들 서로 자유롭게 이야기할 수 있는 게시판을 마련하였습니다. 많은 이용 부탁드립니다.</p>
 
-                        <a href="" class="btn btn-lg">BROWSE OUR WORK</a>
+                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

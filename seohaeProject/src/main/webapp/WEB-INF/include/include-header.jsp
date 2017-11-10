@@ -42,6 +42,7 @@
 <link rel="stylesheet" href="/assets/css/plugins.css" />
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/responsive.css" />
+<link rel="stylesheet" href="/assets/css/seohae.css" />
 
 <script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="/assets/js/vendor/jquery-1.11.2.min.js"></script>

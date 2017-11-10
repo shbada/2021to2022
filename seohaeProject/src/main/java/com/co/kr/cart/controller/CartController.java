@@ -94,7 +94,7 @@ public class CartController {
     	List<CartVo> list = cartService.cartList(userId); // 장바구니 리스트
     	System.out.println(list+"12asdkalsdjaslkjdlsaks");
     	int sumMoney = cartService.sumMoney(userId); // 장바구니 전체 금액
-    	int fee = sumMoney >= 60000 ? 0 : 2500; //전체금액이 6만 >= 0원 아니면 2500
+    	int fee = 2500; //전체금액이 6만 >= 0원 아니면 2500
     	
     	map.put("list", list);
     	map.put("count", list.size());

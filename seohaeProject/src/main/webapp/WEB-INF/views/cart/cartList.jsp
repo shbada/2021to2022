@@ -29,7 +29,7 @@ function CountUpdateOk(idx){
 function listDetail(idx){ 
    document.form1.pdNo.value = idx;
    document.form1.method="POST";         
-   document.form1.action="<c:url value='/bookList.do' />";         
+   document.form1.action="<c:url value='/reviewList.do' />";         
    document.form1.submit();
 }
 
@@ -82,7 +82,8 @@ function CartDel() {
                         <div class="head_title">
                             <h2>CART LIST</h2>
                         </div>
-                        <p> 회원님의 장바구니 목록입니다. 저희 BINO는 30000원 이하 구매시 배송비 2500원이 추가됩니다.</p>
+                        <p> 회원님의 장바구니 목록입니다. 저희 BINO는 회원님들의 활발한 활동에 대한 보답으로 bino를 적립해드리고있습니다. 
+                        	BINO에서 판매하는 교재들은 모두 회원님들의 적립된 bino로만 구매 가능하며, 2500 bino의 배송비는 무조건 추가됨을 알려드립니다.</p>
 
                         <a href="" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
@@ -106,13 +107,14 @@ function CartDel() {
                 </div><!-- End off Head_title -->
                 <div class="work_menu text-center">
                     <div id="filters" class="toolbar mb2 mt2">
-                        <button class="btn-md fil-cat filter" data-rel="web" data-filter=".web">주문금액 ${map.sumMoney }원</button> /
-                        <button class="btn-md fil-cat filter" data-rel="design" data-filter=".design">배송비 ${map.fee }원</button> /
-                        <button class="btn-md fil-cat filter" data-rel="flyers" data-filter=".flyers">총 주문금액 ${map.allSum }원</button>
+                        <button class="btn-md fil-cat filter" data-rel="web" data-filter=".web">주문금액 ${map.sumMoney } bino</button> /
+                        <button class="btn-md fil-cat filter" data-rel="design" data-filter=".design">배송비 ${map.fee } bino</button> /
+                        <button class="btn-md fil-cat filter" data-rel="flyers" data-filter=".flyers">총 주문금액 ${map.allSum } bino</button>
                     </div> 
                 </div>
                 <hr>
 				<form name="form1" method="post" action="#">
+					<input type="hidden" name="pdNo" value="1">
 	                <c:forEach var="row" items="${map.list}" varStatus="i">
 		                <div class="col-md-4 col-sm-6">
 		                    <div class="single_pricing pricing_business">
@@ -134,7 +136,6 @@ function CartDel() {
 	                                </a>
 	                                <input type="number" name="pdAmount" size="4" class="input-text qty text" title="Qty" value="${row.pdAmount}" min="1" step="1">
                                       <a href="#" class="link" onclick="javacscript:CountUpdateOk('${row.pdNo }');">
-                                      	<input type="hidden" name="pdNo" value="1">
                                         <button type="button" class="">확인 </button>
                                      </a>
 		                        </div>

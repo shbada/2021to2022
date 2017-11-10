@@ -145,7 +145,7 @@ function reviewList(idx){
 			                            <div class="grid_item_overlay">
 			                                <div class="separator4"></div>
 			                                <h3>[ ${row.pdCg} ] > ${row.pdName}</h3>
-			                                <h4>${row.pdPrice}원</h4>
+			                                <h4>${row.pdPrice} bino</h4>
 			                                <p>${row.pdInfo}</p>
 											
 			                                <button type="button" class="btn btn-lg m_t_10" onclick="javascript:reviewList('${row.pdNo}');">후기댓글</button>

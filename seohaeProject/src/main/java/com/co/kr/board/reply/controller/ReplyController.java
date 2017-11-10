@@ -38,7 +38,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.co.kr.board.reply.service.ReplyService;
 import com.co.kr.board.reply.vo.ReplyVo;
 
-/*@RestController*/
+/**
+ * ReplyController
+ * 
+ * @author 김서해
+ * @since 2017. 11. 07.
+ * @version 1.0
+ * @see
+ *
+ * <pre>
+ * << 개정이력(Modification Information) >>
+
+ * 1. (2017. 11. 07 / seohae / 최초생성)
+ *
+ * </pre>
+ */
+
 @Controller
 @RequestMapping(value="/reply")
 public class ReplyController {
@@ -50,8 +65,8 @@ public class ReplyController {
 	
 	/**
 	    * @Method freeBoardWrite
-	    * @Date 2017. 06. 11
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11.07
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 댓글쓰기
@@ -68,8 +83,8 @@ public class ReplyController {
 	
 	/**
 	    * @Method freeBoardJsonListReply
-	    * @Date 2017. 06. 11
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11.07
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 댓글목록 (JSON)
@@ -84,8 +99,8 @@ public class ReplyController {
 	
 	/**
 	    * @Method freeBoardListReply
-	    * @Date 2017. 06. 11
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11.07
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 댓글목록
@@ -106,13 +121,13 @@ public class ReplyController {
 
 		model.addAttribute("replyList", replyList);
 		
-		return "user/freeBoard/replyList";
+		return "board/reply/replyList";
 	}
 	
 	/**
 	    * @Method replyOneDelete
-	    * @Date 2017. 06. 17
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11.07
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 댓글 삭제(ajax사용)
@@ -135,8 +150,8 @@ public class ReplyController {
 	
 	/**
 	    * @Method replyOneUpdate
-	    * @Date 2017. 06. 17
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11.07
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 댓글 수정(ajax)

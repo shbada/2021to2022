@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.co.kr.book.vo.BookVo;
 import com.co.kr.cart.service.CartService;
@@ -23,17 +24,17 @@ import com.co.kr.review.service.ReviewService;
 import com.co.kr.review.vo.ReviewVo;
 
 /**
- * BookController
+ * ReviewController
  * 
  * @author 김서해
- * @since 2017. 11. 05.
+ * @since 2017. 11. 07.
  * @version 1.0
  * @see
  *
  * <pre>
  * << 개정이력(Modification Information) >>
 
- * 1. (2017. 11. 05 / seohae / 최초생성)
+ * 1. (2017. 11. 07 / seohae / 최초생성)
  *
  * </pre>
  */
@@ -50,10 +51,12 @@ public class ReviewController {
 	private CartService cartService;
 	
 	/**
-	    * @Method BookList
-	    * @Date 2017. 11. 05.
+	    * @Method ReviewList
+	    * @Date 2017. 11. 07
 	    * @Writter seohae
-	    * @Discript 판매교재 목록
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 교재 리뷰 목록
 	    * @Return String
 	  */
 	
@@ -68,6 +71,15 @@ public class ReviewController {
     	return "ok";
     }
     
+    /**
+	    * @Method ReviewListGo
+	    * @Date 2017. 11. 07
+	    * @Writter seohae
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 교재목록_로그인 체크
+	    * @Return String
+	  */
     @RequestMapping(value="/reviewList", method={RequestMethod.GET, RequestMethod.POST})
     public String ReviewListGo(@ModelAttribute ReviewVo reviewVo, Model model, HttpSession session){
     	//검색어에 맞는 게시물의 갯수 구하기
@@ -83,6 +95,15 @@ public class ReviewController {
     	return "review/reviewList";
     }
     
+    /**
+	    * @Method reviewWrite
+	    * @Date 2017. 11. 07
+	    * @Writter seohae
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 교재 후기 글쓰기
+	    * @Return String
+	  */
 	@RequestMapping(value="reviewWrite")
     public String reviewWrite(@ModelAttribute ReviewVo reviewVo, Model model){
 		BookVo list = reviewService.bookDetail(reviewVo); 
@@ -90,6 +111,15 @@ public class ReviewController {
     	return "review/reviewWrite";
     }
 	
+	/**
+	    * @Method uploadFile
+	    * @Date 2017. 11. 07
+	    * @Writter seohae
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 교재 후기 파일업로드
+	    * @Return String
+	  */
 	// 파일명 랜덤생성 메서드
     private String uploadFile(String originalName, byte[] fileData) throws Exception{
     	String path = "C:\\seohaeProject\\upload\\";
@@ -104,8 +134,18 @@ public class ReviewController {
         return savedName;
     }
     
+    /**
+	    * @Method insertReview
+	    * @Date 2017. 11. 07
+	    * @Writter seohae
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 교재 후기 작성완료
+	    * @Return String
+	  */
     @RequestMapping(value="insertReivew")
-    public String insertReview(@ModelAttribute ReviewVo reviewVo,HttpSession session)throws Exception{
+    public String insertReview(@ModelAttribute ReviewVo reviewVo, HttpSession session)throws Exception{
+    	System.out.println("@@@@@@@@@@@@@@"+reviewVo);
     	String userId = (String)session.getAttribute("userId");
         reviewVo.setWriter(userId);
     	if(!reviewVo.getImg().isEmpty()){
@@ -122,6 +162,7 @@ public class ReviewController {
             reviewVo.setUrl(fileName);
         }
     	reviewService.insertReview(reviewVo);
+    	
     	return "redirect:/reviewList.do";
     }
 }

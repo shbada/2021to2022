@@ -36,7 +36,7 @@
       ) A
       WHERE RNUM BETWEEN #{startRowNo} AND #{endRowNo}
       
-      /* com.co.kr.board.free.controller.FreeBoardController.freeBoardSelectList */
+      /* com.co.kr.board.free.controller.FreeBoardController.freeBoardSelectList -자유게시판 목록*/
 
 	</select>
 	<select id="selectFreeBoardListCount" parameterType="com.co.kr.board.free.vo.FreeBoardVo" resultType="int">
@@ -48,7 +48,7 @@
           AND(USER_NM LIKE '%' || #{search} || '%' OR FREE_BOR_TITLE LIKE '%' || #{search} || '%')
         </if>
  
-      /* com.co.kr.board.free.controller.FreeBoardController.selectFreeBoardListCount */
+      /* com.co.kr.board.free.controller.FreeBoardController.selectFreeBoardListCount -자유게시판 게시글 전체 개수 세기 */
       
 	</select>
 	<insert id="freeBorWriteSave" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
@@ -70,12 +70,12 @@
              TO_CHAR(SYSDATE, 'YYYYMMDD')
            )
        ]]>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardWriteSave */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardWriteSave - 자유게시판 글 작성완료*/
    </insert>
 
 	<select id="freeBoardIdx" resultType="int">
 			SELECT NVL(MAX(FREE_BOR_IDX), 1) FROM FREE_BOARD
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardWriteSave */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardWriteSave -자유게시판 글번호 가져오기 */
 	</select>
 	
 	<select id="freeBoardDetail" parameterType="com.co.kr.board.free.vo.FreeBoardVo" resultType="com.co.kr.board.free.vo.FreeBoardVo">
@@ -92,7 +92,7 @@
                 <if test="freeBorIdx != '' and freeBorIdx != null">
                 AND FREE_BOR_IDX = #{freeBorIdx}
                 </if>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDetail */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDetail - 자유게시판 글 상세보기 */
 	</select>
 	<select id="freeBoardUpdateView" parameterType="com.co.kr.board.free.vo.FreeBoardVo" resultType="com.co.kr.board.free.vo.FreeBoardVo">
 			SELECT  F.FREE_BOR_IDX,
@@ -108,7 +108,7 @@
                 <if test="freeBorIdx != '' and freeBorIdx != null">
                 AND FREE_BOR_IDX = #{freeBorIdx}
                 </if>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDetail */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDetail - 자유게시판 글 수정 페이지로 */
 	</select>
 	<update id="freeBoardUpdate" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 		<![CDATA[
@@ -120,25 +120,25 @@
 					UPDATE_DE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 				WHERE FREE_BOR_IDX = #{freeBorIdx}
 		]]>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardUpdate */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardUpdate - 자유게시판 글 수정 완료 */
 	</update>
 	<delete id="freeBoardDelete" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 			DELETE FROM FREE_BOARD WHERE FREE_BOR_IDX = #{freeBorIdx}
 
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDelete */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDelete - 자유게시판 글 삭제 */
 	</delete>
 	<delete id="freeBoardLikeDelete" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 			DELETE FROM FREE_LIKE_BOARD WHERE FREE_BOR_IDX = #{freeBorIdx}
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDelete */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardDelete -자유게시판 글 추천수 삭제 */
 	</delete>
 	<delete id="freeBoardReplyDelete" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 			DELETE FROM FREE_BOARD_REPLY WHERE FREE_BOR_IDX = #{freeBorIdx}
 			
-       /* com.co.kr.board.reply.controller.ReplyController.replyOneDelete */
+       /* com.co.kr.board.reply.controller.ReplyController.replyOneDelete - 자유게시판 댓글 삭제 */
 	</delete>
 	<select id="freeBoardViewCnt" resultType="int">
 			SELECT FREE_BOR_VIEW_CNT FROM FREE_BOARD WHERE 1=1 AND FREE_BOR_IDX=#{freeBorIdx}
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardViewCnt */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardViewCnt - 자유게시판 글 조회수 조회 */
 	</select>
 	<update id="freeBoardUpdateCnt" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 		<![CDATA[
@@ -148,7 +148,7 @@
 				WHERE
 					FREE_BOR_IDX = #{freeBorIdx}
 		]]>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardUpdateCnt */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardUpdateCnt - 자유게시판 글 조회수 증가 */
 	</update>
 	<select id="freeBoardLikeCnt" resultType="int">
 			SELECT COUNT(FREE_BOR_IDX) FROM FREE_LIKE_BOARD WHERE 1=1 AND FREE_BOR_IDX=#{freeBorIdx}
@@ -166,7 +166,7 @@
                  <if test="userId != '' and userId != null">
                 AND USER_ID = #{userId}
                 </if>
-       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardLike */
+       /* com.co.kr.board.free.controller.FreeBoardController.freeBoardLike - 자유게시판 추천수 가져오기 */
 	</select>
 	<insert id="insertFreeBoardLike" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
       <![CDATA[
@@ -181,7 +181,7 @@
              TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
            )
        ]]>
-       /* com.co.kr.board.free.controller.FreeBoardController.insertFreeBoardLike */
+       /* com.co.kr.board.free.controller.FreeBoardController.insertFreeBoardLike - 자유게시판 추천수 증가  */
    </insert>
    <update id="freeBoardListDelete" parameterType="com.co.kr.board.free.vo.FreeBoardVo">
 		UPDATE FREE_BOARD 
@@ -190,7 +190,7 @@
 					UPDATE_DE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')		 
 			WHERE FREE_BOR_IDX = #{freeBorIdx}
 			
-			/*com.co.kr.board.free.dao.freeBoardListDelete*/
+			/*com.co.kr.board.free.dao.freeBoardListDelete - 자유게시판 글 선택삭제 */
 	</update>
 	<select id="selectSearchCheck"  parameterType="String" resultType="int">
 		SELECT COUNT(SEARCH_WORD) FROM REAL_TIME_QUERY WHERE 1=1
@@ -198,7 +198,7 @@
 			AND SEARCH_WORD = #{value}
 		</if>
 		
-		/*com.co.kr.board.free.dao.selectSearchCheck*/
+		/*com.co.kr.board.free.dao.selectSearchCheck - 자유게시판 검색어 포함한 글 개수 */
 	</select>
 	<insert id="insertSearchWord">
 		INSERT INTO REAL_TIME_QUERY
@@ -212,7 +212,7 @@
 			TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 		)
 		
-		/*com.co.kr.board.free.dao.insertSearchWord*/
+		/*com.co.kr.board.free.dao.insertSearchWord - 자유게시판 검색어 저장*/
 	</insert>
 	<update id="updateSearchWordCount" parameterType="String">
 		<![CDATA[
@@ -223,7 +223,7 @@
 				WHERE SEARCH_WORD = #{value}
 		]]>
 		
-		/*com.co.kr.board.free.dao.updateSearchWordCount*/
+		/*com.co.kr.board.free.dao.updateSearchWordCount - 자유게시판 검색어 횟수 변경 */
 	</update>
    <select id="selectSearchWordList" resultType="com.co.kr.board.free.vo.FreeBoardVo">
 		SELECT SEARCH_WOR_IDX,
@@ -244,7 +244,7 @@
 				)
 		WHERE ROWNUM <![CDATA[ <= ]]>10
 		
-		/*com.co.kr.board.free.dao.selectSearchWordList*/
+		/*com.co.kr.board.free.dao.selectSearchWordList - 자유게시판 검색어 횟수 조회 */
 	</select>
 	
 	<update id="realTimeQueryMerge" parameterType="String">
@@ -270,7 +270,7 @@
 				)
 		]]>
 	
-		/*com.co.kr.board.free.dao.realTimeQueryMerge*/
+		/*com.co.kr.board.free.dao.realTimeQueryMerge - 실시간 검색어 */
 	</update>
    
 </mapper>

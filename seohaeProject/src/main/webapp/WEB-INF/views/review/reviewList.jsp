@@ -106,7 +106,9 @@ function reviewWrite(no){
                         <div class="head_title">
                             <h2>REVIEW</h2>
                         </div>
-                        <p> 공지사항 게시판입니다. 공지사항 게시글을 반드시 숙지해주시고, 공지사항 게시글을 읽지 않아 불이익을 당한 회원은 당사자에게 책임이 있음을 알려드립니다.</p>
+                        <p> 상품 후기댓글 입니다. 저희 BINO에서는 많은 분들의 책의 평가와 리뷰를 담기위해 이 교재를 구압하신 회원들 뿐만 아니라, 해당 교재로
+                        	공부해보신 회원님들 모두에게 후기댓글을 남길 수 있는 권한이 주어집니다. 후기댓글 작성시, 10 bino만큼 적립되며 비방&욕설 등 불편함을 주시는
+                        	회원분들은 영구제명 및 삭제처리 됩니다.</p>
 
                         <a href="" class="btn btn-lg">BROWSE OUR WORK</a>
                     </div>
@@ -131,9 +133,6 @@ function reviewWrite(no){
                 <div class="single_study_content">
                 	<form name="form1" onsubmit="return flase;">
                 		<input type="hidden" name="pdNo" id="pdNo" value="1" /> 
-						<input type="hidden" name="pdName" value="${book.pdName}">
-						<input type="hidden" name="pdUrl" value="${book.pdUrl}">
-						<input type="hidden" name="pdInfo" value="${book.pdInfo}">
 	                    <div class="col-sm-6">
 	                        <div class="single_study_slid_area">
 							
@@ -154,7 +153,11 @@ function reviewWrite(no){
 	                        </div>
 	                    </div>
                     </form>
-
+					<form class="form-horizontal" name="frm">
+						<input type="hidden" name="pdName" value="${book.pdName}">
+						<input type="hidden" name="pdUrl" value="${book.pdUrl}">
+						<input type="hidden" name="pdInfo" value="${book.pdInfo}">
+					</form>
                     <div class="single_study_right_img">
                         <div class="col-sm-6">
                             <div class="single_study_img">
@@ -197,8 +200,9 @@ function reviewWrite(no){
 										<col width="5%" />
 										<col width="5%" />
 										<col width="10%" />
+										<col width="30%" />
 										<col width="70%" />
-										<col width="15%" />
+										<col width="20%" />
 									</colgroup>
 									<c:if test="${sessionScope.userId == 'admin' }">
 										<tfoot>
@@ -224,6 +228,7 @@ function reviewWrite(no){
 											<th>번호</th>
 											<th>평가</th>
 											<th>업로드</th>
+											<th>제목</th>
 											<th>내용</th>
 											<th>작성자</th>
 										</tr>
@@ -253,17 +258,25 @@ function reviewWrite(no){
 													★☆☆☆☆ 
 													</c:if>
 												</td>
-												<td><img src="/img/${i.url}" style="width: 46px; height: 46px" ></td>
+												<td>
+													<c:if test="${i.url != null }">
+														<img src="/img/${i.url}" style="width: 46px; height: 46px" >
+													</c:if>
+													<c:if test="${i.url == null }">
+														
+													</c:if>
+												</td>
 												<fmt:parseDate value="${i.regDe}" var="regdate" pattern="yyyy-MM-dd" scope="page" />
 												<fmt:parseNumber value="${regdate.time/(1000*60*60*24)}" integerOnly="true" var="regdate" scope="page" /> 
 												<td style="text-align: left;">
 													<a style="margin-left: 4px">
-													${i.contents}
+													${i.subject}
 													<c:if test="${regdate <= nowToDay && regdate >= nowToDay-3}">
 														<span class="replyNew">[new]&nbsp;</span>
 													</c:if>
 													</a>
 												</td>
+												<td>${i.contents}</td>
 												<td>${i.writer}</td>
 											</tr>
 										</c:forEach>

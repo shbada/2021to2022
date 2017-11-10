@@ -1,0 +1,277 @@
+form-control.top-textarea{
+	padding: 140px 0 50px;
+	background: url(../../images/bg_error.png) no-repeat 50% 50px; 
+	text-align: center;
+}
+.createHeading {
+	padding-top: 10px;
+    height : 35px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 15px;
+    font-weight : bold;
+    display: block;
+    border-color: #ebeff6;
+    background-color: #fff;
+    border-radius: 2px 2px 0 0;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+}
+.createHeader {
+	font-size: 19px;
+	line-height: 20px;
+	margin-bottom: 20px;
+}
+.subCreateHeader {
+	font-size: 11px;
+	line-height: 20px;
+}
+.zipCode {
+    float : left;
+    width : 100px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.userFirstAddr {
+	float : left;
+	width : 269px;
+}
+.aside {
+	background-color : #555555;
+}
+.btn-link {
+    color: #ffffff;
+}
+.asideSpan {
+    color: #ffffff;
+}
+.bg-success {
+    background-color: #7b7a7a;
+}
+.panel-heading {
+    padding-top: 2px;
+    height: 80px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 15px;
+    font-weight: bold;
+    display: block;
+}
+.mainLogout {
+    float: left;
+    width: 330px;
+    height: 20px;
+    margin-top: 12px;
+}
+.logOutBtn {
+    width: 100px;
+    margin-top: 3px;
+    float: left;
+}
+.mainAudio {
+    float: left;
+    width: 330px;
+    height: 30px;
+    margin-top: 2px;
+}
+.mainClock {
+    height: 30px;
+    margin-top: 23px;
+    font-size: 20px;
+    float: right;
+}
+.sessionScope {
+    height: 20px;
+    margin-top: 20px;
+    float: left;
+}
+.scopeUser {
+    color: #333333;
+    font-size: 16px;
+    font-weight: bold;
+}
+.header .nav-tabs > li.active a, .header .nav-tabs > li.active a:hover, .footer .nav-tabs > li.active a, .footer .nav-tabs > li.active a:hover {
+    background-color: #033059;
+}
+.bg-success .nav li > a:hover {background-color: #033059;}
+
+.bounceInDown {
+   font-size: 18px;
+   line-height: 32px;      
+   letter-spacing: -1px;
+   display: block;
+   -webkit-margin-before: 1em;
+   -webkit-margin-after: 1em;
+   -webkit-margin-start: 0px;
+   -webkit-margin-end: 0px;
+   font-weight: bold;
+   
+   background-image: -webkit-linear-gradient(92deg,#fb83fa,#00aced);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   animation-name: text_error;
+}
+.mainTitle {
+	text-align : center;
+	height : 40px;
+}
+.tlWrap {
+    word-break: break-all;
+    wrap:hard;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.link:hover { text-decoration:underline; color:red;}
+
+.link {color:#154874;}
+
+.hearderDivTitle {
+	width:100%;
+	height:50px;
+	margin-top:30px;
+	text-align:center;
+}
+
+.freeTextarea {
+	height:240px !important;
+	max-height:240px;
+	overflow:scroll;
+	resize:none;
+}
+.btnList{
+	float:left;
+}
+.btnLike {
+	padding-right: 0px;
+	width: 105px;
+}
+
+.falseSpan, .writeNew {
+	color : red;
+}
+
+.panel-footer{
+	height:55px;
+}
+
+.freeReplTextarea{
+	height:100px !important;
+	max-height:100px;
+	overflow:scroll;
+	resize:none;
+}
+
+.btnReplyDelete, .btnReplyUpdate{
+	height: 25.6px;
+}
+
+.replyTextarea{
+	width : 450px;
+	height : 100px !important;
+	max-height : 100px;
+	overflow : scroll;
+	resize : none;
+	float : left;
+	margin-right:10px;
+	margin-bottom:25px;
+}
+.btnReplySuccess, .btnReplyCancle {
+	height:25.6px;
+	float:left;
+	margin-top:34px;
+	margin-bottom:10px;
+}
+.secretReply {
+	float: left;
+	margin-top: 34px;
+}
+
+.none{display:none}
+#ticker{float:left;width:100px;}
+.navi{width: 100px; float: left; padding-top: 4px;}
+
+.divLolUpNumber {
+   padding: 0 15px;
+   font-size: 12px;
+   margin-right: -15px;
+   margin-left: -15px;
+}
+
+.divLolUpNumber:before {
+   display: table;
+   content: " ";
+}
+.divLolUpNumber:after {
+   clear: both;
+   display: table;
+   content: " ";
+}
+
+.block {
+   border: 2px solid #fff;
+   padding: 2px 15px;
+   height: 38px;
+   overflow: hidden;
+   background: #fff;
+   width: 78%;
+   font-family: Gulim;
+   font-size: 12px;
+   float: left;
+}
+.block ul, .block li {margin:0; padding:0; list-style:none;}
+.block li a {
+   display: block;
+   height: 38px;
+   line-height: 38px;
+   text_decoration: none;
+}
+
+.spanLolUpNumber {
+   margin-top: -9px;
+   color: #00ab33;
+   font-size: 16px;
+   left: 0;
+   min-width: 17px;
+   text-align: center;
+   font-family: Arial, Sans-serif;
+   line-height: 18px;
+}
+
+.spanLolUpText {
+   padding-left: 10px;
+   font-family: Arial, Sans-serif;
+   line-height: 18px;
+   font-size: 17px;
+   min-width: 17px;
+   text-align: center;
+}
+.emailLabel, .emailBtn {
+	margin: 5px 10px 0 10px;
+	float:left;
+}
+.smallInput{
+	width:200px;
+	float:left;
+}
+.fileDrop {
+	width: 99%;
+	height: 100px;
+	border: 1px dotted blue;
+}
+.fileTextarea {
+	height:170px !important;
+	max-height:170px;
+	overflow:scroll;
+	resize:none;
+}
+.fileDown:hover{
+	text-decoration:uderline; 
+	color:red;
+}
+.showDownImage {
+	width:100px;
+}
+.excelBtn{
+	float:right;
+}

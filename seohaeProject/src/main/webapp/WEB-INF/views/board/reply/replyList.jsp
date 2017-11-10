@@ -1,6 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style>
+.btn-outline-primary {
+    color: #2980b9;
+    background-color: #fff;
+    border-color: #2980b9;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-outline-success {
+    color: #27ae60;
+    background-color: #fff;
+    border-color: #27ae60;
+}
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.btn-outline-info {
+    color: #8e44ad;
+    background-color: #fff;
+    border-color: #8e44ad;
+}
+.btn-outline-info:hover {
+    color: #fff;
+    background-color: #9b59b6;
+    border-color: #9b59b6;
+}
+
+.btn-outline-warning {
+    color: #f39c12;
+    background-color: #fff;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+}
+
+.btn-outline-danger {
+    color: #c0392b;
+    background-color: #fff;
+    border-color: #c0392b;
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+</style>
 <script>
 $(document).ready(function(){
 });
@@ -54,8 +110,8 @@ function replyUpdate(freeBorReplyIdx, paramText, secretReply){
 	var replyText = paramText.replace(/<br>/g, '\n');
 	//동적으로 태그만들기
 	var tag = "<textarea class='form-control replyTextarea' maxlength='20000' name='replyText' id='replyText'>" + replyText + "</textarea>";
-	tag += "<button type='button' class='btn btn-sm btn-success btnReplySuccess' onclick='javascript:replyOneUpdate(" + freeBorReplyIdx + ");'>수정확인</button>";
-	tag += "<button type='button' class='btn btn-sm btn-danger btnReplyCancle' onclick='javascript:replyOneUpdateCancle();'>취소</button>";
+	tag += "<button type='button' class='btn-outline-warning hover' onclick='javascript:replyOneUpdate(" + freeBorReplyIdx + ");'>수정확인</button>";
+	tag += "<button type='button' class='btn-outline-danger hover' onclick='javascript:replyOneUpdateCancle();'>취소</button>";
 	tag += "<div class='secretReply'><input type='checkbox' id='secretReply" + freeBorReplyIdx +"' />비밀댓글</div>";
 	$("." + freeBorReplyIdx).html(tag); //.은 만약에 20번 댓글이면 20번 댓글을 찾음
 	if(secretReply == 'Y'){
@@ -81,8 +137,8 @@ function replyUpdate(freeBorReplyIdx, paramText, secretReply){
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${row.userId == sessionScope.userId }"> <!-- 댓글 작성자와 접속중인 아이디가 같으면 -->
-					<button type="button" class="btn btn-sm btn-success btnReplyUpdate" onclick="javascript:replyUpdate('${row.freeBorReplyIdx }', '${row.replyText }', '${row.secretReply }' );">수정</button>
-					<button type="button" class="btn btn-sm btn-danger btnReplyDelete" onclick="javascript:replyDelete('${row.freeBorReplyIdx }');">삭제</button>
+					<button type="button" class="btn-outline-warning hover" onclick="javascript:replyUpdate('${row.freeBorReplyIdx }', '${row.replyText }', '${row.secretReply }' );">수정</button>
+					<button type="button" class="btn-outline-danger hover" onclick="javascript:replyDelete('${row.freeBorReplyIdx }');">삭제</button>
 				</c:if>
 				<hr>
 			</td>

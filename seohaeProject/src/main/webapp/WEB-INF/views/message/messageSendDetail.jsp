@@ -21,7 +21,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#sendDelete").click(function(){
-        location.href="/messageList";
+        location.href="/messageList.do";
     });
     
     $("#deleteBtn").click(function(){
@@ -62,15 +62,15 @@ function messageSendWrite(){
 		<div class="col-md-4 col-md-offset-4 m-t-lg">
 			<!-- ************************ -->
 			<form id="form1" name="form1" method="post">
-				<input type="hidden" name="msg_no" value="${MessageVo.msg_no}">
+				<input type="hidden" name="msgNo" value="${MessageVo.msgNo}">
 				<label>받는이</label>
-				<input type="text" class="form-control parsley-validated" name="msg_get" id="msg_get" value=" ${MessageVo.msg_get}" maxlength="100" readonly><br />
+				<input type="text" class="form-control parsley-validated" name="msgGet" id="msgGet" value=" ${MessageVo.msgGet}" maxlength="100" readonly><br />
 				<label>제목</label>
-				<input type="text" class="form-control parsley-validated" name="msg_name" id="msg_name" value="${MessageVo.msg_name}" maxlength="100" readonly><br />
+				<input type="text" class="form-control parsley-validated" name="msgName" id="msgName" value="${MessageVo.msgName}" maxlength="100" readonly><br />
 				<label>내용</label>
-				<textarea class="form-control freeTextarea" maxlength="2000" name="msg_desc" id="msg_desc" readonly>${MessageVo.msg_desc}</textarea><br />
+				<textarea class="form-control freeTextarea" maxlength="2000" name="msgDesc" id="msgDesc" readonly>${MessageVo.msgDesc}</textarea><br />
 				<label>시간</label>
-				<input type="text" class="form-control parsley-validated" name="msg_get" id="msg_get" value="${MessageVo.msg_regdate}" maxlength="100" readonly><br />
+				<input type="text" class="form-control parsley-validated" name="msgGet" id="msgGet" value="${MessageVo.msgRegdate}" maxlength="100" readonly><br />
 				<hr>
 				<button type="button" class="btn btn-lg btn-danger btn-block" id="deleteBtn">삭제</button>
 				<button type="button" class="btn btn-lg btn-primary btn-block" id="sendDelete">목록으로 돌아가기</button>

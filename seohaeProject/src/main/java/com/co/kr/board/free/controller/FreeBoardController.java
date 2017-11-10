@@ -1,17 +1,15 @@
 /**
- * FreeBoard Controller
+ * FreeBoardController
  * 
  * @author 김서해
- * @since 2017. 05. 28. 오후 3:50:00
+ * @since 2017. 11. 07.
  * @version 1.0
  * @see
  *
- *      <pre>
+ * <pre>
  * << 개정이력(Modification Information) >>
- *   
- *  수정일          수정자              수정내용
- *  -------        --------    --------------------------
- * 2017. 05. 28.    김서해              최초생성
+
+ * 1. (2017. 11. 07 / seohae / 최초생성)
  *
  * </pre>
  */
@@ -51,8 +49,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardSelectList
-	    * @Date 2017. 05. 28.
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 자유게시판 페이지.
@@ -61,18 +59,8 @@ public class FreeBoardController {
 	
 	@RequestMapping(value="/freeBoardSelectList")
 	public String freeBoardSelectList(){
-		return "user/freeBoard/freeBoard";
+		return "board/free/freeBoard";
 	}
-	
-	/**
-	    * @Method freeBoardSelectList
-	    * @Date 2017. 05. 28.
-	    * @Writter rlatjgo0406(김서해)
-	    * @Param 
-	    * @EditHistory
-	    * @Discript 자유게시판 리스트 조회.
-	    * @Return String
-	  */
 	
 	/*@RequestMapping(value="/freeBoardSelectList", method={RequestMethod.POST, RequestMethod.GET})
 	public String freeBoardSelectList(@ModelAttribute FreeBoardVo freeBoardVo, Model model){
@@ -88,13 +76,24 @@ public class FreeBoardController {
 		model.addAttribute("boardList", list);
 		model.addAttribute("search", freeBoardVo.getSearch());
 		
-		return "user/freeBoard/freeBoard";
+		return "board/free/freeBoard";
 	}*/
 	
+	/**
+	    * @Method freeBoardSelectList
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
+	    * @Param 
+	    * @EditHistory
+	    * @Discript 자유게시판 리스트 조회.
+	    * @Return String
+	  */
 	@RequestMapping(value="/freeBoardSelectList", method={RequestMethod.POST, RequestMethod.GET})
 	public String freeBoardSelectList(@ModelAttribute FreeBoardVo freeBoardVo, Model model){
+		System.out.println(freeBoardVo);
 		if(freeBoardVo.getPageCnt() == null) freeBoardVo.setPageSize(5);
 		else freeBoardVo.setPageSize(Integer.parseInt(freeBoardVo.getPageCnt()));
+		System.out.println(freeBoardVo.getPageCnt());
 		
 		Map<String, Object> map = freeBoardService.selectFreeBoardList(freeBoardVo);
 		
@@ -103,13 +102,13 @@ public class FreeBoardController {
 		model.addAttribute("search", freeBoardVo.getSearch());
 		model.addAttribute("searchWord", map.get("searchWord"));
 		
-		return "user/freeBoard/freeBoard";
+		return "board/free/freeBoard";
 	}
 	
 	/**
 	    * @Method freeBoardWrite
-	    * @Date 2017. 06. 03
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 새글작성 페이지
@@ -119,12 +118,12 @@ public class FreeBoardController {
 	@RequestMapping(value="/freeBoardWrite")
 	public String freeBoardWhite(@ModelAttribute("freeBoardVo") FreeBoardVo freeBoardVo, Model model){
 		/*model.addAttribute("test", freeBoardVo); -> 대신 위 @ModelAttribute("test")로 하면 됨*/
-		return "user/freeBoard/freeBoardWrite";
+		return "board/free/freeBoardWrite";
 	}
 	/**
 	    * @Method freeBorWriteSave
-	    * @Date 2017. 06. 04
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 새글작성 완료
@@ -136,10 +135,10 @@ public class FreeBoardController {
 		HttpSession session = request.getSession(false);
 		
 		if(session == null) {
-			response.sendRedirect("/login/login.do?GBN=SESSIONOUT");
+			response.sendRedirect("/login.do?GBN=SESSIONOUT");
 		} else {
 			if(session.getAttribute("userId") == null){
-				response.sendRedirect("/login/login.do?GBN=SESSIONOUT");
+				response.sendRedirect("/login.do?GBN=SESSIONOUT");
 			} else {
 				freeBoardVo.setUserId((String) session.getAttribute("userId")); //작성자 아이디
 				freeBoardVo.setUserNm((String) session.getAttribute("userNm")); //작성자 이름
@@ -148,7 +147,7 @@ public class FreeBoardController {
 				freeBoardVo.setFreeBorIdx(freeBorIdx); //글번호 담기
 				model.addAttribute("pageVO", freeBoardVo);
 				model.addAttribute("search", freeBoardVo.getSearch());
-				return "user/freeBoard/freeBoardDetail";
+				return "board/free/freeBoardDetail";
 			}
 		}
 		
@@ -157,8 +156,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardDetail
-	    * @Date 2017. 06. 04
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 새글작성 페이지
@@ -173,13 +172,13 @@ public class FreeBoardController {
 		model.addAttribute("freeBoardVo", list);
 		model.addAttribute("pageVO", freeBoardVo);
 		model.addAttribute("search", freeBoardVo.getSearch());
-		return "user/freeBoard/freeBoardDetail";
+		return "board/free/freeBoardDetail";
 	}
 	
 	/**
 	    * @Method freeBoardUpdateView
-	    * @Date 2017. 06. 04
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 수정 페이지
@@ -193,13 +192,13 @@ public class FreeBoardController {
 		model.addAttribute("freeBoardVo", list);
 		model.addAttribute("pageVO", freeBoardVo);
 		model.addAttribute("search", freeBoardVo.getSearch());
-		return "user/freeBoard/freeBoardUpdate";
+		return "board/free/freeBoardUpdate";
 	}
 	
 	/**
 	    * @Method freeBoardUpdate
-	    * @Date 2017. 06. 10
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 수정 완료
@@ -222,7 +221,7 @@ public class FreeBoardController {
 				freeBoardService.freeBoardUpdate(freeBoardVo); //게시글 번호로, 게시글을 조회하여 update(수정)완료.
 				model.addAttribute("pageVO", freeBoardVo); //수정된 데이터 담음. -> pageVO: view에서 사용
 				model.addAttribute("search", freeBoardVo.getSearch()); //검색어를 담음 -> search: view에서 사용
-				return "user/freeBoard/freeBoardDetail";
+				return "board/free/freeBoardDetail";
 			}
 		}
 		
@@ -231,8 +230,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardUpdate
-	    * @Date 2017. 06. 10
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 글 삭제
@@ -251,8 +250,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardViewCnt
-	    * @Date 2017. 06. 10
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 조회수 증가
@@ -268,8 +267,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardLikeCnt
-	    * @Date 2017. 06. 10
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 추천수 증가
@@ -285,8 +284,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardLike
-	    * @Date 2017. 06. 10
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 추천수 +1
@@ -307,8 +306,8 @@ public class FreeBoardController {
 	
 	/**
 	    * @Method freeBoardListDelete
-	    * @Date 2017. 06. 18
-	    * @Writter rlatjgo0406(김서해)
+	    * @Date 2017. 11. 07.
+	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
 	    * @Discript 체크박스 체크된 글 모두삭제

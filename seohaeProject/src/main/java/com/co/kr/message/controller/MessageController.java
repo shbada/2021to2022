@@ -39,7 +39,7 @@ public class MessageController {
 	public String MessageList(@ModelAttribute MessageVo messageVo, Model model, HttpSession session) {
 		
 		String userId = (String) session.getAttribute("userId");
-		messageVo.setUser_id(userId);
+		messageVo.setUserId(userId);
 		
 		Map<String, Object> map = messageService.messageList(messageVo); 
 		
@@ -59,7 +59,7 @@ public class MessageController {
 	public String MessageSendList(@ModelAttribute MessageVo messageVo, Model model, HttpSession session) {
 		
 		String userId = (String) session.getAttribute("userId");
-		messageVo.setUser_id(userId);
+		messageVo.setUserId(userId);
 		
 		Map<String, Object> map = messageService.MessageSendList(messageVo); 
 		
@@ -91,7 +91,7 @@ public class MessageController {
 	@RequestMapping(value="/messageSendWrite", method=RequestMethod.POST)
 	public String MessageSendWrite(@ModelAttribute("MessageVo") MessageVo messageVo, Model model) {
 		System.out.println(messageVo);
-		model.addAttribute("sender", messageVo.getMsg_send());
+		model.addAttribute("sender", messageVo.getMsgSend());
 		return "message/messageSendWrite";
 	}
 	
@@ -107,9 +107,9 @@ public class MessageController {
 	@ResponseBody
 	public String MessageWriteSave(@ModelAttribute MessageVo messageVo, HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
-		messageVo.setUser_id(userId);
+		messageVo.setUserId(userId);
 		
-		String idCheck = messageVo.getMsg_get();
+		String idCheck = messageVo.getMsgGet();
 		int count = messageService.MessageIdCheck(idCheck);
 		
 		if(count == 0){
@@ -133,7 +133,7 @@ public class MessageController {
 	@ResponseBody
 	public String MessageSendWriteSave(@ModelAttribute MessageVo messageVo, HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
-		messageVo.setUser_id(userId);
+		messageVo.setUserId(userId);
 		messageService.MessageWriteSave(messageVo);
 		
 		return "ok";
@@ -150,7 +150,7 @@ public class MessageController {
 	@RequestMapping(value="/messageSendDelete", method=RequestMethod.POST)
 	public String MessageDelete(@ModelAttribute MessageVo messageVo) {
 		messageService.MessageSendDelete(messageVo);
-		return "redirect:/messageSendList";
+		return "redirect:/messageSendList.do";
 	}
 	
 	/**
@@ -164,7 +164,7 @@ public class MessageController {
 	@RequestMapping(value="/messageGetDelete", method=RequestMethod.POST)
 	public String MessageGetDelete(@ModelAttribute MessageVo messageVo) {
 		messageService.MessageGetDelete(messageVo);
-		return "redirect:/messageList";
+		return "redirect:/messageList.do";
 	}
 	
 	/**
@@ -205,7 +205,7 @@ public class MessageController {
 	@RequestMapping(value="/messageDetail", method=RequestMethod.POST)
 	public String MessageDetail(@ModelAttribute("MessageVo") MessageVo messageVo, Model model, HttpSession session){
 		MessageVo list = messageService.messageDetail(messageVo); 
-		if(list.getMsg_readyn().equals("N")){
+		if(list.getMsgReadyn().equals("N")){
 			messageService.messageReadYn(messageVo);
 		}
 		model.addAttribute("MessageVo", list);

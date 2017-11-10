@@ -19,7 +19,7 @@
 <%@ page session="true"%>
 <script type="text/javascript">
 function messageSendWrite(idx){ 
-	document.form1.msg_send.value = idx;
+	document.form1.msgSend.value = idx;
 	document.form1.method="POST";   		
 	document.form1.action="<c:url value='/messageSendWrite.do' />";   		
 	document.form1.submit();
@@ -31,7 +31,7 @@ function MessageDel() {
 	
 	$(":checkbox[name='chk']:checked").each(function(i){
 		 chkedObj = new Object();
-		 chkedObj.msg_no = $(this).val(); 
+		 chkedObj.msgNo = $(this).val(); 
 		 chkedVal[i] = chkedObj; 
 	 });
 	if(chkedVal.length == 0){
@@ -82,18 +82,18 @@ $(document).ready(function(){
 });
 
 function MessageDelete(idx){ 
-	if(confirm("보낸 쪽지를 삭제하시겠습니까?")){
-		document.form1.msg_no.value = idx;
+	if(confirm("받은 쪽지를 삭제하시겠습니까?")){
+		document.form1.msgNo.value = idx;
 		document.form1.method="POST";   		
-		document.form1.action="<c:url value='/messageGetDelete' />";   		
+		document.form1.action="<c:url value='/messageGetDelete.do' />";   		
 		document.form1.submit();
 	}
 }
 
 function MessageDetail(idx){ 
-	document.form1.msg_no.value = idx;
+	document.form1.msgNo.value = idx;
 	document.form1.method="POST";   		
-	document.form1.action="<c:url value='/messageDetail' />";   		
+	document.form1.action="<c:url value='/messageDetail.do' />";   		
 	document.form1.submit();
 }
 </script>
@@ -120,8 +120,8 @@ function MessageDetail(idx){
 		<div class="col-md-4 col-md-offset-4 m-t-lg">
 			<!-- ************************ -->
 			<form name="form1" method="post">
-				<input type="hidden" name="msg_no" value="1">
-				<input type="hidden" name="msg_send" value="1">
+				<input type="hidden" name="msgNo" value="1">
+				<input type="hidden" name="msgSend" value="1">
 	                <table cellspacing="0" class="table table-striped b-t text-sm">
 	                    <thead>
 	                        <tr>
@@ -139,31 +139,31 @@ function MessageDetail(idx){
 	                    	<c:forEach var="row" items="${list}" varStatus="i">
 	                         <tr class="cart_item">
 	                         	<td style="text-align: center;">
-									<input type="checkbox" name="chk" value="${row.msg_no }">
+									<input type="checkbox" name="chk" value="${row.msgNo }">
 								</td>
 	                             <td class="product-thumbnail">
-	                                 ${row.msg_send }
+	                                 ${row.msgSend }
 	                             </td>
 	                             
 	                             <td class="product-thumbnail">
-	                             	 <a href="#" class="link" onclick="javacscript:MessageDetail('${row.msg_no }');">
-	                             	 <c:if test="${row.msg_readyn == 'N'}">
+	                             	 <a href="#" class="link" onclick="javacscript:MessageDetail('${row.msgNo }');">
+	                             	 <c:if test="${row.msgReadyn == 'N'}">
 	                                 	<sapn style="color:red;">[NEW]</sapn>
 	                                 </c:if>
-	                                 ${row.msg_name }
+	                                 ${row.msgName }
 	                                 </a>
 	                             </td>
 	                             <td class="product-thumbnail">
-	                                 ${row.msg_regdate }
+	                                 ${row.msgRegdate }
 	                             </td>
 	                             
 	                             <td class="product-thumbnail">
-	                             	 <a href="#" class="link"  onclick="javacscript:messageSendWrite('${row.msg_send }');">
+	                             	 <a href="#" class="link"  onclick="javacscript:messageSendWrite('${row.msgSend }');">
 	                                 <button type="button" class="" id="messageSendWrite">답장보내기 </button>&nbsp;
 	                            	 </a>
 	                             </td>
 	                             <td class="product-thumbnail">
-	                             	 <a href="#" class="link" onclick="javacscript:MessageDelete('${row.msg_no }');">
+	                             	 <a href="#" class="link" onclick="javacscript:MessageDelete('${row.msgNo }');">
 	                                 	<button type="button" class="" id="deleteBtn">삭제 </button>&nbsp;
 	                                 </a>
 	                             </td>

@@ -27,19 +27,19 @@ $(document).ready(function(){
     });
     
     $("#msgSendSave").click(function(){
-        var msg_get = $("#msg_get").val(); 
-        var msg_name = $("#msg_name").val(); 
-        var msg_desc = $("#msg_desc").val(); 
+        var msgGet = $("#msgGet").val(); 
+        var msgName = $("#msgName").val(); 
+        var msgDesc = $("#msgDesc").val(); 
 
-        if(msg_get == "") {
+        if(msgGet == "") {
             alert("받는사람의 회원 아이디를 입력해주세요");
-            msg_get.foucs();
-        } else if (msg_name == "") {
+            msgGet.foucs();
+        } else if (msgName == "") {
             alert("쪽지의 제목을 입력해주세요");
-            msg_name.focus();
-        } else if (msg_desc == "") {
+            msgName.focus();
+        } else if (msgDesc == "") {
             alert("쪽지의 설명을 입력해주세요");
-            msg_desc.focus();
+            msgDesc.focus();
         } 
         
         var formData = $("form[name=form1]").serialize();
@@ -56,7 +56,7 @@ $(document).ready(function(){
 					}
 				if(result == 'fal'){
 					alert("존재하지않는 회원입니다.");
-					$("#msg_get").val('');
+					$("#msgGet").val('');
 				}
 			}
 		});
@@ -87,11 +87,11 @@ $(document).ready(function(){
 			<!-- ************************ -->
 			<form id="form1" name="form1" method="post">
 				<label>받는이</label>
-				<input type="text" class="form-control parsley-validated" name="msg_get" id="msg_get" maxlength="100"><br />
+				<input type="text" class="form-control parsley-validated" name="msgGet" id="msgGet" maxlength="100"><br />
 				<label>제목</label>
-				<input type="text" class="form-control parsley-validated" name="msg_name" id="msg_name" maxlength="100"><br />
+				<input type="text" class="form-control parsley-validated" name="msgName" id="msgName" maxlength="100"><br />
 				<label>내용</label>
-				<textarea class="form-control freeTextarea" maxlength="2000" name="msg_desc" id="msg_desc"></textarea><br />
+				<textarea class="form-control freeTextarea" maxlength="2000" name="msgDesc" id="msgDesc"></textarea><br />
 				<hr>
 				<button type="button" class="btn btn-lg btn-primary btn-block" id="msgSendSave">전송</button>
 				<button type="button" class="btn btn-lg btn-danger btn-block" id="sendDelete">취소</button>
