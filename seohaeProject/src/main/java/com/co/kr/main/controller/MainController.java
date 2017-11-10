@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.co.kr.bino.service.BinoService;
 import com.co.kr.message.service.MessageService;
 import com.co.kr.message.vo.MessageVo;
-import com.co.kr.user.vo.UserVo;
 
 @Controller
 public class MainController {
@@ -38,6 +38,9 @@ public class MainController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private BinoService binoService;
 	
 	/**
 	    * @Method mainSelectView
@@ -68,9 +71,10 @@ public class MainController {
 		String user_id = (String) session.getAttribute("userId");
 		
 		int messageCount = messageService.messageNewCount(user_id);
-		System.out.println(messageCount);
+		int binoSum = binoService.binoSumCount(user_id);
 		
 		model.addAttribute("messageCount", messageCount);
+		model.addAttribute("binoSum", binoSum);
 		return "main/mainTopPage";
 	}
 }
