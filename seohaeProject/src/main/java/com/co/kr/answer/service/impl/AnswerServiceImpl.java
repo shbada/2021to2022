@@ -64,8 +64,8 @@ public class AnswerServiceImpl implements AnswerService{
 	}
 
 	@Override
-	public int answerLikeCnt(int qIdx) {
-		return answerDao.answerLikeCnt(qIdx);
+	public int answerLikeCnt(int aIdx) {
+		return answerDao.answerLikeCnt(aIdx);
 	}
 	
 }

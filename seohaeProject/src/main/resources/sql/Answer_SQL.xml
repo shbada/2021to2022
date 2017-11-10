@@ -62,16 +62,12 @@
 	
 	<select id="answerLike" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="com.co.kr.answer.vo.AnswerVo">
 			SELECT  Q_IDX,
+					A_IDX,
 					USER_ID,
 					REG_DE
 				FROM ANS_LIKE_BOARD
-				WHERE 1=1
-				 <if test="freeBorIdx != '' and freeBorIdx != null">
-                AND A_IDX = #{aIdx}
-                </if>
-                 <if test="userId != '' and userId != null">
+				WHERE A_IDX = #{aIdx}
                 AND USER_ID = #{aUserId}
-                </if>
                 
        /*com.co.kr.answer.dao.AnswerDao.answerLike - 답변글 추천수 조회  */
 	</select>

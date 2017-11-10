@@ -17,7 +17,6 @@ public class AnswerDao extends AbstractDAO{
 	}
 
 	public void answerUpdateCnt(int aIdx) {
-		System.out.println("@@@@@@@@@@@@@@@@@");
 		update("answerSql.answerUpdateCnt", aIdx);
 	}
 
@@ -29,8 +28,8 @@ public class AnswerDao extends AbstractDAO{
 		insert("answerSql.insertAnswerLike", answerVo);
 	}
 
-	public int answerLikeCnt(int qIdx) {
-		return (int) selectOne("answerSql.answerLikeCnt", qIdx);
+	public int answerLikeCnt(int aIdx) {
+		return (int) selectOne("answerSql.answerLikeCnt", aIdx);
 	}
 
 }

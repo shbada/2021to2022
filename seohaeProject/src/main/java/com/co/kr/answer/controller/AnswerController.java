@@ -93,10 +93,11 @@ public class AnswerController {
 	@RequestMapping(value="/answerDetail")
 	public String AnswerDetail(@ModelAttribute AnswerVo AnswerVo, @RequestParam int aIdx, Model model,HttpSession session){
 		Map<String, Object> map = answerService.answerDetail(aIdx);
-		answerService.answerUpdateCnt(aIdx,session);
+		answerService.answerUpdateCnt(aIdx, session);
 		model.addAttribute("detail",map.get("detail"));
 		model.addAttribute("list",map.get("list"));
-	 return "/question/answer/answerDetail";	
+		
+		return "/question/answer/answerDetail";	
 	}
 	
 	/**
@@ -116,7 +117,7 @@ public class AnswerController {
 			System.out.println("@");
 			answerService.insertAnswerLike(answerVo);
 			return "ok";
-		}else return "false";
+		} else return "fal";
 	}
 	
 	/**
@@ -129,8 +130,10 @@ public class AnswerController {
 	  */
 	@ResponseBody  
 	@RequestMapping(value="answerLikeCnt", method=RequestMethod.GET)
-	public int AnswerLikeCnt(@RequestParam int qIdx){
-		int resultCnt = answerService.answerLikeCnt(qIdx);
+	public int AnswerLikeCnt(@RequestParam int aIdx){
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>"+aIdx);
+		int resultCnt = answerService.answerLikeCnt(aIdx);
+		System.out.println(resultCnt);
 		return resultCnt;
 	}
 }

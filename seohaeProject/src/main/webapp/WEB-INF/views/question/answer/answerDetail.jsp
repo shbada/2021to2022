@@ -67,7 +67,7 @@ function listDetail(qIdx){
 function likeCnt(){
 	$.ajax({
 		type : "get",
-		url : "<c:url value='/answerLikeCnt.do?qIdx=${detail.qIdx}' />",
+		url : "<c:url value='/answerLikeCnt.do?aIdx=${detail.aIdx}' />",
 		success : function(result){
 			$("#Like").html(result);
 		}
