@@ -54,7 +54,6 @@ public class QuestionController {
 
 	@RequestMapping(value = "/qJavaList")
 	public String QJavaList(@ModelAttribute QuestionVo questionVo, Model model) {
-		
 		int totalCount= questionService.getListBaordJavaCount(questionVo);
 		
 		if(questionVo.getPageCnt()==null) questionVo.setPageSize(10);
@@ -109,8 +108,9 @@ public class QuestionController {
 	  */
 	
 	@RequestMapping(value="/questionDetail")
-	public String QuestionDetail(@ModelAttribute QuestionVo QuestionVo, @RequestParam int qIdx,Model model,HttpSession session){
+	public String QuestionDetail(@ModelAttribute QuestionVo questionVo, @RequestParam int qIdx, Model model,HttpSession session){
 		Map<String, Object> map = questionService.questionDetail(qIdx);
+		model.addAttribute("answerList", questionService.selectAnswerList(qIdx));
 		questionService.JavaUpdateCnt(qIdx,session);
 		model.addAttribute("detail",map.get("detail"));
 		model.addAttribute("list",map.get("list"));

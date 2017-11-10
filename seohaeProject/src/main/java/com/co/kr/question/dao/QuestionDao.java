@@ -36,4 +36,8 @@ public class QuestionDao extends AbstractDAO{
 		return (int) selectOne("questionSql.questionViewCnt", qIdx);
 	}
 
+	public List<QuestionVo> selectAnswerList(int qIdx) {
+		return selectList("questionSql.selectAnswerList", qIdx);
+	}
+
 }

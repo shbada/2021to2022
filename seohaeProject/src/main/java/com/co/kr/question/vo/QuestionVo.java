@@ -26,6 +26,19 @@ public class QuestionVo extends PageVo{
 	private String pageCnt;
 	@Comment("검색어")
 	private String searchView;
+	//답변
+	@Comment("답변 내용")
+	private String aDesc;
+	@Comment("답변글 번호")
+	private int aIdx;
+	@Comment("조회수")
+	private int aViewCnt;
+	@Comment("작성자 아이디")
+	private String aUserId;
+	@Comment("작성날짜")
+	private String aRegDe;
+	@Comment("채택여부")
+	private String aYn;
 	
 	public int getqIdx() {
 		return qIdx;
@@ -97,10 +110,51 @@ public class QuestionVo extends PageVo{
 	public void setSearchView(String searchView) {
 		this.searchView = searchView;
 	}
+	
+	public String getaDesc() {
+		return aDesc;
+	}
+	public void setaDesc(String aDesc) {
+		this.aDesc = aDesc;
+	}
+	public int getaViewCnt() {
+		return aViewCnt;
+	}
+	public void setaViewCnt(int aViewCnt) {
+		this.aViewCnt = aViewCnt;
+	}
+	public String getaUserId() {
+		return aUserId;
+	}
+	public void setaUserId(String aUserId) {
+		this.aUserId = aUserId;
+	}
+	
+	public String getaRegDe() {
+		return aRegDe;
+	}
+	public void setaRegDe(String aRegDe) {
+		this.aRegDe = aRegDe;
+	}
+	
+	public String getaYn() {
+		return aYn;
+	}
+	public void setaYn(String aYn) {
+		this.aYn = aYn;
+	}
+	
+	public int getaIdx() {
+		return aIdx;
+	}
+	public void setaIdx(int aIdx) {
+		this.aIdx = aIdx;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVo [qIdx=" + qIdx + ", qCg=" + qCg + ", qTitle=" + qTitle + ", qDesc=" + qDesc + ", qViewCnt="
 				+ qViewCnt + ", qUserId=" + qUserId + ", qRegDe=" + qRegDe + ", qDelYn=" + qDelYn + ", qAnsYn=" + qAnsYn
-				+ ", pageCnt=" + pageCnt + ", searchView=" + searchView + "]";
+				+ ", pageCnt=" + pageCnt + ", searchView=" + searchView + ", aDesc=" + aDesc + ", aIdx=" + aIdx
+				+ ", aViewCnt=" + aViewCnt + ", aUserId=" + aUserId + ", aRegDe=" + aRegDe + ", aYn=" + aYn + "]";
 	}
 }

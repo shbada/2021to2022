@@ -18,44 +18,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <jsp:include page="/mainTop.do" />
+<style>
+.btn-outline-warning {
+    color: #f39c12;
+    background-color: #fff;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+}
+</style>
 <script>
 $(function(){
 	viewCnt(); //조회수
-	likeCnt(); //추천수
 
    /** 목록으로 이동 */
    $("#list").click(function(){
-	   alert(1);
-	   location.href="questionList.do";
+	   location.href="qJavaList.do";
    });
-   
-   /** 공지글 수정 페이지로 이동 */
-   $("#update").click(function(){
-		document.noFrm.method="POST";
-		document.noFrm.action="<c:url value='/openNoticeUpdate.do'/>";
-		document.noFrm.submit(); 
-   });
-   
-   /** 해당 글 삭제 */
-   $("#delete").click(function(){
-	   if(confirm("정말로 삭제하시겠습니까?") == true){
-		   var formData = $("form[name=noFrm]").serialize();
-		   $.ajax({
-				  type : "POST",
-				  url : "<c:url value='/noticeDelete.do' />",
-				  dataType : "text",
-				  data : formData,
-				  success : function(result){
-					  if(result=="ok"){
-						  alert("삭제가 되었습니다.");
-						  location.href="<c:url value='/notice.do' />";
-					  }else{
-						  alert("오류가 발생했습니다. \n 잠시 후 다시 시도해 주세요.");
-					  }
-				  }
-			  });
-	   }
-	   
+	
+   $("#answerWrite").click(function(){
+	  var obj = document.noFrm;
+	  obj.method = "POST";
+	  obj.action = "<c:url value='answerWrite.do' />";
+	  obj.submit();
    });
 });
    
@@ -68,6 +56,13 @@ function viewCnt(){
 			$("#questionView").html(result);
 		}
 	});
+}
+
+function listDetail(aIdx){
+	document.noFrm.aIdx.value=aIdx;
+	document.noFrm.method="POST";
+	document.noFrm.action="<c:url value='/answerDetail.do'/>";
+	document.noFrm.submit();
 }
 </script>
 <!-- History section -->
@@ -119,7 +114,10 @@ function viewCnt(){
 									<button type="button" class="btn btn-lg m_t_10" id="btnLike" style="text-align: right;">추천하기</button>
 								</c:if>
 								<hr>
-				         		<input type="hidden" name="no" value ="${detail.qIdx}" />
+				         		<input type="hidden" name="qIdx" value ="${detail.qIdx}" />
+				         		<input type="hidden" name="aIdx" value ="1" />
+				         		<input type="hidden" name="qUserId" value ="${detail.qUserId}" />
+				         		<input type="hidden" name="qDesc" value ="${detail.qDesc}" />
 				         		<input type="hidden" name="secretReply" />
 									<table class="table table-striped b-t text-sm">
 									<thead>
@@ -154,17 +152,61 @@ function viewCnt(){
 										</tr>
 									</tbody>
 								</table>
+								<div class="loginButton" style="text-align: center">
+		                          	 <button type="button" class="btn btn-lg m_t_10" name="list" id="list" data-toggle="tooltip" data-placement="bottom" >목록</button>
+		                          	  <c:if test="${detail.qUserId != sessionScope.userId }">
+			                          	 <button type="button" class="btn btn-lg m_t_10" name="answerWrite" id="answerWrite" data-toggle="tooltip" data-placement="bottom" >답변글 작성</button>
+			                     	 </c:if>
+		                       	</div>
+		                       	<br />
+		                       	<hr>
+		                       	<table class="table table-striped b-t text-sm">
+									<thead>
+										<tr>
+											<c:if test="${sessionScope.userId == 'admin' }">
+												<th><input type="checkbox" id="checkall" name="checkall"></th>
+											</c:if>
+											<th>채택여부</th>
+											<th>작성자</th>
+											<th>조회수</th>
+											<th>등록날짜</th>
+											<th>답변</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<c:forEach var="i" items="${answerList}" varStatus="cnt">
+											<tr>
+												<c:if test="${sessionScope.userId == 'admin' }">
+													<td><input type="checkbox" name="chkArray" value="${i.qIdx}"></td>
+												</c:if>
+												<c:if test="${i.aYn == 'Y' }">
+													<td>완료</td>
+												</c:if>
+												<c:if test="${i.aYn == 'N' }">
+													<td>대기중</td>
+												</c:if>
+												<td>
+													${i.aUserId}
+												</td>
+												<td style="text-align: left;">
+													${i.aViewCnt}
+												</td>
+												<td>${i.aRegDe}</td>
+												<td>
+													<a style="margin-left: 4px;" href="#" onclick="javascript:listDetail(${i.aIdx})"> 
+														<button type="button" class="btn-outline-warning hover" name="save" id="save" >답글보기</button>
+													</a>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 				               </form>
+				               
 								</div>
 			      			</div>
 				   		</div>
-                       	<div class="loginButton" style="text-align: center">
-                          	 <button type="button" class="btn btn-lg m_t_10" name="list" id="list" data-toggle="tooltip" data-placement="bottom" >목록</button>
-                          	  <c:if test="${detail.qUserId == sessionScope.userId }">
-	                          	 <button type="button" class="btn btn-lg m_t_10" name="update" id="update" data-toggle="tooltip" data-placement="bottom" >수정</button>
-		                     	 <button type="button" class="btn btn-lg m_t_10" id="delete" data-toggle="tooltip" data-placement="bottom">삭제</button>
-	                     	 </c:if>
-                       	</div>
                     </div>
                 </div>
             </div>

@@ -21,5 +21,7 @@ public interface QuestionService {
 	void insertQuestion(QuestionVo questionVo, HttpServletRequest request);
 
 	int questionViewCnt(int qIdx);
+
+	List<QuestionVo> selectAnswerList(int qIdx);
 	
 }

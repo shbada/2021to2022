@@ -68,5 +68,10 @@ public class QuestionServiceImpl implements QuestionService{
 	public int questionViewCnt(int qIdx) {
 		return questionDao.questionViewCnt(qIdx);
 	}
+
+	@Override
+	public List<QuestionVo> selectAnswerList(int qIdx) {
+		return questionDao.selectAnswerList(qIdx);
+	}
 	
 }

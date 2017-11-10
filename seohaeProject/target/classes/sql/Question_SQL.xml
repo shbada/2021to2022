@@ -114,4 +114,19 @@
 		
 	/*com.co.kr.question.dao.QuestionDao.JavaUpdateCnt - 글 조회수 증가 */
 	</update>
+	
+	<select id="selectAnswerList" parameterType="int" resultType="com.co.kr.question.vo.QuestionVo">
+   		SELECT 
+			Q_IDX,
+			A_USER_ID,
+			A_DESC, 
+			A_VIEW_CNT,
+			(substr(A_REG_DE,0,10)) AS A_REG_DE,
+			A_YN,
+			A_IDX
+			FROM ANSWER
+			WHERE Q_IDX = #{qIdx}
+    
+    /*com.co.kr.question.dao.QuestionDao.selectJavaList - JAVA 질문과답변 목록 */
+   </select>
 </mapper>

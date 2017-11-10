@@ -93,6 +93,7 @@ function listDetail(qIdx){
 										<col width="70" />
 										<col width="70" />
 										<col width="70" />
+										<col width="70" />
 									</colgroup>
 
 									<thead>
@@ -196,7 +197,6 @@ function listDetail(qIdx){
                         </div>
                         <div class="loginButton" style="text-align: center">
                           <button type="button" class="btn btn-lg m_t_10" name="write" id="write" data-toggle="tooltip" data-placement="bottom">작성</button>
-	                      <button type="button" class="btn btn-lg m_t_10" name="delete" id="delete" data-toggle="tooltip" data-placement="bottom">삭제</button>
                        	</div>
                     </div>
                 </div>

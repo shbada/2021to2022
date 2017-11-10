@@ -1,15 +1,15 @@
 <%    
 /**
- * 공지사항 리스트 페이지
+ * 질문과답변 글작성
  * @author seohae
- * @since 2017. 11. 03.
+ * @since 2017. 11. 10.
  * @version 1.0
  * @see
  *
  * <pre>
  * << 개정이력(Modification Information) >>
  *   
- *  1. (2017. 11. 03 / seohae / 최초생성)
+ *  1. (2017. 11. 10 / seohae / 최초생성)
  *
  * </pre>
  */
@@ -19,7 +19,21 @@
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <jsp:include page="/mainTop.do" />
 <script>
-
+$(function(){
+	//저장
+    $("#save").click(function(){
+	  var obj = document.saveFrm;
+	  obj.method = "POST";
+	  obj.action = "<c:url value='insertAnswer.do' />";
+	  obj.submit();
+    });
+    
+    /** 목록으로 이동 */
+    $("#list").click(function(){
+ 	   location.href="questionList.do";
+    });
+    
+});
 </script>
 <!-- History section -->
 <section id="history" class="history sections">
@@ -55,7 +69,7 @@
             <div class="col-sm-12">
                 <div class="contact_contant sections">
                     <div class="head_title text-center">
-                        <h2>QUESTION WRITE</h2>
+                        <h2>ANSWER WRITE</h2>
                         <div class="subtitle">
                             Nullam sit amet odio eu est aliquet euismod a a urna. Proin eu urna suscipit, dictum quam nec.  
                         </div>
@@ -65,11 +79,45 @@
                         <div class="col-sm-12">
                             <div class="single_contant_left padding-top-90 padding-bottom-90">
                                <!-- *********************************************************************************** -->
+                               <form enctype="multipart/form-data" name="saveFrm">
+                               		<input type="hidden" name="qIdx" value ="${questionVo.qIdx}" />
+									<table class="table table-striped b-t text-sm">
+					                  <colgroup>
+					                     <col width="100" />
+					                     <col width="" />
+					                     <col width="100" />
+					                     <col width="100" />
+					                     <col width="30" />
+					                     <col width="30" />
+					                     <col width="30" />
+					                  </colgroup>
+					                  <tbody>
+					                  <tr>
+					                  <th scope="row">질문글 번호</th>
+					                    <td colspan="2">
+					                     ${questionVo.qIdx }
+					                    </td>
+					                  </tr>
+					                  <tr>
+					                  <th scope="row">질문내용</th>
+					                    <td colspan="2">
+					                     ${questionVo.qDesc}
+					                    </td>
+					                  </tr>
+					                  <tr>
+					                  <th scope="row">답변내용</th>
+					                    <td colspan="2">
+					                     <textarea rows="10" cols="110" name="aDesc" ></textarea>
+					                    </td>
+					                  </tr>
+					                  </tbody>
+					               </table>
+					              </form>
                             </div>
                         </div>
                         <div class="loginButton" style="text-align: center">
-                           <button type="button" class="btn btn-lg m_t_10" name="loginChecked" id="loginChecked" data-toggle="tooltip" data-placement="bottom" data-original-title="로그인!">로그인</button>&nbsp;
-	                     <button type="button" class="btn btn-lg m_t_10" id="userCreate" data-toggle="tooltip" data-placement="bottom" data-original-title="회원가입!">회원가입</button>
+                           <button type="button" class="btn btn-lg m_t_10" name="save" id="save" >저장</button>
+                           <button type="button" class="btn btn-lg m_t_10" name="list" id="list" data-toggle="tooltip" data-placement="bottom" >목록</button>
                         </div>
                     </div>
                 </div>
