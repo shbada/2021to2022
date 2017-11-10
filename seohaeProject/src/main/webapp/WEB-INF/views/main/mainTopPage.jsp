@@ -114,7 +114,7 @@ function MessageList(){
 		                                        standard dummy text ever since the 1500s, when an unknown printer took a galley 
 		                                        of type and scrambled it to make a type specimen book.</p>
 		                                    <div class="home_btn">
-		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">JAVA</a>
+		                                        <a href="/qJavaList.do" class="btn btn-lg m_t_10">JAVA</a>
 		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">C</a>
 		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Python</a>
 		                                        <a href="/editUser.do" class="btn btn-lg m_t_10">Ruby</a>

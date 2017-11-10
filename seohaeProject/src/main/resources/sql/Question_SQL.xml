@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="questionSql">
+<select id="selectJavaList" parameterType="com.co.kr.question.vo.QuestionVo" resultType="com.co.kr.question.vo.QuestionVo">
+   		SELECT 
+   			A.RM,
+			A.Q_IDX,
+			A.Q_CG, 
+			A.Q_TITLE, 
+			A.Q_DESC, 
+			A.Q_VIEW_CNT,
+			A.Q_USER_ID,
+			(substr(Q_REG_DE,0,10)) AS Q_REG_DE, 
+			A.Q_ANS_YN
+		FROM (
+      SELECT ROWNUM rnum,
+      S.*
+      FROM
+      (
+        SELECT
+          RANK() OVER(ORDER BY Q_REG_DE ASC)RM,
+          	N.Q_IDX,
+			N.Q_CG, 
+			N.Q_TITLE, 
+			N.Q_DESC, 
+			N.Q_VIEW_CNT,
+			N.Q_USER_ID,
+			(substr(Q_REG_DE,0,10)) AS Q_REG_DE,
+			N.Q_ANS_YN
+        FROM QUESTION N
+        WHERE
+          1 = 1
+         <if test='searchView !=null and searchView != "" '>
+         	AND (TITLE LIKE '%' || #{searchView} || '%' OR Q_USER_ID LIKE '%' || #{searchView} || '%')
+         </if>
+        AND Q_DEL_YN = 'N'
+        AND Q_CG = 'JAVA'
+        ORDER BY Q_IDX DESC
+      ) S
+    ) A
+    WHERE rnum BETWEEN #{startRowNo} and #{endRowNo}
+    
+    /*com.co.kr.question.dao.QuestionDao.selectJavaList - JAVA 질문과답변 목록 */
+   </select>
+   
+   <select id="getListBaordJavaCount" parameterType="com.co.kr.question.vo.QuestionVo" resultType="int">
+		SELECT COUNT(*) FROM QUESTION WHERE 1=1
+		<if test='searchView !=null and searchView != "" '>
+         	AND (TITLE LIKE '%' || #{searchView} || '%' OR Q_USER_ID LIKE '%' || #{searchView} || '%')
+        </if>		
+        
+        /*com.co.kr.question.dao.QuestionDao.getListBaordJavaCount - 질문과답변 글 총개수 가져오기 */
+	</select>
+	
+	<select id="questionDetail" parameterType="int" resultType="com.co.kr.question.vo.QuestionVo">
+		SELECT
+			Q_IDX,
+			Q_CG,
+			Q_TITLE,
+			Q_DESC,
+			Q_VIEW_CNT,
+			Q_USER_ID,
+			Q_REG_DE,
+			Q_ANS_YN
+		FROM QUESTION
+		WHERE 1=1
+		<if test="value != '' and value != null ">
+			AND Q_IDX = #{qIdx}
+		</if>
+		
+		/*com.co.kr.question.dao.QuestionDao.questionDetail - 글 상세정보 */
+	</select>
+	
+	<!-- 업로드 -->
+	<insert id="insertQuestion" parameterType="com.co.kr.question.vo.QuestionVo">
+	    <![CDATA[
+	        INSERT INTO QUESTION
+	        (
+	            Q_IDX,
+				Q_CG,
+				Q_TITLE,
+				Q_DESC,
+				Q_USER_ID,
+				Q_REG_DE
+	        )
+	        VALUES
+	        (
+	            seq_question.NEXTVAL,
+	            #{qCg}, 
+	            #{qTitle}, 
+	            #{qDesc}, 
+	            #{qUserId}, 
+	            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+	        )
+	    ]]>
+	    
+	    /*com.co.kr.question.dao.QuestionDao.insertQuestion - 글 작성완료 */
+	</insert>
+	
+	<select id="questionViewCnt" parameterType="int" resultType="int">
+		SELECT Q_VIEW_CNT FROM QUESTION WHERE 1=1 AND Q_IDX = #{qIdx}
+		
+		/*com.co.kr.question.dao.QuestionDao.questionViewCnt - 글 조회수 가져오기 */
+	</select>
+	
+	<update id="JavaUpdateCnt" parameterType="int">
+		<![CDATA[
+			UPDATE QUESTION
+				SET
+					Q_VIEW_CNT = Q_VIEW_CNT + 1
+				WHERE Q_IDX = #{qIdx}		
+		]]>
+		
+	/*com.co.kr.question.dao.QuestionDao.JavaUpdateCnt - 글 조회수 증가 */
+	</update>
+</mapper>
