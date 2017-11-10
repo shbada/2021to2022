@@ -44,4 +44,8 @@ public class AnswerDao extends AbstractDAO{
 		update("answerSql.answerPickSave", answerVo);
 	}
 
+	public void questionUpdate(AnswerVo answerVo) {
+		update("answerSql.questionUpdate", answerVo);
+	}
+
 }

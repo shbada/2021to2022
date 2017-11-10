@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.co.kr.answer.service.AnswerService;
 import com.co.kr.answer.vo.AnswerVo;
+import com.co.kr.bino.service.BinoService;
+import com.co.kr.bino.vo.BinoVo;
 import com.co.kr.notice.vo.NoticeVo;
 import com.co.kr.question.vo.QuestionVo;
+import com.co.kr.user.vo.UserVo;
 
 /**
  * AnswerController
@@ -45,6 +48,9 @@ public class AnswerController {
 	
 	@Autowired
 	AnswerService answerService;
+	
+	@Autowired
+	private BinoService binoService;
 	
 	/**
 	    * @Method answerWrite
@@ -77,6 +83,22 @@ public class AnswerController {
 		answerVo.setaUserId(userId);
   
 		answerService.insertAnswer(answerVo);
+		
+		//작성 후 10 bino 적립!
+		BinoVo binoVo = new BinoVo();
+		binoVo.setBinoCg("답변글 작성");
+		binoVo.setBinoYn("Y");
+		binoVo.setUserId(userId);
+		binoVo.setBino(10);
+		binoService.questionBino(binoVo);
+		//총 적립 포인트 조회
+		int userBinoAdd = binoService.userBinoAdd(userId);
+		
+		//사용자 테이블의 bino 총액 변경
+		UserVo userVo = new UserVo();
+		userVo.setUserId(userId);
+		userVo.setBino(userBinoAdd);
+		binoService.userBinoUpdate(userVo);
 		
 	    return "redirect:/qJavaList.do";
 	}
@@ -155,6 +177,8 @@ public class AnswerController {
 		int answerPickCheck = answerService.answerPickCheck(answerVo);
 		if(answerPickCheck == 0){
 			answerService.answerPickSave(answerVo);
+			//질문글: 채택여부 변경하기
+			answerService.questionUpdate(answerVo);
 			return "ok";
 		} else return "fal";
 	}

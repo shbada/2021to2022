@@ -9,4 +9,73 @@
 				
 	/* com.co.kr.bino.dao.BinoDao.binoSumCount - 접속자 회원의 bino 총액 가져오기 */   
 	</select>
+	
+	<insert id="questionBino" parameterType="com.co.kr.bino.vo.BinoVo">
+	    <![CDATA[
+	        INSERT INTO BINO
+	        (
+	            BINO_NO,
+	            BINO,
+				USER_ID,
+				BINO_REGDATE,
+				BINO_YN,
+				BINO_CG
+	        )
+	        VALUES
+	        (
+	            seq_bino.NEXTVAL,
+	            #{bino}, 
+	            #{userId}, 
+	            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
+	            #{binoYn}, 
+	            #{binoCg}
+	        )
+	    ]]>
+	    
+	    /* com.co.kr.bino.dao.BinoDao.questionBino - bino 내역 저장 */   
+	</insert>
+	
+	<select id="userBinoAdd" parameterType="String" resultType="int">
+		SELECT SUM(BINO)
+			FROM BINO
+				WHERE USER_ID= #{userId}
+				AND BINO_YN = 'Y'
+				
+	/* com.co.kr.bino.dao.BinoDao.userBinoAdd - 적립 BINO 총액 */   
+	</select>
+	
+	<select id="userBinoMinus" parameterType="String" resultType="int">
+		SELECT SUM(BINO)
+			FROM BINO
+				WHERE USER_ID= #{userId}
+				AND BINO_YN = 'N'
+				
+	/* com.co.kr.bino.dao.BinoDao.userBinoMinus - 사용 BINO 총액 */   
+	</select>
+	
+	<update id="userBinoUpdate" parameterType="com.co.kr.user.vo.UserVo">
+		<![CDATA[
+			UPDATE USERS
+				SET
+					BINO = BINO + #{bino}
+				WHERE USER_ID = #{userId}		
+		]]>
+		
+	/* com.co.kr.bino.dao.BinoDao.userBinoUpdate - 회원 bino 총액 수정 */  
+	</update>
+	
+	<select id="binoList" resultType="com.co.kr.bino.vo.BinoVo">
+   		SELECT 
+   				BINO_NO,
+	            BINO,
+				USER_ID,
+				BINO_REGDATE,
+				BINO_YN,
+				BINO_CG
+		FROM BINO
+		WHERE USER_ID = #{userId}
+		ORDER BY BINO_NO
+    
+    /* com.co.kr.bino.dao.BinoDao.userBinoUpdate - 회원 bino 내역 조회 */  
+   </select>
 </mapper>

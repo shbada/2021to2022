@@ -59,18 +59,7 @@
 			
        /*com.co.kr.answer.dao.AnswerDao.answerLikeCnt - 답변글  추천 여부 조회  */
 	</select>
-	
-	<select id="answerLike" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="com.co.kr.answer.vo.AnswerVo">
-			SELECT  Q_IDX,
-					A_IDX,
-					USER_ID,
-					REG_DE
-				FROM ANS_LIKE_BOARD
-				WHERE A_IDX = #{aIdx}
-                AND USER_ID = #{aUserId}
-                
-       /*com.co.kr.answer.dao.AnswerDao.answerLike - 답변글 추천수 조회  */
-	</select>
+
 	<select id="answerLike" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="com.co.kr.answer.vo.AnswerVo">
 			SELECT  Q_IDX,
 					A_IDX,
@@ -122,5 +111,16 @@
 		]]>
 		
 	/*com.co.kr.answer.dao.AnswerDao.answerPickSave - 답글 채택완료 */
+	</update>
+	
+	<update id="questionUpdate" parameterType="com.co.kr.answer.vo.AnswerVo">
+		<![CDATA[
+			UPDATE QUESTION
+				SET
+					Q_ANS_YN = 'Y'
+				WHERE Q_IDX = #{qIdx}		
+		]]>
+		
+	/*com.co.kr.answer.dao.AnswerDao.answerPickSave - 질문글 채택여부 변경 */
 	</update>
 </mapper>

@@ -37,6 +37,9 @@ public class UserVo {
 	private String userFirstAddr;
 	@Comment("두번째 주소")
 	private String userSecondAddr;
+	@Comment("bino 총액")
+	private int bino;
+	
 	public int getRegistNo() {
 		return registNo;
 	}
@@ -140,6 +143,12 @@ public class UserVo {
 		this.userSecondAddr = userSecondAddr;
 	}
 	
+	public int getBino() {
+		return bino;
+	}
+	public void setBino(int bino) {
+		this.bino = bino;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [registNo=" + registNo + ", userId=" + userId + ", userPw=" + userPw + ", tmprPwNo=" + tmprPwNo
@@ -147,6 +156,6 @@ public class UserVo {
 				+ userLevel + ", userDelYn=" + userDelYn + ", userDelDe=" + userDelDe + ", regDe=" + regDe
 				+ ", passwordLastChangeDe=" + passwordLastChangeDe + ", failCnt=" + failCnt + ", studyLictCode="
 				+ studyLictCode + ", userZipCode=" + userZipCode + ", userFirstAddr=" + userFirstAddr
-				+ ", userSecondAddr=" + userSecondAddr + "]";
+				+ ", userSecondAddr=" + userSecondAddr + ", bino=" + bino + "]";
 	}
 }

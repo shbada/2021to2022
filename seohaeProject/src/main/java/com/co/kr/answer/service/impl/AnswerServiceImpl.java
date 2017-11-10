@@ -82,5 +82,10 @@ public class AnswerServiceImpl implements AnswerService{
 	public void answerPickSave(AnswerVo answerVo) {
 		answerDao.answerPickSave(answerVo);
 	}
+
+	@Override
+	public void questionUpdate(AnswerVo answerVo) {
+		answerDao.questionUpdate(answerVo);
+	}
 	
 }

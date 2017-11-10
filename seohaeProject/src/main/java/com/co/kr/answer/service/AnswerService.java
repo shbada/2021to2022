@@ -25,5 +25,7 @@ public interface AnswerService {
 	int answerPickCheck(AnswerVo answerVo);
 
 	void answerPickSave(AnswerVo answerVo);
+
+	void questionUpdate(AnswerVo answerVo);
 	
 }

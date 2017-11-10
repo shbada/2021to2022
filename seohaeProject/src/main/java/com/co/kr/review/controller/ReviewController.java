@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.co.kr.bino.service.BinoService;
+import com.co.kr.bino.vo.BinoVo;
 import com.co.kr.book.vo.BookVo;
 import com.co.kr.cart.service.CartService;
 import com.co.kr.review.service.ReviewService;
 import com.co.kr.review.vo.ReviewVo;
+import com.co.kr.user.vo.UserVo;
 
 /**
  * ReviewController
@@ -48,7 +51,7 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@Autowired
-	private CartService cartService;
+	private BinoService binoService;
 	
 	/**
 	    * @Method ReviewList
@@ -162,6 +165,22 @@ public class ReviewController {
             reviewVo.setUrl(fileName);
         }
     	reviewService.insertReview(reviewVo);
+    	
+    	//작성 후 10 bino 적립!
+		BinoVo binoVo = new BinoVo();
+		binoVo.setBinoCg("후기댓글 작성");
+		binoVo.setBinoYn("Y");
+		binoVo.setUserId(userId);
+		binoVo.setBino(10);
+		binoService.questionBino(binoVo);
+		//총 적립 포인트 조회
+		int userBinoAdd = binoService.userBinoAdd(userId);
+		
+		//사용자 테이블의 bino 총액 변경
+		UserVo userVo = new UserVo();
+		userVo.setUserId(userId);
+		userVo.setBino(userBinoAdd);
+		binoService.userBinoUpdate(userVo);
     	
     	return "redirect:/reviewList.do";
     }

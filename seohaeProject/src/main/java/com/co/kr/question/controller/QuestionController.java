@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.co.kr.bino.service.BinoService;
+import com.co.kr.bino.vo.BinoVo;
 import com.co.kr.question.service.QuestionService;
 import com.co.kr.question.vo.QuestionVo;
+import com.co.kr.user.vo.UserVo;
 
 /**
  * QuestionController
@@ -42,6 +45,9 @@ public class QuestionController {
 	
 	@Autowired
 	QuestionService questionService;
+	
+	@Autowired
+	private BinoService binoService;
 	
 	/**
 	    * @Method qJavaList
@@ -94,6 +100,22 @@ public class QuestionController {
 		QuestionVo.setqUserId(userId);
      
 		questionService.insertQuestion(QuestionVo, request);
+		
+		//작성 후 5 bino 적립!
+		BinoVo binoVo = new BinoVo();
+		binoVo.setBinoCg("질문글 작성");
+		binoVo.setBinoYn("Y");
+		binoVo.setUserId(userId);
+		binoVo.setBino(5);
+		binoService.questionBino(binoVo);
+		//총 적립 포인트 조회
+		int userBinoAdd = binoService.userBinoAdd(userId);
+		
+		//사용자 테이블의 bino 총액 변경
+		UserVo userVo = new UserVo();
+		userVo.setUserId(userId);
+		userVo.setBino(userBinoAdd);
+		binoService.userBinoUpdate(userVo);
 		
 	    return "redirect:/qJavaList.do";
 	}

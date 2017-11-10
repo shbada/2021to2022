@@ -13,6 +13,9 @@ public class BinoVo {
 	private String binoRegdate;
 	@Comment("적립/사용 여부")
 	private String binoYn;
+	@Comment("출처")
+	private String binoCg;
+	
 	public int getBinoNo() {
 		return binoNo;
 	}
@@ -43,9 +46,16 @@ public class BinoVo {
 	public void setBinoYn(String binoYn) {
 		this.binoYn = binoYn;
 	}
+	
+	public String getBinoCg() {
+		return binoCg;
+	}
+	public void setBinoCg(String binoCg) {
+		this.binoCg = binoCg;
+	}
 	@Override
 	public String toString() {
 		return "BinoVo [binoNo=" + binoNo + ", bino=" + bino + ", userId=" + userId + ", binoRegdate=" + binoRegdate
-				+ ", binoYn=" + binoYn + "]";
+				+ ", binoYn=" + binoYn + ", binoCg=" + binoCg + "]";
 	}
 }
