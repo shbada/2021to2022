@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.co.kr.answer.vo.AnswerVo;
 import com.co.kr.common.dao.AbstractDAO;
 import com.co.kr.notice.vo.NoticeVo;
 import com.co.kr.question.vo.QuestionVo;
@@ -38,6 +39,14 @@ public class QuestionDao extends AbstractDAO{
 
 	public List<QuestionVo> selectAnswerList(int qIdx) {
 		return selectList("questionSql.selectAnswerList", qIdx);
+	}
+
+	public int answerPickCheck(int qIdx) {
+		return (int) selectOne("questionSql.answerPickCheck", qIdx);
+	}
+
+	public AnswerVo ansPickDetail(int qIdx) {
+		return (AnswerVo) selectOne("questionSql.ansPickDetail",qIdx);
 	}
 
 }

@@ -23,5 +23,9 @@ public interface QuestionService {
 	int questionViewCnt(int qIdx);
 
 	List<QuestionVo> selectAnswerList(int qIdx);
+
+	int answerPickCheck(int qIdx);
+
+	Map<String, Object> ansPickDetail(int qIdx);
 	
 }

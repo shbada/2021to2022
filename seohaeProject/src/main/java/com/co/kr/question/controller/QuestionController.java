@@ -112,6 +112,13 @@ public class QuestionController {
 		Map<String, Object> map = questionService.questionDetail(qIdx);
 		model.addAttribute("answerList", questionService.selectAnswerList(qIdx));
 		questionService.JavaUpdateCnt(qIdx,session);
+		//채택된 답변이 있는지 확인
+		int answerPickCheck = questionService.answerPickCheck(qIdx);
+		//채택된 답변의 정보 가져오기
+		Map<String, Object> map2 = questionService.ansPickDetail(qIdx);
+		
+		model.addAttribute("answerPickCheck", answerPickCheck);
+		model.addAttribute("pickDetail", map2.get("pickDetail"));
 		model.addAttribute("detail",map.get("detail"));
 		model.addAttribute("list",map.get("list"));
 	 return "/question/questionDetail";	

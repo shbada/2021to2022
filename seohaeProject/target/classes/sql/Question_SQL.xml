@@ -129,4 +129,24 @@
     
     /*com.co.kr.question.dao.QuestionDao.selectJavaList - JAVA 질문과답변 목록 */
    </select>
+   
+   <select id="answerPickCheck" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM ANSWER WHERE A_YN='Y' AND Q_IDX=#{qIdx}
+
+        /*com.co.kr.question.dao.QuestionDao.answerPickCheck - 채택된 답변이 있는지 확인 */
+	</select>
+	
+	<select id="ansPickDetail" parameterType="int" resultType="com.co.kr.answer.vo.AnswerVo">
+		SELECT
+			A_IDX,
+			A_DESC,
+			A_VIEW_CNT,
+			A_REG_DE,
+			A_USER_ID
+		FROM ANSWER
+		WHERE Q_IDX = #{qIdx}
+			AND A_YN='Y'
+		
+		/*com.co.kr.question.dao.QuestionDao.ansPickDetail - 채택된 답글 정보 가져오기 */
+	</select>
 </mapper>

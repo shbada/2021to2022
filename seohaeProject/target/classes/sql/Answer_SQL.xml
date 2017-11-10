@@ -71,6 +71,17 @@
                 
        /*com.co.kr.answer.dao.AnswerDao.answerLike - 답변글 추천수 조회  */
 	</select>
+	<select id="answerLike" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="com.co.kr.answer.vo.AnswerVo">
+			SELECT  Q_IDX,
+					A_IDX,
+					USER_ID,
+					REG_DE
+				FROM ANS_LIKE_BOARD
+				WHERE A_IDX = #{aIdx}
+                AND USER_ID = #{aUserId}
+                
+       /*com.co.kr.answer.dao.AnswerDao.answerLike - 답변글 추천수 조회  */
+	</select>
 	
 	<insert id="insertAnswerLike" parameterType="com.co.kr.answer.vo.AnswerVo">
       <![CDATA[
@@ -89,4 +100,27 @@
        ]]>
        /*com.co.kr.answer.dao.AnswerDao.insertAnswerLike - 답변글 추천수 완료  */
    </insert>
+   
+   <select id="findqUserId" resultType="String">
+			SELECT Q_USER_ID FROM QUESTION WHERE 1=1 AND Q_IDX = #{qIdx}	
+			
+       /*com.co.kr.answer.dao.AnswerDao.findqUserId - 질문글 작성자 아이디 찾기  */
+	</select>
+	
+	<select id="answerPickCheck" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="int">
+		SELECT COUNT(*) FROM ANSWER WHERE A_YN='Y' AND Q_IDX=#{qIdx}
+
+        /*com.co.kr.answer.dao.AnswerDao.answerPickCheck - 채택여부 확인  */
+	</select>
+	
+	<update id="answerPickSave" parameterType="com.co.kr.answer.vo.AnswerVo">
+		<![CDATA[
+			UPDATE ANSWER
+				SET
+					A_YN = 'Y'
+				WHERE A_IDX = #{aIdx}		
+		]]>
+		
+	/*com.co.kr.answer.dao.AnswerDao.answerPickSave - 답글 채택완료 */
+	</update>
 </mapper>

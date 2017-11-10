@@ -19,5 +19,11 @@ public interface AnswerService {
 	void insertAnswerLike(AnswerVo answerVo);
 
 	int answerLikeCnt(int qIdx);
+
+	String findqUserId(AnswerVo answerVo);
+
+	int answerPickCheck(AnswerVo answerVo);
+
+	void answerPickSave(AnswerVo answerVo);
 	
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.co.kr.answer.vo.AnswerVo;
 import com.co.kr.question.dao.QuestionDao;
 import com.co.kr.question.service.QuestionService;
 import com.co.kr.question.vo.QuestionVo;
@@ -72,6 +73,19 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public List<QuestionVo> selectAnswerList(int qIdx) {
 		return questionDao.selectAnswerList(qIdx);
+	}
+
+	@Override
+	public int answerPickCheck(int qIdx) {
+		return questionDao.answerPickCheck(qIdx);
+	}
+
+	@Override
+	public Map<String, Object> ansPickDetail(int qIdx) {
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		AnswerVo pickDetail = questionDao.ansPickDetail(qIdx);
+	    resultMap.put("pickDetail", pickDetail);
+		return resultMap;
 	}
 	
 }

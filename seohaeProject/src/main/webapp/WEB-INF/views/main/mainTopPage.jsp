@@ -106,6 +106,7 @@ function MessageList(){
 		                        <c:if test="${sessionScope.userId  != null }">
 		                            <div class="single_home_slider">
 		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+		                                	<a href="#"><h3>${sessionScope.userId } = 0 bino</h3></a>
 		                                	<div class="home_btn">
 		                                    	<a href="#" class="btn btn-default">기초 개발 언어의 질문과 답변</a>
 		                                    </div>
@@ -126,6 +127,7 @@ function MessageList(){
 		                        <c:if test="${sessionScope.userId  != null }">
 		                            <div class="single_home_slider">
 		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+		                                	<a href="#"><h3>${sessionScope.userId } = 0 bino</h3></a>
 		                                    <div class="home_btn">
 		                                    	<a href="#" class="btn btn-default">개발 분야별 언어의 질문과 답변</a>
 		                                    </div>
@@ -146,6 +148,7 @@ function MessageList(){
 		                        <c:if test="${sessionScope.userId  != null }">
 		                            <div class="single_home_slider">
 		                                <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+		                                	<a href="#"><h3>${sessionScope.userId } = 0 bino</h3></a>
 		                                    <div class="home_btn">
 		                                    	<a href="#" class="btn btn-default">프로그래밍 언어 무료 강의</a>
 		                                    </div>

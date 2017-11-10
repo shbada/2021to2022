@@ -29,6 +29,16 @@
     background-color: #f1c40f;
     border-color: #f1c40f;
 }
+.btn-outline-danger {
+    color: #c0392b;
+    background-color: #fff;
+    border-color: #c0392b;
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
 </style>
 <script>
 $(function(){
@@ -120,6 +130,13 @@ function listDetail(aIdx){
 				         		<input type="hidden" name="qDesc" value ="${detail.qDesc}" />
 				         		<input type="hidden" name="secretReply" />
 									<table class="table table-striped b-t text-sm">
+									<colgroup>
+										<col width="20%">
+										<col width="30%">
+										<col width="20%">
+										<col width="20%">						
+										<col width="20%">						
+									</colgroup>
 									<thead>
 										<tr>
 											<th scope="row">글번호</th>
@@ -160,6 +177,39 @@ function listDetail(aIdx){
 		                       	</div>
 		                       	<br />
 		                       	<hr>
+		                       	<h4><div class="separator"></div>채택된 답글</h4><br/>
+		                       	<table class="table table-striped b-t text-sm">
+		                       		<c:if test="${answerPickCheck != 0 }">
+										<tbody>
+											<tr>
+												<th scope="row">작성자</th>
+												<td>${pickDetail.aUserId}</td>
+												<th scope="row">등록날짜</th>
+												<td  colspan="4">${pickDetail.aRegDe}</td>
+											</tr>
+											<tr>
+												<th>답변내용</th>
+												<td colspan="5">
+													${pickDetail.aDesc}
+												</td>
+											</tr>
+											<tr>
+												<th>상세보기</th>
+												<td colspan="5">
+													<a style="margin-left: 4px;" href="#" onclick="javascript:listDetail(${pickDetail.aIdx})"> 
+														<button type="button" class="btn-outline-danger hover" name="save" id="save" >상세보기</button>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+										</c:if>
+										<c:if test="${answerPickCheck == 0 }">
+											&nbsp;답변 채택이 진행중입니다. 답변글을 작성하시면 10 bino가 적립됩니다.
+										</c:if>
+								</table>
+								<br/>
+								<hr>
+								<h4><div class="separator"></div>답글 목록</h4><br/>
 		                       	<table class="table table-striped b-t text-sm">
 									<thead>
 										<tr>

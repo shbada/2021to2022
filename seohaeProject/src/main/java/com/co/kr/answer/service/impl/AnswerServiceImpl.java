@@ -67,5 +67,20 @@ public class AnswerServiceImpl implements AnswerService{
 	public int answerLikeCnt(int aIdx) {
 		return answerDao.answerLikeCnt(aIdx);
 	}
+
+	@Override
+	public String findqUserId(AnswerVo answerVo) {
+		return answerDao.findqUserId(answerVo);
+	}
+
+	@Override
+	public int answerPickCheck(AnswerVo answerVo) {
+		return answerDao.answerPickCheck(answerVo);
+	}
+
+	@Override
+	public void answerPickSave(AnswerVo answerVo) {
+		answerDao.answerPickSave(answerVo);
+	}
 	
 }

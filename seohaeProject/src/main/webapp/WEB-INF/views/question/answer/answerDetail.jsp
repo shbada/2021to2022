@@ -54,6 +54,31 @@ $(function(){
 			});
 		}
 	});
+	
+	$("#answerPick").click(function(){ //추천버튼
+		if(confirm("해당 답글을 채택하시겠습니까? 채택 후에는 취소가 불가능합니다.")==true){
+			//ajax통신 끝나면 리스트 페이지 이동
+			var formData = $("form[name=saveFrm]").serialize(); //값을 다가지고와서 변수에 담는다 (리스트형식으로 값이 들어감)
+			$.ajax({
+				type:"POST",
+				url: "<c:url value='/answerPick.do'/>",
+				dataType:"text",
+				data: formData,
+				success: function(result){
+					if(result == 'ok'){
+						alert("해당 답글의 채택이 완료되었습니다.");
+					}
+					if(result == 'fal'){
+						alert("이미 채택이 완료된 질문글입니다.");
+					}
+				},
+				error: function(result){
+					alert('에러가 발생하였습니다.');
+					return;
+				},
+			});
+		}
+	});
 });
 
 function listDetail(qIdx){
@@ -163,10 +188,10 @@ function likeCnt(){
 					               		<a style="margin-left: 4px;" href="#" onclick="javascript:listDetail(${detail.qIdx})"> 
 			                           		<button type="button" class="btn btn-lg m_t_10">뒤로가기</button>
 			                           	</a>
-			                           	<c:if test="${sessionScope.userId  != detail.aUserId }"> <!-- 자기가 쓴글이 아니여야 버튼이 보인다 -->
+			                           	<c:if test="${sessionScope.userId  != writer }"> <!-- 자기가 쓴글이 아니여야 버튼이 보인다 -->
 											<button type="button" class="btn btn-lg m_t_10" id="btnLike">추천</button>
 										 </c:if>
-			                            <c:if test="${sessionScope.userId == aUserId }">
+			                            <c:if test="${sessionScope.userId == writer }">
 			                           		<button type="button" class="btn btn-lg m_t_10" name="answerPick" id="answerPick" data-toggle="tooltip" data-placement="bottom" >채택하기</button>
 			                        	</c:if>
 			                        </div>

@@ -32,4 +32,16 @@ public class AnswerDao extends AbstractDAO{
 		return (int) selectOne("answerSql.answerLikeCnt", aIdx);
 	}
 
+	public String findqUserId(AnswerVo answerVo) {
+		return (String) selectOne("answerSql.findqUserId", answerVo);
+	}
+
+	public int answerPickCheck(AnswerVo answerVo) {
+		return (int) selectOne("answerSql.answerPickCheck", answerVo);
+	}
+
+	public void answerPickSave(AnswerVo answerVo) {
+		update("answerSql.answerPickSave", answerVo);
+	}
+
 }

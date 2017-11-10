@@ -91,9 +91,12 @@ public class AnswerController {
 	  */
 	
 	@RequestMapping(value="/answerDetail")
-	public String AnswerDetail(@ModelAttribute AnswerVo AnswerVo, @RequestParam int aIdx, Model model,HttpSession session){
+	public String AnswerDetail(@ModelAttribute AnswerVo answerVo, @RequestParam int aIdx, Model model,HttpSession session){
 		Map<String, Object> map = answerService.answerDetail(aIdx);
+		//질문글 작성자 아이디 가져오기
+		String writer = answerService.findqUserId(answerVo);
 		answerService.answerUpdateCnt(aIdx, session);
+		model.addAttribute("writer",writer);
 		model.addAttribute("detail",map.get("detail"));
 		model.addAttribute("list",map.get("list"));
 		
@@ -135,5 +138,24 @@ public class AnswerController {
 		int resultCnt = answerService.answerLikeCnt(aIdx);
 		System.out.println(resultCnt);
 		return resultCnt;
+	}
+	
+	/**
+	    * @Method AnswerPick
+	    * @Date 2017. 11. 10.
+	    * @Writter seohae
+	    * @Param AnswerVo
+	    * @Discript 답변글 채택완료
+	    * @Return String
+	  */
+	@RequestMapping(value="answerPick", method=RequestMethod.POST)
+	@ResponseBody
+	public String AnswerPick(@ModelAttribute AnswerVo answerVo, HttpSession session) throws IOException{
+		//채택된 답변이 있는지 확인
+		int answerPickCheck = answerService.answerPickCheck(answerVo);
+		if(answerPickCheck == 0){
+			answerService.answerPickSave(answerVo);
+			return "ok";
+		} else return "fal";
 	}
 }
