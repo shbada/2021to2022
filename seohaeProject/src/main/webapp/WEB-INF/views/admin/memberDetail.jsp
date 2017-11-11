@@ -66,7 +66,7 @@ $(document).ready(function(){
                         </div>
                         <p> 관리자 전용 페이지입니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneAdminList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

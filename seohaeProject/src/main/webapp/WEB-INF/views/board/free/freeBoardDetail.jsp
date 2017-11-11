@@ -276,7 +276,7 @@ function fn_movePage(pageNo){ //댓글 페이징
                         <p> 자유게시판 입니다. BINO에서는 회원분들의 친목, 공부법 공유, 질문과답변 등 회원님들끼리의 관계가 중요하다고 생각되는 만큼, 자유게시판을 통해
                         	회원분들 서로 자유롭게 이야기할 수 있는 게시판을 마련하였습니다. 많은 이용 부탁드립니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

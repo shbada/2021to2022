@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oneAdminSql">
+	<select id="oneAdminListCount" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="int">
+		SELECT COUNT(REQ_NO) FROM ONETOONE
+			 
+     /* com.co.kr.oneto.admin.controller.OneController.oneAdminListCount -게시글 전체 개수 가져오기*/
+	</select>
+	
+	<select id="oneAdminList" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="com.co.kr.oneto.one.vo.OneVo">
+		SELECT
+ 			A.REQ_NO,
+			A.REQ_TITLE,
+			A.USER_ID,
+			A.REQ_DESC,
+     		( SUBSTR(REG_DE, 0, 4)||'-'|| SUBSTR(REG_DE, 5, 2)||'-'||SUBSTR(REG_DE, 7, 2)) AS REG_DE,
+            A.REQ_RE_YN,
+			B.REQ_RE_NO,
+			B.REQ_RE_DESC,
+     		( SUBSTR(REG_RE_DE, 0, 4)||'-'|| SUBSTR(REG_RE_DE, 5, 2)||'-'||SUBSTR(REG_RE_DE, 7, 2)) AS REG_RE_DE,
+            B.USE_YN
+		FROM ONETOONE A LEFT OUTER JOIN ONETOONE_RE B
+			ON A.REQ_NO = B.REQ_RE_NO
+		ORDER BY A.REQ_NO DESC
+      
+      /* com.co.kr.oneto.admin.controller.OneController.oneAdminList -게시글 리스트 조회  */
+	</select>
+	
+	<select id="oneAdminListRe" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="com.co.kr.oneto.one.vo.OneVo">
+	SELECT  REQ_NO,
+			REQ_RE_DESC,
+      		( SUBSTR(REG_RE_DE, 0, 4)||'-'|| SUBSTR(REG_RE_DE, 5, 2)||'-'||SUBSTR(REG_RE_DE, 7, 2)) AS REG_RE_DE,
+      		USE_YN 
+      		FROM ONETOONE_RE
+      
+      /* com.co.kr.oneto.admin.controller.OneController.oneAdminList -문의글 답변글 조회*/
+	</select>
+	
+	<select id="oneAdminDetail" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="com.co.kr.oneto.one.vo.OneVo">
+			SELECT  REQ_RE_NO,
+                    REQ_RE_DESC,
+                    REG_RE_DE,
+                    USE_YN
+                FROM ONETOONE_RE
+	                WHERE REQ_RE_NO = #{reqReNo}
+       /* com.co.kr.oneto.admin.controller.OneController.oneDetail -문의내역글 답변글 상세페이지*/
+	</select>
+	
+	<insert id="oneAdminWriteSave" parameterType="com.co.kr.oneto.one.vo.OneVo">
+      <![CDATA[
+         INSERT 
+           INTO ONETOONE_RE(
+             REQ_RE_NO,
+             REQ_RE_DESC,
+             REG_RE_DE
+           ) VALUES (
+             #{reqNo},
+             #{reqReDesc},
+             TO_CHAR(SYSDATE, 'YYYYMMDD')
+           )
+       ]]>
+       /* com.co.kr.oneto.admin.controller.OneController.oneAdminWriteSave -해당 문의글의 답변글 저장*/
+    </insert>
+    
+    <update id="oneYnUpdate" parameterType="com.co.kr.oneto.one.vo.OneVo">
+		<![CDATA[
+			UPDATE ONETOONE
+				SET 
+					REQ_RE_YN = 'Y'
+				WHERE REQ_NO = #{reqNo}
+		]]>
+       /* com.co.kr.oneto.admin.controller.OneController.oneYnUpdate - 답변 작성후 문의글 답변여부 변경완료 */
+	</update>
+</mapper>

@@ -67,7 +67,7 @@ function MessageList(){
 		                                    <li><a href="/allMemberList.do" >모든회원관리</a></li>
 		                                    <li><a href="/allBinoList.do" >bino 전체내역</a></li>
 		                                    <li><a href="/cartList.do" >모든구매내역</a></li>
-		                                    <li><a href="/cartList.do" >1:1 문의내역</a></li>
+		                                    <li><a href="/oneAdminList.do" >1:1 문의내역</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
 	                                </c:if>

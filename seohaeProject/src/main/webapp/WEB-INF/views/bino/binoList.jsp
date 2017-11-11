@@ -39,7 +39,7 @@
                         </div>
                         <p> 회원님의 bino 적립/사용 내역을 보여주는 페이지입니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>
