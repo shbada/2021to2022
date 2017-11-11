@@ -309,7 +309,7 @@ function ValidationCheck() { //전체
                         <p> 회원가입 페이지입니다. 가입하실 회원님의 올바른 정보를 기입해주세요. 이미 가입하신 회원님께서는 <a href="/login.do" style="color: red">로그인</a> 페이지를 통해 로그인해주세요.
                         	잘못된 정보 입력시, 불이익을 받을 수 있으며 그에 대한 책임은 당사자에게 있습니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

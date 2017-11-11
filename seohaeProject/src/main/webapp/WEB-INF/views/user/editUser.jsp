@@ -236,7 +236,7 @@ function ValidationCheck() {
                         </div>
                         <p> 회원정보 수정 페이지입니다. 변경하실 회원님의 올바른 정보를 입력해주세요. 잘못된 정보 입력시, 불이익을 받을 수 있으며 그에 대한 책임은 당사자에게 있습니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

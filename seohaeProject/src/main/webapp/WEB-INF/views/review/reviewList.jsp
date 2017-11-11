@@ -110,7 +110,7 @@ function reviewWrite(no){
                         	공부해보신 회원님들 모두에게 후기댓글을 남길 수 있는 권한이 주어집니다. 후기댓글 작성시, 10 bino만큼 적립되며 비방&욕설 등 불편함을 주시는
                         	회원분들은 영구제명 및 삭제처리 됩니다.</p>
 
-                        <a href="" class="btn btn-lg">BROWSE OUR WORK</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

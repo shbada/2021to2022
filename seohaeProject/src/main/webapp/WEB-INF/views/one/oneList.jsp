@@ -74,7 +74,7 @@ function listDetail(idx){
                         <p> 1:1 문의 게시판입니다. BINO를 이용하시는 회원님들의 모든 의견과 충고를 존중하겠습니다. 
                         	BINO에게 질문 또는 의견이 있으신 분들은 1:1 문의글을 작성해주세요. </p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

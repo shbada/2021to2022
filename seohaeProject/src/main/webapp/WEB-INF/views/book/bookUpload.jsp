@@ -54,7 +54,7 @@ $(function(){
                         	적립을 도와드리고 있습니다. 교재 구매시, 현재까지 적립된 포인트를 사용할 수 있습니다. 현재 회원님의 포인트 내역을 알고싶으시면,
                         	<a href="#" style="color: red">포인트 내역</a> 게시판으로 이동해주세요.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

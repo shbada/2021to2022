@@ -188,7 +188,7 @@ $(function(){
                         	가입하실때 입력하신 회원님의 이메일을 정확히 입력해주세요.
                         	아이디를 찾고싶으시면, <a href="/idFind.do" style="color: red">아이디 찾기</a> 게시판으로 이동해주세요.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

@@ -58,9 +58,13 @@ public class OneController {
 	  */
 	
 	@RequestMapping(value="/oneList", method={RequestMethod.GET, RequestMethod.POST})
-	public String OneList(@ModelAttribute OneVo oneVo, Model model, HttpSession session){ //qVo: 게시글 정보, Model: jsp로 데이터 전달을 위함.
+	public String OneList(@ModelAttribute OneVo oneVo, Model model, HttpSession session){
 		
 		oneVo.setUserId((String) session.getAttribute("userId"));
+		
+		if(session.getAttribute("userId") == null){
+			return "login/login";
+		}
 		
 		/** 페이징 처리 */
 		if(oneVo.getPageCnt() == null) oneVo.setPageSize(5);

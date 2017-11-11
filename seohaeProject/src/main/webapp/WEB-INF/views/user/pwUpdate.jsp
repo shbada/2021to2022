@@ -130,7 +130,7 @@ function ValidationCheck() { //전체
                         </div>
                         <p> 비밀번호 변경 페이지입니다. 현재 회원님의 비밀번호와 새롭게 변경할 비밀번호를 정확하게 입력해주세요.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>

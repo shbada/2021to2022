@@ -85,7 +85,7 @@ function CartDel() {
                         <p> 회원님의 장바구니 목록입니다. 저희 BINO는 회원님들의 활발한 활동에 대한 보답으로 bino를 적립해드리고있습니다. 
                         	BINO에서 판매하는 교재들은 모두 회원님들의 적립된 bino로만 구매 가능하며, 2500 bino의 배송비는 무조건 추가됨을 알려드립니다.</p>
 
-                        <a href="" class="btn btn-lg">1:1 문의게시판</a>
+                        <a href="/oneList.do" class="btn btn-lg">1:1 문의게시판</a>
                     </div>
                 </div>
             </div>
