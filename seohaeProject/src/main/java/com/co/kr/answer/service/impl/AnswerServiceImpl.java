@@ -87,5 +87,10 @@ public class AnswerServiceImpl implements AnswerService{
 	public void questionUpdate(AnswerVo answerVo) {
 		answerDao.questionUpdate(answerVo);
 	}
+
+	@Override
+	public String findqQUserId(AnswerVo answerVo) {
+		return answerDao.findqQUserId(answerVo);
+	}
 	
 }

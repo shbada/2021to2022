@@ -27,5 +27,7 @@ public interface AnswerService {
 	void answerPickSave(AnswerVo answerVo);
 
 	void questionUpdate(AnswerVo answerVo);
+
+	String findqQUserId(AnswerVo answerVo);
 	
 }

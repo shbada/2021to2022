@@ -91,6 +91,12 @@
    </insert>
    
    <select id="findqUserId" resultType="String">
+			SELECT A_USER_ID FROM ANSWER WHERE 1=1 AND Q_IDX = #{qIdx}	
+			
+       /*com.co.kr.answer.dao.AnswerDao.findqUserId - 답변글 작성자 아이디 찾기  */
+	</select>
+	
+   <select id="findqQUserId" resultType="String">
 			SELECT Q_USER_ID FROM QUESTION WHERE 1=1 AND Q_IDX = #{qIdx}	
 			
        /*com.co.kr.answer.dao.AnswerDao.findqUserId - 질문글 작성자 아이디 찾기  */

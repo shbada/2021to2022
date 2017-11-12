@@ -109,7 +109,7 @@ public class QuestionController {
 		binoVo.setBino(5);
 		binoService.questionBino(binoVo);
 		//총 적립 포인트 조회
-		int userBinoAdd = binoService.userBinoAdd(userId);
+		int userBinoAdd = binoService.userBinoAdd(userId)+5;
 		
 		//사용자 테이블의 bino 총액 변경
 		UserVo userVo = new UserVo();

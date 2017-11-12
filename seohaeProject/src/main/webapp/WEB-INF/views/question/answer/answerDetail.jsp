@@ -146,6 +146,7 @@ function likeCnt(){
                                <form enctype="multipart/form-data" name="saveFrm">
                                		<input type="hidden" name="qIdx" value ="${detail.qIdx}" />
                                		<input type="hidden" name="aIdx" value ="${detail.aIdx}" />
+                               		<input type="hidden" name="aUserId" value ="${writer}" />
 									<table class="table table-striped b-t text-sm">
 					                  <colgroup>
 					                     <col width="100" />
@@ -188,10 +189,10 @@ function likeCnt(){
 					               		<a style="margin-left: 4px;" href="#" onclick="javascript:listDetail(${detail.qIdx})"> 
 			                           		<button type="button" class="btn btn-lg m_t_10">뒤로가기</button>
 			                           	</a>
-			                           	<c:if test="${sessionScope.userId  != writer }"> <!-- 자기가 쓴글이 아니여야 버튼이 보인다 -->
+			                           	<c:if test="${sessionScope.userId  != writer && sessionScope.userId != qUserId}"> <!-- 자기가 쓴글이 아니여야 버튼이 보인다 -->
 											<button type="button" class="btn btn-lg m_t_10" id="btnLike">추천</button>
 										 </c:if>
-			                            <c:if test="${sessionScope.userId == writer }">
+			                            <c:if test="${sessionScope.userId == qUserId}">
 			                           		<button type="button" class="btn btn-lg m_t_10" name="answerPick" id="answerPick" data-toggle="tooltip" data-placement="bottom" >채택하기</button>
 			                        	</c:if>
 			                        </div>

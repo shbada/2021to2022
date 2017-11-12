@@ -48,4 +48,8 @@ public class AnswerDao extends AbstractDAO{
 		update("answerSql.questionUpdate", answerVo);
 	}
 
+	public String findqQUserId(AnswerVo answerVo) {
+		return (String) selectOne("answerSql.findqQUserId", answerVo);
+	}
+
 }

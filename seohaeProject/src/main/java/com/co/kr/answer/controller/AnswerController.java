@@ -21,6 +21,8 @@ import com.co.kr.answer.service.AnswerService;
 import com.co.kr.answer.vo.AnswerVo;
 import com.co.kr.bino.service.BinoService;
 import com.co.kr.bino.vo.BinoVo;
+import com.co.kr.message.service.MessageService;
+import com.co.kr.message.vo.MessageVo;
 import com.co.kr.notice.vo.NoticeVo;
 import com.co.kr.question.vo.QuestionVo;
 import com.co.kr.user.vo.UserVo;
@@ -51,6 +53,9 @@ public class AnswerController {
 	
 	@Autowired
 	private BinoService binoService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	/**
 	    * @Method answerWrite
@@ -92,7 +97,7 @@ public class AnswerController {
 		binoVo.setBino(10);
 		binoService.questionBino(binoVo);
 		//총 적립 포인트 조회
-		int userBinoAdd = binoService.userBinoAdd(userId);
+		int userBinoAdd = binoService.userBinoAdd(userId)+10;
 		
 		//사용자 테이블의 bino 총액 변경
 		UserVo userVo = new UserVo();
@@ -117,8 +122,10 @@ public class AnswerController {
 		Map<String, Object> map = answerService.answerDetail(aIdx);
 		//질문글 작성자 아이디 가져오기
 		String writer = answerService.findqUserId(answerVo);
+		String qUserId = answerService.findqQUserId(answerVo);
 		answerService.answerUpdateCnt(aIdx, session);
-		model.addAttribute("writer",writer);
+		model.addAttribute("writer", writer);
+		model.addAttribute("qUserId", qUserId);
 		model.addAttribute("detail",map.get("detail"));
 		model.addAttribute("list",map.get("list"));
 		
@@ -172,13 +179,41 @@ public class AnswerController {
 	  */
 	@RequestMapping(value="answerPick", method=RequestMethod.POST)
 	@ResponseBody
-	public String AnswerPick(@ModelAttribute AnswerVo answerVo, HttpSession session) throws IOException{
+	public String AnswerPick(@ModelAttribute AnswerVo answerVo, HttpSession session, @RequestParam String aUserId) throws IOException{
+		System.out.println(aUserId+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		//채택된 답변이 있는지 확인
 		int answerPickCheck = answerService.answerPickCheck(answerVo);
 		if(answerPickCheck == 0){
 			answerService.answerPickSave(answerVo);
 			//질문글: 채택여부 변경하기
 			answerService.questionUpdate(answerVo);
+			//채택된 답변 작성자: 20 bino 적립
+			String userId = aUserId;
+			BinoVo binoVo = new BinoVo();
+			binoVo.setBinoCg("답변글 채택");
+			binoVo.setBinoYn("Y");
+			binoVo.setUserId(userId);
+			binoVo.setBino(20);
+			binoService.questionBino(binoVo);
+			//총 적립 포인트 조회
+			int userBinoAdd = binoService.userBinoAdd(userId)+20;
+			
+			//사용자 테이블의 bino 총액 변경
+			UserVo userVo = new UserVo();
+			userVo.setUserId(userId);
+			userVo.setBino(userBinoAdd);
+			binoService.userBinoUpdate(userVo);
+			
+			//채택된 답글의 작성자에게 쪽지로 채택됬음을 알려주기
+			MessageVo messageVo = new MessageVo();
+			messageVo.setMsgGet(userId);
+			messageVo.setMsgSend("admin");
+			messageVo.setMsgName("회원님의 답변글이 채택되셨습니다.");
+			messageVo.setMsgDesc("축하드립니다! 20 bino의 적립이 완료되었습니다.");
+			
+			System.out.println("@@@@@"+messageVo);
+			messageService.MessageWriteSave(messageVo);
+			
 			return "ok";
 		} else return "fal";
 	}

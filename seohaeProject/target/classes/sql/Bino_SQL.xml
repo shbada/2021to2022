@@ -57,7 +57,7 @@
 		<![CDATA[
 			UPDATE USERS
 				SET
-					BINO = BINO + #{bino}
+					BINO = #{bino}
 				WHERE USER_ID = #{userId}		
 		]]>
 		

@@ -12,7 +12,7 @@
 			MSG_DESC
 		) VALUES (
 			MESSAGE_SEQ.NEXTVAL, 
-			#{userId}, 
+			#{msgSend}, 
 			TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
 			#{msgGet},
 			#{msgName},
