@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.co.kr.admin.service.AdminService;
 import com.co.kr.bino.vo.BinoVo;
+import com.co.kr.buy.vo.BuyVo;
 import com.co.kr.user.vo.UserVo;
 
 /**
@@ -42,10 +43,10 @@ public class AdminController {
 	AdminService adminService;
 	
 	/**
-	    * @Method BookList
-	    * @Date 2017. 11. 05.
+	    * @Method allMemberList
+	    * @Date 2017. 11. 11.
 	    * @Writter seohae
-	    * @Discript 판매교재 목록
+	    * @Discript 전체회원리스트
 	    * @Return String
 	  */
 	
@@ -56,7 +57,14 @@ public class AdminController {
 		
 		return "admin/allMemberList";
 	}
-
+	
+	/**
+	    * @Method memberDetail
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 회원상세정보
+	    * @Return String
+	  */
 	@RequestMapping(value="/memberDetail", method=RequestMethod.POST)
 	public String MemberDetail(@ModelAttribute("UserVo") UserVo userVo, Model model, HttpSession session){
 		UserVo list = adminService.memberDetail(userVo); 
@@ -65,27 +73,68 @@ public class AdminController {
 		return "admin/memberDetail";
 	}
 	
+	/**
+	    * @Method memberDelete
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 회원 영구제명
+	    * @Return String
+	  */
 	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
 	public String MemberDelete(@ModelAttribute("UserVo") UserVo userVo, Model model, HttpSession session){
 		adminService.memberDelete(userVo); 
 		return "redirect:/allMemberList.do";
 	}
 	
+	/**
+	    * @Method memberDown
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 회원 강등
+	    * @Return String
+	  */
 	@RequestMapping(value="/memberDown", method=RequestMethod.POST)
 	public String MemberDown(@ModelAttribute("UserVo") UserVo userVo, Model model, HttpSession session){
 		adminService.memberDown(userVo); 
 		return "redirect:/allMemberList.do";
 	}
 	
+	/**
+	    * @Method memberUp
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 회원 등업
+	    * @Return String
+	  */
 	@RequestMapping(value="/memberUp", method=RequestMethod.POST)
 	public String MemberUp(@ModelAttribute("UserVo") UserVo userVo, Model model, HttpSession session){
 		adminService.memberUp(userVo); 
 		return "redirect:/allMemberList.do";
 	}
 	
+	/**
+	    * @Method BinoList
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 모든회원 bino 내역
+	    * @Return String
+	  */
 	@RequestMapping(value="/allBinoList")
 	public String BinoList(@ModelAttribute BinoVo binoVo, Model model) {
 		model.addAttribute("binoList", adminService.binoList());
 		return "admin/allBinoList";
+	}
+	
+	/**
+	    * @Method BuyList
+	    * @Date 2017. 11. 11.
+	    * @Writter seohae
+	    * @Discript 모든회원 구매내역
+	    * @Return String
+	  */
+	@RequestMapping(value="/allBuyList")
+	public String BuyList(@ModelAttribute BuyVo buyVo, Model model) {
+		model.addAttribute("buyList", adminService.allBuyList());
+		return "admin/allBuyList";
 	}
 }

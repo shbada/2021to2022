@@ -101,6 +101,7 @@ public class CartController {
     	map.put("sumMoney", sumMoney); // 장바구니 전체 금액
     	map.put("fee", fee);
     	map.put("allSum", sumMoney+fee); 
+    	map.put("userId", userId);
     	model.addAttribute("map",map);
 
 		return "cart/cartList";

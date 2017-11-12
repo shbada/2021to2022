@@ -36,21 +36,11 @@
 	</insert>
 	
 	<select id="userBinoAdd" parameterType="String" resultType="int">
-		SELECT SUM(BINO)
-			FROM BINO
+		SELECT BINO
+			FROM USERS
 				WHERE USER_ID= #{userId}
-				AND BINO_YN = 'Y'
 				
 	/* com.co.kr.bino.dao.BinoDao.userBinoAdd - 적립 BINO 총액 */   
-	</select>
-	
-	<select id="userBinoMinus" parameterType="String" resultType="int">
-		SELECT SUM(BINO)
-			FROM BINO
-				WHERE USER_ID= #{userId}
-				AND BINO_YN = 'N'
-				
-	/* com.co.kr.bino.dao.BinoDao.userBinoMinus - 사용 BINO 총액 */   
 	</select>
 	
 	<update id="userBinoUpdate" parameterType="com.co.kr.user.vo.UserVo">
@@ -74,7 +64,7 @@
 				BINO_CG
 		FROM BINO
 		WHERE USER_ID = #{userId}
-		ORDER BY BINO_NO
+		ORDER BY BINO_NO DESC
     
     /* com.co.kr.bino.dao.BinoDao.userBinoUpdate - 회원 bino 내역 조회 */  
    </select>

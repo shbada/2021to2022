@@ -64,7 +64,51 @@ function CartDel() {
 	      }
 	   }
 	}
-	</script>
+
+function buyPart() {
+	if("${map.count}" == 0) {
+		alert("결제할 상품이 없습니다.")
+		return;
+	}
+	
+	var totalCartNo = "";  
+	var cart_no = null;
+	
+	$(":checkbox[name='chk']:checked").each(function(i){
+		 cartNo = $(this).val(); 
+		 totalCartNo += cartNo+","; 
+	 });
+	if (confirm("선택 구매 하시겠습니까?") == true) {
+		document.form1.totalCartNo.value = totalCartNo;
+		document.form1.buyChoice.value = "buyPart";
+		document.form1.method="POST";   		
+		document.form1.action="<c:url value='/buy.do' />";   		
+		document.form1.submit();
+	}
+	return;
+}
+
+function buyAll(){
+	if("${map.count}" == 0) {
+		alert("결제할 상품이 없습니다.");
+		return;
+	}
+	var totalCartNo = "";  
+	var cartNo = null;
+	
+	$(":checkbox[name='chk']").each(function(i){
+		 cartNo = $(this).val(); 
+		 totalCartNo += cartNo+","; 
+	 });
+	if (confirm("전체 구매 하시겠습니까?") == true) {
+	   document.form1.totalCartNo.value = totalCartNo;	
+	   document.form1.buyChoice.value = "buyAll";	
+	   document.form1.method="POST";         
+	   document.form1.action="<c:url value='/buy.do' />";         
+	   document.form1.submit();
+	} 
+}
+
 </script>
 <!-- History section -->
 <section id="history" class="history sections">
@@ -115,6 +159,10 @@ function CartDel() {
                 <hr>
 				<form name="form1" method="post" action="#">
 					<input type="hidden" name="pdNo" value="1">
+					<input type="hidden" name="totalCartNo" value=" ">
+	         	    <input type="hidden" name="buyChoice" value=" ">
+	         	    <input type="hidden" name="userId" value="${map.userId }">
+	         	    <input type="hidden" name="sumMoney" value="${map.sumMoney}">
 	                <c:forEach var="row" items="${map.list}" varStatus="i">
 		                <div class="col-md-4 col-sm-6">
 		                    <div class="single_pricing pricing_business">

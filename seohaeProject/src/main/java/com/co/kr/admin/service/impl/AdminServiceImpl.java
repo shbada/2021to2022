@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.co.kr.admin.dao.AdminDao;
 import com.co.kr.admin.service.AdminService;
 import com.co.kr.bino.vo.BinoVo;
+import com.co.kr.buy.vo.BuyVo;
 import com.co.kr.user.vo.UserVo;
 
 
@@ -51,6 +52,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<BinoVo> binoList() {
 		return adminDao.binoList();
+	}
+
+	@Override
+	public List<BuyVo> allBuyList() {
+		return adminDao.allBuyList();
 	}
 	
 }

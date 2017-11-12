@@ -59,7 +59,7 @@ public class ReviewController {
 	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
-	    * @Discript 교재 리뷰 목록
+	    * @Discript 교재 리뷰 목록_로그인체크
 	    * @Return String
 	  */
 	
@@ -80,7 +80,7 @@ public class ReviewController {
 	    * @Writter seohae
 	    * @Param 
 	    * @EditHistory
-	    * @Discript 교재목록_로그인 체크
+	    * @Discript 교재 리뷰 목록
 	    * @Return String
 	  */
     @RequestMapping(value="/reviewList", method={RequestMethod.GET, RequestMethod.POST})

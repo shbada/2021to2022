@@ -3,6 +3,7 @@ package com.co.kr.admin.service;
 import java.util.List;
 
 import com.co.kr.bino.vo.BinoVo;
+import com.co.kr.buy.vo.BuyVo;
 import com.co.kr.user.vo.UserVo;
 
 public interface AdminService {
@@ -20,4 +21,6 @@ public interface AdminService {
 	List<UserVo> allMemberList() throws Exception;
 
 	public List<BinoVo> binoList();
+
+	public List<BuyVo> allBuyList();
 }

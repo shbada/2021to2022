@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.co.kr.bino.vo.BinoVo;
+import com.co.kr.buy.vo.BuyVo;
 import com.co.kr.common.dao.AbstractDAO;
 import com.co.kr.user.vo.UserVo;
 
@@ -38,6 +39,10 @@ public class AdminDao extends AbstractDAO{
 
 	public List<BinoVo> binoList() {
 		return selectList("adminSql.binoList");
+	}
+
+	public List<BuyVo> allBuyList() {
+		return selectList("adminSql.allBuyList");
 	}
 
 }

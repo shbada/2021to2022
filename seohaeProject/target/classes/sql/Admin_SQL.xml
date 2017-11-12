@@ -20,11 +20,15 @@
 		       ,USER_DEL_YN
 		       ,REG_DE
 		FROM USERS
-		ORDER BY REGIST_NO asc
+		ORDER BY REGIST_NO ASC
+		
+		/* com.co.kr.admin.dao.AdminDao.allMemberList - 모든 회원 조회 */  
 	</select>
 	
 	<delete id="allListDelete" parameterType="com.co.kr.user.vo.UserVo">
 		UPDATE USERS SET USER_DEL_YN = 'Y' WHERE user_id = #{userId}		
+		
+		/* com.co.kr.admin.dao.AdminDao.binoList - 회원 영구제명*/  
 	</delete>		
 	
 	<select id="memberDetail" parameterType="com.co.kr.user.vo.UserVo" resultType="com.co.kr.user.vo.UserVo">
@@ -45,18 +49,26 @@
 		       ,REG_DE
 		FROM USERS
 		WHERE user_id = #{userId}
+		
+		/* com.co.kr.admin.dao.AdminDao.binoList - 회원 상세정보 */  
 	</select>
 	
 	<update id="memberDelete" parameterType="com.co.kr.user.vo.UserVo">
-		UPDATE USERS SET USER_DEL_YN = 'Y' WHERE user_id = #{userId}		
+		UPDATE USERS SET USER_DEL_YN = 'Y' WHERE user_id = #{userId}
+		
+		/* com.co.kr.admin.dao.AdminDao.binoList - 회원 영구제명 */  		
 	</update>
 	
 	<update id="memberDown" parameterType="com.co.kr.user.vo.UserVo">
-		UPDATE USERS SET USER_LEVEL='USER' WHERE user_id = #{userId}		
+		UPDATE USERS SET USER_LEVEL='USER' WHERE user_id = #{userId}	
+		
+		/* com.co.kr.admin.dao.AdminDao.binoList - 회원 강등 */  	
 	</update>
 
 	<update id="memberUp" parameterType="com.co.kr.user.vo.UserVo">
 		UPDATE USERS SET USER_LEVEL='ADMIN' WHERE user_id = #{userId}	
+		
+		/* com.co.kr.admin.dao.AdminDao.binoList - 회원 등업 */  
 	</update>
 	
 	<select id="binoList" resultType="com.co.kr.bino.vo.BinoVo">
@@ -70,6 +82,29 @@
 		FROM BINO
 		ORDER BY BINO_NO
     
-    /* com.co.kr.bino.dao.BinoDao.userBinoUpdate - 회원 bino 내역 조회 */  
+    /* com.co.kr.admin.dao.AdminDao.binoList - 모든 회원 bino 조회 */   
    </select>
+   
+   <select id="allBuyList" parameterType="String" resultType="com.co.kr.buy.vo.BuyVo">
+		select
+				B.BUY_NO, 
+				B.BUY_TOTALBINO, 
+				B.BUY_REGDATE, 
+				B.BUY_NAME, 
+				B.BUY_PHONE, 
+				B.BUY_ZIP_CODE, 
+				B.BUY_FIRST_ADDR, 
+				B.BUY_SECOND_ADDR, 
+				B.USER_ID,
+				I.PD_NO, 
+				I.PD_QT, 
+				I.PD_PRICE,
+                P.PD_NAME,
+                P.PD_URL
+			FROM BUY B JOIN BUY_INFO I ON B.BUY_NO = I.buy_no 
+                 JOIN BOOK P ON I.PD_NO = P.PD_NO
+			ORDER BY B.BUY_NO DESC
+			
+			/* com.co.kr.admin.dao.AdminDao.allBuyList - 모든구매내역 조회 */   
+	</select>
 </mapper>

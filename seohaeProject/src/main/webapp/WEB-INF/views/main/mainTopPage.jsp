@@ -58,6 +58,7 @@ function MessageList(){
 		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
 		                                    <li><a href="/editUser.do" >회원정보수정</a></li>
 		                                    <li><a href="/cartList.do" >장바구니</a></li>
+		                                    <li><a href="/purchaseHistory.do" >구매내역</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
 	                                </c:if>
@@ -66,7 +67,7 @@ function MessageList(){
 		                                    <li><a href="#" onclick="javacscript:MessageList();">쪽지함 (${messageCount })</a></li>
 		                                    <li><a href="/allMemberList.do" >모든회원관리</a></li>
 		                                    <li><a href="/allBinoList.do" >bino 전체내역</a></li>
-		                                    <li><a href="/cartList.do" >모든구매내역</a></li>
+		                                    <li><a href="/allBuyList.do" >모든구매내역</a></li>
 		                                    <li><a href="/oneAdminList.do" >1:1 문의내역</a></li>
 		                                    <li><a href="#" onclick="javascript:sessionLogOut()">로그아웃</a></li>
 		                                </ul>
@@ -78,7 +79,6 @@ function MessageList(){
 	                                    <li><a href="#portfolio">자격증 정보</a></li>
 	                                    <li><a href="#pricing">취업 정보</a></li>
 	                                    <li><a href="/bookList.do">교재구매</a></li>
-	                                    <li><a href="#team">고객센터</a></li>
 	                                </ul>
 	                            </div>
 	                        </div>
