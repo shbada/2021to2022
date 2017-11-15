@@ -17,6 +17,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/include/include-header.jsp"%>
 <%@ page session="true"%>
+<style>
+.btn-outline-warning {
+    color: #f39c12;
+    background-color: #fff;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+}
+.btn-outline-danger {
+    color: #c0392b;
+    background-color: #fff;
+    border-color: #c0392b;
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+</style>
 <script type="text/javascript">
 function messageSendWrite(idx){ 
 	document.form1.msgSend.value = idx;
@@ -159,12 +181,12 @@ function MessageDetail(idx){
 	                             
 	                             <td class="product-thumbnail">
 	                             	 <a href="#" class="link"  onclick="javacscript:messageSendWrite('${row.msgSend }');">
-	                                 <button type="button" class="" id="messageSendWrite">답장보내기 </button>&nbsp;
+	                                 <button type="button" class="btn-outline-warning hover" id="messageSendWrite">답장보내기 </button>&nbsp;
 	                            	 </a>
 	                             </td>
 	                             <td class="product-thumbnail">
 	                             	 <a href="#" class="link" onclick="javacscript:MessageDelete('${row.msgNo }');">
-	                                 	<button type="button" class="" id="deleteBtn">삭제 </button>&nbsp;
+	                                 	<button type="button" class="btn-outline-warning hover" id="deleteBtn">삭제 </button>&nbsp;
 	                                 </a>
 	                             </td>
 	                         </tr>

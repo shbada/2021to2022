@@ -63,13 +63,6 @@ $(function(){
 	 
 });
 
-function searchFormView(){
-	var obj = document.frm_search;
-	obj.method="POST";
-	obj.action="reviewList.do";
-	obj.submit();
-}
-
 function fn_movePage(val){
 	$("input[name=pageNo]").val(val); 
 	document.viewTable.method="POST";
@@ -83,11 +76,12 @@ function listDetail(no){
 	document.viewTable.submit();
 }
 
-function reviewWrite(no){
-	document.form1.pdNo.value=no;
-	document.form1.method="POST";
-	document.form1.action="<c:url value='/reviewWrite.do'/>";
-	document.form1.submit();
+function reviewWrite(){
+	var obj = document.frm;
+	obj.method="POST";
+	obj.action="reviewWrite.do";
+	obj.submit();
+
 }
 </script>
 <!-- History section -->
@@ -146,7 +140,7 @@ function reviewWrite(no){
 	                                        <div class="separator3"></div>
 	                                        <p>${book.pdInfo}</p>
 	
-	                                        <button type="button" class="btn btn-lg m_t_10" onclick="javascript:reviewWrite('${book.pdNo}');">후기댓글 작성</button>
+	                                        <button type="button" class="btn btn-lg m_t_10" onclick="javascript:reviewWrite();">후기댓글 작성</button>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -157,6 +151,7 @@ function reviewWrite(no){
 						<input type="hidden" name="pdName" value="${book.pdName}">
 						<input type="hidden" name="pdUrl" value="${book.pdUrl}">
 						<input type="hidden" name="pdInfo" value="${book.pdInfo}">
+						<input type="hidden" name="pdNo" value="${book.pdNo}">
 					</form>
                     <div class="single_study_right_img">
                         <div class="col-sm-6">
@@ -282,7 +277,7 @@ function reviewWrite(no){
 										</c:forEach>
 									</tbody>
 								</table>
-								<div class="text-center">
+								<%-- <div class="text-center">
 									<ul class="pagination pagination">
 										<c:if test="${pageVO.pageNo != 0}">
 											<c:if test="${pageVO.pageNo > pageVO.pageBlock}">
@@ -328,7 +323,7 @@ function reviewWrite(no){
 											</c:if>
 										</c:if>
 									</ul>
-								</div>
+								</div> --%>
 							</form>
                             </div>
                         </div>

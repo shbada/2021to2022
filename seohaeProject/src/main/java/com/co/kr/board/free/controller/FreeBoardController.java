@@ -46,39 +46,7 @@ public class FreeBoardController {
 	
 	@Autowired
 	private FreeBoardService freeBoardService;
-	
-	/**
-	    * @Method freeBoardSelectList
-	    * @Date 2017. 11. 07.
-	    * @Writter seohae
-	    * @Param 
-	    * @EditHistory
-	    * @Discript 자유게시판 페이지.
-	    * @Return String
-	  */
-	
-	@RequestMapping(value="/freeBoardSelectList")
-	public String freeBoardSelectList(){
-		return "board/free/freeBoard";
-	}
-	
-	/*@RequestMapping(value="/freeBoardSelectList", method={RequestMethod.POST, RequestMethod.GET})
-	public String freeBoardSelectList(@ModelAttribute FreeBoardVo freeBoardVo, Model model){
-		
-		int totalCount = freeBoardService.selectFreeBoardListCount(freeBoardVo);
-		
-		if(freeBoardVo.getPageCnt() == null) freeBoardVo.setPageSize(5);
-		else freeBoardVo.setPageSize(Integer.parseInt(freeBoardVo.getPageCnt()));
-		freeBoardVo.setTotalCount(totalCount);
-		model.addAttribute("pageVO", freeBoardVo);
 
-		List<FreeBoardVo> list = freeBoardService.selectFreeBoardList(freeBoardVo);
-		model.addAttribute("boardList", list);
-		model.addAttribute("search", freeBoardVo.getSearch());
-		
-		return "board/free/freeBoard";
-	}*/
-	
 	/**
 	    * @Method freeBoardSelectList
 	    * @Date 2017. 11. 07.
@@ -93,7 +61,6 @@ public class FreeBoardController {
 		System.out.println(freeBoardVo);
 		if(freeBoardVo.getPageCnt() == null) freeBoardVo.setPageSize(5);
 		else freeBoardVo.setPageSize(Integer.parseInt(freeBoardVo.getPageCnt()));
-		System.out.println(freeBoardVo.getPageCnt());
 		
 		Map<String, Object> map = freeBoardService.selectFreeBoardList(freeBoardVo);
 		

@@ -84,7 +84,7 @@ public class ReviewController {
 	    * @Return String
 	  */
     @RequestMapping(value="/reviewList", method={RequestMethod.GET, RequestMethod.POST})
-    public String ReviewListGo(@ModelAttribute ReviewVo reviewVo, Model model, HttpSession session){
+    public String ReviewListGo(@ModelAttribute ReviewVo reviewVo, Model model, HttpSession session, @RequestParam("pdNo") int pdNo){
     	//검색어에 맞는 게시물의 갯수 구하기
     	int totalCount = reviewService.getReviewCount(reviewVo);
     	
@@ -107,10 +107,9 @@ public class ReviewController {
 	    * @Discript 교재 후기 글쓰기
 	    * @Return String
 	  */
-	@RequestMapping(value="reviewWrite")
-    public String reviewWrite(@ModelAttribute ReviewVo reviewVo, Model model){
-		BookVo list = reviewService.bookDetail(reviewVo); 
-		model.addAttribute("book",list);
+	@RequestMapping(value="reviewWrite", method={RequestMethod.GET, RequestMethod.POST})
+    public String reviewWrite(@ModelAttribute BookVo bookVo, Model model){
+		model.addAttribute("book", bookVo);
     	return "review/reviewWrite";
     }
 	
@@ -147,7 +146,7 @@ public class ReviewController {
 	    * @Return String
 	  */
     @RequestMapping(value="insertReivew")
-    public String insertReview(@ModelAttribute ReviewVo reviewVo, HttpSession session)throws Exception{
+    public String insertReview(@ModelAttribute ReviewVo reviewVo, HttpSession session, RedirectAttributes redirectAttributes)throws Exception{
     	System.out.println("@@@@@@@@@@@@@@"+reviewVo);
     	String userId = (String)session.getAttribute("userId");
         reviewVo.setWriter(userId);
@@ -165,6 +164,7 @@ public class ReviewController {
             reviewVo.setUrl(fileName);
         }
     	reviewService.insertReview(reviewVo);
+    	redirectAttributes.addAttribute("pdNo", reviewVo.getPdNo());
     	
     	//작성 후 10 bino 적립!
 		BinoVo binoVo = new BinoVo();
@@ -181,7 +181,7 @@ public class ReviewController {
 		userVo.setUserId(userId);
 		userVo.setBino(userBinoAdd);
 		binoService.userBinoUpdate(userVo);
-    	
+		
     	return "redirect:/reviewList.do";
     }
 }

@@ -268,22 +268,20 @@ function listDetail(idx){ //글 상세보기
 								<br />
 								<!-- 검색어 순위 기능 종료 -->
 								<div class="search">
-									<form name="frm_search">
-										<input type="text" size="50" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" value="${search }" />
-										<button type="button" class="btn btn-md" id="searchView">검색</button>
-										<button type="button" class="btn btn-md" name="" id="reset">초기화</button>
-									</form>
+									<input type="text" size="50" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" value="${search }" />
+									<button type="button" class="btn btn-md" id="searchView">검색</button>
+									<button type="button" class="btn btn-md" name="" id="reset">초기화</button>
 							   </div>
 								<hr>
 								<!-- 페이징 개수 선택 기능 -->
 								<div class="row text-sm wrapper">
 									<div class="col-sm-4 m-b-xs"> <!-- 5,10,15,50 선택하고 확인 클릭시 게시글 수가 바뀌는데, 그때 바뀌면서 선택한 숫자도 그대로있게 하기 위함 -->
-										<select class="form-control" name="pageCnt" id="pageCnt">
+										<select class="form-control inline" name="pageCnt" id="pageCnt">
 											<option value="5"  <c:if test="${pageVO.pageCnt == '5'}">selected="selected"</c:if>>5개</option>
 											<option value="10"  <c:if test="${pageVO.pageCnt == '10'}">selected="selected"</c:if>>10개</option>
 											<option value="15"  <c:if test="${pageVO.pageCnt == '15'}">selected="selected"</c:if>>15개</option>
 											<option value="50"  <c:if test="${pageVO.pageCnt == '50'}">selected="selected"</c:if>>50개</option>
-										</select>								
+										</select>		
 										<button class="btn btn-md" type="button" id="ListCnt">확인</button>			
 									</div>
 								</div>

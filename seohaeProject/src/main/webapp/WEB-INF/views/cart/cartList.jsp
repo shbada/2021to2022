@@ -18,9 +18,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <jsp:include page="/mainTop.do" />
+<style>
+.btn-outline-warning {
+    color: #f39c12;
+    background-color: #fff;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+}
+.btn-outline-danger {
+    color: #c0392b;
+    background-color: #fff;
+    border-color: #c0392b;
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+</style>
 <script>
-function CountUpdateOk(idx){ 
+function CountUpdateOk(idx, qt){ 
 	document.form1.pdNo.value = idx;
+	document.form1.pdAmount.value = qt;
 	document.form1.method="POST";         
 	document.form1.action="<c:url value='/cartUpdate.do' />";         
 	document.form1.submit();
@@ -182,9 +205,10 @@ function buyAll(){
 		                            <a href="#" class="link" onclick="javacscript:listDetail('${row.pdNo }');">
 	                                   <img src="${pageContext.request.contextPath }/img/${row.pdUrl}" width="145" height="145">
 	                                </a>
+	                                <br/><br/>
 	                                <input type="number" name="pdAmount" size="4" class="input-text qty text" title="Qty" value="${row.pdAmount}" min="1" step="1">
-                                      <a href="#" class="link" onclick="javacscript:CountUpdateOk('${row.pdNo }');">
-                                        <button type="button" class="">확인 </button>
+                                      <a href="#" class="link" onclick="javacscript:CountUpdateOk('${row.pdNo }', '${row.pdAmount}');">
+                                        <button type="button" class="btn-outline-danger hover">확인 </button>
                                      </a>
 		                        </div>
 		                    </div>
