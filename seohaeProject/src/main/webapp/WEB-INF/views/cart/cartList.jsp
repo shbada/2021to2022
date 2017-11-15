@@ -41,13 +41,13 @@
 }
 </style>
 <script>
-function CountUpdateOk(idx, qt){ 
-	document.form1.pdNo.value = idx;
-	document.form1.pdAmount.value = qt;
-	document.form1.method="POST";         
-	document.form1.action="<c:url value='/cartUpdate.do' />";         
-	document.form1.submit();
-}
+$(document).ready(function(){
+   $("#amountUpdate").click(function(){ 
+      document.form1.method="POST";         
+      document.form1.action="<c:url value='/cartUpdate.do' />";         
+      document.form1.submit();
+   });
+});
 
 function listDetail(idx){ 
    document.form1.pdNo.value = idx;
@@ -181,7 +181,6 @@ function buyAll(){
                 </div>
                 <hr>
 				<form name="form1" method="post" action="#">
-					<input type="hidden" name="pdNo" value="1">
 					<input type="hidden" name="totalCartNo" value=" ">
 	         	    <input type="hidden" name="buyChoice" value=" ">
 	         	    <input type="hidden" name="userId" value="${map.userId }">
@@ -207,9 +206,7 @@ function buyAll(){
 	                                </a>
 	                                <br/><br/>
 	                                <input type="number" name="pdAmount" size="4" class="input-text qty text" title="Qty" value="${row.pdAmount}" min="1" step="1">
-                                      <a href="#" class="link" onclick="javacscript:CountUpdateOk('${row.pdNo }', '${row.pdAmount}');">
-                                        <button type="button" class="btn-outline-danger hover">확인 </button>
-                                     </a>
+		                        	<input type="hidden" name="pdNo" value="${row.pdNo} ">
 		                        </div>
 		                    </div>
 		                </div> <!-- End off col-md-4 -->
@@ -217,7 +214,9 @@ function buyAll(){
 		         </form>
             </div>
             <div class="loginButton" style="text-align: center">
-	            <button type="button" class="btn btn-lg m_t_10" id="cartDelete" onclick="CartDel();">선택삭제 </button>&nbsp;
+            	<button type="button" class="btn btn-lg m_t_10" id="amountUpdate">수량수정 </button>
+	            <button type="button" class="btn btn-lg m_t_10" id="cartDelete" onclick="CartDel();">선택삭제 </button>
+	            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            <button type="button" class="btn btn-lg m_t_10" id="buyAllBtn" onclick="buyAll()">전체구매</button>
 	    		<button type="button" class="btn btn-lg m_t_10" id="buyBtn" onclick="buyPart()">선택구매</button>
            </div>

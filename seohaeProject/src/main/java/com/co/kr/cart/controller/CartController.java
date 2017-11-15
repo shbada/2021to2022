@@ -1,5 +1,6 @@
 package com.co.kr.cart.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,15 +132,17 @@ public class CartController {
 	    * @Return String
 	  */
 	@RequestMapping(value = "/cartUpdate", method = RequestMethod.POST)
-	public String CartUpdate(@RequestParam int pdAmount, @RequestParam int pdNo, HttpSession session) {
-		System.out.println(pdAmount + "@@@@"+ pdNo);
+	public String CartUpdate(@RequestParam int[] pdAmount, @RequestParam int[] pdNo, HttpSession session) {
+		System.out.println(Arrays.toString(pdAmount) + "@@@@"+ Arrays.toString(pdNo));
 		String user_id = (String) session.getAttribute("userId");
 		
-		CartVo cartVo = new CartVo();
-		cartVo.setUser_id(user_id); 
-		cartVo.setPdAmount(pdAmount); 
-		cartVo.setPdNo(pdNo); 
-		cartService.cartUpdate(cartVo); 
+		for (int i = 0; i < pdNo.length; i++) {
+			CartVo cartVo = new CartVo();
+			cartVo.setUser_id(user_id); 
+			cartVo.setPdAmount(pdAmount[i]); 
+			cartVo.setPdNo(pdNo[i]); 
+			cartService.cartUpdate(cartVo);
+		}
 		
 		return "redirect:/cartList.do";
 	}
