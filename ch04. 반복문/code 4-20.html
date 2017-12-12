@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        var output = 0;
+        
+        for(var i = 1; i<=10; i++){
+            if(i % 2 == 1){
+                //쉽게말하면, 홀수일때는 처리하지 않는다.
+                continue;
+            }
+            
+            output += i;
+        }
+        
+        console.log(output);
+    </script>
+</body>
+</html>

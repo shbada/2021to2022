@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        var output = '';
+        
+        for(var i = 0; i < 15; i++){
+            for(var j = 15; j > i; j--){
+                output += ' ';
+            }
+            for(var k =0; k<2*i-1; k++){
+                output += '*';
+            }
+            output += '\n';
+        }
+        
+        console.log(output);
+    </script>
+</body>
+</html>
