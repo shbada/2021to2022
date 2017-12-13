@@ -97,7 +97,7 @@
 	 		});
 	         
 	         $("#join,#userCreate").click(function(){
-	    		location.href="/join.do";
+	    		location.href="/createUser.do";
 	    	 }); 
 	         
 	         $("#idFind").click(function(){

@@ -84,7 +84,7 @@
             <div class="col-sm-12">
                 <div class="contact_contant sections">
                     <div class="head_title text-center">
-                        <h2>LOGIN</h2>
+                        <h2>FREE BOARD WRITE</h2>
                         <div class="subtitle">
                             Nullam sit amet odio eu est aliquet euismod a a urna. Proin eu urna suscipit, dictum quam nec.  
                         </div>

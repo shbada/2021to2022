@@ -58,7 +58,6 @@ public class FreeBoardController {
 	  */
 	@RequestMapping(value="/freeBoardSelectList", method={RequestMethod.POST, RequestMethod.GET})
 	public String freeBoardSelectList(@ModelAttribute FreeBoardVo freeBoardVo, Model model){
-		System.out.println(freeBoardVo);
 		if(freeBoardVo.getPageCnt() == null) freeBoardVo.setPageSize(5);
 		else freeBoardVo.setPageSize(Integer.parseInt(freeBoardVo.getPageCnt()));
 		

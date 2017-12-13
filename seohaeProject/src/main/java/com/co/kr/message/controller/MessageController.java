@@ -107,7 +107,7 @@ public class MessageController {
 	@ResponseBody
 	public String MessageWriteSave(@ModelAttribute MessageVo messageVo, HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
-		messageVo.setUserId(userId);
+		messageVo.setMsgSend(userId);
 		
 		String idCheck = messageVo.getMsgGet();
 		int count = messageService.MessageIdCheck(idCheck);

@@ -138,6 +138,19 @@ $(document).ready(function(){
 	 $("#reset").click(function(){
 		$("#search").val(''); 
 	 });
+	
+	//최상단 체크박스 클릭
+    $("#checkall").click(function(){
+        //클릭되었으면
+        if($("#checkall").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=chkArry]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=chkArry]").prop("checked",false);
+        }
+    });
 });
 
 $(function($){
@@ -308,11 +321,11 @@ function listDetail(idx){ //글 상세보기
 												</th>
 												<th>번호</th>
 												<th class="th-sortable" style="text-align:center" data-toggle="class">제목
-													<span class="th-sort">
+													<!-- <span class="th-sort">
 														<i class="fa fa-sort-down text"></i>
 														<i class="fa fa-sort-up text-active"></i>
 														<i class="fa fa-sort"></i>
-													</span>
+													</span> -->
 												</th>
 												<th>내 용</th>
 												<th>작성자</th>

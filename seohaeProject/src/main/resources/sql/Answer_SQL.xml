@@ -91,7 +91,7 @@
    </insert>
    
    <select id="findqUserId" resultType="String">
-			SELECT A_USER_ID FROM ANSWER WHERE 1=1 AND Q_IDX = #{qIdx}	
+			SELECT A_USER_ID FROM ANSWER WHERE 1=1 AND A_IDX = #{aIdx}	
 			
        /*com.co.kr.answer.dao.AnswerDao.findqUserId - 답변글 작성자 아이디 찾기  */
 	</select>

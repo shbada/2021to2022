@@ -75,10 +75,12 @@ function MessageList(){
 	                                <ul class="nav navbar-nav navbar-right">
 	                                    <li><a href="/main.do">HOME</a></li>
 	                                    <li><a href="/noticeList.do">공지사항</a></li>
-	                                    <li><a href="/freeBoardSelectList.do">자유게시판</a></li>
-	                                    <li><a href="#portfolio">자격증 정보</a></li>
-	                                    <li><a href="#pricing">취업 정보</a></li>
-	                                    <li><a href="/bookList.do">교재구매</a></li>
+	                                    <c:if test="${sessionScope.userId  != null }">
+		                                    <li><a href="/freeBoardSelectList.do">자유게시판</a></li>
+		                                    <li><a href="#portfolio">자격증 정보</a></li>
+		                                    <li><a href="#pricing">취업 정보</a></li>
+		                                    <li><a href="/bookList.do">교재구매</a></li>
+		                                </c:if>
 	                                </ul>
 	                            </div>
 	                        </div>

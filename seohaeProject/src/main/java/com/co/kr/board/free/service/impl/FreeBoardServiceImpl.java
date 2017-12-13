@@ -23,30 +23,18 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Autowired
 	private FreeBoardDao freeBoardDao;
 
-	/*@Override
-	public List<FreeBoardVo> selectFreeBoardList(FreeBoardVo freeBoardVo) {
-		return freeBoardDao.selectFreeBoardList(freeBoardVo);
-	}*/
-	
 	@Override
 	public Map<String, Object> selectFreeBoardList(FreeBoardVo freeBoardVo) {
 		int totalCount = freeBoardDao.selectFreeBoardListCount(freeBoardVo);
 		freeBoardVo.setTotalCount(totalCount);
 		
-		/*if(freeBoardVo.getSearch() != null) {			// 실시간 검색어(검색어가 있는지 체크 후 없으면 insert 있으면 카운트만 증가)
-		int searchWord = freeBoardDao.selectSearchCheck(freeBoardVo.getSearch());
-		if(searchWord == 0 ) {
-			freeBoardDao.insertSearchWord(freeBoardVo.getSearch());
-		}else{
-			freeBoardDao.updateSearchWordCount(freeBoardVo.getSearch());
-		}
-	}*/
-		
-		if(freeBoardVo.getSearch() != null && freeBoardVo.getSearch() != "" && freeBoardVo.getSearch().length() != 0) {		// merge臾� �궗�슜 �삁
-			freeBoardDao.realTimeQueryMerge(freeBoardVo.getSearch());
+		//실시간 검색어
+		if(freeBoardVo.getSearch() != null && freeBoardVo.getSearch() != "" && freeBoardVo.getSearch().length() != 0) {		
+			freeBoardDao.realTimeQueryMerge(freeBoardVo.getSearch()); //검색어 '실시간 검색어' 테이블에 insert.
 		}
 		
 		List<FreeBoardVo> list = freeBoardDao.selectFreeBoardList(freeBoardVo);
+		//실시간 검색어 (10위권에 해당하는 검색어 10개를 가져옴)
 		List<FreeBoardVo> searchWord = freeBoardDao.selectSearchWordList();
 		
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -83,9 +83,6 @@ function listDetail(qIdx){
 								<!-- <input type="hidden" name="password" id="password" value="" /> -->
 								<table class="table table-striped b-t text-sm">
 									<colgroup>
-										<c:if test="${sessionScope.userLevel == 'ADMIN' }">>
-											<col width="20" />
-										</c:if>
 										<col width="30" />
 										<col width="30" />
 										<col width="150" />

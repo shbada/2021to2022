@@ -159,8 +159,8 @@ function ValidationCheck() { //전체
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span>&nbsp;<label class="control-label">현재 비밀번호</label>
-                                                    <input type="password" class="form-control smallInput" placeholder="현재 비밀번호를 입력해주세요." id="nowPw" name="nowPw" autocomplete="off" required />
+                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span><label class="control-label">현재 비밀번호</label>
+                                                    <input type="password" class="form-control" placeholder="현재 비밀번호를 입력해주세요." id="nowPw" name="nowPw" autocomplete="off" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -168,8 +168,8 @@ function ValidationCheck() { //전체
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span>&nbsp;<label class="control-label">Password</label>
-                                                    <input type="password" class="form-control smallInput" placeholder="새로운 비밀번호를 입력해주세요." id="userPw" name="userPw" autofocus autocomplete="off" required />
+                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span><label class="control-label">Password</label>
+                                                    <input type="password" class="form-control" placeholder="새로운 비밀번호를 입력해주세요." id="userPw" name="userPw" autofocus autocomplete="off" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -178,8 +178,8 @@ function ValidationCheck() { //전체
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span>&nbsp;<label class="control-label passwordCheck">Password 재확인</label>
-                                                    <input type="password" class="form-control smallInput" placeholder="새로운 비밀번호를 다시한번 입력해주세요." id="userPw2" name="userPw2" autofocus autocomplete="off" onblur="onblur_passwordCheck();" />&nbsp;
+                                                	<span style="color:#f00; float:left; margin-right:4px;">*</span><label class="control-label passwordCheck">Password 재확인</label>
+                                                    <input type="password" class="form-control" placeholder="새로운 비밀번호를 다시한번 입력해주세요." id="userPw2" name="userPw2" autofocus autocomplete="off" onblur="onblur_passwordCheck();" />&nbsp;
                                                 </div>
                                             </div>
                                         </div>
