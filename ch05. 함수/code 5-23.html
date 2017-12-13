@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        function callTenTimes(callback){
+            for(var i = 0; i< 10; i++){
+                callback();
+            }
+        }
+        
+        var callback = function() {
+            alert('함수 호출');
+        }
+        
+        callTenTimes(callback);
+    </script>
+</body>
+</html>
