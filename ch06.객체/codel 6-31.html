@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        function clone(obj){
+            var output = {};
+            for(var i in obj) {
+                output[i] = obj[i];
+            }
+            
+            return output;
+        }
+        
+        //원본객체
+        var original = {a:10, b:20};
+        //얕은복사 : 원본객체를 변경했을때 값이 함께 변경
+        var referenced = original;
+        //깊은복사 : 원본을 변경해도, 영향을 주지않는다.
+        var cloned = clone(original);
+        
+        //원본의 값 변경!
+        original.a = 20;
+        
+        console.log(JSON.stringify(referenced, null, 2)); //20 20
+        console.log(JSON.stringify(cloned, null, 2)); //10 20 
+    </script>
+</body>
+</html>
