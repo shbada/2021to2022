@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <h1 id = 'header'>Click</h1>
+    <script>
+        window.onload = function() {
+            var header = document.getElementById('header');
+            
+            function whenClick() {alert('Click');}
+            header.onclick = whenClick;
+        }
+    </script>
+</body>
+</html>
