@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var array = [
+                { name: 'Hanbit Media', link: 'http://hanbit.co.kr' },
+                { name: 'Naver', link: 'http://naver.com' },
+                { name: 'Daum', link: 'http://daum.net' }
+            ];
+            // $.each() 메서드 사용
+            $.each(array, function (index, item) {
+                var output = '';
+                
+                output += '<a href="' + item.link + '">';
+                output += '    <h1>' + item.name + '</h1>';
+                output += '</a>';
+
+                document.body.innerHTML += output;
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
