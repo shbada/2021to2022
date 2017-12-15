@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <h1 id = "header"></h1>
+    <script>
+        window.onload = function() {
+            var header = document.createElement('h1');
+            var textNode = document.createTextNode('Hello DOM');
+            
+            //노드 연결
+            header.appendChild(textNode);
+            document.body.appendChild(header);
+        };
+    </script>
+</body>
+</html>
