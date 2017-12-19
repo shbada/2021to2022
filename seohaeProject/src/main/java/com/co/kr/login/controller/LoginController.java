@@ -108,7 +108,7 @@ public class LoginController {
 					redirectUrl = "redirect:/login.do?LOGIN_ERR=IDDUP";
 					return redirectUrl;
 				}
-
+				
 				UserAuthVo userAuthVo = new UserAuthVo();
 				userAuthVo.setFirstUrl("/main.do");
 				HttpSession session = request.getSession();
@@ -123,6 +123,19 @@ public class LoginController {
 				session.setAttribute("firstUrl", userAuthVo.getFirstUrl());
 				session.setAttribute("ipAddr", getClientIP(request));
 				loginVo.setIpAddr(getClientIP(request));
+				
+				if (loginVo.isUseCookie()) {
+					int amount = 60 * 60 * 24 * 7;
+					Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+					loginService.keepLogin(loginVo.getUserId(), session.getId(), sessionLimit);
+				}
+				
+				if (request.getParameter("useCookie") != null) {
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setPath("/");
+					loginCookie.setMaxAge(60 * 60 * 24 * 7);
+					response.addCookie(loginCookie);
+				}
 			}
 		}
 		
@@ -168,7 +181,19 @@ public class LoginController {
 		public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		   	HttpSession session = request.getSession();
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
+			LoginVo loginVo = new LoginVo();
+			loginVo.setUserId((String)session.getAttribute("userId"));
+			
 			session.invalidate();
+			
+			if (loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				loginService.keepLogin(loginVo.getUserId(), session.getId(), new Date());
+			}
 			
 			return "main/mainPage";
 		}

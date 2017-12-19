@@ -22,10 +22,13 @@
    </select>
    
    <update id="keepLogin">
-		update users set sessionKey = #{sessionId},
-		sessionLimit = #{next} where
-		user_id = #{user_id}
+		UPDATE USERS 
+			SET SESSIONKEY = #{sessionId}, SESSIONLIMIT = #{next} 
+				WHERE
+					USER_ID = #{user_id}
 		
 		/* com.co.kr.common.login.dao.LoginDao.keepLogin - 자동로그인 */
 	</update>
+	
+	
 </mapper>

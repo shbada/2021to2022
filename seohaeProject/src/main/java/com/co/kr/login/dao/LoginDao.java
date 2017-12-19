@@ -17,4 +17,12 @@ public class LoginDao extends AbstractDAO{
 		return (LoginVo)selectOne("loginSql.selectUserLoginCheck",loginVo);
 	}
 
+	public void keepLogin(String userId, String id, Date sessionLimit) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", userId);
+		paramMap.put("sessionId", id);
+		paramMap.put("next", sessionLimit);
+		update("loginSql.keepLogin", paramMap);
+	}
+
 }

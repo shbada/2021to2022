@@ -21,5 +21,10 @@ public class LoginServiceImpl implements LoginService{
 	public LoginVo selectUserLoginCheck(LoginVo loginVo) {
 		return loginDao.selectUserLoginCheck(loginVo);
 	}
+
+	@Override
+	public void keepLogin(String userId, String id, Date sessionLimit) {
+		loginDao.keepLogin(userId, id, sessionLimit);
+	}
 	
 }
