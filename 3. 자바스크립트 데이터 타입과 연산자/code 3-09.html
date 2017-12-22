@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 객체 리터럴 방식으로 객체 생성
+        var objA = {
+            val:40
+        };
+        
+        // 변수 objB에 objA 값을 할당
+        // objB에 objA가 가리키는 참고값을 저장한다
+        var objB = objA;
+        
+        console.log(objA.val); // 40
+        console.log(objB.val); // 40
+        
+        // objB가 가리키는 객체의 val 값을 40에서 50으로 변경
+        // 변수 objA도 변수 objB와 동일한 객체를 참조하고 있으므로, objA값도 50으로 변경된다.
+        objB.val = 50;
+        
+        console.log(objA.val); // 50
+        console.log(objB.val); // 50
+    </script>
+</head>
+<body>
+
+</body>
+</html>
