@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 배열 선언
+        var arr = [0,1,2];
+        console.log(arr.length); // 4
+        
+        // 배열의 length 프로퍼티는 코드릉 통해 명시적으로 값 변경 가능
+        arr.length = 5;
+        console.log(arr);
+        
+        arr.length = 2;
+        
+        // length 프로퍼티를 벗어나는 인덱스 값은 삭제된다
+        console.log(arr);
+        console.log(arr[2]);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

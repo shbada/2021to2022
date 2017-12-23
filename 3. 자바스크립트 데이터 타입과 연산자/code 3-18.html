@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // colorArray 배열
+        var colorArr = ['orange', 'yellow', 'green'];
+        console.log(colorArr[0]);  // orange
+        console.log(colorArr[1]);  // yellow
+        console.log(colorArr[2]);  // green
+
+        // colorObj객체
+        var colorObj = {
+            '0' : 'orange',
+            '1' : 'yellow',
+            '2' : 'green'
+        };
+        
+        console.log(colorArr[0]);  // orange
+        console.log(colorArr[1]);  // yellow
+        console.log(colorArr[2]);  // green
+
+        // typeof 연산자 비교
+        console.log(typeof colorArr); // object
+        console.log(typeof colorObj); // object
+
+        // length 프로퍼티
+        console.log(colorArr.length); // 3
+        //  colorObj는 객체이므로 length프로퍼티가 존재하지 않는다
+        console.log(colorObj.length); // undefined
+
+        // 배열 표준 메서드
+        colorArr.push('red');  // ['orange', 'yellow', 'green', 'red'];
+        colorObj.push('red'); // Uncaught TypeError : 에러 발생
+    </script>
+</head>
+<body>
+
+</body>
+</html>
