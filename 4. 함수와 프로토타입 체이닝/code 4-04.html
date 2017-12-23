@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 함수 표현식 방식으로 구현한 팩토리얼 함수
+        var factorialVal = function factorial(n){
+            if(n<=1){
+                return 1;
+            }
+            return n * factorial(n-1);
+        };
+        
+        console.log(factorialVal(3)); // 6
+        console.log(factorial(3)); //Error
+    </script>
+</head>
+<body>
+
+</body>
+</html>
