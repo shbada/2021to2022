@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var foo = function(){
+            return function(){
+                console.log('this function is the return value');
+            };
+        };
+        
+        // foo() 함수가 호출되어 리턴되는 값을 변수 bar에 저장
+        var bar = foo();
+        
+        // 리턴된 함수를 실행하는 것이 가능
+        bar();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
