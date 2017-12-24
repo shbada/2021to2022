@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 자신을 재정의하는 함수
+        var self = function() {
+            console.log('a');
+            
+            return function() {
+                console.log('b');
+            };
+        };
+        
+        // self() 함수 호출 후, self 함수 변수가 가리키는 함수가 원래 함수에서 리턴받은 새로운 함수로 변경됨
+        self = self();
+        
+        // 변경됨 함수 호출
+        slef();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
