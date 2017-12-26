@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 객체는 자기 자신의 프로퍼티뿐만이 아니라, 자신의 부모 역할을 하는 프로토타입 객체의 프로퍼티 
+        // 또한 마치 자신의 것처럼 접근하는게 가능
+        var myObject = {
+            name:'foo',
+            sayName:function(){
+                console.log('My Name is '+this.name);
+            }
+        };
+        
+        myObject.sayName();
+        console.log(myObject.hasOwnProperty('name')); // true
+        console.log(myObject.hasOwnProperty('nickName')); // false
+        // sayNickName() 메서드는 myObject의 메서드가 아니므로 에러가 발생한다.
+        myObject.sayNickName();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(name){
+            this.name;
+        }
+        
+        Person.prototype.country='korea';
+        var foo = new Person('foo');
+        var bar = new Person('bar');
+        
+        // foo의 프로토타입 객체인 Person.prototype의 country프로퍼티 값
+        console.log(foo.country); // korea
+        console.log(bar.country); // korea
+        
+        // foo객체에 country 프로퍼티 값이 동적으로 생성
+        foo.country='USA';
+        
+        // 프로토타입 체이닝 없이 USA 출력
+        console.log(foo.country); // USA
+        
+        // 프로토타입 체이닝을 거쳐 korea 출력
+        console.log(bar.country); // korea
+    </script>
+</head>
+<body>
+
+</body>
+</html>
