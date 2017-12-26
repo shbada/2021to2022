@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var foo = {
+            name:'foo',
+            age:35,
+            gender:'man'
+        };
+        
+        console.dir(foo);
+        
+        // 생성자 함수
+        function Person(name,age,gender){
+            this.name=name;
+            this.age=age;
+            this.gender=gender;
+        };
+        
+        // Person 생성자 함수를 이용하여 객체 생성
+        var bar = new Person('bar',33,'woman');
+        console.dir(bar);
+        
+        // Person 생성자 함수를 이용하여 객체 생성
+        var baz = new Person('baz',25,'woman');
+        console.log(baz);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
