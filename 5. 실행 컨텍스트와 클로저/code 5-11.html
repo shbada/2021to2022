@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var buffAr = [
+            'I am',
+            '',
+            'live in',
+            '',
+            'You are',
+            '',
+            'years old'
+        ];
+        
+        function getConpletedStr(name, city, age){
+            buffAr[1] = name;
+            buffAr[3] = city;
+            buffAr[5] = age;
+            return buffAr.join('');
+        };
+                               
+        var str = getConpletedStr('zzoon','seoul',16);
+        console.log(str);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

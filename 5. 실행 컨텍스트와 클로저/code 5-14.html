@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function outerFunc(argNum) {
+             var num = argNum;
+            
+             return function (x){
+                  num += x;
+                  console.log('num : ' + num);
+             }
+        };
+        
+        // 호출시마다 자유변수 num의 값은 계속해서 변화한다
+        var exam = outerFunc(40);
+        exam(5);
+        exam(-10);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

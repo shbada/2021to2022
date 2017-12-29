@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // outerFunc()가 실행되면서 생성되는 변수 객체가 스코프 체인에 들어가게 되고,
+        // 이 스코프 체인은 innerFunc의 스코프 체인으로 참조된다.
+        function outerFunc(arg1, arg2){
+            // outerFunc() 함수가 종료되었지만. 여전히 내부 함수 (innerFunc())의 [[scope]]으로 참조된다
+            var local=8;
+            
+            function innerFunc(innerAvg){
+                console.log((arg+arg2) / (innerArg+local));
+            }
+            return innerFunc;
+        }
+        var exan1=outerFunc(2,4);
+        exam1(2); // 따라서, innerFunc()에서 참조하고자 하는 변수 local에 접근할 수 있다
+    </script>
+</head>
+<body>
+
+</body>
+</html>

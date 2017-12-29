@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function func() {
+             var x = 1;
+            
+             // 반환되는 두 함수 모두 자유변수 x를 참조한다
+             // 각각의 함수는 호출될 때마다 x값이 변화한다
+             return {
+                  func1 : function() {console.log((++x);},
+                  func2 : function() {console.log(-x)}    
+             };
+        };
+        var exam = func();
+        exam.func1();
+        exam.func2();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
