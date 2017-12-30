@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(arg){
+            this.name=arg;
+        };
+        
+        Person.prototype.getName=function(){
+            return this.name;
+        };
+        
+        Person.prototype.setName=function(){
+            this.name=value;
+        };
+        
+        // 따로 함수 객체를 생성할 필요없이, 프로토타입 체인으로 함수에 접근할 수 있다
+        var me = new Person('me');
+        var you = new Person('you');
+        
+        console.log(me.getName());
+        console.log(you.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>
