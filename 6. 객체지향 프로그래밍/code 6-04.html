@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // create_object() 함수
+        // = 인자로 들어온 객체를 부모로 하는 자식 객체를 생성하여 반환한다
+        function create_object(o){
+            // 새로운 빈 함수 객체 F를 만들고,
+            function F(){};
+            // F.prototype 프로퍼티에 인자로 들어온 객체를 참조한다
+            F.prototype=o;
+            // 함수 객체 F를 생성자로 하는 새로운 객체를 만들어 반환한다
+            // 이렇게 생성된 객체는 부모 객체의 프로퍼티에 접근할 수 있고,
+            // 자신만의 프로퍼티를 만들 수 있다.
+            return new F();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

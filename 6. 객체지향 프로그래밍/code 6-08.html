@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(arg) {
+             this.name = arg;
+        };
+        
+        Function.prototype.method = function(name, func) {
+             this.prototype[name] = func;
+        };
+        
+        Person.method("setName", function(value) {
+             this.name = value;
+        });
+        
+        Person.method("getName", function(){
+             return this.name;
+        });
+        
+        function Student(arg) {
+        };
+        // 빈 함수 F()을 생성하고,
+        function F(){};
+        F.prototype = Person.prototype;
+        
+        // 이 F()의 인스턴스를 Person.prototype과 Student 사이에 두었다.
+        Student.prototype = new F();
+        student.prototype.constructor = Student;
+        Student.super = Person.prototype;
+        
+        var me = new Student();
+        me.setName('zzoon');
+        console.log(me.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>
