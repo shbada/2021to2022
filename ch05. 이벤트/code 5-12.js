@@ -14,5 +14,5 @@ process.emit('exit');
 process.emit('exit');
 process.emit('exit');
 
-// 프로그램 실행 중
+// 프로그램 실행 중C
 console.log('프로그램 실행 중');

@@ -5,7 +5,7 @@ process.once('uncaughtException', function(err){
 });
 
 // 2초 간격으로 예외를 발생
-var test = function (){
+var test = function (){ㅊ
     setTimeout(test, 2000);
     error.error.error();
 };
