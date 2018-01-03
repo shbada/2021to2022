@@ -6,5 +6,3 @@ var server = http.createServer();
 
 // 웹 서버 실행
 server.listen(52273);
-
-// 웹 서버 종료 : close()

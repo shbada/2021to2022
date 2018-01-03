@@ -13,7 +13,7 @@ http.createServer(function (request, response) {
     console.log('Server Running at http://127.0.0.1:52273');
 });
 
-// 52274번 포트에 서버를 생성하고 실행
+// 52274번 포트에 서버를 생성하고 실행ㅊ
 http.createServer(function (request, response) {
     fs.readFile('GoodDay.mp3',function(err,data){
         response.writeHead(200,{'Content-Type':'audio/mp3'});
