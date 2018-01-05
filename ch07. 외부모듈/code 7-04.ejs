@@ -1,0 +1,15 @@
+// 모듈을 추출
+var http = require('http');
+var fs = require('fs');
+var ejs = require('ejs');
+
+// 서버를 생성하고 실행
+http.createServer(function(request, response){
+    // ejsPagge.ejs 파일을 읽음
+    fs.readFile('7-04.ejs','utf8',function(err,data){
+        response.writeHead(200, {'Content-Type':'text/html'});
+        response.end(ejs.render(data)); // render : ejs 문자열을 HTML 문자열로 변환
+    });
+}).listen(52273,function(){
+    console.log('Server Running at http://127.0.0.1:62273');
+})
