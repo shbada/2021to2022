@@ -13,7 +13,7 @@ var usersRouter = require('./routes/users');
 var login = require('./routes/login/login');
 
 /** 1. 게시판 */
-var boardWrite = require('./routes/board/boardWrite');
+var board = require('./routes/board/board');
 
 var app = express();
 
@@ -36,7 +36,7 @@ app.use('/users', usersRouter)
 app.use('/login', login)
 
 /** 1. 게시판 */
-app.use('/board', boardWrite)
+app.use('/board', board)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

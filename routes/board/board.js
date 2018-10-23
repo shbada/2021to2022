@@ -27,4 +27,19 @@ router.post('', function(req, res, next){
     });
 });
 
+router.get('', function(req, res, next){
+    pool.getConnection(function (err, connection) {
+        let sql = "SELECT idx, title, content, view_cnt AS viewCnt, like_cnt AS likeCnt, writer_idx AS writerIdx, created_date AS createdDate FROM free_board ORDER BY idx";
+
+        connection.query(sql, function (err, rows) {
+            if (err) console.error("err : " + err);
+            console.log('rows :' +  rows);
+
+            res.send({ rows: rows });
+
+            connection.release();
+        });
+    });
+});
+
 module.exports = router;
