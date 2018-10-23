@@ -16,7 +16,7 @@ router.post('', function(req, res, next){
     let data = [req.body.title, req.body.content, 1];
 
     pool.getConnection(function (err, connection) {
-        let sql = "INSERT INTO free_board(title, content, writer_idx) VALUES(?,?,?)";
+        let sql = "INSERT INTO free_board(title, content, writer_idx) VALUES(?, ?, ?)";
 
         connection.query(sql, data, function (err, rows) {
             if (err) console.error("err : " + err);
@@ -33,11 +33,61 @@ router.get('', function(req, res, next){
 
         connection.query(sql, function (err, rows) {
             if (err) console.error("err : " + err);
-            console.log('rows :' +  rows);
 
             res.send({ rows: rows });
 
             connection.release();
+        });
+    });
+});
+
+router.get('/:boardIdx', function(req, res, next){
+    pool.getConnection(function (err, connection) {
+        let data = [req.params.boardIdx];
+
+        let sql = "SELECT idx, title, content, view_cnt AS viewCnt, like_cnt AS likeCnt, writer_idx AS writerIdx, created_date AS createdDate FROM free_board WHERE idx = ?";
+
+        connection.query(sql, data, function (err, rows) {
+            if (err) console.error("err : " + err);
+
+            res.send({ rows: rows });
+
+            connection.release();
+        });
+    });
+});
+
+router.put('/:idx', function(req, res, next){
+    let data = [req.body.title, req.body.content, req.params.idx];
+
+    pool.getConnection(function (err, connection) {
+        let sql = "UPDATE free_board SET title = ?, content = ?, updated_date = NOW() WHERE idx = ?";
+
+        connection.query(sql, data, function (err, rows) {
+            if (err) console.error("err : " + err);
+
+            connection.release();
+        });
+    });
+});
+
+router.delete('/:idx', function(req, res, next){
+    let data = [req.params.idx];
+
+    pool.getConnection(function (err, connection) {
+        let sql = "DELETE FROM free_board WHERE idx = ?";
+
+        connection.query(sql, data, function (err, rows) {
+            if (err) console.error("err : " + err);
+
+            let sql2 = "SELECT idx, title, content, view_cnt AS viewCnt, like_cnt AS likeCnt, writer_idx AS writerIdx, created_date AS createdDate FROM free_board ORDER BY idx";
+
+            connection.query(sql2, data, function (err, rows) {
+                if (err) console.error("err : " + err);
+                res.send({ rows: rows });
+
+                connection.release();
+            });
         });
     });
 });
