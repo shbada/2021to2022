@@ -7,7 +7,13 @@ var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+/** START! */
+/** 1. 로그인 */
 var login = require('./routes/login/login');
+
+/** 1. 게시판 */
+var boardWrite = require('./routes/board/boardWrite');
 
 var app = express();
 
@@ -24,7 +30,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter)
+
+/** START! */
+/** 1. 로그인 */
 app.use('/login', login)
+
+/** 1. 게시판 */
+app.use('/board', boardWrite)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
