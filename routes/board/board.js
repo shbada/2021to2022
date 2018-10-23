@@ -12,6 +12,7 @@ var mysqlInfo = {
 
 var pool = mysql.createPool(mysqlInfo);
 
+/** 글 등록 */
 router.post('', function(req, res, next){
     let data = [req.body.title, req.body.content, 1];
 
@@ -27,6 +28,7 @@ router.post('', function(req, res, next){
     });
 });
 
+/** 리스트 조회 */
 router.get('', function(req, res, next){
     pool.getConnection(function (err, connection) {
         let sql = "SELECT idx, title, content, view_cnt AS viewCnt, like_cnt AS likeCnt, writer_idx AS writerIdx, created_date AS createdDate FROM free_board ORDER BY idx";
@@ -41,6 +43,7 @@ router.get('', function(req, res, next){
     });
 });
 
+/** 글 단건조회 */
 router.get('/:boardIdx', function(req, res, next){
     pool.getConnection(function (err, connection) {
         let data = [req.params.boardIdx];
@@ -57,6 +60,7 @@ router.get('/:boardIdx', function(req, res, next){
     });
 });
 
+/** 글 수정 */
 router.put('/:idx', function(req, res, next){
     let data = [req.body.title, req.body.content, req.params.idx];
 
@@ -71,6 +75,7 @@ router.put('/:idx', function(req, res, next){
     });
 });
 
+/** 글 삭제 */
 router.delete('/:idx', function(req, res, next){
     let data = [req.params.idx];
 
