@@ -3,6 +3,7 @@ let sql = require('../utils/dbConnection');
 let boardMapper = {
     /** 리스트 조회 */
     selectBoardList: function() {
+        console.log('>>>')
         return sql.query("SELECT idx, title, content, view_cnt AS viewCnt, like_cnt AS likeCnt, writer_idx AS writerIdx, created_date AS createdDate FROM free_board ORDER BY idx");
     },
 
