@@ -1,21 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors')
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let cors = require('cors')
 
 /** START! */
 /** 1. 로그인 */
-var login = require('./routes/login/login');
+let login = require('./routes/login');
 
 /** 1. 게시판 */
-var board = require('./routes/board/board');
+let board = require('./routes/board');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,9 +24,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter)
 
 /** START! */
 /** 1. 로그인 */
