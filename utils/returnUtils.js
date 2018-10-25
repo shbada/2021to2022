@@ -1,5 +1,4 @@
 let returnUtils = {
-    /** 200 */
     send: function(res, result) {
         if(res.status(200)) {
             res.send(result)
