@@ -1,13 +1,14 @@
 let express = require('express');
 let router = express.Router();
 let boardMapper = require("../models/boardMapper")
-let returnUtils = require("../utils/returnUtils")
+let release = require("../utils/release")
 
 /** 글 등록 */
 router.post('', async function(req, res){
     try {
         boardMapper.insertBoard(req.body.title, req.body.content, 1);
-        returnUtils.send(res);
+
+        release.send(res, true)
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -17,7 +18,8 @@ router.post('', async function(req, res){
 router.get('', async function(req, res){
     try {
         let results = await boardMapper.selectBoardList();
-        returnUtils.send(res, results);
+
+        release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -27,7 +29,8 @@ router.get('', async function(req, res){
 router.get('/:boardIdx', async function(req, res){
     try {
         let result = await boardMapper.selectBoard(req.params.boardIdx)
-        returnUtils.send(res, result);
+
+        release.send(res, result)
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -38,7 +41,8 @@ router.put('/:idx', async function(req, res){
     try {
         await boardMapper.updateBoard(req.body.title, req.body.content, req.params.idx);
         let results = await boardMapper.selectBoardList();
-        returnUtils.send(res, results);
+
+        release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -49,7 +53,8 @@ router.delete('/:idx', async function(req, res){
     try {
         await boardMapper.deleteBoard(req.params.idx);
         let results = await boardMapper.selectBoardList();
-        returnUtils.send(res, results);
+
+        release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
     }
