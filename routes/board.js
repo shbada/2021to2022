@@ -7,8 +7,7 @@ let returnUtils = require("../utils/returnUtils")
 router.post('', async function(req, res){
     try {
         boardMapper.insertBoard(req.body.title, req.body.content, 1);
-
-        res.status(200).send('등록완료');
+        returnUtils.send(res);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -17,8 +16,8 @@ router.post('', async function(req, res){
 /** 리스트 조회 */
 router.get('', async function(req, res){
     try {
-        let result = await boardMapper.selectBoardList();
-        returnUtils.send(res, result);
+        let results = await boardMapper.selectBoardList();
+        returnUtils.send(res, results);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -28,7 +27,7 @@ router.get('', async function(req, res){
 router.get('/:boardIdx', async function(req, res){
     try {
         let result = await boardMapper.selectBoard(req.params.boardIdx)
-        res.status(200).send(result);
+        returnUtils.send(res, result);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -39,8 +38,7 @@ router.put('/:idx', async function(req, res){
     try {
         await boardMapper.updateBoard(req.body.title, req.body.content, req.params.idx);
         let results = await boardMapper.selectBoardList();
-
-        res.status(200).send(results);
+        returnUtils.send(res, results);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -51,8 +49,7 @@ router.delete('/:idx', async function(req, res){
     try {
         await boardMapper.deleteBoard(req.params.idx);
         let results = await boardMapper.selectBoardList();
-
-        res.status(200).send(results);
+        returnUtils.send(res, results);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
