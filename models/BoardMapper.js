@@ -1,4 +1,4 @@
-let sql = require('../utils/dbConnection');
+let sql = require('../utils/dbUtils');
 
 let boardMapper = {
     /** 리스트 조회 */

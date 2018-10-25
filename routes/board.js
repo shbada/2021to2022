@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let boardMapper = require("../models/boardMapper")
+let returnUtils = require("../utils/returnUtils")
 
 /** 글 등록 */
 router.post('', async function(req, res){
@@ -17,7 +18,7 @@ router.post('', async function(req, res){
 router.get('', async function(req, res){
     try {
         let result = await boardMapper.selectBoardList();
-        res.status(200).send(result);
+        returnUtils.send(res, result);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
