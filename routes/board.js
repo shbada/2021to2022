@@ -5,9 +5,8 @@ let boardMapper = require("../models/boardMapper")
 /** 글 등록 */
 router.post('', async function(req, res){
     try {
-        let params = [req.body.title, req.body.content, 1];
+        boardMapper.insertBoard(req.body.title, req.body.content, 1);
 
-        boardMapper.insertBoard(params);
         res.status(200).send('등록완료');
     } catch (e) {
         console.log(e + '>>>>> error')
@@ -37,10 +36,10 @@ router.get('/:boardIdx', async function(req, res){
 /** 글 수정 */
 router.put('/:idx', async function(req, res){
     try {
-        let params = [req.body.title, req.body.content, req.params.idx];
-        await boardMapper.updateBoard(params);
+        await boardMapper.updateBoard(req.body.title, req.body.content, req.params.idx);
+        let results = await boardMapper.selectBoardList();
 
-        res.status(200).send('수정완료');
+        res.status(200).send(results);
     } catch (e) {
         console.log(e + '>>>>> error')
     }
@@ -50,7 +49,7 @@ router.put('/:idx', async function(req, res){
 router.delete('/:idx', async function(req, res){
     try {
         await boardMapper.deleteBoard(req.params.idx);
-        let results = await boardMapper.selectBoardList()
+        let results = await boardMapper.selectBoardList();
 
         res.status(200).send(results);
     } catch (e) {
