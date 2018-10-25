@@ -4,6 +4,12 @@ let release = {
             result : result,
             message: 'success'
         })
+    },
+
+    error: function (res) {
+        return res.status(500).json({
+            message: 'server error'
+        })
     }
 }
 

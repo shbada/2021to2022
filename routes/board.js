@@ -10,7 +10,8 @@ router.post('', async function(req, res){
 
         release.send(res, true)
     } catch (e) {
-        console.log(e + '>>>>> error')
+        console.log("error: >>>>>>>>>> " + e)
+        release.error(res)
     }
 });
 
@@ -22,6 +23,7 @@ router.get('', async function(req, res){
         release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
+        release.error(res)
     }
 });
 
@@ -33,6 +35,7 @@ router.get('/:boardIdx', async function(req, res){
         release.send(res, result)
     } catch (e) {
         console.log(e + '>>>>> error')
+        release.error(res)
     }
 });
 
@@ -45,6 +48,7 @@ router.put('/:idx', async function(req, res){
         release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
+        release.error(res)
     }
 });
 
@@ -57,6 +61,7 @@ router.delete('/:idx', async function(req, res){
         release.send(res, results)
     } catch (e) {
         console.log(e + '>>>>> error')
+        release.error(res)
     }
 });
 
