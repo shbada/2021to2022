@@ -8,7 +8,7 @@ router.post('', async function(req, res){
     try {
         boardMapper.insertBoard(req.body.title, req.body.content, 1);
 
-        release.send(res, true)
+        release.send(res)
     } catch (e) {
         console.log("error: >>>>>>>>>> " + e)
         release.serverError(res)
