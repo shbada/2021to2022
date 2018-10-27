@@ -24,7 +24,7 @@ router.get('', async function(req, res){
     } catch (e) {
         console.log(e + '>>>>> error')
         release.serverError(res)
-    }
+    }``
 });
 
 /** 글 단건조회 */

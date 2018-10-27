@@ -6,13 +6,6 @@ let release = {
         })
     },
 
-    send: function(res) {
-        return res.status(200).json({
-            result : true,
-            message: 'success'
-        })
-    },
-
     serverError: function (res) {
         return res.status(500).json({
             message: 'server Error'
