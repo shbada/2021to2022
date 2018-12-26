@@ -1,6 +1,5 @@
 <?php
 require_once "Database.php";
-require_once "BoardMapper.php";
 
 class Board {
     /** db 연동 */
@@ -19,7 +18,6 @@ class Board {
      * @return array
      */
     public function selectBoardList() {
-        //$query = $this->boardMapper->selectBoardList();
         $query = "SELECT
                             b.idx,
                             b.title AS title, 
@@ -44,8 +42,6 @@ class Board {
      * @return mixed
      */
     public function selectBoardInfo($idx) {
-        //$query = $this->boardMapper->selectBoardInfo();
-
         $query = "SELECT
                             b.idx,
                             b.title AS title,
@@ -73,7 +69,6 @@ class Board {
      */
     public function addBoard($title, $content) {
         try {
-            // $query = $this->boardMapper->addBoard();
             $query = "INSERT INTO board_notice( title, content, created_user_idx ) VALUE ( :title, :content, :created_user_idx )";
             $createdUserIdx = 1;
 
@@ -98,8 +93,6 @@ class Board {
      * 글 수정
      */
     public function updateBoard($title, $content, $idx) {
-        // $query = $this->boardMapper->updateBoard();
-
         $query = "UPDATE board_notice
                         SET
                             title = :title,
