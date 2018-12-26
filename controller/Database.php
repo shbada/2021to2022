@@ -9,10 +9,10 @@
 class Database {
     public $pdo;
 
-    private $user = 'ims';
-    private $password = 'Ims2018!';
-    private $host = '54.180.77.161';
-    private $db = 'test_ims';
+    private $user = 'test';
+    private $password = 'test2018!';
+    private $host = 'localhost';
+    private $db = 'test';
 
     function __construct() {
         try{
