@@ -9,8 +9,6 @@ class Board {
     public function __construct() {
         $database = new Database();
         $this->pdo = $database->pdo;
-
-        $this->boardMapper = new BoardMapper();
     }
 
     /**
