@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.14 비동기적 프로그래밍</title>
+</head>
+<script>
+    /**
+     프라미스에는 체인으로 연결될 수 있다는 장점이 있다.
+     프라미스가 완료되면 다른 프라미스를 반환하는 함수를 즉시 호출할 수 있다.
+     */
+
+    function launch() {
+        return new Promise(function (resolve, reject) {
+            console.log("Lift off!");
+            setTimeout(function () {
+                resolve("In orbit!");
+            }, 2*1000);
+        })
+    }
+
+    // 카운트다운 함수에 묶기
+    const c = new Countdown(5)
+        .on('tick', i => console.log(i + '...'));
+
+    c.go()
+        .then(launch)
+        .then(function (msg) {
+            console.log(msg);
+        })
+        // 체인 어디에서든 에러가 발생하면 체인 전체가 멈추고 catch 가 동작한다.
+        .catch(function (err) {
+            console.error("error...");
+        })
+
+    /**
+     프라미스는 비동기적 코드를 단순화하고 콜백이 두번이상 실행되는 문제를 방지한다.
+     하지만 resolve, reject 를 호출하는 것을 잊어서 프라미스가 결정되지않는 문제까지
+     자동으로 해결하지는 못한다.
+     에러가 일어나지 않으므로 이런 실수는 찾기 어렵다.
+
+     결정되지않은 프라미스를 방지하는 한가지 방법은 프라미스에 타임아웃을 거는것이다.
+     충분한 시간이 지났는데도 프라미스가 결정되지 않으면 자동으로 실패하게할 수 있다.
+     */
+
+    function addTimeout(fn, timeout) {
+        if (timeout === undefined) timeout = 1000;
+        return function (...args) {
+            return new Promise(function (resolve, reject) {
+                const tid = setTimeout(reject, timeout, new Error("time out"));
+                fn(...args)
+                    .then(function (...args) {
+                        clearTimeout(tid);
+                        resolve(...args);
+                    })
+                    .catch(function (...args) {
+                        clearTimeout(tid);
+                        reject(...args);
+                    });
+            });
+        }
+    }
+    
+    c.go()
+        .then(addTimeout(launch(), 11*1000))
+        .then(function (msg) {
+            console.log(msg);
+        })
+        .catch(function (err) {
+            console.error("Error: "+err.message);
+        })
+</script>
+<body>
+
+</body>
+</html>
