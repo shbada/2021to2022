@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 타임존을 명시하지않고 날짜를 생성할때는 어느 타임존이 사용되는지 생각해야하고, 어느 지역에서 날짜를 생성하느냐에 따라 다르다.
+     * 서버에서 날짜를 생성할때에는 항상 UTC 를 사용하거나 타임존을 명시하는 편이 좋다.
+     */
+
+    // UTC 메서드 사용
+    const d = new Date(Date.UTC(2019, 6, 14));
+    console.log(d);
+
+    // 특정 타임존에 있는 서버에서 날짜를 생성할때에는 moment.tz 사용하여 Date 인스턴스 생성하여,
+    // 타임존을 손으로 변환할 필요가 없다.
+
+    const a = moment.tz([2019, 6, 14, 9, 19], 'America/Los_Angeles').toDate();
+    const b = moment.tz([2019, 6, 14, 9, 19], 'Asia/Seoul').toDate();
+</script>
+<body>
+
+</body>
+</html>

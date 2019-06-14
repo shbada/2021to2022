@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 서버와 브라우저가 다른 타임존에 있더라도, 사용자는 자신의 타임존을 기준으로 날짜를 보고싶어할 것이다.
+     * 자바스크립트의 Date 인스턴스는 날짜를 저장할때 UTC 기준으로 유닉스 타임스탬프로 저장하므로 안전하다.
+     * 자바스크립트에서 날짜를 전송하는 가장 확실한 방법은 JSON 을 사용하는 것이다.
+     * 날짜는 JSON 에서 1:1 대칭이 되게끔 파싱할 수 없으므로 JSON 명세에는 날짜에 대한 데이터 타입을 정의하지 않았다.
+     */
+
+    const before = { d: new Date() };
+
+    console.log(before.d instanceof Date); // true
+
+    const json = JSON.stringify(before);
+    const after = JSON.parse(json);
+
+    // JSON 으로 날짜를 다룰 수는 없다.
+    console.log(after.d instanceof Date ); // false
+    console.log(typeof after.d); // "string"
+
+    // 전송된 문자열에서 날짜를 '복구'하는 것은 가능하다.
+    after.d = new Date(after.d);
+    console.log(after.d instanceof Date); // true
+
+    /**
+     * 원래 날짜가 어느 타임존에 있었든, 일단 JSON 으로 인코드된 날짜는 UTC 이다.
+     * JSON 으로 인코드된 문자열을 Date 생성자에 넘겨서 얻은 날짜는 사용자의 타임존을 기준으로 표시된다.
+     * valueOf() 메서드로 얻은 숫자를 그냥 전송해도 된다.
+     */
+    console.log("-----------------------")
+
+    const two = { d: new Date.valueOf() };
+    console.log(typeof two.d);
+</script>
+<body>
+
+</body>
+</html>

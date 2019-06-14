@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * moment.js 에서 format 메서드 > 날짜의 형식을 바꾼다.
+     */
+
+    const d = new Date(Date.UTC(1930, 4, 10));
+
+    console.log(d.toLocaleDateString()); // "5/9/1930"
+
+    // 날짜 형식을 바꿔야한다면, moment 에서 제공하는 메서드가 분명 있을것이다.
+    moment(d).format("YYYY-MM-DD"); // "1930-05-09"
+
+</script>
+<body>
+
+</body>
+</html>
