@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    const input = "As I was going to Saint Ives";
+
+    input.startsWith("As");
+    input.endsWith("Ives");
+    input.includes("going");
+    input.indexOf("going", 10);
+
+    // 위 메소드들은 모두 대소문자를 구분한다.
+    input.toLowerCase().startsWith("as"); // true
+
+    // 문자열 대체
+    const output = input.replace("going", "walking");
+    console.log(output);
+
+</script>
+<body>
+
+</body>
+</html>

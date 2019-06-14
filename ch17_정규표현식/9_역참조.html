@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 1. XYYX 형태의 밴드이름을 찾고싶다.
+     * 2. PJJP, GOOG, ANNA 등이 해당될 것이다.
+     * 3. 각 그룹은 숫자를 할당받는다.
+     * 4. 숫자는 맨 왼쪽이 1번에서 시작해 오른쪽으로 갈수록 1씩 늘어난다.
+     * 5. 역슬래시 뒤에 숫자를 써서 이 그룹을 참조할 수 있다.
+     * 6. 즉, \1 은 맨 처음 일치한 그룹이다.
+     */
+
+    const promo = "Opening for XAAX is the dynamic GOOG! At the box office now!";
+    const bands =  promo.match(/([A-Z])([A-Z])\2\1/g);
+
+    // 첫번째 그룹이 X에 일치하고 두번째 그룹이 A에 일치한다면,
+    // \2 가 A이고, \1은 X이다.
+</script>
+<body>
+
+</body>
+</html>
