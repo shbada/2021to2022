@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    function highlightParas(containing) {
+        if (typeof containing === 'string') {
+            containing = new RegExp(`\\b${containing}\\b`, 'i');
+        }
+
+        const paras = document.getElementsByTagName('p');
+        console.log(paras);
+
+        for (let p of paras) {
+            if (!containing.test(p.textContent)) continue;
+            p.classList.add('highlight');
+        }
+    }
+
+    highlightParas('unique');
+
+    //  클래스 제거
+    function removePara() {
+        const paras = document.querySelectorAll('p.highlight');
+
+        for (let p of paras) {
+            p.classList.remove('highlight');
+        }
+    }
+</script>
+<body>
+    <!-- ID 중복은 경고하지않지만, 유일한 ID를 사용해야 할 것. -->
+    <div id = "content">
+        <p>This is a <i>simple</i> HTML file.</p>
+        <div class="callout">
+            <p>This is as fancy as  ...</p>
+        </div>
+        <p>IDs (such as <span class ="code">#content</span></p>
+        <div id = "callout2" class="callout fancy">
+            <p>A single HTML element can have multiple classes.</p>
+        </div>
+    </div>
+</body>
+<style>
+    .highlight {
+        background: #ff0;
+        font-style: italic;
+    }
+</style>
+</html>
