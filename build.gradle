@@ -28,6 +28,9 @@ dependencies {
     compile "redis.clients:jedis:2.9.0"
     compile "org.springframework.session:spring-session-data-redis"
 
+    //okhttp
+    compile "com.squareup.okhttp3:okhttp:4.2.0"
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
