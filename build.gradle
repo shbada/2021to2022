@@ -34,6 +34,11 @@ dependencies {
     //slf4j
     compile "org.slf4j:jcl-over-slf4j:1.7.25"
 
+    //jpa, ojdbc6
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:2.1.8.RELEASE"
+    compile "com.oracle.ojdbc:ojdbc8:19.3.0.0"
+    compile "com.oracle.ojdbc:orai18n:19.3.0.0"
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
