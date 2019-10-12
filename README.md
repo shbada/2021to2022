@@ -1,7 +1,4 @@
-1. 2019-09-28
- > Swagger
- 
-2. 2019-10-18
- > Redis
- > Okhttp
- > Slf4j
+1. Swagger
+2. Redis
+3. Okhttp
+4. Slf4j
