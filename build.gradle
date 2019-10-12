@@ -31,6 +31,9 @@ dependencies {
     //okhttp
     compile "com.squareup.okhttp3:okhttp:4.2.0"
 
+    //slf4j
+    compile "org.slf4j:jcl-over-slf4j:1.7.25"
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

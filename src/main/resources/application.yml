@@ -2,3 +2,17 @@
 redis:
   host: 127.0.0.1
   port: 6379
+
+#Log4j
+# application.properties
+# 콘솔 창에 출력되는 로깅 메세지를 색으로 구분해서 출력
+spring:
+  output:
+    ansi:
+      enabled: always
+logging:
+  file: C:/intelliJLog/technology_add/technology_add.log
+  level:
+    com:
+      tutorial:
+        springboot: DEBUG
