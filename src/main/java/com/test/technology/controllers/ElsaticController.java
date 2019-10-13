@@ -56,11 +56,13 @@ public class ElsaticController {
 
     @PostMapping("/index")
     public ResponseEntity<?> addData(HttpServletRequest request, @RequestParam String indexName) {
+        String type = "test";
+        int id = 1;
         // url
-        String url = "http://" + host + ":" + port + "/" + indexName;
+        String url = "http://" + host + ":" + port + "/" + indexName + type + id;
 
         // body
-        String jsonParam = "";
+        String jsonParam = "{ \"test\" : \"seohae\" }";
 
         log.info(jsonParam);
         httpConnection.syncPut(url, jsonParam);
