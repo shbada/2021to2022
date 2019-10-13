@@ -31,7 +31,10 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(this.TestApiInfo())
-                .tags(new Tag("RedisController", "redis TEST API"));
+                .tags(new Tag("RedisController", "Redis API")
+                        , new Tag("DeptController", "JPA+Oracle DB 연동 API")
+                        , new Tag("TestController", "TEST API")
+                    );
 
     }
 

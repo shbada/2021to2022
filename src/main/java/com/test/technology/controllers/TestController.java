@@ -1,6 +1,7 @@
 package com.test.technology.controllers;
 
 import com.test.technology.commons.Output;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Api(tags = {"TestController"})
 @RestController
 @RequestMapping("/test")
 @Slf4j
