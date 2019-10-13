@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-public class TestConfig {
+public class RedisCacheConfig {
     @Value("${redis.host}")
     private String host;
 

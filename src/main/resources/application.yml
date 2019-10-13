@@ -3,6 +3,11 @@ redis:
   host: 127.0.0.1
   port: 6379
 
+#Elastic
+elastic:
+  host: 127.0.0.1
+  port: 9200
+
 
 spring:
   jpa:

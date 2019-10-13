@@ -1,9 +1,13 @@
 package com.test.technology.commons;
 
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Slf4j
+@Component
 public class HttpConnection {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient();
@@ -13,7 +17,7 @@ public class HttpConnection {
      * @param requestURL
      * @param jsonMessage
      */
-    public void synPost(String requestURL, String jsonMessage) {
+    public void syncPost(String requestURL, String jsonMessage) {
         try{
             Request request = new Request.Builder()
                     .url(requestURL)
@@ -23,7 +27,7 @@ public class HttpConnection {
             Response response = client.newCall(request).execute();
 
             String message = response.body().string();
-            System.out.println(message);
+            log.info(message);
 
         } catch (Exception e) {
             System.err.println(e.toString());
@@ -33,24 +37,24 @@ public class HttpConnection {
     /**
      * 비동기방식: POST
      * @param requestURL
-     * @param message
+     * @param jsonMessage
      */
-    public void post(String requestURL, String message) {
+    public void post(String requestURL, String jsonMessage) {
         try{
             Request request = new Request.Builder()
                     .url(requestURL)
-                    .post(RequestBody.create(JSON, message))
+                    .post(RequestBody.create(JSON, jsonMessage))
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    System.out.println("error + Connect Server Error is " + e.toString());
+                    log.info("error + Connect Server Error is " + e.toString());
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    System.out.println("Response Body is " + response.body().string());
+                    log.info("Response Body is " + response.body().string());
                 }
             });
 
@@ -63,7 +67,7 @@ public class HttpConnection {
      * 동기방식 :GET
      * @param requestURL
      */
-    public void SynGet(String requestURL) {
+    public void syncGet(String requestURL) {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -73,7 +77,7 @@ public class HttpConnection {
             Response response = client.newCall(request).execute();
 
             String message = response.body().string();
-            System.out.println(message);
+            log.info(message);
         } catch (Exception e){
             System.err.println(e.toString());
         }
@@ -92,15 +96,36 @@ public class HttpConnection {
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    System.out.println("error + Connect Server Error is " + e.toString());
+                    log.info("error + Connect Server Error is " + e.toString());
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    System.out.println("Response Body is " + response.body().string());
+                    log.info("Response Body is " + response.body().string());
                 }
             });
 
+        } catch (Exception e){
+            System.err.println(e.toString());
+        }
+    }
+
+    /**
+     * 동기방식 :PUT
+     * @param requestURL
+     */
+    public void syncPut(String requestURL, String jsonMessage) {
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(requestURL)
+                    .put(RequestBody.create(JSON, jsonMessage))
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            String message = response.body().string();
+            log.info(message);
         } catch (Exception e){
             System.err.println(e.toString());
         }
