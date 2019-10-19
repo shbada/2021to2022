@@ -35,6 +35,7 @@ public class SwaggerConfig {
                         , new Tag("ElastiController", "ElasticSearch API")
                         , new Tag("DeptController", "JPA+Oracle DB 연동 API")
                         , new Tag("TestController", "TEST API")
+                        , new Tag("FeignController", "TEST API")
                     );
 
     }

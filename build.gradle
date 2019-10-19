@@ -40,6 +40,10 @@ dependencies {
     compile "com.oracle.ojdbc:orai18n:19.3.0.0"
 
     //elasticsearch
+    compile "org.elasticsearch:elasticsearch:7.4.0"
+
+    //feign
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign:2.1.0.RELEASE"
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'

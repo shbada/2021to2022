@@ -4,13 +4,14 @@ import com.test.technology.commons.HttpConnection;
 import com.test.technology.commons.Output;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.common.settings.Settings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(tags = {"Elasticontroller"})
+@Api(tags = {"ElastiController"})
 @Slf4j
 @RestController
 @RequestMapping("/elastic")
@@ -57,6 +58,10 @@ public class ElsaticController {
     @PostMapping("/index")
     public ResponseEntity<?> addData(HttpServletRequest request, @RequestParam String indexName) {
         String type = "test";
+
+        //Settings settings = Settings.settingsBuilder().put("cluster.name", "elasticSearch").build();
+        //Client client = new ElasticSearchClass().getElasticSearchClient(settings);
+
         int id = 1;
         // url
         String url = "http://" + host + ":" + port + "/" + indexName + type + id;
