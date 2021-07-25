@@ -1,0 +1,39 @@
+#jar 시킬때 파람을 줘서 job을 실행 시킬 수 있다. none은 jar을 시행할때 어떤 파람을 안주면 실행을 안하게 설정
+server:
+  port: 6060
+
+#Redis
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+spring:
+  profiles:
+    active: local
+  # BATCH
+  batch:
+    job:
+      enabled: false
+  # MYSQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/springbatch_study?serverTimezone=Asia/Seoul
+    hikari:
+      username: springbatch
+      password: root
+  # JPA
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #    generate-ddl: true
+    show_sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        #        ddl-auto: update
+        ddl-auto: none
+#       ddl-auto: create-drop
+#        ddl-auto: create
+#       ddl-auto: validate
