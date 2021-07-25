@@ -1,0 +1,12 @@
+server:
+  port: 8761  # Eureka Web Service 포트번호
+
+
+spring:
+  application:
+    name: discoveryservice  # 서비스명
+
+eureka: # Eureka 라이브러리가 포함된채 부트가 실행되면 유레카 클라이언트 역할로써 어딘가에다 유레카를 등록한다.
+  client: # 기본값이 true 인데 자신의 정보를 자신에게 등록하는 의미없는 작업을 안하도록 false 지정
+    register-with-eureka: false
+    fetch-registry: false

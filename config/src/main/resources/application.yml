@@ -1,0 +1,34 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  profiles:
+    active: nativ # nativ file add
+  cloud:
+    config:
+      server:
+        native: # native file add
+          search-locations: file://${user.home}/Documents/seohae-dev/config/msa-yml/nativeLocalRepo  # 윈도우는 file:/// (3개가 들어가야함)
+          # 현재 폴더 기준 파일 3개 (application.yml, user-service.yml, ecommerce.yml )
+          # localhost/ecommerce/native : ecommerce.yml, application.yml
+          # localhost/user-service/native : user-service.yml, application.yml
+        git:
+          # uri: file://Users/seohaekim/workspace/inflearn_msa_spring_cloude/gitLocalRepo
+          uri: https://github.com/seohae/usersMicroservice-config
+          #private git repository 일 경우 username, password 입력 필요
+          username: seohae
+          password: rladbs256@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, bursefresh  # bursefresh  ; rqbbitmq 가 푸쉬해줄 클라이언트가 되겠다는 의미
+        # rabbitmq 에다가 요청사항을 받았음, rabiitmq 가 일괄적으로 서비스 프로젝트들에 푸쉬
