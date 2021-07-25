@@ -1,0 +1,69 @@
+type CreateChannelResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  CreateChannel(channelName: String!): CreateChannelResponse!
+  ModifyChannel(id: Int!, nextName: String!): ModifyChannelResponse!
+  ModifyMessage(id: Int!, nextMessage: String!): ModifyMessageResponse!
+  SendMessage(nickname: String!, contents: String!, thumbnail: String!, innerChannelId: Int!): SendMessageResponse!
+}
+
+type Subscription {
+  CreateChannelSubscription: Channel
+  CreateMessageSubscription: Message
+}
+
+type GetChannelsResponse {
+  ok: Boolean!
+  error: String
+  channels: [Channel]
+}
+
+type Query {
+  GetChannels: GetChannelsResponse!
+  GetMessages(innerChannelId: Int!): GetMessagesResponse!
+}
+
+type ModifyChannelResponse {
+  ok: Boolean!
+  error: String
+  changedName: String
+}
+
+type Channel {
+  id: Int!
+  channelName: String!
+  messages: [Message]
+  createdAt: String!
+  updatedAt: String
+}
+
+type GetMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type ModifyMessageResponse {
+  ok: Boolean!
+  error: String
+  changedMessage: String
+}
+
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Message {
+  id: Int!
+  nickname: String!
+  contents: String!
+  thumbnail: String!
+  innerChannel: Channel!
+  innerChannelId: Int!
+  createdAt: String!
+  updatedAt: String
+}
