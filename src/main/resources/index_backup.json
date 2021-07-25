@@ -1,0 +1,73 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "properties": {
+      "GUBUN": {
+        "type": "keyword"
+      },
+      "SVCID": {
+        "type": "keyword"
+      },
+      "MAXCLASSNM": {
+        "type": "keyword"
+      },
+      "MINCLASSNM": {
+        "type": "keyword"
+      },
+      "SVCSTATNM": {
+        "type": "keyword"
+      },
+      "SVCNM": {
+        "type": "keyword"
+      },
+      "PAYATNM": {
+        "type": "keyword"
+      },
+      "location": {
+        "type": "geo_point"
+      },
+      "SVCOPNBGNDT": {
+        "type": "date"
+      },
+      "SVCOPNENDDT": {
+        "type": "date"
+      },
+      "RCPTBGNDT": {
+        "type": "date"
+      },
+      "RCPTENDDT": {
+        "type": "date"
+      },
+      "AREANM": {
+        "type": "text"
+      },
+      "NOTICE": {
+        "type": "text"
+      },
+      "IMG_PATH": {
+        "type": "text"
+      },
+      "DTLCONT": {
+        "type": "text"
+      },
+      "TELNO": {
+        "type": "text"
+      },
+      "V_MAX": {
+        "type": "text"
+      },
+      "V_MIN": {
+        "type": "text"
+      },
+      "REVSTDDAYNM": {
+        "type": "text"
+      },
+      "REVSTDDAY": {
+        "type": "text"
+      }
+    }
+  }
+}
