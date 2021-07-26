@@ -37,6 +37,7 @@ public class M04_스트림_평면화 {
         List<String> productNameList3 = wordList.stream()
                                                         .map(word -> word.split(""))
                                                         .flatMap(Arrays::stream) /* 평면화 리턴 */
+                                                        .distinct()
                                                         .collect(Collectors.toList());
 
 
