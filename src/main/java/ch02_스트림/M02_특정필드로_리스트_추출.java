@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class M01_특정필드로_리스트_추출 {
+public class M02_특정필드로_리스트_추출 {
 
     public static void main(String[] args) {
 	    // sample List
