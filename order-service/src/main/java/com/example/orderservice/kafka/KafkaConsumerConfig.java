@@ -15,7 +15,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaProducerConfig {
+public class KafkaConsumerConfig {
     /**
      * 접속하고자하는 카프카 정보
      * @return
