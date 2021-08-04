@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "elk-api", url = "${feign.elk-api.url}")
 public interface ElasticSearchClient {
-    /* reserrvation 인덱스 조회 */
+    /* reservation 인덱스 조회 */
     @GetMapping("/reservation/_search?pretty")
     String selectIndex();
 
