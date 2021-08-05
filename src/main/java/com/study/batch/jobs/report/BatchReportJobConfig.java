@@ -1,46 +1,21 @@
 package com.study.batch.jobs.report;
 
-import com.study.batch.common.OutputArea;
 import com.study.batch.entity.BatchStepExecution;
-import com.study.batch.entity.TempLibrary;
-import com.study.batch.entity.TempLibraryLocal;
-import com.study.batch.entity.TempLibraryType;
 import com.study.batch.entity.dto.BatchStepExecutionDto;
-import com.study.batch.entity.dto.TempLibraryDto;
 import com.study.batch.repository.BatchStepExecutionRepository;
-import com.study.batch.steps.CsvFileItemTskletStep;
-import com.study.batch.steps.LibraryItemReaderStep;
-import com.study.batch.steps.LibraryLocalItemReaderStep;
-import com.study.batch.steps.LibraryTypeItemReaderStep;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemReader;
-import org.springframework.batch.item.database.JpaCursorItemReader;
-import org.springframework.batch.item.database.JpaItemWriter;
-import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
-import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
-import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 
-import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
-import java.util.List;
 
 @Slf4j
 @Configuration

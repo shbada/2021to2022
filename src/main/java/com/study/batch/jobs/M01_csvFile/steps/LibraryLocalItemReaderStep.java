@@ -1,7 +1,6 @@
-package com.study.batch.steps;
+package com.study.batch.jobs.M01_csvFile.steps;
 
 import com.study.batch.common.OutputArea;
-import com.study.batch.entity.TempLibrary;
 import com.study.batch.entity.TempLibraryLocal;
 import com.study.batch.entity.dto.TempLibraryDto;
 import lombok.RequiredArgsConstructor;
@@ -11,22 +10,18 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
 import javax.persistence.EntityManagerFactory;
 
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class LibraryItemReaderStep {
+public class LibraryLocalItemReaderStep {
     private final EntityManagerFactory entityManagerFactory;
 
-    private static final String JOB_NAME = "LibraryItemReaderJob";
+    private static final String JOB_NAME = "LibraryLocalItemReaderJob";
 
     /**
      * Reader
@@ -34,19 +29,7 @@ public class LibraryItemReaderStep {
      */
     @Bean(name = JOB_NAME +"_reader")
     public FlatFileItemReader<TempLibraryDto> csvFileItemReader() {
-        return OutputArea.outputList = new FlatFileItemReaderBuilder<TempLibraryDto>()
-                .name("csvFileItemReader")
-                .resource(new ClassPathResource("/temp.csv"))
-                .linesToSkip(1) // header line skip
-                .encoding("MS949")
-                .lineTokenizer(new DelimitedLineTokenizer() {{
-                    setNames("libraryNm", "bigLocal", "smallLocal", "libraryType");
-                    setStrict(false);
-                }})
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<TempLibraryDto>() {{
-                    setTargetType(TempLibraryDto.class);
-                }})
-                .build();
+        return OutputArea.outputList;
     }
 
     /**
@@ -55,9 +38,9 @@ public class LibraryItemReaderStep {
      */
     @StepScope
     @Bean(name = JOB_NAME +"_processor")
-    public ItemProcessor<TempLibraryDto, TempLibrary> processor() {
+    public ItemProcessor<TempLibraryDto, TempLibraryLocal> processor() {
         /* JPA는 entity에 set을 하면 안된다. 빌더패턴을 적용하자. */
-        return TempLibraryDto::toEntity;
+        return TempLibraryDto::toLocalEntity;
     }
 
     /**
@@ -66,8 +49,8 @@ public class LibraryItemReaderStep {
      */
     @Bean(name = JOB_NAME +"_writer")
     @StepScope
-    public JpaItemWriter<TempLibrary> writer() {
-        return new JpaItemWriterBuilder<TempLibrary>()
+    public JpaItemWriter<TempLibraryLocal> writer() {
+        return new JpaItemWriterBuilder<TempLibraryLocal>()
                 .entityManagerFactory(entityManagerFactory)
                 .build();
     }

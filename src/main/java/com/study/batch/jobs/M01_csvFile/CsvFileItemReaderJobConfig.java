@@ -1,13 +1,13 @@
-package com.study.batch.jobs;
+package com.study.batch.jobs.M01_csvFile;
 
 import com.study.batch.entity.TempLibrary;
 import com.study.batch.entity.TempLibraryLocal;
 import com.study.batch.entity.TempLibraryType;
 import com.study.batch.entity.dto.TempLibraryDto;
-import com.study.batch.steps.CsvFileItemTskletStep;
-import com.study.batch.steps.LibraryItemReaderStep;
-import com.study.batch.steps.LibraryLocalItemReaderStep;
-import com.study.batch.steps.LibraryTypeItemReaderStep;
+import com.study.batch.jobs.M01_csvFile.steps.CsvFileItemTskletStep;
+import com.study.batch.jobs.M01_csvFile.steps.LibraryItemReaderStep;
+import com.study.batch.jobs.M01_csvFile.steps.LibraryLocalItemReaderStep;
+import com.study.batch.jobs.M01_csvFile.steps.LibraryTypeItemReaderStep;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;

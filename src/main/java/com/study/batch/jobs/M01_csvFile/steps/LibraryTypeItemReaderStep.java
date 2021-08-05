@@ -1,7 +1,7 @@
-package com.study.batch.steps;
+package com.study.batch.jobs.M01_csvFile.steps;
 
 import com.study.batch.common.OutputArea;
-import com.study.batch.entity.TempLibraryLocal;
+import com.study.batch.entity.TempLibraryType;
 import com.study.batch.entity.dto.TempLibraryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ import javax.persistence.EntityManagerFactory;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class LibraryLocalItemReaderStep {
+public class LibraryTypeItemReaderStep {
     private final EntityManagerFactory entityManagerFactory;
 
-    private static final String JOB_NAME = "LibraryLocalItemReaderJob";
+    private static final String JOB_NAME = "LibraryTypeItemReaderJob";
 
     /**
      * Reader
@@ -38,9 +38,9 @@ public class LibraryLocalItemReaderStep {
      */
     @StepScope
     @Bean(name = JOB_NAME +"_processor")
-    public ItemProcessor<TempLibraryDto, TempLibraryLocal> processor() {
+    public ItemProcessor<TempLibraryDto, TempLibraryType> processor() {
         /* JPA는 entity에 set을 하면 안된다. 빌더패턴을 적용하자. */
-        return TempLibraryDto::toLocalEntity;
+        return TempLibraryDto::toTypeEntity;
     }
 
     /**
@@ -49,8 +49,8 @@ public class LibraryLocalItemReaderStep {
      */
     @Bean(name = JOB_NAME +"_writer")
     @StepScope
-    public JpaItemWriter<TempLibraryLocal> writer() {
-        return new JpaItemWriterBuilder<TempLibraryLocal>()
+    public JpaItemWriter<TempLibraryType> writer() {
+        return new JpaItemWriterBuilder<TempLibraryType>()
                 .entityManagerFactory(entityManagerFactory)
                 .build();
     }

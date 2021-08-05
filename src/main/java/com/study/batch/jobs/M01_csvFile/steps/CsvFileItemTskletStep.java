@@ -1,4 +1,4 @@
-package com.study.batch.steps;
+package com.study.batch.jobs.M01_csvFile.steps;
 
 import com.study.batch.common.OutputArea;
 import com.study.batch.entity.dto.TempLibraryDto;
