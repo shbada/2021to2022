@@ -1,0 +1,8 @@
+server:
+  port: 4040  # 동적 포트
+  servlet:
+    context-path: /kafkaConsumer
+
+spring:
+  application:
+    name: kafka-consumer
