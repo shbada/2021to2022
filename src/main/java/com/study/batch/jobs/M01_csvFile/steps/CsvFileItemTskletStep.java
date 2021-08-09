@@ -1,7 +1,7 @@
 package com.study.batch.jobs.M01_csvFile.steps;
 
 import com.study.batch.common.OutputArea;
-import com.study.batch.entity.dto.TempLibraryDto;
+import com.study.batch.jobs.M01_csvFile.entity.dto.TempLibraryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepContribution;

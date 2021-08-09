@@ -1,4 +1,4 @@
-package com.study.batch.entity.dto;
+package com.study.batch.jobs.M01_csvFile.entity.dto;
 
 import lombok.Data;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.study.batch.entity;
+package com.study.batch.jobs.M01_csvFile.entity;
 
 import lombok.*;
 

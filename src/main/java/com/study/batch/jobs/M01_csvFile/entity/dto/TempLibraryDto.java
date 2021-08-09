@@ -1,8 +1,8 @@
-package com.study.batch.entity.dto;
+package com.study.batch.jobs.M01_csvFile.entity.dto;
 
-import com.study.batch.entity.TempLibrary;
-import com.study.batch.entity.TempLibraryLocal;
-import com.study.batch.entity.TempLibraryType;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibrary;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibraryLocal;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibraryType;
 import lombok.*;
 
 @Data

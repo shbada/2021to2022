@@ -1,4 +1,4 @@
-package com.study.batch.entity;
+package com.study.batch.jobs.M01_csvFile.entity;
 
 import lombok.*;
 
@@ -8,20 +8,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "temp_library_local")
+@Table(name = "temp_library_type")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TempLibraryLocal {
+public class TempLibraryType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idx")
     private Long idx;
 
-    @Column(name = "big_local")
-    private String bigLocal;
+    @Column(name = "library_type")
+    private String libraryType;
 
-    @Column(name = "small_local")
-    private String smallLocal;
+
 
 }

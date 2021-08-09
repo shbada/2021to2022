@@ -1,9 +1,9 @@
 package com.study.batch.jobs.M01_csvFile;
 
-import com.study.batch.entity.TempLibrary;
-import com.study.batch.entity.TempLibraryLocal;
-import com.study.batch.entity.TempLibraryType;
-import com.study.batch.entity.dto.TempLibraryDto;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibrary;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibraryLocal;
+import com.study.batch.jobs.M01_csvFile.entity.TempLibraryType;
+import com.study.batch.jobs.M01_csvFile.entity.dto.TempLibraryDto;
 import com.study.batch.jobs.M01_csvFile.steps.CsvFileItemTskletStep;
 import com.study.batch.jobs.M01_csvFile.steps.LibraryItemReaderStep;
 import com.study.batch.jobs.M01_csvFile.steps.LibraryLocalItemReaderStep;
