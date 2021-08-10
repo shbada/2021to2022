@@ -33,3 +33,8 @@ spring:
       hibernate:
         show_sql: true  # 실행 SQL (System.out) - 운영에서 찍으면 안되므로 주석처리
         format_sql: true
+
+# feign URL
+feign:
+  vendor-api:
+    url: http://apis.data.go.kr/1130000/MllBsStatsService/getMllBsStatsInfo?
