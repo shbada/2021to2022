@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
+    /**
+     * kafka message 전송
+     * @param topic
+     * @param kafkaTestDto
+     * @return
+     */
     public String send(String topic, KafkaTestDto kafkaTestDto) {
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = "";

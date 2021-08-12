@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class KafkaConsumer {
+    /**
+     * 토픽명 test
+     * @param kafkaMessage
+     */
     @KafkaListener(topics = "test") // 토픽명
     public void updateQty(String kafkaMessage) { // message 를 토픽에서 가져온다.
         log.info("Kafka Method : " + kafkaMessage);
