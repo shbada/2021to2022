@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -14,13 +17,11 @@ import java.time.LocalDateTime;
  1) equals   : 두 객체의 내용이 같은지 확인
  2) hashcode : 두 객체가 같은 객체인지 확인
  */
-@EqualsAndHashCode(of = "id") /* equals, hashCode 자동 생성 */
-@Builder
-@AllArgsConstructor /* 모든 필드 값을 파라미터로 받는 생성자를 만들어준다 */
-@NoArgsConstructor /* 파라미터가 없는 기본 생성자 생성 */
+@EqualsAndHashCode(of = "id")
+@Builder @AllArgsConstructor @NoArgsConstructor
 public class Account {
-    @Id
-    @GeneratedValue
+
+    @Id @GeneratedValue
     private Long id;
 
     @Column(unique = true)
@@ -31,46 +32,59 @@ public class Account {
 
     private String password;
 
-    /* 이메일 검증 여부 */
     private boolean emailVerified;
 
-    /* 이메일 검증 토큰값 */
     private String emailCheckToken;
 
-    /* 인증 일자 */
     private LocalDateTime emailCheckTokenGeneratedAt;
 
-    /* 가입 날짜 */
     private LocalDateTime joinedAt;
 
-    /* 프로필 관련 간단한 소개글 */
     private String bio;
 
     private String url;
 
-    /* 직업 */
     private String occupation;
 
-    /* 위치 (지역) */
     private String location;
 
-    @Lob /* varchar(255) */
-    @Basic(fetch = FetchType.EAGER) /* default LAZY -> EAGER 명시적 설정 */
-    /* 이미지는 유저를 로딩할때 같이 쓰일 예정이므로 EAGER */
+    @Lob @Basic(fetch = FetchType.EAGER)
     private String profileImage;
 
-    /* 스터디 생성 이메일 알람 여부 */
     private boolean studyCreatedByEmail;
 
     private boolean studyCreatedByWeb = true;
 
-    /* 스터디 모임의 가입신청 결과 이메일 알람 여부 */
     private boolean studyEnrollmentResultByEmail;
 
     private boolean studyEnrollmentResultByWeb = true;
 
-    /* 스터디 모임의 변경사항 이메일 알람 여부 */
     private boolean studyUpdatedByEmail;
 
     private boolean studyUpdatedByWeb = true;
+
+//    @ManyToMany
+//    private Set<Tag> tags = new HashSet<>();
+//
+//    @ManyToMany
+//    private Set<Zone> zones = new HashSet<>();
+
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+        this.emailCheckTokenGeneratedAt = LocalDateTime.now();
+    }
+
+    public void completeSignUp() {
+        this.emailVerified = true;
+        this.joinedAt = LocalDateTime.now();
+    }
+
+    public boolean isValidToken(String token) {
+        return this.emailCheckToken.equals(token);
+    }
+
+    public boolean canSendConfirmEmail() {
+        return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
+    }
+
 }

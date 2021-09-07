@@ -17,6 +17,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final AccountRepository accountRepository;
     private final SignUpFormValidator signUpFormValidator;
 
     /**
@@ -56,5 +57,33 @@ public class AccountController {
         Account account = accountService.processNewAccount(signUpForm);
         //accountService.login(account);
         return "redirect:/";
+    }
+
+    /**
+     * 이메일 토큰 체크
+     * @param token
+     * @param email
+     * @param model
+     * @return
+     */
+    @GetMapping("/check-email-token")
+    public String checkEmailToken(String token, String email, Model model) {
+        /* 이메일에 유저가 있는지 확인 */
+        Account account = accountRepository.findByEmail(email);
+        String view = "account/checked-email";
+        if (account == null) {
+            model.addAttribute("error", "wrong.email");
+            return view;
+        }
+
+        if (!account.isValidToken(token)) {
+            model.addAttribute("error", "wrong.token");
+            return view;
+        }
+
+        accountService.completeSignUp(account);
+        model.addAttribute("numberOfUser", accountRepository.count());
+        model.addAttribute("nickname", account.getNickname());
+        return view;
     }
 }
