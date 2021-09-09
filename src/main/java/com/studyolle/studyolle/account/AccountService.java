@@ -88,11 +88,17 @@ public class AccountService {
         login(account);
     }
 
+    /**
+     * 로그인
+     * @param account
+     */
     public void login(Account account) {
+        /* 세션 토큰 생성 */
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new UserAccount(account),
                 account.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
+
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 }
