@@ -19,6 +19,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+/**
+ * --job.name=csvFileItemReaderJob
+ */
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -64,6 +67,7 @@ public class FlatFileItemJobConfig {
                 .name("FlatFileItemReaderStep")
                 .resource(inputFile)
                 .fixedLength()
+                /* Range 객체 (파싱해야할 칼럼의 시작 위치와 종료 위치를 나타낸다) 의 배열 지정 */
                 .columns(new Range[]{new Range(1, 11), new Range(12, 12), new Range(13, 22),
                                     new Range(23, 26), new Range(27, 46), new Range(47, 62),
                                     new Range(63, 64), new Range(65, 69)})
