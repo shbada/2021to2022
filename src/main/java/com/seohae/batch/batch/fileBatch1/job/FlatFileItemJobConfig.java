@@ -4,7 +4,6 @@ import com.seohae.batch.batch.fileBatch1.entity.Customer;
 import com.seohae.batch.batch.fileBatch1.mapper.CustomerFieldSetMapper;
 import com.seohae.batch.batch.fileBatch1.mapper.CustomerFileLineTokenizer;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -22,7 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 /**
- * --job.name=csvFileItemReaderJob
+ * --job.name=flatFileItemJob
  */
 @Slf4j
 @Configuration
