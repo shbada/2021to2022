@@ -6,6 +6,8 @@ import com.seohae.java.member.dto.entity.Member;
 import com.seohae.java.member.service.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,10 @@ public class MemberController {
     @PostMapping("")
     public ResponseEntity<?> addMember(@ModelAttribute MemberDto memberDto) {
         /* 1. users */
-        Member member = new Member(memberDto.getUserId(), memberDto.getUserName(), memberDto.getUserAge(), memberDto.getUserSex());
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT); /* 강력하게 */
+
+        Member member = mapper.map(memberDto, Member.class);
         Long userIdx = memberService.addMember(member);
 
         return commonResponse.send(userIdx);

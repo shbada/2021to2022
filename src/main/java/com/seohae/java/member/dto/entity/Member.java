@@ -27,18 +27,14 @@ public class Member {
     @Column(name = "user_sex", nullable = false)
     private String userSex; /* sex */
 
+    @Column(name = "phone", nullable = false)
+    private String phone; /* phone */
+
+    @Column(name = "tel_no", nullable = false)
+    private String telNo; /* telno */
+
     @Column(name = "created_date", nullable = false, updatable = false, insertable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP") /* 현재날짜 찍기 */
     private LocalDateTime createdDate;
 
-    public Member(String userId, String userName, Integer userAge, String userSex) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userAge = userAge;
-        this.userSex = userSex;
-    }
-
-    public Member() {
-
-    }
 }
