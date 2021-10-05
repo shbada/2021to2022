@@ -9,10 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = {"MemberController"})
 @RestController
@@ -22,6 +21,11 @@ public class MemberController {
     private final CommonResponse commonResponse;
     private final MemberService memberService;
 
+    /**
+     * Member 단건 등록
+     * @param memberDto
+     * @return
+     */
     @PostMapping("")
     public ResponseEntity<?> addMember(@ModelAttribute MemberDto memberDto) {
         /* 1. users */
@@ -32,5 +36,18 @@ public class MemberController {
         Long userIdx = memberService.addMember(member);
 
         return commonResponse.send(userIdx);
+    }
+
+    /**
+     * userName 에 해당하는 멤버 리스트 조회
+     * @param memberDto
+     * @return
+     */
+    @GetMapping("")
+    public ResponseEntity<?> getMemberName(@ModelAttribute MemberDto memberDto) {
+        /* 1. userName 에 해당하는 멤버 리스트 조회 */
+        List<MemberDto> memberDtoList = memberService.getMemberNameList(memberDto.getUserName());
+
+        return commonResponse.send(memberDtoList);
     }
 }

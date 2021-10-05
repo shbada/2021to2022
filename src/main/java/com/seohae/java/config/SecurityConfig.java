@@ -17,7 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /* 아래 URL 들은 인증 없이 패스 */
                 .mvcMatchers("/").permitAll()
                 /* GET 메서드 중에서 /profile/* 경로는 인증 없이 패스 */
-                .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/member/*").permitAll()
+                .mvcMatchers("/v2/api-docs").permitAll()
+                .mvcMatchers("/configuration/ui").permitAll()
+                .mvcMatchers("/swagger-resources/**").permitAll()
+                .mvcMatchers("/configuration/security").permitAll()
+                .mvcMatchers("/swagger-ui.html").permitAll()
+                .mvcMatchers("/swagger-ui/*").permitAll()
+                .mvcMatchers("/webjars/**").permitAll()
+                .mvcMatchers("/v2/**").permitAll()
                 .anyRequest().authenticated(); /* 로그인 해야만 사용 가능 */
     }
 
