@@ -1,8 +1,8 @@
 package com.seohae.java;
 
-import com.seohae.java.member.dto.MemberDto;
-import com.seohae.java.member.dto.entity.Member;
-import com.seohae.java.member.service.MemberService;
+import com.seohae.java.dto.MemberDto;
+import com.seohae.java.dto.entity.Member;
+import com.seohae.java.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

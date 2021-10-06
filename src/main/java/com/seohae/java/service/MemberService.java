@@ -1,9 +1,9 @@
-package com.seohae.java.member.service;
+package com.seohae.java.service;
 
 import com.seohae.java.common.exceptions.BadRequestException;
-import com.seohae.java.member.dto.MemberDto;
-import com.seohae.java.member.dto.entity.Member;
-import com.seohae.java.member.repository.MemberRepository;
+import com.seohae.java.dto.MemberDto;
+import com.seohae.java.dto.entity.Member;
+import com.seohae.java.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -61,7 +61,7 @@ public class MemberService {
      * @param memberDtoList
      * @return
      */
-    public List<MemberDto> getMemberNameList(String userName, List<MemberDto> memberDtoList) {
+    public List<MemberDto> getMemberNameFilterList(String userName, List<MemberDto> memberDtoList) {
         /* validation check */
         if (!StringUtils.hasText(userName)) {
             throw new BadRequestException("파라미터 누락: userName");
@@ -70,6 +70,18 @@ public class MemberService {
         /** Stream 연습) filter 사용하여 데이터 필터링 */
         Stream<MemberDto> memberDtoStream = memberDtoList.stream()
                 .filter(memberDto -> userName.equals(memberDto.getUserName()));
+
+        return memberDtoStream.collect(Collectors.toList());
+    }
+
+    /**
+     * userName 으로만 이루어진 리스트 추출
+     * @return
+     */
+    public List<String> getMemberNameMapList(List<MemberDto> memberDtoList) {
+        /** Stream 연습) map 사용하여 데이터 재조합 */
+        Stream<String> memberDtoStream = memberDtoList.stream()
+                .map(MemberDto::getUserName);
 
         return memberDtoStream.collect(Collectors.toList());
     }

@@ -1,4 +1,4 @@
-package com.seohae.java.member.dto;
+package com.seohae.java.dto;
 
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.seohae.java.member.dto.entity;
+package com.seohae.java.dto.entity;
 
 import lombok.Getter;
 import lombok.Setter;

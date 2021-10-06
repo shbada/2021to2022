@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackages={
-        "com.seohae.java.member.controller"
+        "com.seohae.java.controller"
 })
 public class SwaggerConfig {
 
@@ -25,7 +25,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("Java API")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.seohae.java.member.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.seohae.java.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(this.TestApiInfo())

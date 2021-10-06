@@ -1,9 +1,9 @@
-package com.seohae.java.member.controller;
+package com.seohae.java.controller;
 
 import com.seohae.java.common.CommonResponse;
-import com.seohae.java.member.dto.MemberDto;
-import com.seohae.java.member.dto.entity.Member;
-import com.seohae.java.member.service.MemberService;
+import com.seohae.java.dto.MemberDto;
+import com.seohae.java.dto.entity.Member;
+import com.seohae.java.service.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -49,7 +49,22 @@ public class MemberController {
         List<MemberDto> memberAllList = memberService.getMemberList();
 
         /* 2. userName 에 해당하는 멤버 리스트 조회 */
-        List<MemberDto> memberList = memberService.getMemberNameList(memberDto.getUserName(), memberAllList);
+        List<MemberDto> memberList = memberService.getMemberNameFilterList(memberDto.getUserName(), memberAllList);
+
+        return commonResponse.send(memberList);
+    }
+
+    /**
+     * userName 으로만 이루어진 리스트 추출
+     * @return
+     */
+    @GetMapping("/map")
+    public ResponseEntity<?> getMemberNameMapList() {
+        /* 1. Member List 조회 */
+        List<MemberDto> memberAllList = memberService.getMemberList();
+
+        /* 2. userName 에 해당하는 멤버 리스트 조회 */
+        List<String> memberList = memberService.getMemberNameMapList(memberAllList);
 
         return commonResponse.send(memberList);
     }
