@@ -22,18 +22,22 @@ import java.util.stream.Stream;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    /**
+     * 멤버 단건 등록
+     * @param member
+     * @return
+     */
     @Transactional
     public Long addMember(Member member) {
         memberRepository.save(member);
         return member.getUserIdx(); // 항상 값이 있다는 보장이 있음
     }
 
-    public List<MemberDto> getMemberNameList(String userName) {
-        /* validation check */
-        if (!StringUtils.hasText(userName)) {
-            throw new BadRequestException("파라미터 누락: userName");
-        }
-
+    /**
+     * 멤버 전체 리스트 조회
+     * @return
+     */
+    public List<MemberDto> getMemberList() {
         /* member List select */
         Iterable<Member> members = memberRepository.findAll();
 
@@ -46,6 +50,21 @@ public class MemberService {
         for (Member member : members) {
             MemberDto memberDto = mapper.map(member, MemberDto.class);
             memberDtoList.add(memberDto);
+        }
+
+        return memberDtoList;
+    }
+
+    /**
+     * userName 에 해당하는 리스트 조회
+     * @param userName
+     * @param memberDtoList
+     * @return
+     */
+    public List<MemberDto> getMemberNameList(String userName, List<MemberDto> memberDtoList) {
+        /* validation check */
+        if (!StringUtils.hasText(userName)) {
+            throw new BadRequestException("파라미터 누락: userName");
         }
 
         /** Stream 연습) filter 사용하여 데이터 필터링 */

@@ -45,9 +45,12 @@ public class MemberController {
      */
     @GetMapping("")
     public ResponseEntity<?> getMemberName(@ModelAttribute MemberDto memberDto) {
-        /* 1. userName 에 해당하는 멤버 리스트 조회 */
-        List<MemberDto> memberDtoList = memberService.getMemberNameList(memberDto.getUserName());
+        /* 1. Member List 조회 */
+        List<MemberDto> memberAllList = memberService.getMemberList();
 
-        return commonResponse.send(memberDtoList);
+        /* 2. userName 에 해당하는 멤버 리스트 조회 */
+        List<MemberDto> memberList = memberService.getMemberNameList(memberDto.getUserName(), memberAllList);
+
+        return commonResponse.send(memberList);
     }
 }
