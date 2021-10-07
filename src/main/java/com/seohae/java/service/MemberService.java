@@ -93,7 +93,8 @@ public class MemberService {
         Optional<MemberDto> optionalMemberDto = memberList.stream()
                                                           .findFirst();
 
-        /* TODO Optional Null check */
+        /* Optional Null check */
+        optionalMemberDto.orElseThrow(() -> new BadRequestException("Object null"));
 
         return optionalMemberDto.get();
     }
