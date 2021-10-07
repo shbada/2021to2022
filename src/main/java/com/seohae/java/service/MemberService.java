@@ -9,10 +9,12 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -84,5 +86,15 @@ public class MemberService {
                 .map(MemberDto::getUserName);
 
         return memberDtoStream.collect(Collectors.toList());
+    }
+
+    public MemberDto getMemberFirst(List<MemberDto> memberList) {
+        /** Stream 연습) map 사용하여 데이터 재조합 */
+        Optional<MemberDto> optionalMemberDto = memberList.stream()
+                                                          .findFirst();
+
+        /* TODO Optional Null check */
+
+        return optionalMemberDto.get();
     }
 }

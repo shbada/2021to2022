@@ -6,6 +6,7 @@ import com.seohae.java.dto.entity.Member;
 import com.seohae.java.service.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/member/")
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
     private final CommonResponse commonResponse;
     private final MemberService memberService;
@@ -50,6 +52,10 @@ public class MemberController {
 
         /* 2. userName 에 해당하는 멤버 리스트 조회 */
         List<MemberDto> memberList = memberService.getMemberNameFilterList(memberDto.getUserName(), memberAllList);
+
+        /* 3. 첫번째 멤버 추출하기 */
+        MemberDto memberDto1 = memberService.getMemberFirst(memberList);
+        log.info(memberDto1.getUserId());
 
         return commonResponse.send(memberList);
     }
