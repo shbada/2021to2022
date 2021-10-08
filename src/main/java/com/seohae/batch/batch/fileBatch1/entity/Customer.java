@@ -1,12 +1,11 @@
 package com.seohae.batch.batch.fileBatch1.entity;
 
+import com.seohae.batch.batch.fileBatch2.entity.Transaction;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -31,6 +30,8 @@ public class Customer {
     private String city;
     private String state;
     private String zipCode;
+
+    private List<Transaction> transactions;
 
     public Customer() {}
 
