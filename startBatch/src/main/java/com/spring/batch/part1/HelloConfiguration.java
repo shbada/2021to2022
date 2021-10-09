@@ -37,6 +37,10 @@ public class HelloConfiguration {
     @Bean
     public Job helloJob() { /* Job : 배치 실행 단위 */
         return jobBuilderFactory.get("helloJob") /* 잡 이름 : helloWorld, 배치를 실행시키는 key */
+                /** RunIdIncrementer : 새로운 JobInstance 가 생성되도록 돕는다.
+                   runId 라는 파라미터를 자동으로 생성하기 때문 (매번 다른 파라미터로 실행된다)
+                   같은 파라미터로 실행시 JobInstance 가 재실행된다.
+                 */
                 .incrementer(new RunIdIncrementer()) /* 항상 잡이 실행될때마다 파라미터ID를 자동으로 생성해주는 클래스 */
                 .start(this.helloStep()) /* 잡에 필요한 스텝을 설정해야함 */
                 .build();
