@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
  * 위 설정을 쓰지않으면 모든 Batch 가 실행된다. -> application.yml 에 설정을 추가하자.
  * application.yml 에 spring:batch:job:names 추가되었다. 이후로는 아래와같이 설정하자.
  * --job.name=helloJob
+ *
+ * schema-db2.sql (배치 메타데이터 테이블 등)
  */
 @Configuration
 @Slf4j
