@@ -1,6 +1,6 @@
 package calculator;
 
-public class KrwCalculator implements ICalculaotr {
+public class KrwCalculator implements ICalculator {
     private int price = 1;
 
     @Override
