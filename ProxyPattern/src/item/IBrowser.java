@@ -1,4 +1,4 @@
-package item_cache;
+package item;
 
 public interface IBrowser {
     Html show();

@@ -1,4 +1,4 @@
-package item_cache;
+package item;
 
 public class Browser implements IBrowser {
     private String url;

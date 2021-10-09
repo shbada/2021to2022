@@ -1,7 +1,7 @@
-package item_cache.cache;
+package item.cache;
 
-import item_cache.Html;
-import item_cache.IBrowser;
+import item.Html;
+import item.IBrowser;
 
 public class BrowserProxy implements IBrowser {
     private String url;
