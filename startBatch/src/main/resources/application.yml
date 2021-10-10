@@ -1,18 +1,16 @@
 spring:
   batch:
     job:
-      names: ${job.name:NONE} # job names ? ??? (job.name ?? ??): job.name ????? ??? ?????. (?? ??????? ?? ??X)
-#    jdbc:
-#      initialize-schema: always # never ? ?? schema.sql ? schema-h2.sql ? ?? ???? ????? ??.
+      names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: always
 
-  # H2Database
-#  datasource:
-#    url: jdbc:h2:mem:test
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
-#  sql:
-#    init:
-#      schema-locations: classpath*:/schema.sql
-#      data-locations: classpath*:/data.sql
+  sql:
+    init:
+      data-locations: classpath*:/person.sql
