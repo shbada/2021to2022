@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 /* Equivalent to @Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode. */
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 public class UserData { // extends Object (자바의 모든 클래스는 Object 를 상속받은 클래스)
     @NonNull
