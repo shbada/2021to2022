@@ -10,6 +10,7 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ItemProcessor;
@@ -28,17 +29,17 @@ import java.util.stream.IntStream;
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-public class ChunkProcessingParamConfiguration {
+public class ChunkProcessingScopeConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job chunkProcessingParamJob() { /* Job : 배치 실행 단위 */
-        return jobBuilderFactory.get("chunkProcessingParamJob") /* 잡 이름 : helloWorld, 배치를 실행시키는 key */
+    public Job chunkProcessingScopeJob() { /* Job : 배치 실행 단위 */
+        return jobBuilderFactory.get("chunkProcessingScopeJob") /* 잡 이름 : helloWorld, 배치를 실행시키는 key */
                 .incrementer(new RunIdIncrementer()) /* 항상 잡이 실행될때마다 파라미터ID를 자동으로 생성해주는 클래스 */
-                .start(this.taskBaseParamStep())
-                //.next(this.chunkBaseStep())
-                .next(this.chunkBaseParamStep(null)) /** null 로 해줘도 정상적으로 해당 메서드의 파라미터를 받게된다 */
+                .start(this.taskBaseScopeStep())
+                //.next(this.chunkBaseScopeStep())
+                .next(this.chunkBaseScopeStep(null)) /** null 로 해줘도 정상적으로 해당 메서드의 파라미터를 받게된다 */
                 .build();
     }
 
@@ -47,20 +48,21 @@ public class ChunkProcessingParamConfiguration {
      * @return
      */
     @Bean
-    public Step taskBaseParamStep() { /* tasklet 기반 */
-        return stepBuilderFactory.get("taskBaseParamStep") /* 스텝 이름 */
-                .tasklet(this.ParamTasklet())
+    public Step taskBaseScopeStep() { /* tasklet 기반 */
+        return stepBuilderFactory.get("taskBaseScopeStep") /* 스텝 이름 */
+                /** 빈의 라이프사이클에 의해서 null 로 설정해도 스프링은 자동감지하여 ScopeTasklet 내부의 해당 파라미터를 value 변수에 할당한다 */
+                .tasklet(this.ScopeTasklet(null)) /* null */
                 .build();
     }
 
     /**
-     * chunkBaseParamStep 잡파라미터 추가
+     * chunkBaseScopeStep 잡파라미터 추가
      * @return
      */
     @Bean
-    @JobScope /** 추가 (.next(this.chunkBaseParamStep(null)) 를 했어도 파라미터를 받게된다) */
-    public Step chunkBaseParamStep(@Value("#{jobParameters[chunkSize]}") String chunkSize) {
-        return stepBuilderFactory.get("chunkBaseParamStep")
+    @JobScope /** 추가 (.next(this.chunkBaseScopeStep(null)) 를 했어도 파라미터를 받게된다) */
+    public Step chunkBaseScopeStep(@Value("#{jobParameters[chunkSize]}") String chunkSize) {
+        return stepBuilderFactory.get("chunkBaseScopeStep")
                 /* <INPUT, OUTPUT */
                 // .<String, String>chunk(10) /* 100 개의 데이터를 10개씩 나눠서 실행한다는 의미이다. (페이징 처리처럼) */
                 .<String, String>chunk(StringUtils.isNotEmpty(chunkSize) ? Integer.parseInt(chunkSize) : 10) /* 100 개의 데이터를 10개씩 나눠서 실행한다는 의미이다. (페이징 처리처럼) */
@@ -103,20 +105,21 @@ public class ChunkProcessingParamConfiguration {
      * Tasklet
      * @return
      */
-    private Tasklet ParamTasklet() {
+    @Bean /* private 선언할 수 없다 */
+    /* @StepScope 를 주석처리하면, jobParameters 를 찾을 수 없다는 에러가 발생한다.
+       jobParameters 객체에 접근하는 것은 StepScope 라이프사이클에 의해 가능하다라는걸 알 수 있다.
+     */
+    @StepScope /* StepScope 설정 : Scope 은 항상 빈이여야한다. */
+    public Tasklet ScopeTasklet(@Value("#{jobParameters[chunkSize]}") String value) {
         return (stepContribution, chunkContext) -> {
             List<String> items = getItems();
 
             /* tasklet 에서 chunk 처럼 코딩하기 */
             StepExecution stepExecution = stepContribution.getStepExecution();
-            JobParameters jobParameters = stepExecution.getJobParameters();
 
-            /** 파라미터로 받아오는 변수로 수정
-             *  1) jobParameters 로 받아오는 방법
-             *  실행: -chunkSize=10 --job.name=chunkProcessingScopeJob
-             */
-            String value = jobParameters.getString("chunkSize", "10");
-            // int chunkSize = 10;
+//            JobParameters jobParameters = stepExecution.getJobParameters();
+//            String value = jobParameters.getString("chunkSize", "10");
+
             int chunkSize = StringUtils.isNotEmpty(value) ? Integer.parseInt(value) : 10;
 
             int fromIndex = stepExecution.getReadCount(); /* chunk 에서 읽은 아이템 count */
