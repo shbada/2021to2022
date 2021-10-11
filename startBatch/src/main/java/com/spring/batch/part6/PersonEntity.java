@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PERSON")
+@Table(name = "PERSON") /** TODO 10/11 테이블 찾을 수 없다는 에러 발생, 해결중.... */
 @NoArgsConstructor /* 기본 생성자 */
 @Getter
 public class PersonEntity {
