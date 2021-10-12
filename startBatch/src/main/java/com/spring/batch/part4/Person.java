@@ -1,8 +1,12 @@
 package com.spring.batch.part4;
 
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
 
 @Getter
+@Setter
 public class Person {
     private int id;
     private String name;
@@ -14,5 +18,9 @@ public class Person {
         this.name = name;
         this.age = age;
         this.address = address;
+    }
+
+    public boolean isNotEmptyName() {
+        return Objects.nonNull(this.name) && !name.isEmpty();
     }
 }
