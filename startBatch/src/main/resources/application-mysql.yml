@@ -4,7 +4,10 @@ spring: # zone mysql 설정 (Active profiles)
       initialize-schema: never
   datasource:
     hikari:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/springbatch?characeterEncoding=UTF-8&serverTimezone=UTC
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/springbatch?characeterEncoding=UTF-8&serverTimezone=UTC&rewriteBatchStatements=true
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: springbatch
       password: springbatch
+  jpa:
+    hibernate:
+      ddl-auto: update # Person 테이블이 없을 경우 생성하고, 있으면 스키마를 업데이트
