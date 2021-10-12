@@ -26,43 +26,36 @@ import java.util.stream.IntStream;
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-public class ItemSkipConfiguration {
+public class ItemRetryConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job itemSkipJob() throws Exception {
-        return this.jobBuilderFactory.get("itemSkipJob")
+    public Job itemRetryJob() throws Exception {
+        return this.jobBuilderFactory.get("itemRetryJob")
                 .incrementer(new RunIdIncrementer())
-                .start(this.itemSkipStep())
+                .start(this.itemRetryStep())
                 /* Job 리스너 등록 (순서대로 실행) : part9 */
-                .listener(new SavePersonJobListener.SavePersonJobExecutionListener())
-                .listener(new SavePersonJobListener.SavePersonAnnotationJobExecutionListener())
+                //.listener(new SavePersonJobListener.SavePersonJobExecutionListener())
+                //.listener(new SavePersonJobListener.SavePersonAnnotationJobExecutionListener())
                 .build();
     }
 
     @Bean
-    public Step itemSkipStep() throws Exception {
-        return this.stepBuilderFactory.get("itemSkipStep")
+    public Step itemRetryStep() throws Exception {
+        return this.stepBuilderFactory.get("itemRetryStep")
                 .<Person, Person>chunk(10)
                 .reader(this.itemReader())
                 .processor(this.itemProcessor())
                 .writer(this.itemWriter())
                 /* Step 리스너 등록 (순서대로 실행) : part9 */
-                .listener(new SavePersonStepListener.SavePersonStepExecutionListener())
-                .listener(new SavePersonStepListener.SavePersonAnnotationStepExecutionListener())
-                .faultTolerant() /* 메소드를 호출시 예외처리할 수 있는 메서드를 선언할 수 있다 (skip 등) */
-                .skip(NotFoundNameException.class)
-                .skipLimit(3) /* 3번까지 NotFoundNameException 을 허용하겠다는 의미 */
-                /**
-                 * skipLimit(2) 일때 NotFoundNameException 가 3번 발생하면 실패.
-                 * 만약에 Name 이 비어져있는 데이터 3개가 맨 마지막에 있다고 가정하자.
-                 * 로그에는 에러 로그가 남고, 데이터는 정상적으로 3개가 저장된다. (chunk 가 10개씩이므로, 처음에 실행된 3개는 정상 저장되고,
-                 * 롤백되지 않아 남아있다. 그리고 에러를 발생시키는 데이터 3개는 저장되지 않았다.)
-                 * 그리고 BATCH_STEP_EXECUTION 테이블에 STEP 결과코드를 조회하면 FAILED 로 남게된다.
-                 * BATCH_JOB_EXECUTION 테이블에도 JOB 결과 코드가 FAILED 로 남게된다. (에러로그와 함께)
-                 */
+                //.listener(new SavePersonStepListener.SavePersonStepExecutionListener())
+                //.listener(new SavePersonStepListener.SavePersonAnnotationStepExecutionListener())
+//                .faultTolerant() /* 메소드를 호출시 예외처리할 수 있는 메서드를 선언할 수 있다 (skip, retry 등) */
+//                .retry(NotFoundNameException.class)
+//                .retryLimit(3)
+                /* 위 방법 사용 가능, ItemValidationRetryProcessor.java 방법으로 사용 가능 */
                 .build();
     }
 
@@ -78,19 +71,21 @@ public class ItemSkipConfiguration {
      * processor
      * @return
      */
-    private ItemProcessor<? super Person,? extends Person> itemProcessor() {
-        // 만약 2개의 프로세서를 묶어야한다면
-//        CompositeItemProcessor<Person, Person> itemProcessor = new CompositeItemProcessorBuilder<Person, Person>()
-//                .delegates(new ItemValidationRetryProcessor(), validationProcessor)
-//                .build();
-
-        return item -> {
+    private ItemProcessor<? super Person,? extends Person> itemProcessor() throws Exception {
+        ItemProcessor<Person, Person> validationProcessor = item -> {
             if (item.isNotEmptyName()) {
                 return item;
             }
 
             throw new NotFoundNameException();
         };
+
+        CompositeItemProcessor<Person, Person> itemProcessor = new CompositeItemProcessorBuilder<Person, Person>()
+                .delegates(new ItemValidationRetryProcessor(), validationProcessor)
+                .build();
+
+        itemProcessor.afterPropertiesSet();
+        return itemProcessor;
     }
 
     /**
@@ -115,6 +110,7 @@ public class ItemSkipConfiguration {
                 })
                 .collect(Collectors.toList());
 
+        log.info(String.valueOf(items));
         return items;
     }
 }
