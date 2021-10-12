@@ -55,7 +55,9 @@ public class ItemSkipConfiguration {
                 .skipLimit(3) /* 3번까지 NotFoundNameException 을 허용하겠다는 의미 */
                 /**
                  * skipLimit(2) 일때 NotFoundNameException 가 3번 발생하면 실패.
-                 * 로그에는 에러 로그가 남고, 데이터는 정상적으로 3개가 저장된다.
+                 * 만약에 Name 이 비어져있는 데이터 3개가 맨 마지막에 있다고 가정하자.
+                 * 로그에는 에러 로그가 남고, 데이터는 정상적으로 3개가 저장된다. (chunk 가 10개씩이므로, 처음에 실행된 3개는 정상 저장되고,
+                 * 롤백되지 않아 남아있다. 그리고 에러를 발생시키는 데이터 3개는 저장되지 않았다.)
                  * 그리고 BATCH_STEP_EXECUTION 테이블에 STEP 결과코드를 조회하면 FAILED 로 남게된다.
                  * BATCH_JOB_EXECUTION 테이블에도 JOB 결과 코드가 FAILED 로 남게된다. (에러로그와 함께)
                  */
