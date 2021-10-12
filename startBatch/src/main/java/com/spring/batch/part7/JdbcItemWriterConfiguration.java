@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-public class jdbcItemWriterConfiguration {
+public class JdbcItemWriterConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;

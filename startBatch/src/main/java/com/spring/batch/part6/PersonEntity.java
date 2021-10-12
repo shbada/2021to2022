@@ -19,7 +19,7 @@ public class PersonEntity {
     private String address;
 
     public PersonEntity(String name, String age, String address) {
-        this(0, name, age, address);
+        this(0, name, age, address); // 0이여도 JPA 에 의해 자동증가로 설정됨
     }
 
     public PersonEntity(int id, String name, String age, String address) {
