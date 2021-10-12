@@ -2,6 +2,8 @@ package com.spring.batch.part8;
 
 import com.spring.batch.part4.CustomItemReader;
 import com.spring.batch.part4.Person;
+import com.spring.batch.part9.SavePersonJobListener;
+import com.spring.batch.part9.SavePersonStepListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -12,13 +14,8 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +34,9 @@ public class ItemProcessorConfiguration {
         return this.jobBuilderFactory.get("itemProcessorJob")
                 .incrementer(new RunIdIncrementer())
                 .start(this.itemProcessorStep())
+                /* Job 리스너 등록 (순서대로 실행) : part9 */
+                .listener(new SavePersonJobListener.SavePersonJobExecutionListener())
+                .listener(new SavePersonJobListener.SavePersonAnnotationJobExecutionListener())
                 .build();
     }
 
@@ -47,6 +47,9 @@ public class ItemProcessorConfiguration {
                 .reader(this.itemReader())
                 .processor(this.itemProcessor())
                 .writer(this.itemWriter())
+                /* Step 리스너 등록 (순서대로 실행) : part9 */
+                .listener(new SavePersonStepListener.SavePersonStepExecutionListener())
+                .listener(new SavePersonStepListener.SavePersonAnnotationStepExecutionListener())
                 .build();
     }
 
