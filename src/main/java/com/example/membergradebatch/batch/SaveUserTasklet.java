@@ -3,6 +3,7 @@ package com.example.membergradebatch.batch;
 import com.example.membergradebatch.entity.User;
 import com.example.membergradebatch.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -17,6 +18,7 @@ import java.util.stream.IntStream;
  * 유저를 저장하기위한 Tasklet
  */
 @RequiredArgsConstructor
+@Slf4j
 public class SaveUserTasklet implements Tasklet {
     private final UserRepository userRepository;
 
@@ -30,6 +32,10 @@ public class SaveUserTasklet implements Tasklet {
         return RepeatStatus.FINISHED;
     }
 
+    /**
+     * 유저 생성
+     * @return
+     */
     private List<User> createUsers() {
         List<User> userList = new ArrayList<>();
 
@@ -48,11 +54,12 @@ public class SaveUserTasklet implements Tasklet {
                 .username("test username" + i)
                 .build()));
 
-        IntStream.range(200, 400).forEach(i -> userList.add(User.builder()
+        IntStream.range(300, 400).forEach(i -> userList.add(User.builder()
                 .totalAmount(500_000)
                 .username("test username" + i)
                 .build()));
 
+        log.info("createUsers size : " + userList.size());
         return userList;
     }
 }
