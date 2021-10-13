@@ -1,4 +1,4 @@
-package item1;
+package item01_innerClass;
 
 class OutClass2 {
     private int num = 10;
