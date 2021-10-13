@@ -8,8 +8,9 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data /* @NoArgsConstructor 기본 생성자 (인자없는 생성자) 포함 : JPA 에서는 반드시 필요하다. */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class User {

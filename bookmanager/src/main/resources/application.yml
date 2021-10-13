@@ -2,7 +2,12 @@ spring:
   h2:
     console:
       enabled: true # http://localhost:8080/h2-console
-      # console ? ??? jdbc:h2:mem:03c9aa4f-531e-488e-b1fa-58ed06cc2e5f
+
+  jpa:
+    show-sql: true # query 출력
+    properties:
+      hibernate:
+        format_sql: true # query format
 
 server:
-  port: 8070 # ?? ??
+  port: 8070
