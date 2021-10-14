@@ -3,7 +3,7 @@ package com.java.effective.item15;
 import java.lang.reflect.Array;
 
 /**
- * https://devfunny.tistory.com/525
+ * https://devfunny.tistory.com/541
  */
 public class Main {
     public static void main(String[] args) {
