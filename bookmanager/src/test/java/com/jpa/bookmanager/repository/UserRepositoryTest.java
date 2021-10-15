@@ -37,6 +37,21 @@ class UserRepositoryTest {
     }
 
     @Test
+    void update() {
+        // insert query
+        userRepository.save(new User("david", "david@test.com"));
+
+        // select query
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("martin-update@test.com");
+
+        // select-update
+        userRepository.save(user);
+
+        /** SimpleJpaRepository */
+    }
+
+    @Test
     void crud_example() {
         /* query by example (Entity 를 Example 로 만들고, matcher 과 함께하여 쿼리를 만들기 */
         ExampleMatcher matcher = ExampleMatcher.matching()
