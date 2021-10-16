@@ -34,8 +34,53 @@ class UserRepositoryTest {
 
             userRepository.save(user);
         }
+
+        User user = new User();
+        user.setEmail("seohaea" + "@naver.com");
+        user.setName("test1");
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
     }
 
+    /**
+     * select method 확인하기
+     */
+    @Test
+    void selectMethod() {
+        /* 모두 동일한 쿼리, 동일한 결과 */
+        System.out.println("findByEmail : " + userRepository.findByEmail("seohae1@naver.com"));
+        System.out.println("getByEmail : " + userRepository.getByEmail("seohae1@naver.com"));
+        System.out.println("readByEmail : " + userRepository.readByEmail("seohae1@naver.com"));
+        System.out.println("queryByEmail : " + userRepository.queryByEmail("seohae1@naver.com"));
+        System.out.println("searchByEmail : " + userRepository.searchByEmail("seohae1@naver.com"));
+        System.out.println("streamByEmail : " + userRepository.streamByEmail("seohae1@naver.com"));
+        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("seohae1@naver.com"));
+        System.out.println("findSomeThingByEmail : " + userRepository.findSomeThingByEmail("seohae1@naver.com"));
+        // System.out.println("findByByName : " + userRepository.findByByName("seohae1@naver.com")); // RuntimeError
+
+        /* limit keyword (1) */
+        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("test1"));
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("test1"));
+
+
+        /* limit 은 없음 (Last1 은 인식되지 않으므로 쿼리 동작에 limit 이 없다) */
+        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("test1"));
+    }
+
+    /**
+     * name 을 파라미터로 조회
+     */
+    @Test
+    void select() {
+        System.out.println(userRepository.findByName("test1"));
+        System.out.println(userRepository.findOptionalByName("test1"));
+    }
+
+    /**
+     * update
+     */
     @Test
     void update() {
         // insert query
@@ -51,6 +96,9 @@ class UserRepositoryTest {
         /** SimpleJpaRepository */
     }
 
+    /**
+     * ExampleMatcher 활용해보기
+기    */
     @Test
     void crud_example() {
         /* query by example (Entity 를 Example 로 만들고, matcher 과 함께하여 쿼리를 만들기 */
@@ -75,6 +123,9 @@ class UserRepositoryTest {
         userRepository.findAll(example1).forEach(System.out::println);
     }
 
+    /**
+     * 리스트 페이징
+     */
     @Test
     void crud_paging() {
         // limit ? offset ?
@@ -94,6 +145,9 @@ class UserRepositoryTest {
         users.getContent().forEach(System.out::println);
     }
 
+    /**
+     * deleteInBatch, deleteAllInBatch
+     */
     @Test
     void crud_deleteBatch() {
         /* select 없이 delete 는 한번만 실행되고 where 에 or 절로 id 매핑 */
@@ -104,6 +158,9 @@ class UserRepositoryTest {
         userRepository.findAll().forEach(System.out::println);
     }
 
+    /**
+     * deleteAll
+     */
     @Test
     void crud_deleteAll() {
         // userRepository.deleteAll(); // select-delete
@@ -111,6 +168,9 @@ class UserRepositoryTest {
         userRepository.findAll().forEach(System.out::println);
     }
 
+    /**
+     * delete
+     */
     @Test
     void delete() {
         /* select (findById) -> delete */
@@ -124,6 +184,9 @@ class UserRepositoryTest {
     }
 
 
+    /**
+     * existsById
+     */
     @Test
     void crud_exist() {
         /* count(*) 쿼리가 실행됨 */
@@ -131,6 +194,9 @@ class UserRepositoryTest {
         System.out.println("exist : " + exist );
     }
 
+    /**
+     * get count
+     */
     @Test
     void crud_count() {
         long count= userRepository.count();
@@ -138,6 +204,9 @@ class UserRepositoryTest {
         System.out.println("count : " + count);
     }
 
+    /**
+     * flush
+     */
     @Test
     void crud_flush() {
 //        userRepository.save(new User("test", "sss@naver.com"));
@@ -151,6 +220,9 @@ class UserRepositoryTest {
         userRepository.findAll().forEach(System.out::println);
     }
 
+    /**
+     * findOne
+     */
     @Test
     @Transactional // could not initialize proxy 에러 해결
     void crud_user_데이터등록_조회_findOne() { // create, read, update, delete
@@ -160,6 +232,9 @@ class UserRepositoryTest {
         System.out.println(user);
     }
 
+    /**
+     * findById
+     */
     @Test
     void crud_user_데이터등록_조회_findId() { // create, read, update, delete
         // Optional
@@ -171,6 +246,9 @@ class UserRepositoryTest {
         System.out.println(user);
     }
 
+    /**
+     * saveAll, findAll
+     */
     @Test
     void crud_user_데이터등록_조회() { // create, read, update, delete
         User user1 = new User("jack", "jack@test.com");
@@ -184,6 +262,9 @@ class UserRepositoryTest {
         users.forEach(System.out::println);
     }
 
+    /**
+     * findAllById
+     */
     @Test
     void crud_user_리스트조회() { // create, read, update, delete
         /** list 조회 */
@@ -197,6 +278,9 @@ class UserRepositoryTest {
         users.forEach(System.out::println);
     }
 
+    /**
+     * save, findAll
+     */
     @Test
     void crud() { // create, read, update, delete
         /* 저장 */
