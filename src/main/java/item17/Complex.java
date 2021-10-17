@@ -3,6 +3,9 @@ package item17;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * https://devfunny.tistory.com/543
+ */
 @EqualsAndHashCode
 @ToString
 public class Complex {
