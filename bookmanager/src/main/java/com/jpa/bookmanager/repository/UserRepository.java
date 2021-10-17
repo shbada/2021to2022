@@ -3,6 +3,7 @@ package com.jpa.bookmanager.repository;
 import com.jpa.bookmanager.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,4 +50,26 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // User findLast1ByName(String name); // query did not return a unique result: 2
     /* limit 은 없음 (Last1 은 인식되지 않으므로 쿼리 동작에 limit 이 없다) */
     List<User> findLast1ByName(String name);
+
+    /* WHERE AND */
+    List<User> findByEmailAndName(String email, String name);
+    /* WHERE OR */
+    List<User> findByEmailOrName(String email, String name);
+
+    /* TIME After, Before */
+    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
+    List<User> findByCreatedAtBefore(LocalDateTime yesterday);
+
+    List<User> findByIdAfter(long id);
+
+    /* 위 findByCreatedAtAfter 와 동일 (created_at>?) */
+    List<User> findByCreatedAtGreaterThan(LocalDateTime yesterday);
+    List<User> findByCreatedAtGreaterThanEqual(LocalDateTime yesterday);
+
+    /* between */
+    List<User> findByCreatedAtBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<User> findByIdBetween(long startId, long endId);
+
+    // = between (id>=? AND id<=?) : findByIdBetween 와 동일하게 구현됨
+    List<User> findByIdGreaterThanEqualAndIdLessThanEqual(Long id1, Long id2);
 }

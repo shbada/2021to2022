@@ -23,6 +23,9 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 테스트 데이터 삽입
+     */
     @BeforeEach
     void insertTestData() {
         for (int i = 1; i < 6; i++) {
@@ -42,6 +45,59 @@ class UserRepositoryTest {
         user.setUpdatedAt(LocalDateTime.now());
 
         userRepository.save(user);
+    }
+
+    /**
+     * findByCreatedAtBetween : created_at between ? and ?
+     * findByIdBetween : id between ? and ? (양 끝의 조건도 포함, 그러므로 1L, 3L 이면 1~3)
+     */
+    @Test
+    void between() {
+        System.out.println("findByCreatedAtBetween : " +
+                userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L)));
+
+        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
+
+        // = between (id>=? AND id<=?)
+        System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L, 3L));
+    }
+
+    /**
+     * findByCreatedAtGreaterThan : 아래 findByCreatedAtAfter 와 동일 (created_at>?)
+     * findByCreatedAtGreaterThanEqual : created_at>=?
+     */
+    @Test
+    void greaterThan() {
+        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+    }
+
+    /**
+     * ID long 4 이상인 데이터 조회 (findByIdAfter) : id>?
+     */
+    @Test
+    void idAfter() {
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
+    }
+
+    /**
+     * findByAAfter : A 시간의 After (created_at>?)
+     * findByABefore :  A 시간의 Before
+     */
+    @Test
+    void timeAfterBefore() {
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtBefore : " + userRepository.findByCreatedAtBefore(LocalDateTime.now().minusDays(1L)));
+    }
+
+    /**
+     * findByAAndB : A AND B (WHERE AND 절)
+     * findByAOrB : A OR B (WHERE OR절)
+     */
+    @Test
+    void findByWhere() {
+        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("seohae1@naver.com", "test1"));
+        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("seohae1@naver.com", "test2"));
     }
 
     /**
