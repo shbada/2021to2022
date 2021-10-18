@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /* <User, Long> : <Entity 타입, User 의 PK 타입> */
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -29,6 +30,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     /* name 을 파라미터로 조회하는 메서드 */
     List<User> findByName(String name);
+    Set<User> findUserByNameIs(String name);
+    Set<User> findUserByName(String name);
+    Set<User> findUserByNameEquals(String name);
+
     Optional<User> findOptionalByName(String name);
 
     /* select : 모두 동일한 쿼리, 동일한 결과 */
@@ -72,4 +77,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // = between (id>=? AND id<=?) : findByIdBetween 와 동일하게 구현됨
     List<User> findByIdGreaterThanEqualAndIdLessThanEqual(Long id1, Long id2);
+
+    /* ID 가 NULL 이 아닌 데이터 조회 */
+    List<User> findByIdIsNotNull(); // id is not null
+    // name is not null and name != '' 가 아님!!! 오해하지말자.
+    // List<User> findByAddressIsNotEmpty(); // Collection type 의 not empty 를 체크함
+
+    // in */
+    List<User> findByNameIn(List<String> names);
+    /* like */
+    List<User> findByNameStartingWith(String name);
+    List<User> findByNameEndingWith(String name);
+    List<User> findByNameContains(String name);
+    List<User> findByNameLike(String name);
 }

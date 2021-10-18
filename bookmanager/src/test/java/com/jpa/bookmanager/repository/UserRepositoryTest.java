@@ -48,6 +48,51 @@ class UserRepositoryTest {
     }
 
     /**
+     * 메소드명 가독성
+     */
+    @Test
+    void findUserBy() {
+        System.out.println("findUserByNameIs : " + userRepository.findUserByNameIs("test1"));
+        System.out.println("findUserByName : " + userRepository.findUserByName("test1"));
+        System.out.println("findUserByNameEquals : " + userRepository.findUserByNameEquals("test1"));
+    }
+
+    /**
+     * Like
+     */
+    @Test
+    void like() {
+        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("test1"));
+        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("test"));
+        // like ? escape ?
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("test"));
+
+        // % 추가 (like ? escape ?)
+        System.out.println("findByNameLike : " + userRepository.findByNameLike("%test%"));
+    }
+
+    /**
+     * In절
+     */
+    @Test
+    void in() {
+        System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("test1", "test2")));
+    }
+
+    /**
+     * NULL 관련된 메서드 테스트
+     */
+    @Test
+    void nullCheck() {
+        // id is not null
+        System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());
+
+        // Collection type 의 not empty 를 체크함 (where~exist)
+        // System.out.println("findByAddressIsNotEmpty : " + userRepository.findByAddressIsNotEmpty());
+        //System.out.println("findByIdIsNotEmpty : " + userRepository.findByIdIsNotEmpty());
+    }
+
+    /**
      * findByCreatedAtBetween : created_at between ? and ?
      * findByIdBetween : id between ? and ? (양 끝의 조건도 포함, 그러므로 1L, 3L 이면 1~3)
      */

@@ -2,10 +2,9 @@ package com.jpa.bookmanager.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data /* @NoArgsConstructor 기본 생성자 (인자없는 생성자) 포함 : JPA 에서는 반드시 필요하다. */
 @RequiredArgsConstructor
@@ -26,4 +25,7 @@ public class User {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Address> address;
 }
