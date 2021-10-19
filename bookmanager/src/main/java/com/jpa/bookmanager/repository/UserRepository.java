@@ -1,6 +1,9 @@
 package com.jpa.bookmanager.repository;
 
 import com.jpa.bookmanager.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -90,4 +93,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByNameEndingWith(String name);
     List<User> findByNameContains(String name);
     List<User> findByNameLike(String name);
+
+    /* limit, order */
+    List<User> findTopByNameOrderByIdDesc(String name); // TopN 중 N을 생략하면 1이 default 값이다
+    List<User> findTop1ByNameOrderByIdDesc(String name); // 역순
+    List<User> findTop1ByNameOrderByIdAsc(String name); // 정순
+    List<User> findFirstByNameOrderByIdDescEmailAsc(String name); // id desc, email asc
+    /* 정렬 조건을 Sort domain 으로 받는다 */
+    List<User> findFirstByName(String name, Sort sort);
+
+    /* paging */
+    Page<User> findByName(String name, Pageable pageable);
 }

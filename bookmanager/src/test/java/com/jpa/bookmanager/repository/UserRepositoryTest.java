@@ -48,6 +48,49 @@ class UserRepositoryTest {
     }
 
     /**
+     * 페이징 처리
+     */
+    @Test
+    void paging() {
+        System.out.println("findByName : " + userRepository.findByName("test1"
+                , PageRequest.of(0, 1, Sort.by(Sort.Order.desc("id")))));
+        // getContent
+        System.out.println("findByName : " + userRepository.findByName("test1"
+                , PageRequest.of(0, 1, Sort.by(Sort.Order.desc("id")))).getContent());
+    }
+
+    /**
+     * 정렬
+     */
+    @Test
+    void orderBy() {
+        // TopN 중 N을 생략하면 1이 default 값이다
+        System.out.println("findTopByNameOrderByIdDesc : " + userRepository.findTopByNameOrderByIdDesc("test1"));
+        // 역순
+        System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("test1"));
+        // 정순
+        System.out.println("findTop1ByNameOrderByIdAsc : " + userRepository.findTop1ByNameOrderByIdAsc("test1"));
+        // id desc, email asc
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("test1"));
+
+        // sort param (Sort.by(Sort.Order.desc("id"))안에는 컬럼명)
+        System.out.println("findFirstByName With Sort Params : " + userRepository.findFirstByName("test1", Sort.by(Sort.Order.desc("id"))));
+        System.out.println("findFirstByName With Sort Params : " + userRepository.findFirstByName("test1", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+        // getSort() 호출
+        System.out.println("findFirstByName With Sort Params : " + userRepository.findFirstByName("test1", getSort()));
+    }
+
+    /* 가독성 */
+    private Sort getSort() {
+        return Sort.by(
+                Sort.Order.desc("id"),
+                Sort.Order.asc("email"),
+                Sort.Order.desc("createdAt"),
+                Sort.Order.desc("updatedAt")
+        );
+    }
+
+    /**
      * 메소드명 가독성
      */
     @Test
