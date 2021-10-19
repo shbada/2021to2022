@@ -36,6 +36,30 @@ public class MemberTreeSetTest {
         set.add("Lee");
 
         System.out.println(set);
+
+        /* 익명함수 */
+        TreeSet<String> set2 = new TreeSet<String>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2) * (-1); // 내림차순
+            }
+        });
+
+        set2.add("AAA");
+        set2.add("CCC");
+        set2.add("BBB");
+        System.out.println(set2);
+
+        /* 람다 */
+        TreeSet<String> set3 = new TreeSet<String>((String o1, String o2) -> {
+            return o1.compareTo(o2) * (-1);
+        });
+
+        set3.add("AAA");
+        set3.add("CCC");
+        set3.add("BBB");
+
+        System.out.println(set3);
     }
 }
 
