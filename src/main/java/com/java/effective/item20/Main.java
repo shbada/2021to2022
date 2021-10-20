@@ -4,6 +4,9 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * https://devfunny.tistory.com/551
+ */
 public class Main {
     public static void main(String[] args) {
         TestSub testSub = new TestSub();
