@@ -37,23 +37,36 @@ public class UserConfiguration {
     @Bean
     public Job userJob() throws Exception {
         return this.jobBuilderFactory.get("userJob")
-                .incrementer(new RunIdIncrementer())
+                .incrementer(new RunIdIncrementer()) // Batch parameter increment
+                /* 실행할 스텝 지정 */
                 .start(this.userStep())
                 .next(this.userLevelUpStep())
+                /* 실행할 리스너 지정 */
                 .listener(new LevelUpJobExecutionListener(userRepository))
                 .build();
     }
 
+    /**
+     * Tasklet Step
+     * @return
+     */
     @Bean
     public Step userStep() {
         return this.stepBuilderFactory.get("userStep")
                 /* user Data 400 개 생성 */
+                /* Step 의 구성방법 1. Tasklet 사용 */
                 .tasklet(new SaveUserTasklet(userRepository))
                 .build();
     }
 
+    /**
+     * Chunk Step
+     * @return
+     * @throws Exception
+     */
     @Bean
     public Step userLevelUpStep() throws Exception {
+        /* Step 의 구성 방법 2. Chunk (reader-processor-writer) */
         return this.stepBuilderFactory.get("userLevelUpStep")
                 .<User, User>chunk(100)
                 .reader(this.itemReader())
@@ -62,16 +75,24 @@ public class UserConfiguration {
                 .build();
     }
 
+    /**
+     * ItemWriter
+     * @return
+     */
     private ItemWriter<? super User> itemWriter() {
         return users -> {
             users.forEach(x -> {
-                x.levelUp();
+                x.levelUp(); // 레벨업 실행
                 userRepository.save(x);
                 log.info("id: " + x.getId());
             });
         };
     }
 
+    /**
+     * ItemProcessor
+     * @return
+     */
     private ItemProcessor<? super User,? extends User> itemProcessor() {
         /* 등급 상향 유저 대상 추출 */
         return user -> {
@@ -84,11 +105,16 @@ public class UserConfiguration {
         };
     }
 
+    /**
+     * ItemReader
+     * @return
+     * @throws Exception
+     */
     private ItemReader<? extends User> itemReader() throws Exception {
         /* JpaPagingItemReaderBuilder */
         JpaPagingItemReader<User> itemReader = new JpaPagingItemReaderBuilder<User>()
                 .queryString("select u from User u")
-                .entityManagerFactory(entityManagerFactory)
+                .entityManagerFactory(entityManagerFactory) // JPA 사용시
                 .pageSize(100) /* 정크 사이즈와 동일하게 보통 설정함. */
                 .name("userItemReader")
                 .build();
