@@ -25,6 +25,86 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     /**
+     * 테스트 데이터 삽입
+     */
+    @BeforeEach
+    void insertTestData() {
+        for (int i = 1; i < 6; i++) {
+            User user = new User();
+            user.setEmail("seohae" + i + "@naver.com");
+            user.setName("test" + i);
+            user.setCreatedAt(LocalDateTime.now());
+            user.setUpdatedAt(LocalDateTime.now());
+
+            userRepository.save(user);
+        }
+
+        User user = new User();
+        user.setEmail("seohaea" + "@naver.com");
+        user.setName("test1");
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+    }
+
+    @Test
+    void listenerTest() {
+        User user = new User();
+        user.setEmail("test01@test.com");
+        user.setName("martin");
+
+        // prePersist
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        user2.setName("marttttttin");
+
+        // preUpdate
+        userRepository.save(user2);
+
+        // preRemove
+        userRepository.deleteById(4L);
+        // postRemove
+    }
+
+    /**
+        User.java > @PreUpdate test
+     */
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is : " + user);
+
+        user.setName("update");
+        userRepository.save(user);
+
+        // updatedAt 이 변경됨
+        System.out.println("to-be : " + userRepository.findAll().get(0));
+    }
+
+    /**
+     * User.java > @PrePersist test
+     */
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setEmail("test000@test.com");
+        user.setName("teeeeeest");
+
+        // date 타입을 굳이 직접 set 해줄 필요가 없다. 또는 실수로 넣지 않았을 경우 데이터의 정확성이 문제가 발생한다.
+        // 주석처리 -> User.java 에 @prePersist 추가
+        // user.setCreatedAt(LocalDateTime.now());
+        //.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("test000@test.com"));
+    }
+
+    /**
      * enum
      */
     @Test
@@ -55,30 +135,6 @@ class UserRepositoryTest {
         user2.setName("marrrrtin");
 
         userRepository.save(user2);
-    }
-
-    /**
-     * 테스트 데이터 삽입
-     */
-    @BeforeEach
-    void insertTestData() {
-        for (int i = 1; i < 6; i++) {
-            User user = new User();
-            user.setEmail("seohae" + i + "@naver.com");
-            user.setName("test" + i);
-            user.setCreatedAt(LocalDateTime.now());
-            user.setUpdatedAt(LocalDateTime.now());
-
-            userRepository.save(user);
-        }
-
-        User user = new User();
-        user.setEmail("seohaea" + "@naver.com");
-        user.setName("test1");
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-
-        userRepository.save(user);
     }
 
     /**

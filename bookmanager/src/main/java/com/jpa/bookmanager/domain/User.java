@@ -12,13 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+//@EntityListeners(value = MyEntityListener.class)
 /** create index, alter table user add constraint : 주의점) 해당 인덱스, 제약사항이 실제로 DB에 적용된 것과 다를 수 있다.
  * JPA Entity 를 활용해서 (ddl) 이렇게 생성하면 적용이 직접 되지만,
  * select/update.delete 에서는, 실제 DB에 인덱스가 적용되어있지 않은데 JPA 에 인덱스 설정이 있다고 해서, 인덱스 관련 쿼리가 동작하진 않음
  * DB 설정을 하고 이렇게 JPA 설정을 하진 않음 (보통)
  * (UniqueConstraint : 복합컬럼, 단일컬럼은 @Column(unique=true) 사용
  * */
-@Table(name = "user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+// @Table(name = "user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 // @Table(name = "user_legacy") /** Entity 이름을 지정 가능 (일반적으로 클래스명으로 자동 설정) */
 public class User { // table name : user
     @Id /** Entity 를 식별해주는 PK 를 지정한다 */
@@ -53,4 +54,59 @@ public class User { // table name : user
 
     @Enumerated(value = EnumType.STRING) /** 필수 */
     private Gender gender;
+
+    /** entity listener : @EntityListeners(value = MyEntityListener.class) */
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+//    @PrePersist
+//    public void prePersist() {
+//        System.out.println(">>>>> prePersist");
+//    }
+//
+//    @PostPersist
+//    public void postPersist() {
+//        System.out.println(">>>>> postPersist");
+//    }
+//
+//    @PreUpdate
+//    public void preUpdate() {
+//        System.out.println(">>>>> preUpdate");
+//    }
+//
+//    @PostUpdate
+//    public void postUpdate() {
+//        System.out.println(">>>>> postUpdate");
+//    }
+//
+//    @PreRemove
+//    public void preRemove() {
+//        System.out.println(">>>>> preRemove");
+//    }
+//
+//    @PostRemove
+//    public void postRemove() {
+//        System.out.println(">>>>> postRemove");
+//    }
+//
+//    @PostLoad
+//    public void postLoad() {
+//        System.out.println(">>>>> postLoad");
+//    }
+
+//    @PrePersist // insert 가 호출되기 전에 호출되는 메서드
+//    @PreUpdate
+//    @PreRemove
+//    @PostPersist // insert 가 호출된 이후 호출되는 메서드
+//    @PostUpdate
+//    @PostRemove
+//    @PostLoad
 }
