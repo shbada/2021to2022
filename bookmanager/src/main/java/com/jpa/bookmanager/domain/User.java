@@ -1,6 +1,9 @@
 package com.jpa.bookmanager.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-//@EntityListeners(value = MyEntityListener.class)
+//@EntityListeners(value = {MyEntityListener.class, UserEntityListener.class})
+/** AuditingEntityListener : 자동 Listener (JPA 에서 제공) */
+@EntityListeners(value = {AuditingEntityListener.class, UserEntityListener.class})
 /** create index, alter table user add constraint : 주의점) 해당 인덱스, 제약사항이 실제로 DB에 적용된 것과 다를 수 있다.
  * JPA Entity 를 활용해서 (ddl) 이렇게 생성하면 적용이 직접 되지만,
  * select/update.delete 에서는, 실제 DB에 인덱스가 적용되어있지 않은데 JPA 에 인덱스 설정이 있다고 해서, 인덱스 관련 쿼리가 동작하진 않음
@@ -41,9 +46,11 @@ public class User { // table name : user
 
     //  @Column(name = "crtdat", nullable = false) /** 컬럼 네이밍 지정 (없으면 필드명), null 가능 여부 지정(not null, null) */
     @Column(updatable = false) // update 되지 않음
+    @CreatedDate /* AuditingEntityListener */
     private LocalDateTime createdAt;
 
     // @Column(insertable = false) // insert 되지 않음
+    @LastModifiedDate /* AuditingEntityListener */
     private LocalDateTime updatedAt;
 
 //    @OneToMany(fetch = FetchType.EAGER)
@@ -56,16 +63,16 @@ public class User { // table name : user
     private Gender gender;
 
     /** entity listener : @EntityListeners(value = MyEntityListener.class) */
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+//    @PrePersist
+//    public void prePersist() {
+//        this.createdAt = LocalDateTime.now();
+//        this.updatedAt = LocalDateTime.now();
+//    }
+//
+//    @PreUpdate
+//    public void preUpdate() {
+//        this.updatedAt = LocalDateTime.now();
+//    }
 
 //    @PrePersist
 //    public void prePersist() {

@@ -2,6 +2,7 @@ package com.jpa.bookmanager.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Data
-@EntityListeners(value = MyEntityListener.class)
+// @EntityListeners(value = MyEntityListener.class)
+@EntityListeners(value = AuditingEntityListener.class)
 public class Book implements Auditable {
     @Id
     @GeneratedValue
