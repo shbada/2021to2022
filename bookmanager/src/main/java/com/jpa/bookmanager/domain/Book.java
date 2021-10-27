@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 // @EntityListeners(value = AuditingEntityListener.class)
 public class Book extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

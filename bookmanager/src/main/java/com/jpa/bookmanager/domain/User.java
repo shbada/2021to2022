@@ -37,7 +37,8 @@ public class User extends BaseEntity { // table name : user
      * 3) IDENTITY : Mysql, Maria DB 사용시 (auto increment 값, 트랜잭션 동작 전에 값 설정)
      * 4) AUTO : default. (값 DB에 적합한 값을 자동으로 넘겨줌: DB 의존성 없음)
      */
-    @GeneratedValue /** 자동으로 증가하는 값 (직접 쓰겠다는게 아닌, 생성된 값을 사용하겠다는 의미) */
+    // @GeneratedValue /** 자동으로 증가하는 값 (직접 쓰겠다는게 아닌, 생성된 값을 사용하겠다는 의미) */
+    @GeneratedValue(strategy = GenerationType.IDENTITY) /** mysql, mariadb 의 기본 전략이 IDENTITY 이고 id 를 AUTO INCREMENT 하겠다는 의미 */
     private Long id;
 
     @NonNull
