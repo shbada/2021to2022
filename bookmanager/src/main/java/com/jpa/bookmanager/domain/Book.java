@@ -32,6 +32,12 @@ public class Book extends BaseEntity {
 
     private Long publisherId;
 
+    /* mappedBy 사용하여 아래는 주석처리 */
+    //@OneToOne /* 1:1 연관관계 매핑 -> book 테이블에 book_review_info_id 컬럼이 생겼음 */
+    @OneToOne(mappedBy = "book") /* 1:1 연관관계 매핑 -> mappedBy : book 에 FK를 두지않겠다 */
+    @ToString.Exclude // ToString 순환참조 발생하므로 추가
+    private BookReviewInfo bookReviewInfo;
+
 //    @CreatedDate
 //    private LocalDateTime createdAt;
 //
