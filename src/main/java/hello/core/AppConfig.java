@@ -2,6 +2,7 @@ package hello.core;
 
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
@@ -35,7 +36,15 @@ public class AppConfig {
         return new MemoryMemberRepository();
     }
 
+    /**
+     * 할인 정책 변경 FixDiscountPolicy -> RateDiscountPolicy (AppConfig.java 만 변경 발생)
+     * 구성 영역은 당연히 변경된다. 구성 역할을 담당하는 AppConfig.java 가 변경 발생한다.
+     * OrderServiceImpl, MemberServiceImpl 의 수정은 없다 (DIP, OCP:확장엔 열려있고, 수정엔 닫혀있다.; 만족)
+     * @return
+     */
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+        /* 변경요건) RateDiscountPolicy() 로 변경 */
+        // return new FixDiscountPolicy();
+        return new RateDiscountPolicy(); //  이 코드만 변경하면 적용된다.
     }
 }
