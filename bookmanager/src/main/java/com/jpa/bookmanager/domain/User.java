@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data /* @NoArgsConstructor 기본 생성자 (인자없는 생성자) 포함 : JPA 에서는 반드시 필요하다. */
 @ToString(callSuper = true)
@@ -65,6 +67,22 @@ public class User extends BaseEntity { // table name : user
 
     @Enumerated(value = EnumType.STRING) /** 필수 */
     private Gender gender;
+
+    /**
+     * 1 : N 관계
+     */
+    @OneToMany(fetch = FetchType.EAGER)
+    // JPA persist 전에 null 이므로 Null 에러 발생 방지
+    // (JPA에서는 해당 값을 조회할때 값이 존재하지않으면 빈 리스트를 넣어주게되지만,JPA persist 일때 문제가되는것)
+    /*
+    create table user_user_history_list (
+       user_id bigint not null,
+        user_history_list_id bigint not null
+    ) -> join 컬럼 지정 후 제외. (user_history 테이블에 user_histories_id 컬럼이 생기고,
+     */
+    // insertable = false, updatable = false : userEntity 에서는 userHisotry 를 저장/수정을 막는다.
+    @JoinColumn(name = "userId", insertable = false, updatable = false) // 모호하다. @Column(name = "user_id") 을 userHistory 에 추가해주자.
+    private List<UserHistory> userHistoryList = new ArrayList<>();
 
     /** entity listener : @EntityListeners(value = MyEntityListener.class) */
 //    @PrePersist
