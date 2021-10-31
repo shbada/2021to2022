@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Arrays;
+
 public class ApplicationContextInfoTest {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
@@ -22,10 +24,10 @@ public class ApplicationContextInfoTest {
             name = memberRepository object = hello.core.member.MemoryMemberRepository@299321e2
             name = discountPolicy object = hello.core.discount.RateDiscountPolicy@23fb172e
          */
-        for (String beanDefinitionName : beanDefinitionNames) {
+        Arrays.stream(beanDefinitionNames).forEach(beanDefinitionName -> {
             Object bean = ac.getBean(beanDefinitionName);
             System.out.println("name = " + beanDefinitionName + " object = " + bean);
-        }
+        });
     }
 
     @Test
@@ -41,21 +43,21 @@ public class ApplicationContextInfoTest {
             name = memberRepository object = hello.core.member.MemoryMemberRepository@299321e2
             name = discountPolicy object = hello.core.discount.RateDiscountPolicy@23fb172e
          */
-        for (String beanDefinitionName : beanDefinitionNames) {
-            // bean 하나에 대한 메타데이터 정보
+        // bean 하나에 대한 메타데이터 정보
+        // spring 이 내부 구현을 위해 등록한 빈이 아닌 내가 등록한 빈 을 출력
+        // spring 내부에서 등록된 빈 출력
+        Arrays.stream(beanDefinitionNames).forEach(beanDefinitionName -> {
             BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
 
-            // spring 이 내부 구현을 위해 등록한 빈이 아닌 내가 등록한 빈 을 출력
             if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
                 Object bean = ac.getBean(beanDefinitionName);
                 System.out.println("name = " + beanDefinitionName + " object = " + bean);
             }
 
-            // spring 내부에서 등록된 빈 출력
             if (beanDefinition.getRole() == BeanDefinition.ROLE_INFRASTRUCTURE) {
                 Object bean = ac.getBean(beanDefinitionName);
                 System.out.println("name = " + beanDefinitionName + " object = " + bean);
             }
-        }
+        });
     }
 }
