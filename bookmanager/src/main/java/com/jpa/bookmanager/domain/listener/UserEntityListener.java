@@ -31,6 +31,8 @@ public class UserEntityListener {
         userHistory.setUserId(user.getId()); // pre 로 하면 userId 가 셋 되기 전이라 null 이 들어간다.
         userHistory.setName(user.getName());
         userHistory.setEmail(user.getEmail());
+        // UserHistory.java -> @ManyToOne private User user 추가 후 추가
+        userHistory.setUser(user);
 
         userHistoryRepository.save(userHistory);
     }
