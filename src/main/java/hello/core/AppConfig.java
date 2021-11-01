@@ -13,10 +13,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * AppConfig.java
  * 앱 전체를 설정하고 구성한다는 의미
  * 실제 동작에 필요한 구현 객체를 생성하는 클래스
  * (생성자를 통해서 주입(연결) 해준다)
- *
+ */
+
+/**
+ * @Configuration
+ * 이거 안붙히면? 안붙혀도 다 빈으로 정상적으로 등록됨.
+ * 대신 문제는 발생 -> 바이트코드를 조작하는 CGLIB 기술을 사용하여 싱글톤을 보장한다 (테스트 메서드 configurationDeep 참고)
  */
 @Configuration /* 다음단계) Spring annotation 적용 */
 public class AppConfig {
@@ -32,6 +38,11 @@ public class AppConfig {
         configurationTest 테스트로 확인 : 같은 객체임.
         로그 찍은 결과 : AppConfig.memberService, AppConfig.memberRepository, AppConfig.orderService
         AppConfig.memberRepository 가 3번 찍힐거라고 생각했지만 1번만 호출된다.
+
+
+        스프링 컨테이너에 등록되어있는지의 여부에 따라 새로 생성할지, 기존껄 반환할지 결정된다.
+        그러므로 memberRepository 가 딱 1번만 호출되는것
+        --> configurationDeep 테스트 메서드 확인
     */
 
     @Bean /* 빈 등록 (스프링 컨테이너에 등록됨) : 메서드 명으로 등록, 빈 이름은 무조건 중복되면 안됨. */

@@ -36,4 +36,24 @@ public class ConfigurationSingletonTest {
         Assertions.assertThat(memberServiceImpl.getMemberRepository()).isSameAs(orderServiceImpl.getMemberRepository());
         Assertions.assertThat(orderServiceImpl.getMemberRepository()).isSameAs(memberRepository);
     }
+
+    @Test
+    void configurationDeep() {
+        // AppConfig 도 해당 호출로 빈에 등록됨
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+        /**
+        * class hello.core.AppConfig$$EnhancerBySpringCGLIB$$3aac460c
+        * $$EnhancerBySpringCGLIB$$3aac460c 순수한 클래스라면 class hello.core.AppConfig 로 나와야한다..
+        * 이것은 내가 만든 클래스가 아니라 스프링이 CGLIB라는 바이트코드 조작 라이브러리를 사용해서 AppConfig 클래스를 상속받은
+        * 임의의 다른 클래스를 만들고, 그 다른 클래스를 스프링 빈으로 등록한 것이다!
+        * 임의의 다른 클래스가 바로 싱글톤이 보장되도록 해준다.
+        * 예상코드) 이미 스프링 컨테이너에 등록되어있으면 컨테이너에서 찾아서 반환하고, 아니라면 새로 등록하고 등록한 객체를 반환할것임
+         *
+         * 부모타입을 조회하면 자식 타입도 다 끌려나오니깐.. GCLIB 도 출력된것
+        */
+        System.out.println("bean = " + bean.getClass());
+    }
 }
