@@ -21,24 +21,23 @@ import java.time.LocalDateTime;
 //@EntityListeners(value = {AuditingEntityListener.class})
 public class UserHistory extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // @ManyToOne 해야하므로 insertable = false, updatable = false 추가
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
+//    @Column(name = "user_id", insertable = false, updatable = false)
+//    private Long userId;
 
     private String name;
     private String email;
 
-    @CreatedDate /* AuditingEntityListener */
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+//    @CreatedDate /* AuditingEntityListener */
+//    private LocalDateTime createdAt;
+//
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
 
     // User 의 PK를 USER_HISTORY 가 가지게된다.
     @ManyToOne
-    @ToString.Exclude
     private User user;
 }

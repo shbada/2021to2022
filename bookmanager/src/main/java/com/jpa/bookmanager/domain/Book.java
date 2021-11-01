@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -30,13 +32,22 @@ public class Book extends BaseEntity {
 
     private Long authorId;
 
-    private Long publisherId;
+    // private Long publisherId;
 
     /* mappedBy 사용하여 아래는 주석처리 */
     //@OneToOne /* 1:1 연관관계 매핑 -> book 테이블에 book_review_info_id 컬럼이 생겼음 */
     @OneToOne(mappedBy = "book") /* 1:1 연관관계 매핑 -> mappedBy : book 에 FK를 두지않겠다 */
     @ToString.Exclude // ToString 순환참조 발생하므로 추가
     private BookReviewInfo bookReviewInfo;
+
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
+
+    @ManyToOne
+    @ToString.Exclude
+    private Publisher publisher;
 
 //    @CreatedDate
 //    private LocalDateTime createdAt;

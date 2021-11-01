@@ -9,5 +9,9 @@ spring:
       hibernate:
         format_sql: true # query format
 
+#logging:
+#  level:
+#    org.hibernate.type: trace
+
 server:
   port: 8070

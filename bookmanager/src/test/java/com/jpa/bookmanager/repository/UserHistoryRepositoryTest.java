@@ -47,11 +47,11 @@ class UserHistoryRepositoryTest {
 //                userRepository.findByEmail("testtest@naver.com").getId());
 
         // User.java 에 UserHist @OneToMany 추가 후 코드 변경
-        List<UserHistory> result = userRepository.findByEmail("testtest@naver.com").getUserHistoryList();
+        List<UserHistory> result = userRepository.findByEmail("testtest@naver.com").getUserHistories();
 
         result.forEach(System.out::println);
 
-        System.out.println("USerHistory.getUSer() : " + userHistoryRepository.findAll().get(0).getUser());
+        System.out.println("USerHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
     }
 
     @Test

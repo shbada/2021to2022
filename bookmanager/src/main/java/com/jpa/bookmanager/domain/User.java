@@ -80,9 +80,15 @@ public class User extends BaseEntity { // table name : user
         user_history_list_id bigint not null
     ) -> join 컬럼 지정 후 제외. (user_history 테이블에 user_histories_id 컬럼이 생기고,
      */
-    // insertable = false, updatable = false : userEntity 에서는 userHisotry 를 저장/수정을 막는다.
-    @JoinColumn(name = "userId", insertable = false, updatable = false) // 모호하다. @Column(name = "user_id") 을 userHistory 에 추가해주자.
-    private List<UserHistory> userHistoryList = new ArrayList<>();
+    // insertable = false, updatable = false : userEntity 에서는 userHistory 를 저장/수정을 막는다.
+    @JoinColumn(name = "user_id", insertable = false, updatable = false) // 모호하다. @Column(name = "user_id") 을 userHistory 에 추가해주자.
+    @ToString.Exclude
+    private List<UserHistory> userHistories = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 
     /** entity listener : @EntityListeners(value = MyEntityListener.class) */
 //    @PrePersist
