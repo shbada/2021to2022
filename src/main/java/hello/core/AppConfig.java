@@ -20,6 +20,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration /* 다음단계) Spring annotation 적용 */
 public class AppConfig {
+    /**
+     * 싱글톤 객체는 상태를 유지(stateful)하게 설계하면 안된다.
+     * 무상태로 설계해야한다. (stateless)
+     */
+
+
     @Bean /* 빈 등록 (스프링 컨테이너에 등록됨) : 메서드 명으로 등록, 빈 이름은 무조건 중복되면 안됨. */
     public MemberService memberService() {
         // new MemoryMemberRepository() 생성하고 파라미터로 new MemberServiceImpl 한 결과를 전달한다.
