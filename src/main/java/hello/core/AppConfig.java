@@ -25,16 +25,26 @@ public class AppConfig {
      * 무상태로 설계해야한다. (stateless)
      */
 
+    /**
+        @Bean memberService -> new MemoryMemberRepository() create
+        @Bean orderService -> new OrderServiceImpl(memberRepository(), discountPilicy())
+        -> memberRepository() 호출이 2번 발생 -> 싱글톤이 깨지지 않을까?
+        configurationTest 테스트로 확인 : 같은 객체임.
+        로그 찍은 결과 : AppConfig.memberService, AppConfig.memberRepository, AppConfig.orderService
+        AppConfig.memberRepository 가 3번 찍힐거라고 생각했지만 1번만 호출된다.
+    */
 
     @Bean /* 빈 등록 (스프링 컨테이너에 등록됨) : 메서드 명으로 등록, 빈 이름은 무조건 중복되면 안됨. */
     public MemberService memberService() {
         // new MemoryMemberRepository() 생성하고 파라미터로 new MemberServiceImpl 한 결과를 전달한다.
         // new MemoryMemberRepository() 중복 코드
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
@@ -45,6 +55,7 @@ public class AppConfig {
      */
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
