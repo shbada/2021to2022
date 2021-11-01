@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,11 +33,21 @@ class BookRepositoryTest {
         book.setAuthorId(1L);
        // book.setPublisherId(1L);
 
+        Publisher publisher = new Publisher();
+        publisher.setName("패스트캠퍼스");
+
+        Publisher getPublisher = publisherRepository.save(publisher);
+
+        book.setPublisher(getPublisher);
+
         bookRepository.save(book);
 
         System.out.println(bookRepository.findAll());
     }
 
+    /**
+     * TODO User join ??
+     */
     @Test
     @Transactional
     void bookRelationTest() {
@@ -45,9 +56,11 @@ class BookRepositoryTest {
         User user = userRepository.findByEmail("test@naver.com");
         System.out.println(user);
 
-        System.out.println("Review : " + user.getReviews());
-        System.out.println("Book : " + user.getReviews().get(0).getBook());
-        System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
+        List<Review> reviewList = user.getReviews();
+
+        System.out.println("Review : " + reviewList);
+        System.out.println("Book : " + reviewList.get(0).getBook());
+        System.out.println("Publisher : " + reviewList.get(0).getBook().getPublisher());
     }
 
     private void givenBookAndReview() {
@@ -60,9 +73,7 @@ class BookRepositoryTest {
         user.setEmail("test@naver.com");
         user.setGender(Gender.FEMALE);
 
-        userRepository.save(user);
-
-        return userRepository.findByEmail("test@naver.com");
+        return userRepository.save(user);
     }
 
     private void givenReview(User user, Book book) {

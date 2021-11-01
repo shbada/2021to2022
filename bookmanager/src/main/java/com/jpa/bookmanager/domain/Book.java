@@ -41,7 +41,7 @@ public class Book extends BaseEntity {
     private BookReviewInfo bookReviewInfo;
 
     @OneToMany
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id") // @OneToMany 일때 중간테이블 생성하지 않도록 지정
     @ToString.Exclude
     private List<Review> reviews = new ArrayList<>();
 
