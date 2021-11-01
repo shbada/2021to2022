@@ -50,14 +50,29 @@ public class Book extends BaseEntity {
     @ToString.Exclude
     private Publisher publisher;
 
-    @ManyToMany
+    @OneToMany
+    @JoinColumn(name = "book_id")
     @ToString.Exclude
-    private List<Author> authors = new ArrayList<>();
+    private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
+
+    public void addBookAndAuthors(BookAndAuthor... bookAndAuthors) {
+        Collections.addAll(this.bookAndAuthors, bookAndAuthors);
+    }
+
+//    @ManyToMany
+//    @ToString.Exclude
+//    private List<Author> authors = new ArrayList<>();
 
     // 등록 메소드 별도 생성
-    public void addAuthor(Author... author) {
-        Collections.addAll(this.authors, author);
-    }
+//    public void addAuthor(Author... author) {
+//        Collections.addAll(this.authors, author);
+//    }
+
+    // user
+
+    // User/Product (중간테이블 user_product 생성-> order)
+
+    // Product
 
 //    @CreatedDate
 //    private LocalDateTime createdAt;
