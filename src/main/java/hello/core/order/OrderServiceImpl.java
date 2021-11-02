@@ -3,7 +3,10 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
     // private final MemberRepository memberRepository = new MemoryMemberRepository();
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -21,6 +24,14 @@ public class OrderServiceImpl implements OrderService {
 
     // 파라미터 객체에 어떤 구현클래스가 들어올지는 클라이언트가 전혀 모른다.
     // 추상화 인터페이스의 존재만 알 뿐이다.
+
+    /**
+     * 의존관계 자동 주입
+     * memoryMemberRepository, rateDiscountPolicy 를 찾아서 자동 주입 해주는것. (타입으로 찾는다)
+     * @param memberRepository
+     * @param discountPolicy
+     */
+    @Autowired // 생성할때 MemberRepository, DiscountPolicy 타입에 맞게 의존 주입
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

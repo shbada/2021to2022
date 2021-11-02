@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
  * @Configuration
  * 이거 안붙히면? 안붙혀도 다 빈으로 정상적으로 등록됨.
  * 대신 문제는 발생 -> 바이트코드를 조작하는 CGLIB 기술을 사용하여 싱글톤을 보장한다 (테스트 메서드 configurationDeep 참고)
+ * private final MemberRepository memberRepository; 주입도 스프링 빈으로 관리되지 않고 그저 new 인스턴스된 객체다.
  */
 @Configuration /* 다음단계) Spring annotation 적용 */
 public class AppConfig {
