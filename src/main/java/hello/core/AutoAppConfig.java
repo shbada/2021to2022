@@ -1,5 +1,8 @@
 package hello.core;
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -35,5 +38,18 @@ import org.springframework.stereotype.Component;
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class) // 뺄것을 지정
 ) // 스프링 빈을 긁어서 자동으로 모두 등록해주는 것.
 public class AutoAppConfig {
-
+    /**
+     * 똑같은 빈 이름이 중복된다면, 수동 빈 등록이 우선권을 가진다.
+     * 수동 빈이 자동 빈을 오버라이딩 한다.
+     *
+     * 근데, 애초에 빈이 중복적으로 2개인게 에러가 아닌걸까? 서비스가 맞는걸까?
+     * 최근 스프링 부트에서는 수동 빈 등록과 자동 빈 등록이 충돌나면 오류가 발생하도록 기본값을 바꾸었다.
+     *
+     * 허용은 설정할수 있다.
+     * properties 에 spring.main.allow-bean-definition-overrinding = false 지정하면 된다.
+     */
+    @Bean(name = "memoryMemberRepository")
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
 }
