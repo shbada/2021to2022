@@ -26,8 +26,25 @@ public class OrderServiceImpl implements OrderService {
     // 추상화 인터페이스의 존재만 알 뿐이다.
 
     /**
+     * set 메서드 주입
+     * 필드에 final 제거하고 set 메서드로 선언
+     * @Autowired 명시되어있으므로 해당 매개변수 타입에 맞게 주입
+     * 선택/변경 가능성이 있는 의존관계에 사용
+     *
+     * (생성자에서는 필수값인데, set 은 매개변수가 빈으로 등록 안되어있을 경우에도 설정 가능하다)
+     * @Autowired(required = false)
+     */
+    /**
+     * 생성자 주입
+     * 이름 그대로 생성자를 통해서 의존 관계를 주입받는 방법이다.
+     * 생성자 호출 시점에 딱 1번만 호출되는 것이 보장된다.
+     * 불변/필수 의존관계에 사용
+     * 자바 스프링이 OrderServiceImpl 객체를 생성할때 생성자가 실행되니깐 그때 주입도 동시에 발생
+     */
+    /**
      * 의존관계 자동 주입
      * memoryMemberRepository, rateDiscountPolicy 를 찾아서 자동 주입 해주는것. (타입으로 찾는다)
+     * 생성자가 1개이면 @Autowired 생략 가능
      * @param memberRepository
      * @param discountPolicy
      */
