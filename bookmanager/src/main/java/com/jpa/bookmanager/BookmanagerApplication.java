@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing /* 선언 (AuditingEntityListener 사용) */
+// configuration/JpaConfiguration.java 파일 생성으로 대체
+//@EnableJpaAuditing /* 선언 (AuditingEntityListener 사용) */
 public class BookmanagerApplication {
 
     public static void main(String[] args) {
