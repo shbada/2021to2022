@@ -9,9 +9,18 @@ spring:
       hibernate:
         format_sql: true # query format
 
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/jpaapp?characeterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: jpaapp
+      password: jpaapp
+
 #logging:
 #  level:
 #    org.hibernate.type: trace
 
 server:
   port: 8070
+
+
