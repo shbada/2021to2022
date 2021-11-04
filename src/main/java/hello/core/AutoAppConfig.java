@@ -48,8 +48,8 @@ public class AutoAppConfig {
      * 허용은 설정할수 있다.
      * properties 에 spring.main.allow-bean-definition-overrinding = false 지정하면 된다.
      */
-    @Bean(name = "memoryMemberRepository")
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 }
