@@ -26,6 +26,21 @@ public class OrderServiceImpl implements OrderService {
     // 추상화 인터페이스의 존재만 알 뿐이다.
 
     /**
+     * 일반 메서드 주입
+     * set메서드, 생성자 이외에 일반 아무 메서드에나 @Autowired 를 쓸수있다.
+     * public void init(...);
+     * 사용이 거의 없다. 의존관계 자동 주입은 스프링 컨테이너가 관리하는 스프링 빈이어야한다.
+     * 스프링 빈이 아니면 @Autowired 는 의미없다. 아무것도 하지 않는다.
+     */
+    /**
+     * 필드주입
+     * @Autowired private DiscountPolicy discountPolicy
+     * 치명적인 단점 : DI 프레임워크가 없으면 아무것도 할 수 없다.
+     * 테스트코드 때도 주입해줄 방법이 없다. 따로 set 메서드를 만들어서 set 해줘야한다.
+     * 필드 주입은 쓰지말자.
+     * 단, Config 파일 정도까진 괜찮다. (스프링에서 쓰는 파일.. 테스트 안만들 파일)
+     */
+    /**
      * set 메서드 주입
      * 필드에 final 제거하고 set 메서드로 선언
      * @Autowired 명시되어있으므로 해당 매개변수 타입에 맞게 주입
