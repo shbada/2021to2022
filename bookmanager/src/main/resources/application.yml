@@ -19,10 +19,10 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: jpaapp
       password: jpaapp
-#  sql:
-#    init:
-#      mode: always  # schema.sql, data.sql 실행 (h2 DB(embedded)와 같은건 기본으로 설정되어있다)
-       # ddl-auto 모드 둘 중에 이게 더 우선순위가 높다. schema.sql 이 있다면 ddl-auto 가 무시됨.
+  sql:
+    init:
+      mode: always  # schema.sql, data_test.sql 실행 (h2 DB(embedded)와 같은건 기본으로 설정되어있다)
+       # ddl-auto 모드 둘 중에 이게 더 우선순위가 높다. schema.sql 이 있다면 ddl-auto 가 무시됨. (data_test.sql 만 있으면 상관없음)
 
 #logging:
 #  level:

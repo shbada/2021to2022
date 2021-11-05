@@ -27,6 +27,6 @@ public class BookmanagerApplication {
      *
      * spring-boot-starter-data-jpa dependency : 스프링부트가 JPA 관련 설정을 모두 해준다.
      *
-     *
+     * EntityManager : Entity 캐시
      */
 }
