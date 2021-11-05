@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -88,13 +89,19 @@ public class OrderServiceImpl implements OrderService {
     /* 롬복 라이브러리 적용으로 생성자 생략 가능 @RequiredArgsConstructor */
     @Autowired // 생성할때 MemberRepository, DiscountPolicy 타입에 맞게 의존 주입 (타입으로 조회)
     // 타입으로 조회하고, 그때 빈이 중복되어 2개 이상일때는 필드 이름, 파라미터 이름으로 빈 이름을 추가 매핑한다.
-
-    // @Primary - 빈의 우선순위 제공 (@Primary, @Qualify 2개 모두 되어있으면 @Qualify 가 더 우선순위가 높다(더 상세해서))
-    // 현재는 DiscountPolicy 타입이 빈 2개가 있고, RateDiscountPolicy @Primary bean 으로 되어있다.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        
+    // 직접 생성한 어노테이션으로 처리 
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+    
+    // @Primary - 빈의 우선순위 제공 (@Primary, @Qualifier 2개 모두 되어있으면 @Qualifier 가 더 우선순위가 높다(더 상세해서))
+    // 현재는 DiscountPolicy 타입이 빈 2개가 있고, RateDiscountPolicy @Primary bean 으로 되어있다.
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     //@Qualifier (@Qualifier value 와 동일한 빈을 주입한다.)
     // @Qualifier 는 Qualifier 찾는 용도로만 사용해야한다.
