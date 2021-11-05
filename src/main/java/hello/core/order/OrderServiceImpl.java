@@ -5,10 +5,11 @@ import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor /* lombok) final 필드들을 모아서 생성자를 자동으로 만들어준다. */
+//@RequiredArgsConstructor /* lombok) final 필드들을 모아서 생성자를 자동으로 만들어준다. */
 public class OrderServiceImpl implements OrderService {
     // private final MemberRepository memberRepository = new MemoryMemberRepository();
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -85,11 +86,30 @@ public class OrderServiceImpl implements OrderService {
      */
 
     /* 롬복 라이브러리 적용으로 생성자 생략 가능 @RequiredArgsConstructor */
-    @Autowired // 생성할때 MemberRepository, DiscountPolicy 타입에 맞게 의존 주입
+    @Autowired // 생성할때 MemberRepository, DiscountPolicy 타입에 맞게 의존 주입 (타입으로 조회)
+    // 타입으로 조회하고, 그때 빈이 중복되어 2개 이상일때는 필드 이름, 파라미터 이름으로 빈 이름을 추가 매핑한다.
+
+    // @Primary - 빈의 우선순위 제공
+    // 현재는 DiscountPolicy 타입이 빈 2개가 있고, RateDiscountPolicy @Primary bean 으로 되어있다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    //@Qualifier (@Qualifier value 와 동일한 빈을 주입한다.)
+    // @Qualifier 는 Qualifier 찾는 용도로만 사용해야한다.
+    // mainDiscountPolicy 이때 이걸 못찾으면, mainDiscountPolicy 라는 이름으로 된 스프링 빈 이름을 찾는다.
+//    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
+
+    // @autowired
+    // rateDiscountPolicy 이름으로 매핑됨 (타입으로는 fixDiscountPolicy, rateDiscountPolicy 2개가 조회됬을것)
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = rateDiscountPolicy;
+//    }
 
 
     /**
