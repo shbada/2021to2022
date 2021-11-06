@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 // 해결 방법 : @Autowired, @Quilifier, @Primary
 //@Qualifier("fixDiscountPolicy") // 구분 기준을 추가한다.
 public class FixDiscountPolicy implements DiscountPolicy {
-    private int discountfixAmount = 1000; // 1000원 할인의 의미
+    private int discountFixAmount = 1000; // 1000원 할인의 의미
 
     @Override
     public int discount(Member member, int price) {
         // enum 은 == 이다 (equals 아니다.)
         if (member.getGrade() == Grade.VIP) {
-            return discountfixAmount;
+            return discountFixAmount;
         } else {
             return 0;
         }
