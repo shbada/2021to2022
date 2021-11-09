@@ -1,7 +1,6 @@
 package hello.core.lifecycle;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +20,17 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifeCycleConfig {
         // 스프링 빈이 설정되면서 로직이 호출됨
+
+        /**
+         * 빈 등록 초기화, 소멸 메서드
+         * 1) 메서드명 자유로 설정 가능
+         * 2) 스프링 빈이 스프링 코드에 의존하지 않는다.
+         * 3) 코드가 아니라 설정 정보를 사용하기 때문에 코드를 고칠 수 없는 외부 라이브러리에도 초기화, 종료 메서드를 적용시킬 수 있다.
+         * @return
+         */
+        //@Bean(initMethod = "init", destroyMethod = "close")
+        // destroyMethod 기존값 : (inferred)(추론)으로 설정되어있음. (close, shutdown 메서드가 있으면 자동으로 호출해줌)
+        // 추론 기능을 사용하지 않으려면 destoryMethod = "" 으로 설정하면 된다.
         @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient(); // 객체 생성

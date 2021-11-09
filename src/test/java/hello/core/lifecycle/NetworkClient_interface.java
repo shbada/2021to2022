@@ -3,25 +3,19 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+/* 1) 빈 생명주기 콜백 InitializingBean(생성),DisposableBean(소멸) 인터페이스 사용 */
 
 /**
- * 어노테이션 권장 방법
- * 1) @PostConstruct 생성
- * 2) @PreDestroy 소멸
- *
- * - 최신 스프링에서 가장 권장하는 방법이다.
- * - 어노테이션 하나만 붙이면 되므로 매우 편리하다.
- * - JSR-250 이라는 자바 표준이다. (스프링이 아닌 다른 컨테이너에서도 동작함)
- * - 컴포넌트 스캔과 잘어울림
- * - 유일한 단점 : 외부 라이브러리에 적용하지 못한다. (외부 라이브러리의 초기화/종료는 @Bean 설정으로 지정하자)
+ * 1)번 방법 - 인터페이스 사용의 단점
+ * 해당 코드가 스프링 전용 인터페이스에 의존한다.
+ * 초기화, 소멸 메서드의 이름을 변경할 수 없다.
+ * 내가 코드를 고칠 수 없는 외부 라이브러리에 적용할 수 없다.
  */
-public class NetworkClient {
+public class NetworkClient_interface implements InitializingBean, DisposableBean {
 
     private String url;
 
-    public NetworkClient() {
+    public NetworkClient_interface() {
         //System.out.println("생성자 호출, url = " + url);
         //connect();
         call("초기화 연결 메시지");
@@ -46,15 +40,15 @@ public class NetworkClient {
         System.out.println("close : " + url);
     }
 
-    @PostConstruct
-    public void init() throws Exception {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @PreDestroy
-    public void close() throws Exception {
+    @Override
+    public void destroy() throws Exception {
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
