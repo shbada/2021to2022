@@ -20,6 +20,7 @@ public class Author extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // @Transient // 해당 컬럼에 대해서 영속화에서 제외하겠다는 의미
     private String name;
 
     private String country;
