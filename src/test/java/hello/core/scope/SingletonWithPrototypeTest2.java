@@ -2,15 +2,16 @@ package hello.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-public class SingletonWithPrototypeTest1 {
+public class SingletonWithPrototypeTest2 {
     @Test
     void prototypeFind() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
@@ -71,16 +72,15 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("singleton") // default
     static class ClientBean {
-        // 프로토타입 빈 주입
-        private final PrototypeBean prototypeBean;
-
-        // 생성 시점에 주입됨
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        // 옛날버전 (ObjectProvider가 기능이 더 많음)
+        // private ObjectFactory<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
+            // getObject() 호출시 스프링 컨테이너에서 PrototypeBean 빈을 찾아서 반환해준다.
+            // 새로운 프로토타입 빈이 생성된다.
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
@@ -96,7 +96,7 @@ public class SingletonWithPrototypeTest1 {
         // 이렇게 직접 필요한 의존관계를 찾는것을 DL(Dependency Lookup)이라고 한다.
         // DL 정도의 기능 제공만 해주는 무언가가 있으면 된다... -> 스프링에 준비되어있다.
 //            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class);
-//            prototypeBean.addCount();
+//            prototypeBean.getCount();
 //            int count = prototypeBean.getCount();
 //            return count;
 //        }
