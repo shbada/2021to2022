@@ -2,7 +2,6 @@ package hello.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,8 +9,11 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
-public class SingletonWithPrototypeTest2 {
+// JSR303 Provider
+// 의존성 implementation 'javax.inject:javax.inject:1' 추가
+public class SingletonWithPrototypeTest3 {
 
     @Scope("prototype")
     static class PrototypeBean {
@@ -57,18 +59,22 @@ public class SingletonWithPrototypeTest2 {
 
     @Scope("singleton") // default
     static class ClientBean {
+        // implementation 'javax.inject:javax.inject:1' 추가 후 사용 가능
+        // 스프링이 아니여도 사용 가능
+        // 라이브러리 의존성 추가 필요
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
-        // 옛날버전 (ObjectProvider가 기능이 더 많음)
-        // private ObjectFactory<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
-            // getObject() 호출시 스프링 컨테이너에서 PrototypeBean 빈을 찾아서 반환해준다.
-            // 새로운 프로토타입 빈이 생성된다.
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get(); // 심플
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
         }
+
+        /**
+         * 프로토타입 필요할 경우 : 매번 사용할때마다 의존관계 주입이 완료된 새로운 객체가 필요할 경우 사용하자.
+         * 실무에선 매우 드물다.
+         */
     }
 }
