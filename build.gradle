@@ -14,6 +14,8 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    // request scope 는 web 환경에서만 생성됨
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.inject:javax.inject:1'
     compileOnly 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
