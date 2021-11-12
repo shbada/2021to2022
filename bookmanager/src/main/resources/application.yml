@@ -13,12 +13,12 @@ spring:
     # false (default 값) : h2 DB (embedded) 사용했을땐 기본이 ddl-auto 속성이 create-drop 으로 동작한다.
     generate-ddl: false  # (jpa 의 하위속성) 구현체와 상관없이 자동화된 ddl 을 사용할 수 있도록 지정 (JPA 하위 속성)
 
-  datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/jpaapp?characeterEncoding=UTF-8&serverTimezone=UTC
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: jpaapp
-      password: jpaapp
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:mysql://127.0.0.1:3306/jpaapp?characeterEncoding=UTF-8&serverTimezone=UTC
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: jpaapp
+#      password: jpaapp
   sql:
     init:
       mode: always  # schema.sql, data_test.sql 실행 (h2 DB(embedded)와 같은건 기본으로 설정되어있다)
