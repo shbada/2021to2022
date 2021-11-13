@@ -26,12 +26,25 @@ class BookServiceTest {
         // 테스트 코드에서 try~catch 는 쓰면 안된다(안티패턴).
         // 연습을 위해 사용
         try {
-            bookService.putBookAndAuthor();
+            // bookService.putBookAndAuthor();
+            bookService.put();
         } catch (RuntimeException e) {
             System.out.println(">>> " + e.getMessage());
         }
 
         System.out.println("books : " + bookRepository.findAll());
         System.out.println("authors : " + authorRepository.findAll());
+    }
+
+    @Test
+    void isolationTest() {
+        Book book = new Book();
+        book.setName("1번 책");
+
+        bookRepository.save(book);
+
+        bookService.get(1L);
+
+        System.out.println(">>> " + bookRepository.findAll());
     }
 }
