@@ -1,0 +1,10 @@
+server:
+  port: 9050
+
+# Using generated security password: 0638b01e-5650-4668-b774-70281db22b06 -> 외우기 어려움
+spring:
+  security:
+    user:
+      name: seohae
+      password: 1234
+      roles: USER # 유저 권한만 있음

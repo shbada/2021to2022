@@ -1,4 +1,4 @@
-package com.sp.fc;
+package com.sp.fc.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
