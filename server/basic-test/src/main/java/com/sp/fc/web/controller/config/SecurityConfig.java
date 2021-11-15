@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = true) // request 가 올때마다 어떤 filter 를 타게되는지 로그가 남는다.
 // 컨트롤러의 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')") 가 이제 적용된다.
 @EnableGlobalMethodSecurity(prePostEnabled = true) // prePostEnabled 로 권한체크를 하겠다.
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurityConfigurerAdapter : filterChain 구성
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 여기서 설정하는 것이 filterChain 설정
         http.authorizeRequests((requests) ->
                 requests.antMatchers("/").permitAll() // localhost:9050/ 는 접근 가능, /**는 로그인필요
                         .anyRequest().authenticated());
