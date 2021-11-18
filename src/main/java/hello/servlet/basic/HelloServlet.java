@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * http://localhost:8080/hello 접속시 서블릿 호출
  */
+// name : 서블릿이름, urlPatterns : URL 매핑 -> 둘다 중복되면 안됨
 @WebServlet(name = "helloServlet", urlPatterns = "/hello")
 public class HelloServlet extends HttpServlet {
     /**
@@ -31,6 +32,7 @@ public class HelloServlet extends HttpServlet {
 
         response.setContentType("text/plain");
         response.setCharacterEncoding("utf-8");
+
         response.getWriter().write("hello " + username); // body 에 들어감
     }
 }
