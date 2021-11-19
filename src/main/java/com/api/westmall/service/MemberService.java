@@ -18,8 +18,7 @@ public class MemberService {
      * @param memberForm
      */
     public void saveUser(MemberForm memberForm) {
-        Member member = new Member();
-        modelMapper.map(memberForm, member);
+        Member member = modelMapper.map(memberForm, Member.class);
 
         memberRepository.save(member);
     }

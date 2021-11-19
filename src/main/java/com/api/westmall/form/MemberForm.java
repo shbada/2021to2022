@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class MemberForm {
+    private Long idx;
+
     @NotBlank
     private String userId;
 
