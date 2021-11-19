@@ -8,6 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  GET
+ * : /url?username=hello&age=20
+ * 메시지 바디 없이, URL 쿼리 파라미터에 데이터를 포함해서 전달
+ *
+ *  POST
+ * : content-type: application/x-www-form-urlencoded (Form 전송하는 웹 브라우저가 만들어주는 것이다)
+ * 메시지 바디에 쿼리 파라미터 형식으로 전달
+ * username=hello&age=20
+ *
+ *  HTTP Message Body 에 직접 담아서 요청 (rest api 등)
+ *  HTTP API 에서 주료 사용 (JSON, XML, TEXT)
+ *  데이터 형식은 주로 JSON 사용
+ *  POST, PUT, PATCH
+ */
 @WebServlet(name = "requestHeaderServlet", urlPatterns = "/request-header")
 public class RequestHeaderServlet extends HttpServlet {
     @Override
