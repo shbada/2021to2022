@@ -1,11 +1,11 @@
 package com.api.westmall.service;
 
-import com.api.westmall.repository.AccountRepository;
+import com.api.westmall.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AccountService {
-    private final AccountRepository accountRepository;
+    private final MemberRepository memberRepository;
 }
