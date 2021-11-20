@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * /student 도메인
  * Student 가 받게될 통행증
  */
 @Data
@@ -20,7 +21,8 @@ import java.util.Set;
 @Builder
 public class StudentAuthenticationToken implements Authentication {
 
-    private Student principal;
+    /* 구현증이 가져야할 정보 */
+    private Student principal; // principal 역할의 Student
     private String credentials;
     private String details;
     private boolean authenticated; // 인증 도장 받을 장소

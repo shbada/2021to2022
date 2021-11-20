@@ -11,24 +11,30 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * 통행증 Student 를 발급할 AuthenticationProvider
+ */
 @Component
 public class StudentManager implements AuthenticationProvider, InitializingBean {
 
+    // DB 대체
     private HashMap<String, Student> studentDB = new HashMap<>();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         StudentAuthenticationToken token = (StudentAuthenticationToken) authentication;
+
         if(studentDB.containsKey(token.getCredentials())){
             Student student = studentDB.get(token.getCredentials());
-            // token 만들어서 전달
+            // token 만들어서 전달 (StudentAuthenticationToken)
             return StudentAuthenticationToken.builder()
                     .principal(student)
-                    .details(student.getUsername())
+                    .details(student.getUsername()) // 원래는 details 에대한 객체를 담아야하는데..
                     .authenticated(true)
                     .authorities(student.getRole())
                     .build();
         }
+
         return null;
     }
 
@@ -39,8 +45,8 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
      */
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication == UsernamePasswordAuthenticationToken.class;
-        //return authentication == StudentAuthenticationToken.class;
+        // return authentication == UsernamePasswordAuthenticationToken.class;
+        return authentication == StudentAuthenticationToken.class;
     }
 
     @Override

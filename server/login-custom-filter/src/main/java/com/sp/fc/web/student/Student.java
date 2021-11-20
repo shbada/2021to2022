@@ -9,6 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 
+/**
+ * /student 도메인
+ * Principal 역할
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,5 +20,5 @@ import java.util.Set;
 public class Student {
     private String id;
     private String username;
-    private Set<GrantedAuthority> role;
+    private Set<GrantedAuthority> role; // 권한
 }

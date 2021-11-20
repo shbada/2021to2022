@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private final StudentManager studentManager;
     private final TeacherManager teacherManager;
 
@@ -25,6 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+    /**
+     * authenticationProvider 설정
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // authenticationProvider 설정
@@ -34,12 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // formLogin 부분을 만들어서 사용
         CustomLoginFilter filter = new CustomLoginFilter(authenticationManager());
+
         http
                 .authorizeRequests(request->
                         request.antMatchers("/", "/login").permitAll()
                                 .anyRequest().authenticated()
                 )
+                // 추가 설정 해줘야 생략 가능
                 .formLogin(
                         login->login.loginPage("/login")
                                 .permitAll()

@@ -27,6 +27,10 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String type = request.getParameter("type");
 
+        /**
+         * 이렇게 하면 각 권한에 따라 xxManager 로 찾아간다.
+         * 그 전에는 둘다 찾아갔음 (UsernamePasswordAuthenticationToken 였을때)
+         */
         if (type == null || !type.equals("teacher")) {
             // student
             StudentAuthenticationToken token = StudentAuthenticationToken.builder()
