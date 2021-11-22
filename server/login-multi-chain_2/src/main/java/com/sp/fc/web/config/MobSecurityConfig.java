@@ -36,8 +36,8 @@ public class MobSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/api/**")
                 .csrf().disable()
-                .authorizeRequests(request->request.anyRequest().authenticated())
-                .httpBasic()
+                .authorizeRequests(request -> request.anyRequest().authenticated())
+                .httpBasic() // basic login 사용
                 ;
     }
 
