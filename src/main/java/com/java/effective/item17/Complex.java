@@ -1,4 +1,4 @@
-package item17;
+package com.java.effective.item17;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

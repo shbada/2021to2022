@@ -1,4 +1,4 @@
-package item17;
+package com.java.effective.item17;
 
 public class ComplexStaticField {
     public static final Complex ZERO = new Complex(0,0);
