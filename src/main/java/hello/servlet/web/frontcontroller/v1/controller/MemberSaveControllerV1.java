@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class MemberSaveController implements ControllerV1 {
+public class MemberSaveControllerV1 implements ControllerV1 {
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
     @Override
@@ -21,6 +21,9 @@ public class MemberSaveController implements ControllerV1 {
         Member member = new Member(username, age);
         System.out.println("member = " + member);
         memberRepository.save(member);
+
+        // set attribute
+        request.setAttribute("member", member);
 
         //Model 에 데이터를 보관한다. request.setAttribute("member", member);
         String viewPath = "/WEB-INF/views/save-result.jsp";
