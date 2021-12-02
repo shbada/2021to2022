@@ -6,10 +6,10 @@ public class Exam1_거스름돈 {
         int[] coinTypes = {500, 100, 50, 10};
 
         int cnt = 0;
-        for (int i = 0; i < coinTypes.length; i++) {
-            cnt += (n / coinTypes[i]);
+        for (int coinType : coinTypes) {
+            cnt += (n / coinType);
 
-            n = n % coinTypes[i];
+            n = n % coinType;
         }
 
         System.out.println(cnt);

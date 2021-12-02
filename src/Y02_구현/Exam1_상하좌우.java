@@ -21,7 +21,6 @@ public class Exam1_상하좌우 {
                     y = y - 1;
                 }
             } else if (plan == 'R') {
-
                 if (y + 1 < n) {
                     y = y + 1;
                 }
