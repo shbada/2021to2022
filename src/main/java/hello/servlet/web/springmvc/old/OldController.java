@@ -30,6 +30,17 @@ public class OldController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("OldController.handleRequest");
-        return null;
+        // return null;
+        /**
+         * view Resolver
+         * ... 생략
+         * 1 = BeanNameViewResolver : 빈 이름으로 뷰를 찾아서 반환한다.
+         * 2 = InternalResourceViewResolver : JSP 를 처리할 수 있는 뷰를 처리한다.
+         * ... 생략
+         *
+         * JSP의 경우는 forward()를 통해서 해당 JSP로 이동해야 렌더링이 된다. (나머지 뷰는 forward() 과정 없이 바로 렌더링된다.)
+         *
+         */
+        return new ModelAndView("new-form");
     }
 }
