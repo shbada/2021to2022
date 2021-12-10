@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>StudyOlle</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" th:href="@{/}">
+        <img src="/images/logo_symbol.png" width="30" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">로그인</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>계정 만들기</h2>
+        </div>
+        <div class="row justify-content-center">
+            <form class="needs-validation col-sm-6" action="#"
+                  th:action="@{/user/signup}" th:object="${registerForm}" method="post" novalidate>
+                <div class="form-group">
+                    <label for="nickname">아이디</label>
+                    <input id="nickname" type="text" th:field="*{userId}" class="form-control"
+                           placeholder="westssun" aria-describedby="userIdHelp" required minlength="3" maxlength="20">
+                    <small id="userIdHelp" class="form-text text-muted">
+                        공백없이 문자와 숫자로만 3자 이상 20자 이내로 입력하세요. 가입후에 변경할 수 있습니다.
+                    </small>
+                    <small class="invalid-feedback">아이디를 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">패스워드</label>
+                    <input id="password" type="password" th:field="*{password}" class="form-control"
+                           aria-describedby="passwordHelp" required minlength="8" maxlength="50">
+                    <small id="passwordHelp" class="form-text text-muted">
+                        8자 이상 50자 이내로 입력하세요. 영문자, 숫자, 특수기호를 사용할 수 있으며 공백은 사용할 수 없습니다.
+                    </small>
+                    <small class="invalid-feedback">패스워드를 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</small>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit"
+                            aria-describedby="submitHelp">가입하기</button>
+                    <small id="submitHelp" class="form-text text-muted">
+                        <a href="#">약관</a>에 동의하시면 가입하기 버튼을 클릭하세요.
+                    </small>
+                </div>
+            </form>
+        </div>
+
+        <footer th:fragment="footer">
+            <div class="row justify-content-center">
+                <img class="mb-2" src="/images/logo_long_kr.jpg" alt="" width="100">
+                <small class="d-block mb-3 text-muted">&copy; 2020</small>
+            </div>
+        </footer>
+    </div>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="application/javascript">
+    (function () {
+
+    }())
+</script>
+</body>
+</html>
