@@ -22,7 +22,7 @@ public class MainController {
     }
 
     /**
-     * 로그인
+     * 로그인 화면 이동
      * @return
      */
     @GetMapping("/login")

@@ -1,6 +1,6 @@
 package com.login.controller;
 
-import com.login.entity.User;
+import com.login.entity.Users;
 import com.login.form.RegisterForm;
 import com.login.repository.UserRepository;
 import com.login.validator.RegisterFormValidator;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final RegisterFormValidator registerFormValidator;
@@ -59,12 +59,12 @@ public class UserController {
         }
 
         /* entity setting */
-        User user = User.builder()
+        Users users = Users.builder()
                 .userId(registerForm.getUserId())
                 .password(passwordEncoder.encode(registerForm.getPassword()))
                 .build();
 
-        userRepository.save(user);
+        userRepository.save(users);
 
         /* 가입 완료시, 메인페이지로 이동 */
         return "redirect:/";

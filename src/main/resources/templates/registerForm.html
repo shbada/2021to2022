@@ -36,7 +36,7 @@
         </div>
         <div class="row justify-content-center">
             <form class="needs-validation col-sm-6" action="#"
-                  th:action="@{/user/signup}" th:object="${registerForm}" method="post" novalidate>
+                  th:action="@{/users/signup}" th:object="${registerForm}" method="post" novalidate>
                 <div class="form-group">
                     <label for="nickname">아이디</label>
                     <input id="nickname" type="text" th:field="*{userId}" class="form-control"
