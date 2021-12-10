@@ -57,7 +57,9 @@ public class AccountService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         /**
-         * userId 는 login.html 에서 id에 해당하는 input 의 id가 username 인데 이게 위 파라미터로 매핑된다.
+         * userId 는 login.html 에서 name에 해당하는 input 의 name가 username 인데 이게 위 파라미터로 매핑된다.
+         * name : username -> userid
+         * name : password
          */
         Users users = userRepository.findByUserId(userId);
 
