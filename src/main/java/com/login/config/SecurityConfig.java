@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                               , "/users/signup", "/test/**").permitAll()
                 .anyRequest().authenticated();
 
+        /* 지정해줘야, UserDetailsService 구현한 클래스(AccountService)의 loadUserByUsername를 호출해준다. */
         http.formLogin()
                 .loginPage("/login").permitAll();
     }
