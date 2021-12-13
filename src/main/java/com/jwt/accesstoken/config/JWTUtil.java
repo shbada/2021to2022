@@ -9,7 +9,8 @@ import java.time.Instant;
 
 public class JWTUtil {
     private static final Algorithm ALGORITHM = Algorithm.HMAC256("seohae");
-    private static final long AUTH_TIME = 20 * 60;
+    // private static final long AUTH_TIME = 20 * 60;
+    private static final long AUTH_TIME = 2; /* 2초 였다면? 3초 후 요청은 토큰이 유효하지 않겠다. */
     private static final long REFRESH_TIME = 60 * 60 * 24 * 7;
 
     /**

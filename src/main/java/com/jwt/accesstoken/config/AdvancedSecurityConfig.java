@@ -27,7 +27,7 @@ public class AdvancedSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // authenticationManager 로 위임 가능
-        JWTLoginFilter loginFilter = new JWTLoginFilter(authenticationManager()); // authenticationManager 는 기본으로 만들어진다.
+        JWTLoginFilter loginFilter = new JWTLoginFilter(authenticationManager(), userService); // authenticationManager 는 기본으로 만들어진다.
         // authenticationManager 위임 불가능 (사용자를 직접 가져올 상황이 생기기 때문) - spUserService 필요
         JWTCheckFilter jwtCheckFilter = new JWTCheckFilter(authenticationManager(), userService);
 
