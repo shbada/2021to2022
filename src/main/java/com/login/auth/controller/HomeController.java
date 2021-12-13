@@ -15,9 +15,9 @@ public class HomeController {
      * @return
      */
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/greeting")
-    public OAuth2User greeting(@AuthenticationPrincipal OAuth2User user){
-        /* OAuth2User  (userPrincipal) */
+    @GetMapping("/")
+    public Object greeting(@AuthenticationPrincipal Object user){
+        /* SpUser */
         return user;
     }
 }

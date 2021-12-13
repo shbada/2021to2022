@@ -5,6 +5,7 @@ import com.login.auth.user.domain.SpOauth2User;
 import com.login.auth.user.domain.SpUser;
 import com.login.auth.user.repository.SpOauth2UserRepository;
 import com.login.auth.user.repository.SpUserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,13 +20,11 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class SpUserService implements UserDetailsService {
 
-    @Autowired
-    private SpUserRepository userRepository;
-
-    @Autowired
-    private SpOauth2UserRepository oauth2UserRepository;
+    private final SpUserRepository userRepository;
+    private final SpOauth2UserRepository oauth2UserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -94,20 +93,23 @@ public class SpUserService implements UserDetailsService {
     public SpUser loadUser(final SpOauth2User oauth2User) {
         SpOauth2User user = oauth2UserRepository.findById(oauth2User.getOauth2UserId())
                 .orElseGet(() -> {
-            SpUser spUser = new SpUser();
-            spUser.setEmail(oauth2User.getEmail());
-            spUser.setEnabled(true);
-            spUser.setPassword("");
+                    // 최초 등록
+                    // 각 sns 를 통해 들어온 유저는 모두 다른 사용자라고 생각한다 (같은 사용자인지의 판별은 여러 정책에 따라 결정될 부분)
+                    SpUser spUser = new SpUser();
+                    spUser.setEmail(oauth2User.getEmail());
+                    spUser.setEnabled(true);
+                    spUser.setUsername(oauth2User.getName());
+                    spUser.setPassword("");
 
-            userRepository.save(spUser);
+                    userRepository.save(spUser);
 
-            addAuthority(spUser.getUserId(), "ROLE_USER");
+                    addAuthority(spUser.getUserId(), "ROLE_USER");
 
-            oauth2User.setUserId(spUser.getUserId());
-            oauth2User.setCreated(LocalDateTime.now());
+                    oauth2User.setUserId(spUser.getUserId());
+                    oauth2User.setCreated(LocalDateTime.now());
 
-            return oauth2UserRepository.save(oauth2User);
-        });
+                    return oauth2UserRepository.save(oauth2User);
+                });
 
         return userRepository.findById(user.getUserId()).get();
     }

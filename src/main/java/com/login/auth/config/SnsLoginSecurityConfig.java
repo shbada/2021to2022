@@ -27,8 +27,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class SnsLoginSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SpUserService userService;
-    private final SpOAuth2UserService oAuth2UserService;
-    private final SpOidcUserService oidcUserService;
+//    private final SpOAuth2UserService oAuth2UserService;
+//    private final SpOidcUserService oidcUserService;
 
     /* 구글이 OidcUserService 을 제공해준다. */
     // private OidcUserService oidcUserService; // loadUser (OidAuthorizationCodeAuthenticationProvider)
@@ -37,38 +37,44 @@ public class SnsLoginSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         /* oauth2 를 사용하여 사용자를 받겠다는 의미 */
         http.oauth2Login(
-                oauth2 -> oauth2.userInfoEndpoint(
-                        userInfo -> userInfo.userService(oAuth2UserService)
-                                .oidcUserService(oidcUserService)
-                ).successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                        Authentication authentication) throws IOException, ServletException {
-                        // 인증이 되었다면 authentication 객체가 있을것
-                        Object principal = authentication.getPrincipal();
+                oauth2 -> oauth2
+//                        .userInfoEndpoint(
+//                            userInfo -> userInfo.userService(oAuth2UserService)
+//                                    .oidcUserService(oidcUserService))
+                        .successHandler(new AuthenticationSuccessHandler() {
+                            @Override
+                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                                                Authentication authentication) throws IOException, ServletException {
+                                // 인증이 되었다면 authentication 객체가 있을것
+                                Object principal = authentication.getPrincipal();
 
-                        if (principal instanceof OAuth2User) {
-                            /* OidcUser */
-                            if (principal instanceof OidcUser) {
-                                // google
-                                SpOauth2User googleUser = SpOauth2User.OAuth2Provider.google.convert((OAuth2User) principal);
-                                SpUser user = userService.loadUser(googleUser);
+                                if (principal instanceof OAuth2User) {
+                                    /* OidcUser */
+                                    if (principal instanceof OidcUser) {
+                                        // google
+                                        SpOauth2User googleUser = SpOauth2User.OAuth2Provider.google.convert((OAuth2User) principal);
+                                        SpUser user = userService.loadUser(googleUser);
 
-                                /* SecurityContextHolder set */
-                                SecurityContextHolder.getContext().setAuthentication(
-                                        new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities())
-                                );
-                            } else {
-                                // naver, or kakao, facebook
-                                SpOauth2User naverUser = SpOauth2User.OAuth2Provider.naver.convert((OAuth2User) principal);
-                                SpUser user = userService.loadUser(naverUser);
+                                        /* SecurityContextHolder set */
+                                        // 인증된 사용자를 넣어준다.
+                                        SecurityContextHolder.getContext().setAuthentication(
+                                                new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities())
+                                        );
+                                    } else {
+                                        // naver, or kakao, facebook
+                                        SpOauth2User naverUser = SpOauth2User.OAuth2Provider.naver.convert((OAuth2User) principal);
+                                        SpUser user = userService.loadUser(naverUser);
 
-                                /* SecurityContextHolder set */
-                                SecurityContextHolder.getContext().setAuthentication(
-                                        new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities())
-                                );
-                            }
-                        }
+                                        /* SecurityContextHolder set */
+                                        SecurityContextHolder.getContext().setAuthentication(
+                                                new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities())
+                                        );
+                                    }
+
+                                    System.out.println(principal);
+                                    // redirect
+                                    request.getRequestDispatcher("/").forward(request, response);
+                                }
 
                     }
                 })

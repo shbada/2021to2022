@@ -23,6 +23,8 @@ public class SpUser implements UserDetails {
 
     private String email;
 
+    private String username;
+
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
