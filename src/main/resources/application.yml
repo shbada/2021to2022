@@ -1,0 +1,16 @@
+server:
+  port: 5050
+
+spring:
+  security:
+    oauth2:
+      client: # provider 은 구글이 등록해놔서 따로 설정하지 않아도 된다. (이미 common 에)
+        registration:
+          google: # Registration
+            # 이 정보는 console.cloud.google.com/apis 에 등록된 인증 정보에 있다.
+            clientId: 377825014181-2tpha7niq0hjar86e4j8h6dl0h8j1s3i.apps.googleusercontent.com
+            clientSecret: yyHXhXWBRrx3jyDWrhiSwzu8
+
+#        provider:
+#          naver:
+#          kakao: # provider 정보를 제공해줘야한다.
