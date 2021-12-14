@@ -1,5 +1,5 @@
 # instagram-clone
-[clone project] instagram
+[clone project] instagram   
 (참고 : https://github.com/codingspecialist/-SpringBoot-React-InstaClone)
 
 (Backend API).  
