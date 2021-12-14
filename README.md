@@ -1,5 +1,6 @@
 # instagram-clone
 [clone project] instagram
+(참고 : https://github.com/codingspecialist/-SpringBoot-React-InstaClone)
 
 (Backend API).  
 - SpringBoot2.6.  
@@ -7,4 +8,6 @@
 - JPA.  
 - H2 Database.  
 - Junit5.  
-- Spring Security.  
+- Spring Security (jwt token).
+
+ 
