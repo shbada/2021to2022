@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+</head>
+<body>
+<h1>로그인 페이지</h1>
+<hr/>
+<!-- 시큐리티는 x-www-form-url-encoded 타입만 인식 -->
+<form action="/loginProc" method="post">
+    <input type="text" name="username" /> <!-- 시큐리티 매칭을 위해 username 을 꼭 name 으로, 아니면 securityConfig 에서 설정 가능 -->
+    <input type="password" name="password" /> <!-- 시큐리티 매칭을 위해 password 을 꼭 name 으로, 아니면 securityConfig 에서 설정 가능 -->
+    <button>로그인</button>
+</form>
+</body>
+</html>
