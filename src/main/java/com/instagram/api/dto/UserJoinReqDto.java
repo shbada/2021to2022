@@ -1,9 +1,11 @@
 package com.instagram.api.dto;
 
 import com.instagram.api.entity.User;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserJoinReqDto {
     private String username;
     private String password;
