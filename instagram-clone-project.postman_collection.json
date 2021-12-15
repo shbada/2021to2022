@@ -70,7 +70,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3ZXN0c3N1biIsImlkIjoxLCJleHAiOjE2NDA0MTUxNDYsInVzZXJuYW1lIjoid2VzdHNzdW4ifQ.IxqN17rsYzrBBQRH35DvvH2HuGbJ658QS0ybqcuZyjtl51Ny9annREoBr6E25pD1NuL2RX2_kln07azi1BZFgQ",
+						"value": "Bearer test",
 						"type": "text"
 					}
 				],
