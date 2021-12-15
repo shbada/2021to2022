@@ -1,5 +1,6 @@
 package com.instagram.api.config;
 
+import com.instagram.api.common.exception.ExceptionHandlerFilter;
 import com.instagram.api.config.jwt.JwtAuthenticationFilter;
 import com.instagram.api.config.jwt.JwtAuthorizationFilter;
 import com.instagram.api.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 @RequiredArgsConstructor
 @Configuration
@@ -20,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
     private final CorsConfig corsConfig;
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
 
     /**
      * 패스워드 인코더 빈 등록
@@ -30,22 +33,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * configure
+     * exceptionHandlerFilter : 기본 필터 체인 및 순서를 고려하여 일찍 타도록 선언하는게 좋다. 우선, LogoutFilter 앞에 순서 지정한다.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilter(corsConfig.corsFilter())
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
-                .authorizeRequests()
-                .mvcMatchers("/test/**", "/user/join").permitAll()
-                .antMatchers("/post/**")
-                .access("hasRole('ROLE_USER')")
-                .antMatchers("/user/**")
-                .access("hasRole('ROLE_USER')")
-                .anyRequest().authenticated();
+        http.addFilterBefore(exceptionHandlerFilter, LogoutFilter.class)
+            .addFilter(corsConfig.corsFilter())
+            .csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .formLogin().disable()
+            .httpBasic().disable()
+            .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+            .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
+            .authorizeRequests()
+            .mvcMatchers("/test/**", "/user/join").permitAll()
+            .antMatchers("/post/**")
+            .access("hasRole('ROLE_USER')")
+            .antMatchers("/user/**")
+            .access("hasRole('ROLE_USER')")
+            .anyRequest().authenticated();
     }
 }
