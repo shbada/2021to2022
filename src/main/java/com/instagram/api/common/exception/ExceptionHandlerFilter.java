@@ -1,9 +1,11 @@
 package com.instagram.api.common.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.instagram.api.common.response.CommonResponse;
 import com.instagram.api.common.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,6 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;
+    private final CommonResponse commonResponse;
 
     /**
      * jwt filter error handler
@@ -31,14 +34,10 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } catch (RuntimeException e) {
-            ResponseDto<Object> errorResponse = ResponseDto.builder()
-                    .status(HttpStatus.UNAUTHORIZED.value())
-                    .message("")
-                    .body(null)
-                    .build();
-
+            ResponseEntity<ResponseDto<Object>> send
+                    = commonResponse.send(null, HttpStatus.UNAUTHORIZED, "");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+            response.getWriter().write(objectMapper.writeValueAsString(send));
         }
     }
 }
