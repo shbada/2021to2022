@@ -11,3 +11,4 @@
 - Spring Security (jwt token).
 
  
+- Postman : https://github.com/westssun/instagram-clone/blob/master/instagram-clone-project.postman_collection.json
