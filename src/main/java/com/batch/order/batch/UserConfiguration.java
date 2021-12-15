@@ -1,6 +1,7 @@
 package com.batch.order.batch;
 
 import com.batch.order.entity.User;
+import com.batch.order.order.JobParametersDecide;
 import com.batch.order.order.OrderStatistics;
 import com.batch.order.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,11 @@ public class UserConfiguration {
                 .next(this.userLevelUpStep())
                 /* 실행할 리스너 지정 */
                 .listener(new LevelUpJobExecutionListener(userRepository))
-                .next(this.orderStatisticsStep(null))
+                //.next(this.orderStatisticsStep(null))
+                .next(new JobParametersDecide("date"))
+                    .on(JobParametersDecide.CONTINUE.getName()) /* CONTINUE 일때 */
+                    .to(this.orderStatisticsStep(null))
+                    .build()
                 .build();
     }
 
