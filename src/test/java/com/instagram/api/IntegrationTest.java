@@ -2,7 +2,6 @@ package com.instagram.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,7 +10,10 @@ import java.net.URISyntaxException;
 
 import static java.lang.String.format;
 
-public class SpIntegrationTest {
+public class IntegrationTest {
+    /**
+     * 내장 서버 랜덤 포트로 띄었을때 port 를 알 수 없으므로 이렇게 처리한다.
+     */
     @LocalServerPort
     protected int port;
 

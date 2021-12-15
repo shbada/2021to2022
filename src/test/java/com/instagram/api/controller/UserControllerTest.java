@@ -1,13 +1,11 @@
 package com.instagram.api.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.instagram.api.SpIntegrationTest;
+import com.instagram.api.IntegrationTest;
 import com.instagram.api.config.jwt.JwtEnum;
 import com.instagram.api.dto.UserJoinReqDto;
 import com.instagram.api.dto.UserLoginReqDto;
 import com.instagram.api.repository.UserRepository;
 import com.instagram.api.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import static java.lang.String.format;
@@ -28,9 +24,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * (webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+ * 내장 서버 랜덤 포트로 띄운다.
+ * 기본값 : SpringBootTest.WebEnvironment.MOCK
+ * 위처럼 설정한 이유는 실제로 테스트를 위한 서블릿 컨테이너를 띄우기 위해다.
+ */
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class UserControllerTest extends SpIntegrationTest {
+class UserControllerTest extends IntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
