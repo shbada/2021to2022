@@ -64,6 +64,7 @@ public class UserConfiguration {
                 /* 실행할 리스너 지정 */
                 .listener(new LevelUpJobExecutionListener(userRepository))
                 //.next(this.orderStatisticsStep(null))
+                /** orderStatisticsStep 추가 */
                 .next(new JobParametersDecide("date"))
                     .on(JobParametersDecide.CONTINUE.getName()) /* CONTINUE 일때 */
                     .to(this.orderStatisticsStep(null))
@@ -97,13 +98,15 @@ public class UserConfiguration {
          * chunk 실행 개수만큼 파일이 여러개 생성되지 않음
          */
         YearMonth yearMonth = YearMonth.parse(date);
+
+        /* 파일명 지정 */
         String fileName = yearMonth.getYear() + "년_" + yearMonth.getMonthValue() + "월_일별_주문_금액.csv";
 
         BeanWrapperFieldExtractor<OrderStatistics> fieldExtractor = new BeanWrapperFieldExtractor<>();
         fieldExtractor.setNames(new String[] {"amount", "date"});
 
         DelimitedLineAggregator<OrderStatistics> lineAggregator = new DelimitedLineAggregator<>();
-        lineAggregator.setDelimiter(",");
+        lineAggregator.setDelimiter(","); /* 구분자 */
         lineAggregator.setFieldExtractor(fieldExtractor);
 
         FlatFileItemWriter<OrderStatistics> itemWriter = new FlatFileItemWriterBuilder<OrderStatistics>()
@@ -142,6 +145,7 @@ public class UserConfiguration {
                         .build()) // 조회된 orders 데이터 기준으로 OrderStatistics 로 매핑
                 .pageSize(CHUNK)
                 .name("orderStatisticsItemReader")
+                /* select 쿼리 */
                 .selectClause("sum(amount), created_date") /* 일별 합계 */
                 .fromClause("orders") /* orders 데이터 조회 */
                 .whereClause("created_date >= :startDate and created_date <= :endDate")
@@ -151,6 +155,7 @@ public class UserConfiguration {
                 .build();
 
         itemReader.afterPropertiesSet();
+
         return itemReader;
     }
 
