@@ -41,7 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(exceptionHandlerFilter, LogoutFilter.class)
+        http
+            /* filter exception handler set */
+            .addFilterBefore(exceptionHandlerFilter, LogoutFilter.class)
+            /* cors set */
             .addFilter(corsConfig.corsFilter())
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -51,11 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilter(new JwtAuthenticationFilter(authenticationManager()))
             .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
             .authorizeRequests()
-            .mvcMatchers("/test/**", "/user/join").permitAll()
+            .mvcMatchers("/test/**", "/user/join").permitAll() /* test API, 회원가입 - 권한 허용*/
             .antMatchers("/post/**")
-            .access("hasRole('ROLE_USER')")
+            .access("hasRole('ROLE_USER')") /* 권한 - 유저 */
             .antMatchers("/user/**")
-            .access("hasRole('ROLE_USER')")
+            .access("hasRole('ROLE_USER')") /* 권한 - 유저 */
             .anyRequest().authenticated();
     }
 }
