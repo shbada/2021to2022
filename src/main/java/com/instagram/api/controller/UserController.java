@@ -34,6 +34,11 @@ public class UserController {
         return commonResponse.send(userRepository.findByUsername(userJoinReqDto.getUsername()));
     }
 
+    /**
+     * 사용자 정보 조회
+     * @param principalDetails
+     * @return
+     */
     @GetMapping("/load")
     public ResponseEntity<?> loadUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         if (principalDetails != null) { // 사용자가 있을 경우 사용자 정보를 리턴
