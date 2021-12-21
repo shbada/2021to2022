@@ -1,3 +1,7 @@
 spring:
   jpa:
     show-sql: true
+
+
+file:
+  path: /Users/seohae/Documents/seohae-dev/workspace/fileUpload/file/
