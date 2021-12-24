@@ -42,35 +42,6 @@ class UserControllerTest extends IntegrationTest {
     @Autowired
     private UserService userService;
 
-    /**
-     * 회원가입 및 로그인 실행
-     * @param username
-     * @return
-     * @throws URISyntaxException
-     */
-    String joinAndLogin(String username) throws URISyntaxException {
-        /* 1) 회원가입 */
-        UserJoinReqDto userJoinReqDto = UserJoinReqDto.builder()
-                .username(username)
-                .password("123123")
-                .email("test@test.com")
-                .name("ksh")
-                .build();
-        userService.addUser(userJoinReqDto);
-
-        /* 2) 로그인 */
-        UserLoginReqDto userLoginReqDto = UserLoginReqDto.builder()
-                .username(username)
-                .password("123123")
-                .build();
-
-        HttpEntity<UserLoginReqDto> body = new HttpEntity<>(userLoginReqDto);
-        ResponseEntity<String> response = restTemplate.exchange(uri("/login"),
-                HttpMethod.POST, body, String.class);
-
-        return response.getHeaders().get(JwtEnum.HEADER_STRING.getValue()).get(0);
-    }
-
     @DisplayName("회원가입 성공")
     @Test
     void addUser_success() throws Exception {
