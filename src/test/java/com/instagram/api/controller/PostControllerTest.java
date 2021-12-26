@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,8 +28,7 @@ import java.net.URISyntaxException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -71,5 +71,17 @@ class PostControllerTest extends IntegrationTest {
             throws IOException {
         FileInputStream fileInputStream = new FileInputStream(new File(path));
         return new MockMultipartFile(paramName, fileName + "." + contentType, contentType, fileInputStream);
+    }
+
+    @DisplayName("게시글 조회 성공")
+    @Test
+    void getPost_success() throws Exception {
+        String username = "westssun";
+        String jwtToken = this.joinAndLogin(username);
+
+        mockMvc.perform(get("/post")
+                        .header(JwtEnum.HEADER_STRING.getValue(), jwtToken))
+                .andExpect(status().isOk());
+                //.andExpect(MockMvcResultMatchers.jsonPath("$.body.username").value(username));
     }
 }

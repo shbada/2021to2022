@@ -10,6 +10,8 @@ import com.instagram.api.repository.PostRepository;
 import com.instagram.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,16 @@ public class PostService {
         Post post = postReqDto.toEntity(imageFileName, principalDetails.getUser());
 
         postRepository.save(post);
+    }
+
+    /**
+     * 로그인 유저의 게시글 조회
+     * @param id
+     * @param pageable
+     * @return
+     */
+    public Page<Post> getPost(Long id, Pageable pageable) {
+        Page<Post> posts = postRepository.findByUserId(id, pageable);
+        return posts;
     }
 }
