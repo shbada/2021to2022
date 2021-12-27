@@ -5,6 +5,7 @@ import com.instagram.api.config.jwt.JwtEnum;
 import com.instagram.api.dto.PostReqDto;
 import com.instagram.api.dto.UserJoinReqDto;
 import com.instagram.api.dto.UserLoginReqDto;
+import com.instagram.api.entity.Post;
 import com.instagram.api.repository.PostRepository;
 import com.instagram.api.service.PostService;
 import com.instagram.api.service.UserService;
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.io.File;
@@ -76,12 +78,33 @@ class PostControllerTest extends IntegrationTest {
     @DisplayName("게시글 조회 성공")
     @Test
     void getPost_success() throws Exception {
+        /** 1) 게시글 등록 */
         String username = "westssun";
         String jwtToken = this.joinAndLogin(username);
 
-        mockMvc.perform(get("/post")
+        String filePath = "/Users/seohae/Documents/seohae-dev/workspace/fileUpload/test.png";
+        String contentType = "png";
+        MockMultipartFile mockMultipartFile = getMockMultipartFile("file", "test", contentType, filePath);
+
+        mockMvc.perform(multipart("/post")
+                        .file(mockMultipartFile)
+                        .param("tags", "test")
+                        .param("caption", "test upload post")
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
                         .header(JwtEnum.HEADER_STRING.getValue(), jwtToken))
                 .andExpect(status().isOk());
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.body.username").value(username));
+
+        assertEquals(postRepository.getById(1L).getId(), 1L);
+
+        /** 2) 게시글 조회 */
+        MvcResult result = mockMvc.perform(get("/post")
+                        .header(JwtEnum.HEADER_STRING.getValue(), jwtToken))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+
+        System.out.println(content);
+
     }
 }
