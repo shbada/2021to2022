@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
+/**
+ * SpringSecurity User
+ */
 @Getter
 public class UserAccount extends User {
 

@@ -18,6 +18,11 @@ public class SignUpFormValidator implements Validator {
         return aClass.isAssignableFrom(SignUpForm.class);
     }
 
+    /**
+     * Account Validation
+     * @param object
+     * @param errors
+     */
     @Override
     public void validate(Object object, Errors errors) {
         SignUpForm signUpForm = (SignUpForm)object;

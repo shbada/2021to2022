@@ -43,6 +43,10 @@ public class MainController {
         return "index";
     }
 
+    /**
+     * 로그인 화면
+     * @return
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
