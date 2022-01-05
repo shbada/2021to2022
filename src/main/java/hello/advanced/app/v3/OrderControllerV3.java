@@ -1,7 +1,8 @@
-package hello.advanced.app.v2;
+package hello.advanced.app.v3;
 
-import hello.advanced.trace.hellotrace.HelloTraceV2;
 import hello.advanced.trace.TraceStatus;
+import hello.advanced.trace.hellotrace.HelloTraceV2;
+import hello.advanced.trace.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController // (@Controller + @ResponseBody)
 @RequiredArgsConstructor
-public class OrderControllerV2 {
+public class OrderControllerV3 {
 
-    private final OrderServiceV2 orderService;
-    private final HelloTraceV2 trace;
+    private final OrderServiceV3 orderService;
+    private final LogTrace trace;
 
     /**
-     * localhost:8080/v2/request?itemId=hello
+     * localhost:8080/v3/request?itemId=hello
      * 같은 HTTP 요청에 대해서 트랜잭션ID가 유지, level 도 정상 노출됨
      * @param itemId
      * @return
      */
-    @GetMapping("/v2/request")
+    @GetMapping("/v3/request")
     public String request(String itemId) {
         TraceStatus status = null;
 
@@ -39,7 +40,7 @@ public class OrderControllerV2 {
             status = trace.begin("OrderController.request()");
 
             // orderItem
-            orderService.orderItem(status.getTraceId(), itemId);
+            orderService.orderItem(itemId);
 
             // end
             trace.end(status);
