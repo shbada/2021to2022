@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @Builder 를 쓰면 Set 과 같은 필드가 null 로 들어간다.
+ */
 @NamedEntityGraph(
         name = "Event.withEnrollments",
         attributeNodes = @NamedAttributeNode("enrollments")
@@ -27,6 +30,9 @@ public class Event {
     @ManyToOne
     private Study study;
 
+    /**
+     * 모임 생성한 회원 정보
+     */
     @ManyToOne
     private Account createdBy;
 
@@ -51,10 +57,18 @@ public class Event {
     @Column
     private Integer limitOfEnrollments;
 
+    /**
+     * 참여정보
+     */
     @OneToMany(mappedBy = "event")
     @OrderBy("enrolledAt")
     private List<Enrollment> enrollments = new ArrayList<>();
 
+    /**
+     * EvenType
+     * FCFS 선착순
+     * CONFIRMATIVE 관리자 확인 필요
+     */
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
