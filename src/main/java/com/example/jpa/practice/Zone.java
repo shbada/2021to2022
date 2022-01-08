@@ -5,8 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "id")
-@Builder @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"city", "province"}))
 public class Zone {
 

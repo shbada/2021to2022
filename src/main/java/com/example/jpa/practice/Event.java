@@ -13,10 +13,10 @@ import java.util.List;
 /**
  * @Builder 를 쓰면 Set 과 같은 필드가 null 로 들어간다.
  */
-@NamedEntityGraph(
-        name = "Event.withEnrollments",
-        attributeNodes = @NamedAttributeNode("enrollments")
-)
+//@NamedEntityGraph(
+//        name = "Event.withEnrollments",
+//        attributeNodes = @NamedAttributeNode("enrollments")
+//)
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
 public class Event {

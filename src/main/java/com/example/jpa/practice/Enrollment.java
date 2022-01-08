@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "id")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 public class Enrollment {
 
     @Id @GeneratedValue
