@@ -14,7 +14,7 @@ spring:
       password:
       driver-class-name: org.h2.Driver
   batch:
-    jdbc:
+    jdbc: # 내장 DB 일때 설정 가능
       initialize-schema: embedded
 
 
@@ -23,12 +23,14 @@ spring:
   config:
     activate:
       on-profile: mysql
-  datasource: # schema-mysql.sql
+  datasource:
     hikari:
       jdbc-url: jdbc:mysql://localhost:3306/inflearn_batch?useUnicode=true&characterEncoding=utf8
       username: inflearn_batch
       password: inflearn_batch
       driver-class-name: com.mysql.jdbc.Driver
   batch:
-    jdbc:
+    jdbc: # schema-mysql.sql 항상 실행
+      # 오류 발생 : Table 을 모두 삭제했는데, 자동 실행하는 부분이 never 일때는 테이블도 자동으로 생성되지 않기 때문
+      # initialize-schema: never
       initialize-schema: always
