@@ -16,6 +16,12 @@ import java.util.stream.Collectors;
 /**
  * @Builder 를 쓰면 Set 과 같은 필드가 null 로 들어간다.
  */
+
+/*
+enrollments 설정 이유 (N + 1)
+: 모임이 여러개일때 각 모임별로 enrollments 를 계속해서 조회해온다.
+: 같이 조회해야한다.
+ */
 @NamedEntityGraph(
         name = "Event.withEnrollments",
         attributeNodes = @NamedAttributeNode("enrollments")
