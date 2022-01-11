@@ -14,30 +14,33 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class DBJobConfiguration {
+public class JobConfiguration {
+
     // job 생성
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job dbJob() {
-        return this.jobBuilderFactory.get("dbJob")
+    public Job job() {
+        return this.jobBuilderFactory.get("job")
                 /* step start */
-                .start(dbStep1())
-                .next(dbStep2())
+                // simpleJobBuilder.java 로 이동 (SimpleJob 객체)
+                // 실행 : SimpleJob을 스프링부트는 자동으로 실행해주는에 어떻게 되는걸까?
+                // JobLauncherApplicationRunner 가 실행해준다.
+                // execute() : jobLauncher.run(job, parameters);
+                // stepHandler.handleStep(step, execution); : 스텝실행
+                .start(step1())
+                .next(step2())
                 .build();
     }
 
     @Bean
-    public Step dbStep1() {
-        return stepBuilderFactory.get("dbStep1")
+    public Step step1() {
+        return stepBuilderFactory.get("step1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        /**
-                         * Tasklet 은 무한반복되어 FINISHED 를 리턴하여 종료
-                         */
-                        System.out.println("DBJobConfiguration step1 was executed");
+                        System.out.println("step1");
                         return RepeatStatus.FINISHED;
                     }
                 })
@@ -45,12 +48,12 @@ public class DBJobConfiguration {
     }
 
     @Bean
-    public Step dbStep2() {
-        return stepBuilderFactory.get("dbStep2")
+    public Step step2() {
+        return stepBuilderFactory.get("step2")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("DBJobConfiguration step2 was executed");
+                        System.out.println("step2");
                         return RepeatStatus.FINISHED;
                     }
                 })
