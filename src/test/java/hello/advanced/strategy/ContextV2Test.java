@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
  * V2가 더 적합하다.
  * 코드를 실행할때 변하지 않는 템플릿이 있고, 그 템플릿 안에 원하는 코드를 실행하고싶은 경우가 많다.
  * 유연하게 실행 코드 조각을 전달하는 V2가 적합하다.
+ *
+ * V2 : 템플릿 콜백 패턴이라고도 한다.
+ * 클라이언트가 ContextV2.execute()를 실행할때 Strategy를 넘겨주고, ContextV2 뒤에서 Strategy가 실행된다.
  */
 @Slf4j
 public class ContextV2Test {
