@@ -34,3 +34,5 @@ spring:
       # 오류 발생 : Table 을 모두 삭제했는데, 자동 실행하는 부분이 never 일때는 테이블도 자동으로 생성되지 않기 때문
       # initialize-schema: never
       initialize-schema: always
+    job:
+      enabled: false # spring batch 자동실행 방지
