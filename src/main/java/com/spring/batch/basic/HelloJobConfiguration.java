@@ -1,4 +1,4 @@
-package com.spring.batch;
+package com.spring.batch.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -12,50 +12,44 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @RequiredArgsConstructor
-public class JobConfiguration {
+@Configuration // 빈 생성을 위해
+public class HelloJobConfiguration {
 
-    // job 생성
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job job() {
-        return this.jobBuilderFactory.get("job")
+    public Job helloJob() {
+        return this.jobBuilderFactory.get("helloJob")
                 /* step start */
-                // simpleJobBuilder.java 로 이동 (SimpleJob 객체)
-                // 실행 : SimpleJob을 스프링부트는 자동으로 실행해주는에 어떻게 되는걸까?
-                // JobLauncherApplicationRunner 가 실행해준다.
-                // execute() : jobLauncher.run(job, parameters);
-                // stepHandler.handleStep(step, execution); : 스텝실행
-                .start(step1())
-                .next(step2())
+                .start(helloStep1())
+                .next(helloStep2())
                 .build();
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
+    public Step helloStep1() {
+        return stepBuilderFactory.get("helloStep1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("step1");
+                        System.out.println(" ============================");
+                        System.out.println(" >> Hello Spring Batch");
+                        System.out.println(" ============================");
                         return RepeatStatus.FINISHED;
                     }
                 })
                 .build();
     }
 
-    @Bean
-    public Step step2() {
-        return stepBuilderFactory.get("step2")
-                .tasklet(new Tasklet() {
-                    @Override
-                    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("step2");
-                        return RepeatStatus.FINISHED;
-                    }
+    public Step helloStep2() {
+        return stepBuilderFactory.get("helloStep2")
+                .tasklet((contribution, chunkContext) -> {
+                    System.out.println(" ============================");
+                    System.out.println(" >> Step2 has executed");
+                    System.out.println(" ============================");
+                    return RepeatStatus.FINISHED;
                 })
                 .build();
     }

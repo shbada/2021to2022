@@ -1,4 +1,4 @@
-package com.spring.batch;
+package com.spring.batch.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -12,44 +12,47 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @RequiredArgsConstructor
-@Configuration // 빈 생성을 위해
-public class HelloJobConfiguration {
-
+public class DBJobConfiguration {
+    // job 생성
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job helloJob() {
-        return this.jobBuilderFactory.get("helloJob")
+    public Job dbJob() {
+        return this.jobBuilderFactory.get("dbJob")
                 /* step start */
-                .start(helloStep1())
-                .next(helloStep2())
+                .start(dbStep1())
+                .next(dbStep2())
                 .build();
     }
 
     @Bean
-    public Step helloStep1() {
-        return stepBuilderFactory.get("helloStep1")
+    public Step dbStep1() {
+        return stepBuilderFactory.get("dbStep1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println(" ============================");
-                        System.out.println(" >> Hello Spring Batch");
-                        System.out.println(" ============================");
+                        /**
+                         * Tasklet 은 무한반복되어 FINISHED 를 리턴하여 종료
+                         */
+                        System.out.println("DBJobConfiguration step1 was executed");
                         return RepeatStatus.FINISHED;
                     }
                 })
                 .build();
     }
 
-    public Step helloStep2() {
-        return stepBuilderFactory.get("helloStep2")
-                .tasklet((contribution, chunkContext) -> {
-                    System.out.println(" ============================");
-                    System.out.println(" >> Step2 has executed");
-                    System.out.println(" ============================");
-                    return RepeatStatus.FINISHED;
+    @Bean
+    public Step dbStep2() {
+        return stepBuilderFactory.get("dbStep2")
+                .tasklet(new Tasklet() {
+                    @Override
+                    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                        System.out.println("DBJobConfiguration step2 was executed");
+                        return RepeatStatus.FINISHED;
+                    }
                 })
                 .build();
     }

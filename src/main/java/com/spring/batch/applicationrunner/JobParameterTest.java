@@ -1,7 +1,6 @@
-package com.spring.batch;
+package com.spring.batch.applicationrunner;
 
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -10,12 +9,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-/**
- * 스프링부트가 제공하는 ApplicationRunner
- */
-@Component // 빈으로 만든다.
-public class JobRunner implements ApplicationRunner {
+import java.util.Date;
 
+@Component // bean
+public class JobParameterTest implements ApplicationRunner {
     /* 잡을 실행시키는, 스프링부트가 초기화될때 이미 빈으로 생성되어있어서 주입이 가능하다. */
     @Autowired
     private JobLauncher jobLauncher;
@@ -24,22 +21,19 @@ public class JobRunner implements ApplicationRunner {
     @Autowired
     private Job job;
 
-
     /**
-     * job Parameter add
-     * job 실행을 수동으로 수행
+     * Program argument : name=user1 seq(long)=2L date(date)=2021/01/01 double(double)=16.5
+     * 이렇게도 가능하다.
      * @param args
      * @throws Exception
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // 동일한 job 이 실행되면 에러 발생 :  A job instance already exists and complete for parameters ...
-//        JobParameters jobParameters = new JobParametersBuilder()
-//                .addString("name", "user1")
-//                .toJobParameters();
-
         JobParameters jobParameters = new JobParametersBuilder()
-                .addString("name", "user2")
+                .addString("name", "seohae")
+                .addLong("seq", 1L)
+                .addDate("date", new Date())
+                .addDouble("double", 16.5)
                 .toJobParameters();
 
         jobLauncher.run(job, jobParameters);
