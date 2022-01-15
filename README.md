@@ -6,4 +6,7 @@
 - Jpa  
 - Spring Security  
 - postgresql   
-- junit test       
+- junit test   
+
+- Database ERD   
+![IMAGES](/everydayDevPlan.drawio.png)
