@@ -24,6 +24,13 @@ public class EventService {
     private final EnrollmentRepository enrollmentRepository;
     private final ApplicationEventPublisher eventPublisher;
 
+    /**
+     * 모임 등록
+     * @param event
+     * @param study
+     * @param account
+     * @return
+     */
     public Event createEvent(Event event, Study study, Account account) {
         event.setCreatedBy(account);
         event.setCreatedDateTime(LocalDateTime.now());
@@ -33,6 +40,11 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    /**
+     * 모임 수정
+     * @param event
+     * @param eventForm
+     */
     public void updateEvent(Event event, EventForm eventForm) {
         modelMapper.map(eventForm, event);
         event.acceptWaitingList();
@@ -40,12 +52,21 @@ public class EventService {
                 "'" + event.getTitle() + "' 모임 정보를 수정했으니 확인하세요."));
     }
 
+    /**
+     * 모임 취소 (삭제)
+     * @param event
+     */
     public void deleteEvent(Event event) {
         eventRepository.delete(event);
         eventPublisher.publishEvent(new StudyUpdateEvent(event.getStudy(),
                 "'" + event.getTitle() + "' 모임을 취소했습니다."));
     }
 
+    /**
+     * 참가 신청
+     * @param event
+     * @param account
+     */
     public void newEnrollment(Event event, Account account) {
         if (!enrollmentRepository.existsByEventAndAccount(event, account)) {
             Enrollment enrollment = new Enrollment();
@@ -57,6 +78,11 @@ public class EventService {
         }
     }
 
+    /**
+     * 참가신청 취소
+     * @param event
+     * @param account
+     */
     public void cancelEnrollment(Event event, Account account) {
         Enrollment enrollment = enrollmentRepository.findByEventAndAccount(event, account);
         if (!enrollment.isAttended()) {
@@ -66,20 +92,38 @@ public class EventService {
         }
     }
 
+    /**
+     * 모임 승인
+     * @param event
+     * @param enrollment
+     */
     public void acceptEnrollment(Event event, Enrollment enrollment) {
         event.accept(enrollment);
         eventPublisher.publishEvent(new EnrollmentAcceptedEvent(enrollment));
     }
 
+    /**
+     * 모임 반려
+     * @param event
+     * @param enrollment
+     */
     public void rejectEnrollment(Event event, Enrollment enrollment) {
         event.reject(enrollment);
         eventPublisher.publishEvent(new EnrollmentRejectedEvent(enrollment));
     }
 
+    /**
+     * 모임 출석체크
+     * @param enrollment
+     */
     public void checkInEnrollment(Enrollment enrollment) {
         enrollment.setAttended(true);
     }
 
+    /**
+     * 모임 출석취소
+     * @param enrollment
+     */
     public void cancelCheckInEnrollment(Enrollment enrollment) {
         enrollment.setAttended(false);
     }
