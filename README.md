@@ -1,4 +1,4 @@
-# everydayDevPlan
+# TEST SAMPLE PROJECT
 [프로젝트] SpringBoot, JAVA11, Postgresql, JPA, API...
 
 - SpringBoot2.6 
