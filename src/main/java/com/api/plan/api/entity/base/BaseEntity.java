@@ -1,4 +1,4 @@
-package com.api.plan.entity.base;
+package com.api.plan.api.entity.base;
 
 import javax.persistence.MappedSuperclass;
 

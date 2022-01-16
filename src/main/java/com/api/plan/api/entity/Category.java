@@ -1,6 +1,6 @@
-package com.api.plan.entity;
+package com.api.plan.api.entity;
 
-import com.api.plan.entity.base.BaseEntity;
+import com.api.plan.api.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

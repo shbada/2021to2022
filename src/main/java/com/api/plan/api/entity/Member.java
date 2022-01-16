@@ -1,6 +1,6 @@
-package com.api.plan.entity;
+package com.api.plan.api.entity;
 
-import com.api.plan.entity.base.BaseEntity;
+import com.api.plan.api.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +21,8 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String memberId;
 
+    private String password;
+
     private String memberName;
 
     private String email;
@@ -32,6 +34,8 @@ public class Member extends BaseEntity {
     private String age;
 
     private String jobName;
+
+    private String role; // USER, ADMIN
 
     /*
       create table member_category (
