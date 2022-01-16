@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,4 +32,14 @@ public class Member extends BaseEntity {
     private String age;
 
     private String jobName;
+
+    /*
+      create table member_category (
+        member_idx int8 not null,
+        category_idx int8 not null,
+        primary key (member_idx, category_idx)
+    )
+     */
+    @ManyToMany
+    private Set<Category> category = new HashSet<>();
 }
