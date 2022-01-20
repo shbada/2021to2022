@@ -1,4 +1,4 @@
-StudyOlle_rode
+## StudyOlle_redo
 - 강의로 배운 내용을 바탕으로 혼자 직접 구현해보기
 
 #### 환경구성
