@@ -8,6 +8,9 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+--job.name=executionContextTestJob
+ */
 @Configuration
 @RequiredArgsConstructor
 public class ExecutionContextConfiguration {

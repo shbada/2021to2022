@@ -12,6 +12,9 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+--job.name=stepTaskletTestJob
+ */
 /**
  * SimpleStepHandler.java
  * AbstractStep.java

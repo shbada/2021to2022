@@ -11,7 +11,9 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+/*
+--job.name=JobExecutionTestJob
+ */
 /**
  * 1. Job 실행시키자.
  * Job이 COMPLETED 로 끝나면 BATCH_JOB_EXECUTION, BATCH_JOB_INSTANCE 각 1개의 row가 들어간다.
