@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   # Thymeleaf
   thymeleaf:
-    prefix: classpath:templates/ # TODO default ?? ???? account/??? ??????
+    prefix: classpath:templates/
   # JPA
   jpa:
     hibernate:
@@ -16,6 +16,3 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-
-app:
-  host: http://localhost:8080

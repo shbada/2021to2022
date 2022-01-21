@@ -129,6 +129,44 @@
 <!--                    <i th:if="${!hasNotification}" class="fa fa-bell-o" aria-hidden="true"></i>-->
 <!--                    <span class="text-info" th:if="${hasNotification}"><i class="fa fa-bell" aria-hidden="true"></i></span>-->
 <!--                </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <h6 class="dropdown-header">-->
+<!--                    <span sec:authentication="name">Username</span>-->
+<!--                </h6>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <a class="nav-link btn btn-outline-primary" th:href="@{/new-study}">-->
+<!--                    <svg th:if="${#strings.isEmpty(account?.profileImage)}" th:data-jdenticon-value="${#authentication.name}"-->
+<!--                         width="24" height="24" class="rounded border bg-light"></svg>-->
+<!--                    <img th:if="${!#strings.isEmpty(account?.profileImage)}" th:src="${account.profileImage}"-->
+<!--                         width="24" height="24" class="rounded border"/>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <a class="nav-link btn btn-outline-primary" th:href="@{'/profile/' + ${#authentication.name}}">프로필</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="#" th:href="@{'/settings/profile'}">설정</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post">-->
+<!--                    <button class="btn-outline-primary" type="submit">로그아웃</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" th:href="@{/login}">로그인</a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" th:href="@{/sign-up}">가입</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <!--                <a class="nav-link" th:href="@{/notifications}">-->
+                <!--                    <i th:if="${!hasNotification}" class="fa fa-bell-o" aria-hidden="true"></i>-->
+                <!--                    <span class="text-info" th:if="${hasNotification}"><i class="fa fa-bell" aria-hidden="true"></i></span>-->
+                <!--                </a>-->
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link btn btn-outline-primary" th:href="@{/new-study}">

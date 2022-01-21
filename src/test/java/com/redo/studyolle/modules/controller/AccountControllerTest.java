@@ -1,15 +1,20 @@
 package com.redo.studyolle.modules.controller;
 
+import com.redo.studyolle.common.mail.EmailMessage;
+import com.redo.studyolle.common.mail.EmailService;
 import com.redo.studyolle.infra.MockMvcTest;
 import com.redo.studyolle.modules.domain.entity.Account;
 import com.redo.studyolle.modules.repository.AccountRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.then;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
@@ -25,6 +30,9 @@ class AccountControllerTest {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @MockBean
+    EmailService emailService;
 
     @DisplayName("회원 가입 화면 보이는지 테스트")
     @Test
@@ -66,5 +74,7 @@ class AccountControllerTest {
         Account account = accountRepository.findByEmail("seohae@gmail.com");
         assertNotNull(account);
         assertNotEquals(account.getPassword(), "12345678");
+        assertNotNull(account.getEmailCheckToken());
+        then(emailService).should().sendEmail(any(EmailMessage.class));
     }
 }
