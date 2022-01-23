@@ -12,6 +12,9 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+--job.name=helloJob
+ */
 @RequiredArgsConstructor
 @Configuration // 빈 생성을 위해
 public class HelloJobConfiguration {
