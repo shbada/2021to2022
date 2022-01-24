@@ -36,3 +36,9 @@ spring:
       initialize-schema: always
     job:
       enabled: false # spring batch 자동실행 방지
+      # names: batchJob1 # 여기에 기재된 job 이 실행된다. 존재하지않는 job 을 실행시키면 에러 없이, 아무런 배치잡이 수행되지않는다.
+
+      # BatchProperties 의 name 에 저장되고 BatchAutoConfiguration 의 jobLauncherApplicationRunner() 에서 setJobNames 에서 job 이 셋팅된다.
+      # --batch.name=batchJob1, batchJob2 (, 구분으로 여러개 job 수행 가능)
+      # 넘어온 name 은 JobLauncherApplicationRunner 의 executeLocalJobs()에서 simpleMatch()로 name 매치를 판단한다.
+      names: ${job.name:NONE} # --job.name=batchJob1 로 실행시키겠다는 의미. 아무런 파라미터로 넘기지 않으면 NONE이라는 이름으로 실행되어 아무런 배치잡이 수행되지 않는다.
