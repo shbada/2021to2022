@@ -113,4 +113,30 @@ public class AccountService {
         account.completeSignUp();
         login(account);
     }
+
+    /**
+     * 로그인 링크 이메일 발송
+     * @param account
+     */
+    public void sendLoginLink(Account account) {
+        /* email content */
+        Context context = new Context();
+        context.setVariable("link", "/login-by-email?token=" + account.getEmailCheckToken() +
+                "&email=" + account.getEmail());
+        context.setVariable("nickname", account.getNickname());
+        context.setVariable("linkName", "스터디올래 로그인하기");
+        context.setVariable("message", "로그인 하려면 아래 링크를 클릭하세요.");
+        context.setVariable("host", appProperties.getHost());
+        String message = templateEngine.process("mail/simple-link", context);
+
+        /* dto set */
+        EmailMessage emailMessage = EmailMessage.builder()
+                .to(account.getEmail())
+                .subject("스터디올래, 로그인 링크")
+                .message(message)
+                .build();
+
+        /* send email */
+        emailService.sendEmail(emailMessage);
+    }
 }

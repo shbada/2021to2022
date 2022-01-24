@@ -1,9 +1,6 @@
 package com.redo.studyolle.modules.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +11,7 @@ import java.util.UUID;
 @Setter // modelMapper
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Account {
     @Id
     @GeneratedValue
@@ -82,5 +80,13 @@ public class Account {
     public void completeSignUp() {
         this.emailVerified = true;
         this.joinedAt = LocalDateTime.now();
+    }
+
+    /**
+     * 이메일 로그인 발송 1시간마다 1회씩 가능
+     * @return
+     */
+    public boolean canSendConfirmEmail() {
+        return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
     }
 }
