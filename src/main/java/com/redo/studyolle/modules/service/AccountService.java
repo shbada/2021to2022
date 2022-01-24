@@ -139,4 +139,14 @@ public class AccountService {
         /* send email */
         emailService.sendEmail(emailMessage);
     }
+
+    /**
+     * 패스워드 업데이트
+     * @param account
+     * @param newPassword
+     */
+    public void updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword));
+        accountRepository.save(account); // account 는 detach 상태이므로 save 호출 필요
+    }
 }
