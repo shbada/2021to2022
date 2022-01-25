@@ -1,4 +1,4 @@
-package com.book.jpa.domain;
+package com.book.jpa.chapter04;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ create table board (
     primary key (id)
 )
  */
-@Entity
+//@Entity
 /*
 create sequence board_seq start 1 increment 1
  */

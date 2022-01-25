@@ -1,4 +1,4 @@
-package com.book.jpa.domain;
+package com.book.jpa.chapter04;
 
 public enum RoleType {
     ADMIN, USER

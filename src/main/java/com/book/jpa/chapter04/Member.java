@@ -1,4 +1,4 @@
-package com.book.jpa.domain;
+package com.book.jpa.chapter04;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ create table member (
     primary key (id)
 )
  */
-@Entity
+//@Entity
 
 /*
 alter table if exists member
