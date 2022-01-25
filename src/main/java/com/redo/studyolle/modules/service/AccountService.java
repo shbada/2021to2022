@@ -4,6 +4,7 @@ import com.redo.studyolle.common.AppProperties;
 import com.redo.studyolle.common.mail.EmailMessage;
 import com.redo.studyolle.common.mail.EmailService;
 import com.redo.studyolle.modules.domain.entity.Account;
+import com.redo.studyolle.modules.domain.form.ProfileForm;
 import com.redo.studyolle.modules.domain.form.SignUpForm;
 import com.redo.studyolle.modules.repository.AccountRepository;
 import com.redo.studyolle.security.UserAccount;
@@ -147,6 +148,29 @@ public class AccountService {
      */
     public void updatePassword(Account account, String newPassword) {
         account.setPassword(passwordEncoder.encode(newPassword));
+        accountRepository.save(account); // account 는 detach 상태이므로 save 호출 필요
+    }
+
+    /**
+     * 닉네임 업데이트
+     * @param account
+     * @param nickname
+     */
+    public void updateNickname(Account account, String nickname) {
+        account.setNickname(nickname);
+        accountRepository.save(account);
+
+        /* 로그인 (변경된 닉네임으로 재로그인 필요) */
+        login(account);
+    }
+
+    /**
+     * 프로필 업데이트
+     * @param account
+     * @param profileForm
+     */
+    public void updateProfile(Account account, ProfileForm profileForm) {
+        modelMapper.map(profileForm, account);
         accountRepository.save(account); // account 는 detach 상태이므로 save 호출 필요
     }
 }
