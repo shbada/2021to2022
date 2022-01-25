@@ -1,9 +1,6 @@
 package com.book.jpa.chapter05;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Team {
     @Id
     @Column(name= "ID")
@@ -28,6 +26,6 @@ public class Team {
         members_id varchar(255) not null
     )
      */
-    @OneToMany
-    private List<Member> members;
+    // @OneToMany
+    // private List<Member> members;
 }
