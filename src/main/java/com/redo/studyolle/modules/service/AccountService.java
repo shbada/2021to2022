@@ -4,27 +4,38 @@ import com.redo.studyolle.common.AppProperties;
 import com.redo.studyolle.common.mail.EmailMessage;
 import com.redo.studyolle.common.mail.EmailService;
 import com.redo.studyolle.modules.domain.entity.Account;
+import com.redo.studyolle.modules.domain.entity.Tag;
 import com.redo.studyolle.modules.domain.form.ProfileForm;
 import com.redo.studyolle.modules.domain.form.SignUpForm;
+import com.redo.studyolle.modules.domain.form.TagForm;
 import com.redo.studyolle.modules.repository.AccountRepository;
+import com.redo.studyolle.security.CurrentAccount;
 import com.redo.studyolle.security.UserAccount;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
@@ -172,5 +183,37 @@ public class AccountService {
     public void updateProfile(Account account, ProfileForm profileForm) {
         modelMapper.map(profileForm, account);
         accountRepository.save(account); // account 는 detach 상태이므로 save 호출 필요
+    }
+
+    /**
+     * 회원의 태그 조회
+     * @param account
+     * @return
+     */
+    public Set<Tag> getTags(Account account) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        return byId.orElseThrow().getTags();
+    }
+
+    /**
+     * 회원의 태그 등록
+     * @param account
+     * @param tag
+     */
+    public void addTag(Account account, Tag tag) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+
+        /* byId 가 존재할 경우 실행된다. account add tag */
+        byId.ifPresent(a -> a.getTags().add(tag));
+    }
+
+    /**
+     * 태그 삭제
+     * @param account
+     * @param tag
+     */
+    public void removeTag(Account account, Tag tag) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getTags().remove(tag));
     }
 }

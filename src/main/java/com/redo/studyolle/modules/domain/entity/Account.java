@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -56,6 +58,16 @@ public class Account {
     private boolean studyUpdatedByEmail;
 
     private boolean studyUpdatedByWeb = true;
+
+    /*
+      create table account_tags (
+        account_id int8 not null,
+        tags_id int8 not null,
+        primary key (account_id, tags_id)
+    )
+     */
+    @ManyToMany
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * 이메일 토큰 생성하여 저장
