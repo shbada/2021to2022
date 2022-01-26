@@ -118,8 +118,10 @@ public class Chapter05Controller {
         /* 무시) 연관관계의 주인이 team 이 아니므로 의미없다. */
         // 그래도 넣어줘야한다.
         // 테스트에서 team1.getMembers(); 를 출력했을때 아래 코드가 없으면 0 인데, 기대한 값은 2일 것이다.
-        team1.getMembers().add(member1);
-        team1.getMembers().add(member2);
+//        team1.getMembers().add(member1);
+//        team1.getMembers().add(member2);
+
+        // Member 의 setTeam() 메서드 리팩토링으로 위 코드가 들어가서 따로 호출해줄 필요가 없다.
 
         return "ok";
     }

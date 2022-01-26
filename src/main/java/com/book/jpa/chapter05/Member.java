@@ -34,8 +34,23 @@ public class Member {
      */
     /**
      * 연관관계 매핑
+     * 사실 여기의 주인의 단방향 매핑만으로도 객체의 연관관계 매핑은 이미 완료되었다.
      */
     @ManyToOne // member 테이블에 team_id varchar(255), 설정
     @JoinColumn(name="TEAM_ID") // 매핑할 외래 키 이름을 지정한다.
     private Team team;
+
+    /**
+     * 양방향 연관관계 set 메서드
+     * @param team
+     */
+    public void setTeam(Team team) {
+        // 기존에 매핑된 팀이 있었다면 매핑 제거
+        if (this.team != null) {
+            this.team.getMembers().remove(this);
+        }
+
+        this.team = team;
+        team.getMembers().add(this);
+    }
 }
