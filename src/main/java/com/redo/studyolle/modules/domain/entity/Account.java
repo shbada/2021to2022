@@ -69,6 +69,9 @@ public class Account {
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
 
+    @ManyToMany
+    private Set<Zone> zones = new HashSet<>();
+
     /**
      * 이메일 토큰 생성하여 저장
      */

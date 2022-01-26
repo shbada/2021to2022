@@ -5,6 +5,7 @@ import com.redo.studyolle.common.mail.EmailMessage;
 import com.redo.studyolle.common.mail.EmailService;
 import com.redo.studyolle.modules.domain.entity.Account;
 import com.redo.studyolle.modules.domain.entity.Tag;
+import com.redo.studyolle.modules.domain.entity.Zone;
 import com.redo.studyolle.modules.domain.form.ProfileForm;
 import com.redo.studyolle.modules.domain.form.SignUpForm;
 import com.redo.studyolle.modules.domain.form.TagForm;
@@ -215,5 +216,35 @@ public class AccountService {
     public void removeTag(Account account, Tag tag) {
         Optional<Account> byId = accountRepository.findById(account.getId());
         byId.ifPresent(a -> a.getTags().remove(tag));
+    }
+
+    /**
+     * 지역 저장
+     * @param account
+     * @param zone
+     */
+    public void addZone(Account account, Zone zone) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getZones().add(zone));
+    }
+
+    /**
+     * 지역 삭제
+     * @param account
+     * @param zone
+     */
+    public void removeZone(Account account, Zone zone) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getZones().remove(zone));
+    }
+
+    /**
+     * 회원의 지역 정보 조회
+     * @param account
+     * @return
+     */
+    public Set<Zone> getZones(Account account) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        return byId.orElseThrow().getZones();
     }
 }

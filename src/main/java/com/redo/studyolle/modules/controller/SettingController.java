@@ -4,13 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redo.studyolle.modules.domain.entity.Account;
 import com.redo.studyolle.modules.domain.entity.Tag;
-import com.redo.studyolle.modules.domain.form.NicknameForm;
-import com.redo.studyolle.modules.domain.form.PasswordForm;
-import com.redo.studyolle.modules.domain.form.ProfileForm;
-import com.redo.studyolle.modules.domain.form.TagForm;
+import com.redo.studyolle.modules.domain.entity.Zone;
+import com.redo.studyolle.modules.domain.form.*;
 import com.redo.studyolle.modules.domain.validator.NicknameValidator;
 import com.redo.studyolle.modules.domain.validator.PasswordFormValidator;
 import com.redo.studyolle.modules.repository.TagRepository;
+import com.redo.studyolle.modules.repository.ZoneRepository;
 import com.redo.studyolle.modules.service.AccountService;
 import com.redo.studyolle.modules.service.TagService;
 import com.redo.studyolle.security.CurrentAccount;
@@ -40,6 +39,8 @@ public class SettingController {
 
     private final TagService tagService;
     private final TagRepository tagRepository;
+
+    private final ZoneRepository zoneRepository;
 
     /**
      * PasswordFormValidator
@@ -237,6 +238,70 @@ public class SettingController {
 
         /* 태그 삭제 */
         accountService.removeTag(account, tag);
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 지역정보 수정 화면
+     * @param account
+     * @param model
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GetMapping("/zones")
+    public String updateZonesForm(@CurrentAccount Account account, Model model) throws JsonProcessingException {
+        model.addAttribute(account);
+
+        /* 회원의 지역정보 조회 */
+        Set<Zone> zones = accountService.getZones(account);
+        model.addAttribute("zones", zones.stream().map(Zone::toString).collect(Collectors.toList()));
+
+        /* 모든 지역 리스트 조회 */
+        List<String> allZones = zoneRepository.findAll().stream().map(Zone::toString).collect(Collectors.toList());
+        model.addAttribute("whitelist", objectMapper.writeValueAsString(allZones));
+
+        return "settings/zones";
+    }
+
+    /**
+     * 지역 추가
+     * @param account
+     * @param zoneForm
+     * @return
+     */
+    @PostMapping("/zones/add")
+    @ResponseBody
+    public ResponseEntity addZone(@CurrentAccount Account account, @RequestBody ZoneForm zoneForm) {
+        /* 존재하는 지역 체크 */
+        Zone zone = zoneRepository.findByCityAndProvince(zoneForm.getCityName(), zoneForm.getProvinceName());
+        if (zone == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        /* 지역 저장 */
+        accountService.addZone(account, zone);
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 지역 삭제
+     * @param account
+     * @param zoneForm
+     * @return
+     */
+    @PostMapping("/zones/remove")
+    @ResponseBody
+    public ResponseEntity removeZone(@CurrentAccount Account account, @RequestBody ZoneForm zoneForm) {
+        /* 존재하는 지역 체크 */
+        Zone zone = zoneRepository.findByCityAndProvince(zoneForm.getCityName(), zoneForm.getProvinceName());
+        if (zone == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        /* 지역 삭제 */
+        accountService.removeZone(account, zone);
 
         return ResponseEntity.ok().build();
     }
