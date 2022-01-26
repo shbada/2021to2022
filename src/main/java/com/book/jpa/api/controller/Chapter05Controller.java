@@ -87,4 +87,40 @@ public class Chapter05Controller {
 
         return "ok";
     }
+
+    /**
+     * 양방향 연관관계 저장
+     * @return
+     */
+    @PutMapping("/team/save")
+    public String saveMemberTeam() {
+        // 팀1 저장
+        Team team1 = new Team();
+        team1.setName("팀1");
+        teamRepository.save(team1);
+
+        // 회원1 저장
+        Member member1 = new Member();
+        member1.setUsername("회원1");
+        /**
+         * 연관관계 주인은 Member 다.
+         * setTeam()을 하지 않으면 Member 의 team_ID는 null이다.
+         * 연관관계의 주인만이 외래 키의 값을 변경할 수 있다.
+         */
+        member1.setTeam(team1); // 연관관계 설정
+        memberRepository.save(member1);
+
+        Member member2 = new Member();
+        member2.setUsername("회원2");
+        member2.setTeam(team1); // 연관관계 설정
+        memberRepository.save(member2);
+
+        /* 무시) 연관관계의 주인이 team 이 아니므로 의미없다. */
+        // 그래도 넣어줘야한다.
+        // 테스트에서 team1.getMembers(); 를 출력했을때 아래 코드가 없으면 0 인데, 기대한 값은 2일 것이다.
+        team1.getMembers().add(member1);
+        team1.getMembers().add(member2);
+
+        return "ok";
+    }
 }
