@@ -1,0 +1,21 @@
+spring:
+  # Postgres Database
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shopping
+    username: shopping
+    password: shopping
+    driver-class-name: org.postgresql.Driver
+  # Thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+app:
+  host: http://localhost:8080
