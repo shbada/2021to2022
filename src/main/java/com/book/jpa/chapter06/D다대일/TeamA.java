@@ -38,7 +38,7 @@ public class TeamA {
      * 1) 주인(Member)는 mappedBy 속성을 사용하지 않는다.
      * 2) 주인이 아니면(Team) mappedBy 속성을 사용해서 값으로 연관관계의 주인을 지정해야한다.
      */
-     @OneToMany(mappedBy = "team") // team 은 주인이 아님을 설장한다. 주인은 Member.team 이다.
+     @OneToMany(mappedBy = "teamA") // team 은 주인이 아님을 설장한다. 주인은 Member.team 이다.
      private List<MemberA> memberA;
 
      public void addMember(MemberA memberA) {
