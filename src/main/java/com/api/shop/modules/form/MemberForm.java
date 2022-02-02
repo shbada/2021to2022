@@ -1,4 +1,4 @@
-package com.api.shop.api.form;
+package com.api.shop.modules.form;
 
 import lombok.Getter;
 import lombok.Setter;

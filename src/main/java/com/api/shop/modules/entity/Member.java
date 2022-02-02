@@ -1,4 +1,4 @@
-package com.api.shop.api.entity;
+package com.api.shop.modules.entity;
 
 import lombok.Getter;
 
