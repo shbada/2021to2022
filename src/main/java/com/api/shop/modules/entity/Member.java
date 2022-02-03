@@ -14,4 +14,6 @@ public class Member {
     private Long idx;
 
     private String memberName;
+
+    private String password;
 }
