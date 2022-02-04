@@ -21,7 +21,10 @@ public class MemberService {
      * @param memberForm
      */
     public void saveMember(MemberForm memberForm) {
+        // password encoding
         memberForm.setPassword(passwordEncoder.encode(memberForm.getPassword()));
+
+        // save member
         Member member = modelMapper.map(memberForm, Member.class);
         memberRepository.save(member);
     }
