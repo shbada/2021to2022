@@ -1,18 +1,11 @@
 package com.book.jpa.api.controller;
 
-import com.book.jpa.api.repository.MemberERepository;
-import com.book.jpa.api.repository.MemberRepository;
-import com.book.jpa.api.repository.ProductERepository;
-import com.book.jpa.api.repository.TeamRepository;
-import com.book.jpa.api.service.Chapter05Service;
-import com.book.jpa.chapter05.Member;
-import com.book.jpa.chapter05.Team;
+import com.book.jpa.chapter06.D다대다.MemberERepository;
+import com.book.jpa.chapter06.D다대다.ProductERepository;
 import com.book.jpa.chapter06.D다대다.MemberE;
 import com.book.jpa.chapter06.D다대다.ProductE;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

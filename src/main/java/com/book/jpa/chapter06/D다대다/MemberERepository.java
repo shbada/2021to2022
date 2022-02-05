@@ -1,4 +1,4 @@
-package com.book.jpa.api.repository;
+package com.book.jpa.chapter06.D다대다;
 
 import com.book.jpa.chapter05.Member;
 import com.book.jpa.chapter06.D다대다.MemberE;

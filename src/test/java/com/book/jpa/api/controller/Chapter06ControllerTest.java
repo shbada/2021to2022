@@ -1,11 +1,7 @@
 package com.book.jpa.api.controller;
 
-import com.book.jpa.api.repository.MemberERepository;
-import com.book.jpa.api.repository.MemberRepository;
-import com.book.jpa.api.repository.ProductERepository;
-import com.book.jpa.api.repository.TeamRepository;
-import com.book.jpa.chapter05.Member;
-import com.book.jpa.chapter05.Team;
+import com.book.jpa.chapter06.D다대다.MemberERepository;
+import com.book.jpa.chapter06.D다대다.ProductERepository;
 import com.book.jpa.chapter06.D다대다.MemberE;
 import com.book.jpa.chapter06.D다대다.ProductE;
 import org.assertj.core.api.Assertions;
@@ -20,7 +16,6 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

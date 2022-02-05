@@ -1,9 +1,6 @@
-package com.book.jpa.chapter06.F다대다_한계극복;
+package com.book.jpa.chapter06.F다대다_한계극복.api;
 
-import com.book.jpa.chapter06.D다대다.MemberE;
-import com.book.jpa.chapter06.D다대다.MemberERepository;
-import com.book.jpa.chapter06.D다대다.ProductE;
-import com.book.jpa.chapter06.D다대다.ProductERepository;
+import com.book.jpa.chapter06.F다대다_한계극복.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
