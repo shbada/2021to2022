@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * MemberProduct 를 Order 엔티티로 새로 생성하는게 편할 수도 있다.
  */
-@Entity
+//@Entity
 @Setter
 @Getter
 public class Order {
