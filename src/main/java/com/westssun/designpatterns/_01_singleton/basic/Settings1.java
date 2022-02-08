@@ -1,4 +1,4 @@
-package com.westssun.designpatterns._01_singleton;
+package com.westssun.designpatterns._01_singleton.basic;
 
 /**
  * private 생성자와 public static 메소드를 사용하는 방법

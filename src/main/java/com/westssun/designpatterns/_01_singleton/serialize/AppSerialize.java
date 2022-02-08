@@ -1,8 +1,6 @@
-package com.westssun.designpatterns._01_singleton;
+package com.westssun.designpatterns._01_singleton.serialize;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class AppSerialize {
     public static void main(String[] args) {

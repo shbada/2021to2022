@@ -1,4 +1,4 @@
-package com.westssun.designpatterns._01_singleton;
+package com.westssun.designpatterns._01_singleton.serialize;
 
 import java.io.Serializable;
 

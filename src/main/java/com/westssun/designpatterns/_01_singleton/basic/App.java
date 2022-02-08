@@ -1,4 +1,4 @@
-package com.westssun.designpatterns._01_singleton;
+package com.westssun.designpatterns._01_singleton.basic;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

@@ -1,4 +1,4 @@
-package com.westssun.designpatterns._01_singleton;
+package com.westssun.designpatterns._01_singleton.sync;
 
 /**
  * Java8 이후 버전
