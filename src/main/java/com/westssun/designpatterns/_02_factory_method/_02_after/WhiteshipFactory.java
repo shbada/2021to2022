@@ -1,9 +1,9 @@
 package com.westssun.designpatterns._02_factory_method._02_after;
 
-public class BlackShipFactory implements ShipFactory {
+public class WhiteshipFactory implements ShipFactory {
     @Override
     public Ship createShip() {
-        return new BlackShip();
+        return new Whiteship();
     }
 
 //    public static Ship orderShip(String name, String email) {

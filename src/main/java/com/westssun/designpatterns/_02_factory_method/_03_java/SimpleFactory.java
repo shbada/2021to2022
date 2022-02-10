@@ -1,15 +1,15 @@
 package com.westssun.designpatterns._02_factory_method._03_java;
 
-import com.westssun.designpatterns._02_factory_method._02_after.BlackShip;
-import com.westssun.designpatterns._02_factory_method._02_after.WhiteShip;
+import com.westssun.designpatterns._02_factory_method._02_after.Blackship;
+import com.westssun.designpatterns._02_factory_method._02_after.Whiteship;
 
 public class SimpleFactory {
 
     public Object createProduct(String name) {
         if (name.equals("whiteship")) {
-            return new WhiteShip();
+            return new Whiteship();
         } else if (name.equals("blackship")) {
-            return new BlackShip();
+            return new Blackship();
         }
 
         throw new IllegalArgumentException();
