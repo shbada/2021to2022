@@ -35,7 +35,7 @@ public class TaskletStepConfiguration {
     public Job taskletStepJob() {
         return this.jobBuilderFactory.get("taskletStepJob")
                 .start(taskletStepStep1())
-                .start(chunkStep())
+                .next(chunkStep())
                 .build();
     }
 
