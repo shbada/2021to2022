@@ -23,6 +23,11 @@ public class ProxyInJava {
         gameServiceProxy.startGame();
     }
 
+    /**
+     * 인터페이스가 없으면 CGLIB 사용
+     * @param target
+     * @return
+     */
     private GameService getGameServiceProxy(GameService target) {
         // proxy Instance 생성
         return  (GameService) Proxy.newProxyInstance(this.getClass().getClassLoader(),
