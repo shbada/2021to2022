@@ -1,8 +1,10 @@
 package com.api.shop.modules.controller;
 
 import com.api.shop.common.Output;
+import com.api.shop.modules.form.LoginForm;
 import com.api.shop.modules.form.MemberForm;
 import com.api.shop.modules.repository.MemberRepository;
+import com.api.shop.modules.service.AuthService;
 import com.api.shop.modules.service.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import javax.validation.Valid;
 public class AuthController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
+    private final AuthService authService;
     private final Output output;
 
     /**
@@ -28,8 +31,18 @@ public class AuthController {
      * @return
      */
     @PostMapping("/register")
-    public ResponseEntity<?> memberRegister(@Valid @ModelAttribute MemberForm memberForm) {
+    public ResponseEntity<?> register(@Valid @ModelAttribute MemberForm memberForm) {
         memberService.saveMember(memberForm);
+        return output.send();
+    }
+
+    /**
+     * 로그인
+     * @return
+     */
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @ModelAttribute LoginForm loginForm) {
+        String memberName = authService.login(loginForm);
         return output.send();
     }
 }

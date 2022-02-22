@@ -12,7 +12,8 @@ import javax.validation.constraints.Pattern;
 public class LoginForm {
     @NotBlank
     @Length(min = 3, max = 20)
-    private String memberId;
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{3,20}$")
+    private String memberName;
 
     @NotBlank
     @Length(min = 8, max = 50)

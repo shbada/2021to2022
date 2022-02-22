@@ -26,6 +26,8 @@ public class MemberService {
 
         // save member
         Member member = modelMapper.map(memberForm, Member.class);
+        member.setRoleUser();
+
         memberRepository.save(member);
     }
 }
