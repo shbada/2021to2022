@@ -43,6 +43,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @ModelAttribute LoginForm loginForm) {
         String memberName = authService.login(loginForm);
-        return output.send();
+        return output.send(memberName);
     }
 }
