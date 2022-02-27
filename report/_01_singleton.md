@@ -79,7 +79,7 @@ import lombok.Setter;
  * Enum 을 상속받고 있다. (serializable 을 지원받는다.)
  */
 public enum EnumSingleton {
-    INSTANCE;
+    INSTANCE; // EnumSingleton.INSTANCE
 
     // default 가 private
     private EnumSingleton() {
