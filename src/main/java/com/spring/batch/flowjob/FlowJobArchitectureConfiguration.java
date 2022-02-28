@@ -37,7 +37,7 @@ public class FlowJobArchitectureConfiguration {
     @Bean
     public Job flowJobArchitectureJob() {
         return this.jobBuilderFactory.get("flowJobArchitectureJob")
-                .start(flowJobArchitectureFlowJob())
+                .start(flowJobArchitectureFlowJob()) // flow return
                 .next(flowJobArchitectureStep3())
                 .end()
                 .build();
@@ -46,8 +46,8 @@ public class FlowJobArchitectureConfiguration {
     @Bean
     public Flow flowJobArchitectureFlowJob() {
         FlowBuilder<Flow> flowBuilder = new FlowBuilder<>("flowJobArchitectureFlowJob");
-        flowBuilder.start(flowJobArchitectureStep1())
-                    .next(flowJobArchitectureStep2())
+        flowBuilder.start(flowJobArchitectureStep1()) // step1
+                    .next(flowJobArchitectureStep2()) // step2
                     .end();
 
         return flowBuilder.build();
