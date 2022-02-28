@@ -17,7 +17,7 @@ public class Member {
     private String username;
     private int age;
 
-    @ManyToOne // Many 쪽(Member)에 TEAM_ID 컬럼 생성됨
+    @ManyToOne(fetch = FetchType.LAZY) // Many 쪽(Member)에 TEAM_ID 컬럼 생성됨
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
@@ -43,5 +43,14 @@ public class Member {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
     }
 }

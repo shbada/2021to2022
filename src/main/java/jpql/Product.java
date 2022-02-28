@@ -3,7 +3,7 @@ package jpql;
 import javax.persistence.*;
 
 @Entity
-@Table(name="TEAM")
+@Table(name="PRODUCT")
 public class Product {
 
     @Id @GeneratedValue
