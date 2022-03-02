@@ -1,4 +1,7 @@
-package com.designpattern.report._03_abstract_factory.step2_after;
+package com.designpattern.report._03_abstract_factory.step2_after.abstractFactory;
+
+import com.designpattern.report._03_abstract_factory.step2_after.product.Anchor;
+import com.designpattern.report._03_abstract_factory.step2_after.product.Wheel;
 
 /**
  * 추상 팩토리 생성

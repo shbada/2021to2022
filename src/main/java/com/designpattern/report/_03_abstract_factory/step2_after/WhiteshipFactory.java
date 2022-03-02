@@ -1,5 +1,13 @@
 package com.designpattern.report._03_abstract_factory.step2_after;
 
+import com.designpattern.report._03_abstract_factory.step2_after.abstractFactory.DefaultShipFactory;
+import com.designpattern.report._03_abstract_factory.step2_after.abstractFactory.ShipPartsFactory;
+import com.designpattern.report._03_abstract_factory.step2_after.product.Ship;
+import com.designpattern.report._03_abstract_factory.step2_after.product.Whiteship;
+
+/**
+ * Client
+ */
 public class WhiteshipFactory extends DefaultShipFactory {
 
     private ShipPartsFactory shipPartsFactory;
