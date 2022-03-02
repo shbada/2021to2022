@@ -1,4 +1,4 @@
-package com.designpattern.report._02_factory_method.step2_after;
+package com.designpattern.report._02_factory_method.step2_after.product;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,6 @@
-package com.designpattern.report._02_factory_method.step2_after;
+package com.designpattern.report._02_factory_method.step2_after.creator;
+
+import com.designpattern.report._02_factory_method.step2_after.product.Ship;
 
 /**
  * 팩토리 메서드 패턴

@@ -1,5 +1,9 @@
 package com.designpattern.report._02_factory_method.step2_after;
 
+import com.designpattern.report._02_factory_method.step2_after.creator.BlackshipFactory;
+import com.designpattern.report._02_factory_method.step2_after.creator.ShipFactory;
+import com.designpattern.report._02_factory_method.step2_after.creator.WhiteshipFactory;
+
 public class Client {
     public static void main(String[] args) {
         Client client = new Client();
