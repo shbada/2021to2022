@@ -3,5 +3,5 @@
 - 구체적으로 어떤 클래스의 인스턴스를(concrete product)를 사용하는지 감출 수 있다.
 ![IMAGES](../report/images/abstractFactory01.png)     
 
-(1) 추상 팩토리 적용 후
+(1) 적용 후
 ![IMAGES](../report/images/abstractFactory02.png)

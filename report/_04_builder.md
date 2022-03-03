@@ -3,5 +3,5 @@
 - (복잡한) 객체를 만드는 프로세스를 독립적으로 분리할 수 있다.
 ![IMAGES](../report/images/builder01.png)     
 
-(1) 추상 팩토리 적용 후
+(1) 적용 후
 ![IMAGES](../report/images/builder02.png)
