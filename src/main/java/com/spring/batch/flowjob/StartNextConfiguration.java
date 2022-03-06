@@ -27,7 +27,7 @@ public class StartNextConfiguration {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job flowJob() {
+    public Job startNextJob() {
         return this.jobBuilderFactory.get("startNextJob")
                 .start(flowA())// step1, step2
                 .next(startNextStep3())

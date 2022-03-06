@@ -16,29 +16,29 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
-public class JobConfiguration {
+public class JobTestConfiguration {
 
     // job 생성
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job job() {
-        return this.jobBuilderFactory.get("job")
+    public Job testJob() {
+        return this.jobBuilderFactory.get("testJob")
                 /* step start */
                 // simpleJobBuilder.java 로 이동 (SimpleJob 객체)
                 // 실행 : SimpleJob을 스프링부트는 자동으로 실행해주는에 어떻게 되는걸까?
                 // JobLauncherApplicationRunner 가 실행해준다.
                 // execute() : jobLauncher.run(job, parameters);
                 // stepHandler.handleStep(step, execution); : 스텝실행
-                .start(step1())
-                .next(step2())
+                .start(testStep1())
+                .next(testStep2())
                 .build();
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
+    public Step testStep1() {
+        return stepBuilderFactory.get("testStep1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
@@ -50,8 +50,8 @@ public class JobConfiguration {
     }
 
     @Bean
-    public Step step2() {
-        return stepBuilderFactory.get("step2")
+    public Step testStep2() {
+        return stepBuilderFactory.get("testStep2")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {

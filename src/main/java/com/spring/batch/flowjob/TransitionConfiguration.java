@@ -28,7 +28,7 @@ public class TransitionConfiguration {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job flowJob() {
+    public Job transitionJob() {
         return this.jobBuilderFactory.get("transitionJob")
                 // step1 이 FAILED 면 step2 를 실행
                 // step2 가 FAILED 면 stop

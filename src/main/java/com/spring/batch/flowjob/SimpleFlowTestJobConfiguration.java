@@ -36,10 +36,10 @@ public class SimpleFlowTestJobConfiguration {
     @Bean
     public Job simpleFlowTestJob() {
         return this.jobBuilderFactory.get("simpleFlowTestJob")
-                .start(simpleFlow1())
+                .start(simpleTestFlow())
                     .on("COMPLETED")
                     .to(simpleFlow2())
-                .from(simpleFlow1()) // 이 경우의 JOB (BATCH_STATUS : COMPLETED, EXIT_CODE : FAILED)
+                .from(simpleTestFlow()) // 이 경우의 JOB (BATCH_STATUS : COMPLETED, EXIT_CODE : FAILED)
                     // flow 내 Step 이 실행되고 나서 ExitSTauts 를 FlowExecutionStatus 로 저장하고,
                     // 이가 FlowJob 의 배치 결과에 관여
                     .on("FAILED")
@@ -49,9 +49,9 @@ public class SimpleFlowTestJobConfiguration {
     }
 
     @Bean
-    public Flow simpleFlow1() {
+    public Flow simpleTestFlow() {
         // flowBuilder
-        FlowBuilder<Flow> flowBuilder = new FlowBuilder<>("simpleFlow1");
+        FlowBuilder<Flow> flowBuilder = new FlowBuilder<>("simpleTestFlow");
         flowBuilder.start(simpleFlowTestStep1())
                 .next(simpleFlowTestStep2())
                 .end();
