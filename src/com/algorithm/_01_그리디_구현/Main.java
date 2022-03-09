@@ -1,4 +1,4 @@
-package com.algorithm;
+package com.algorithm._01_그리디_구현;
 
 /**
  *

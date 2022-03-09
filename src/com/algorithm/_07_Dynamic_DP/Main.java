@@ -1,4 +1,4 @@
-package com.algorithm;
+package com.algorithm._07_Dynamic_DP;
 
 /**
  *
