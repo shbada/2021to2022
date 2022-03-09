@@ -1,7 +1,8 @@
 package com.algorithm._01_그리디_구현;
 
 /**
- *
+ * @Date 2022/03/09
+ * @URL https://
  */
 public class Main {
     public static void main(String[] args) {
