@@ -15,7 +15,7 @@
 ![IMAGES](/img.png)
 #
 ### 인증 관련 API
-(1) 회원가입 
+(1) 회원가입  
 `/auth/register`
 
 (2) 로그인   
