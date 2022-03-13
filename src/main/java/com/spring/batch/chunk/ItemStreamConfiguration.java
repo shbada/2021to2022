@@ -51,9 +51,17 @@ public class ItemStreamConfiguration {
                 // AbstractStep - open()
                 // TaskletStep - open()
                 // CompositeItemStream > open() (여기서 streams에 우리가 만든 Reader, Writer 이 담겨져있다)
-                // TaskletStep - update() (chunk 프로세스 진행 전 update)
-                // chunk 프로세스 수행
-                // chunk 프로세스 이후 update()
+
+                // ItemReader 의 open() -> ItemWriter 의 open()
+
+                // chunk 프로세스 전에 한번 update 되긴함 (reader update())
+                // chunk Reader 프로세스 수행
+                // ItemReader 의 update()
+
+                // chunk Writer 프로세스 수행
+                // ItemWriter 의 update()
+
+                // 모든 수행이 끝나면 close()
 
                 .<String, String>chunk(5)
                 .reader(customItemStreamReader())
