@@ -1,0 +1,22 @@
+spring:
+  # H2Database
+  datasource:
+    url: jdbc:h2:mem:test
+    # url: jdbc:h2:tcp://localhost/~/jpashop  # 여러개 접근시 한번에 실행되도록 (개발할때 큰 의미는 없다)
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: create  # 자동으로 테이블 생성 (drop->create) # 선언 안할시, 스프링부트는 create-drop으로 실행 (마지막에 drop 한다-초기화)
+    properties:
+      hibernate:
+#        show_sql: true  # 실행 SQL (System.out) - 운영에서 찍으면 안되므로 주석처리
+        format_sql: true
+
+logging.level:
+  org.hibernate.SQL: debug # hibernate 실행 SQL (logger)
+  # 파라미터 남기기 (이것만 쓰면 binding param 이라고 로그가 남는데, 더 편하게 사용을 위해 gradle에 추가 (com.github.gavlyukovskiy))
+  org.hibernate.type: trace
+#  org.hibernate.type: trace
