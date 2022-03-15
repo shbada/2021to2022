@@ -1,4 +1,4 @@
-package com.algorithm._01_그리디_구현;
+package com.algorithm._00_;
 
 /**
  * @Date 2022/03/09
