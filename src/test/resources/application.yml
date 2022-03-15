@@ -4,10 +4,10 @@
 spring:
   # H2Database
   datasource:
-    url: jdbc:h2:mem:test  # 메모리 모드로 실행
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/springbootjpa  # 메모리 모드로 실행
+    username: springbootjpa
+    password: jpa
+    driver-class-name: org.postgresql.Driver
   # JPA
   jpa:
     hibernate:
