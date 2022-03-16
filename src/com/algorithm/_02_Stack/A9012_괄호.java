@@ -8,7 +8,7 @@ import java.util.Stack;
  * @Date 2021
  * https://www.acmicpc.net/problem/9012
  */
-public class _9012_괄호 {
+public class A9012_괄호 {
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
 

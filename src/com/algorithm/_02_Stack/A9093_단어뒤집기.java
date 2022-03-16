@@ -10,7 +10,7 @@ import java.util.Stack;
  * @Date 2021
  * @URL https://www.acmicpc.net/problem/9093
  */
-public class _9093_단어뒤집기 {
+public class A9093_단어뒤집기 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @Date 2021
  * @URL https://www.acmicpc.net/problem/10828
  */
-public class _10828_스택 {
+public class A10828_스택 {
     static ArrayList<Integer> arrayList = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {

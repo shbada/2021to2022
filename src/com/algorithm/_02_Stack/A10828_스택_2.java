@@ -2,14 +2,13 @@ package com.algorithm._02_Stack;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  * @Date 2021
  * @URL https://www.acmicpc.net/problem/10828
  */
-public class _10828_스택_2 {
+public class A10828_스택_2 {
     static Stack<Integer> stack = new Stack<>();
 
     public static void main(String[] args) throws Exception {

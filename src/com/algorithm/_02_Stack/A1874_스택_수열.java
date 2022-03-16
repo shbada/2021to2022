@@ -9,7 +9,7 @@ import java.util.*;
  * @Date 2022.03.12
  * https://www.acmicpc.net/problem/1874
  */
-public class _1874_스택_수열 {
+public class A1874_스택_수열 {
     static int N;
     static int index = 1;
     static Queue<Integer> paramQueue = new LinkedList<>();

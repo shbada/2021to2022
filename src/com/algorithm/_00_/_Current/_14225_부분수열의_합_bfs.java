@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
  * @Date 2022/03/16
  * @URL https://www.acmicpc.net/problem/14225
  */
-public class _14225_부분수열의_합 {
+public class _14225_부분수열의_합_bfs {
     static int N;
     static int[] arr;
     static Set<Integer> sumSet = new HashSet<>(); // 부분수열의 합을 담을 Set (중복X)
@@ -15,7 +15,7 @@ public class _14225_부분수열의_합 {
 
     public static void main(String[] args) {
 	    // write your code here
-        _14225_부분수열의_합 main = new _14225_부분수열의_합();
+        _14225_부분수열의_합_bfs main = new _14225_부분수열의_합_bfs();
         main.solution();
     }
 

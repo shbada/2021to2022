@@ -6,7 +6,7 @@ import java.util.*;
  * @Date 2022/03/15
  * @URL https://www.acmicpc.net/problem/2583
  */
-public class _2583_영역구하기 {
+public class A2583_영역구하기 {
     static int[][] graph;
     static int N;
     static int M;
@@ -38,7 +38,7 @@ public class _2583_영역구하기 {
 
     public static void main(String[] args) {
 	    // write your code here
-        _2583_영역구하기 main = new _2583_영역구하기();
+        A2583_영역구하기 main = new A2583_영역구하기();
         main.solution();
     }
 

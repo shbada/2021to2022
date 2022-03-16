@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
  * @Date 2022/03/15
  * @URL https://www.acmicpc.net/problem/1238
  */
-public class _1238_파티 {
+public class A1238_파티 {
     /* 무한을 의미하는 값으로 10억을 설정 */
     public static final int INF = (int) 1e9;
 
@@ -26,7 +26,7 @@ public class _1238_파티 {
 
     public static void main(String[] args) {
 	    // write your code here
-        _1238_파티 main = new _1238_파티();
+        A1238_파티 main = new A1238_파티();
         main.solution();
     }
 

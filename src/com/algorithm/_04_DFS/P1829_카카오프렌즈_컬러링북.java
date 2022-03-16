@@ -8,7 +8,7 @@ import java.util.List;
  * @Date 2022/03/14
  * @URL https://programmers.co.kr/learn/courses/30/lessons/1829
  */
-public class _1829_카카오프렌즈_컬러링북 {
+public class P1829_카카오프렌즈_컬러링북 {
     static int graph[][];
     static boolean[][] visited;
     static int N;
@@ -18,7 +18,7 @@ public class _1829_카카오프렌즈_컬러링북 {
 
     public static void main(String[] args) {
 	    // write your code here
-        _1829_카카오프렌즈_컬러링북 main = new _1829_카카오프렌즈_컬러링북();
+        P1829_카카오프렌즈_컬러링북 main = new P1829_카카오프렌즈_컬러링북();
 
         int[][] a = new int[][] { {1,1,1,0}, {1,2,2,0}, {1,0,0,1}, {0,0,0,1}, {0,0,0,3}, {0,0,0,3}};
         System.out.println(Arrays.toString(main.solution(6, 4, a)));

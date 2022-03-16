@@ -6,7 +6,7 @@ package com.algorithm._01_그리디_구현;
  */
 import java.util.Scanner;
 
-public class _12969_직사각형_별찍기 {
+public class P12969_직사각형_별찍기 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
