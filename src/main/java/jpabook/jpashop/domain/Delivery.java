@@ -13,6 +13,8 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+    // FK 를 어디에 둬도 상관없다. 1:1
+    // 접근성이 더 많은 곳에 놓자. 그렇다면 ORDER에 두겠다.
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY) /* 연관관계 주인이 아니다. 조회용 */
     private Order order;
 

@@ -13,11 +13,15 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
+    /*
+      ORDER_ITEM : ITEM = N : 1
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    /* 하나의 주문은 여러개의 주문 상품을 가질 수 있다. */
+    /* ORDER_ITEM : ORDER = N : 1
+     * 하나의 주문은 여러개의 주문 상품을 가질 수 있다. */
     /* FK : ORDER_ID 이므로 연관관계의 주인은 ORDER_ITEM */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

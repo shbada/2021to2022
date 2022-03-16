@@ -34,6 +34,8 @@ public class Order {
     // cascade가 있으면 persist(order)만 있으면 orderItemA, orderItemB, orderItemC를 모두 저장해준다.
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    // FK 를 어디에 둬도 상관없다. 1:1
+    // 접근성이 더 많은 곳에 놓자. 그렇다면 ORDER에 두겠다.
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id") /* 연관 관계의 주인 */
     private Delivery delivery;

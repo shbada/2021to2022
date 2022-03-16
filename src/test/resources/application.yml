@@ -2,7 +2,6 @@
 # 테스트 DB를 메모리 DB로 사용하자 (프로젝트 라이브러리에 h2 가 들어가있다 - jvm 안에 띄울 수 있다.)
 # 스프링 부트는 아래 설정이 모두 없으면 메모리로 자동으로 실행한다!!
 spring:
-  # H2Database
   datasource:
     url: jdbc:postgresql://localhost:5432/springbootjpa  # 메모리 모드로 실행
     username: springbootjpa
