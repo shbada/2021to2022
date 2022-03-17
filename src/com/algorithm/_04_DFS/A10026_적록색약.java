@@ -3,7 +3,7 @@ package com.algorithm._04_DFS;
 import java.util.Scanner;
 
 /**
- * @Date 2022/03/15
+ * @Date 2022/03/17
  * @URL https://www.acmicpc.net/problem/10026
  */
 public class A10026_적록색약 {
