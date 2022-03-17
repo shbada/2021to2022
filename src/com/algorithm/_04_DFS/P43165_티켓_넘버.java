@@ -4,14 +4,14 @@ package com.algorithm._04_DFS;
  * @Date 2022/03/12
  * @URL https://programmers.co.kr/learn/courses/30/lessons/43165
  */
-public class _43165_티켓_넘버 {
+public class P43165_티켓_넘버 {
     static int t;
     static int count;
     static boolean[] visited;
 
     public static void main(String[] args) {
 	    // write your code here
-        _43165_티켓_넘버 main = new _43165_티켓_넘버();
+        P43165_티켓_넘버 main = new P43165_티켓_넘버();
         System.out.println(main.solution(new int[]{1,1,1,1,1}, 3));
     }
 
