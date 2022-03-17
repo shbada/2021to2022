@@ -1,4 +1,4 @@
-package com.spring.batch.multiThread;
+package com.spring.batch._멀티_스레드_프로세싱.multiThread;
 
 import org.springframework.batch.core.ItemReadListener;
 

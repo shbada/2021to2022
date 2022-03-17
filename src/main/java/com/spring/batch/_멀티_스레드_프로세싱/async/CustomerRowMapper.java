@@ -1,4 +1,4 @@
-package com.spring.batch.async;
+package com.spring.batch._멀티_스레드_프로세싱.async;
 
 import org.springframework.jdbc.core.RowMapper;
 
