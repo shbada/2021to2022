@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true) // 트랜잭션 필수
+// 트랜잭션 필수 (public method 모두 트랜잭션에 걸린다.)
+@Transactional(readOnly = true) // 트랜잭션 필수 (읽기가 중복이 많아서 이렇게 쓰고, 쓰기에는 별도로 메소드 단위로 선언한다.)-
 /*
  * javax Transactional
  * spring Transactional (권장 - 이미 스프링 프레임워크를 쓰기 때문에)
@@ -32,6 +33,7 @@ public class MemberService {
     */
 
     /** 생성자 주입 (권장) */
+    // final : 컴파일 시점에 생성자 주입 체크가 가능하기 때문에 써주는걸 권장한다.
     private final MemberRepository memberRepository;
 
     // 생성자가 하나만 있는 경우 @Autowired 어노테이션이 없어도 자동으로 주입해줌
@@ -73,7 +75,7 @@ public class MemberService {
      * 전체 회원 조회
      * @return
      */
-    // @Transactional(readOnly = true) // JPA 가 조회하는 곳에서는 성능을 최적화한다.
+    // @Transactional(readOnly = true) // JPA 가 조회하는 곳에서는 성능을 최적화한다. (읽기에 쓴다)
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
@@ -83,7 +85,7 @@ public class MemberService {
      * @param memberId
      * @return
      */
-    // @Transactional(readOnly = true) // JPA 가 조회하는 곳에서는 성능을 최적화한다.
+    // @Transactional(readOnly = true) // JPA 가 조회하는 곳에서는 성능을 최적화한다. (읽기에 쓴다)
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }

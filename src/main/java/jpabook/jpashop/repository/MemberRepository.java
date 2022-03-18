@@ -10,14 +10,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import java.util.List;
 
-@Repository
+@Repository // @Component가 포함되어있어서 빈으로 등록됨
 @RequiredArgsConstructor
 public class MemberRepository {
 
     private final EntityManager em;
     /*
     // @PersistenceContext 대신 @Autowired 사용이 가능하다.
-    @PersistenceContext // 스프링이 EntityManager 을 생성해서 주입해준다.
+    @PersistenceContext // 이게 있으면 스프링이 알아서 EntityManager 을 생성해서 주입해준다.
     private EntityManager em;
     */
 
