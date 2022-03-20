@@ -6,9 +6,9 @@ import java.util.Arrays;
  * @Date 2022/03/09
  * @URL https://leetcode.com/problems/rotate-image/
  */
-public class _48_RotateImage {
+public class L48_RotateImage {
     public static void main(String[] args) {
-        _48_RotateImage solution = new _48_RotateImage();
+        L48_RotateImage solution = new L48_RotateImage();
         int[][] a = new int[][] { {1,2,3}, {4,5,6}, {7,8,9}};
 
         solution.rotate(a);
