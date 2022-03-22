@@ -105,6 +105,7 @@ public class Order {
         orderItems.forEach(OrderItem::cancel);
     }
 
+    //== 조회 로직 메서드 ==//
     /**
      * 전체 주문 가격 조회
      * @return
