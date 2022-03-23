@@ -1,4 +1,4 @@
-package com.algorithm._05_BFS;
+package com.algorithm._05_BFS.Dont;
 
 /*
 현민이는 게임 캐릭터가 맵 안에서 움직이는 시스템을 개발 중이다.
