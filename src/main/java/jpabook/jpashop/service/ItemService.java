@@ -26,6 +26,7 @@ public class ItemService {
 
     /**
      * updateItem 메소드에서 호출하는 준영속 엔티티의 변경감지 메소드 (merge 보다 변경감지 메서드를 사용해야한다.)
+     * merge()와 같이 Item 을 리턴해주는 방식
      * @param itemId
      * @param bookParam
      */
@@ -34,9 +35,10 @@ public class ItemService {
         Item findItem = itemRepository.findOne(itemId);
 
         // set 메소드로 데이터 지정하기 보다는 아래처럼 메소드를 만들어서 호출하자.
+        // 추적하기가 좋다.
         // findItem.change(price, name, stockQuantity);
 
-        /* 변경감지 사용 가능 */
+        /* 변경감지 사용 가능 - save() 호출 필요 없다 */
         findItem.setName(bookParam.getName());
         findItem.setPrice(bookParam.getPrice());
         findItem.setStockQuantity(bookParam.getStockQuantity());
