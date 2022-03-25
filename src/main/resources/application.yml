@@ -7,11 +7,11 @@ spring:
     driver-class-name: org.postgresql.Driver
   # Thymeleaf
   thymeleaf:
-    prefix: classpath:templates/ # TODO default ?? ???? account/??? ??????
+    prefix: classpath:templates/
   # JPA
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
