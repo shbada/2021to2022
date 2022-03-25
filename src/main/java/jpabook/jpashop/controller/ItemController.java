@@ -125,6 +125,6 @@ public class ItemController {
 
         /* CASE2. 변경감지 메서드 호출 */
         itemService.updateItem2(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
-        return "redirect:items"; /* 리스트로 리다이렉트 */
+        return "redirect:/items"; /* 리스트로 리다이렉트 */
     }
 }

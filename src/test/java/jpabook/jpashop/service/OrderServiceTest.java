@@ -6,6 +6,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.excpetion.NotEnoughStockException;
 import jpabook.jpashop.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +53,7 @@ class OrderServiceTest {
 
         assertEquals("상품 주문시 상태는 ORDER", OrderStatus.ORDER, getOrder.getStatus());
         assertEquals("주문한 상품 종류 수가 정확해야한다.", 1, getOrder.getOrderItems().size());
-        assertEquals("주문 가격은 가격 * 수량이다.", 1000 * orderCount, getOrder.getTotalPrice());
+        assertEquals("주문 가격은 가격 * 수량이다.", 10000 * orderCount, getOrder.getTotalPrice());
         assertEquals("주문 수량만큼 재고가 줄어야한다.", 8, book.getStockQuantity());
 
     }
@@ -62,6 +63,7 @@ class OrderServiceTest {
         book.setName(name);
         book.setPrice(price);
         book.setStockQuantity(stockQuantity);
+        em.persist(book);
         return book;
     }
 
@@ -106,7 +108,7 @@ class OrderServiceTest {
         // when
         try {
             orderService.order(member.getId(), item.getId(), orderCount);
-        } catch (IllegalStateException e) {
+        } catch (NotEnoughStockException e) {
             return; // 에러가 발생하면 pass 여야 하므로.
         }
 
