@@ -1,8 +1,8 @@
 package com.algorithm._00_;
 
 /**
- * @Date 2022/03/09
- * @URL https://
+ * @Date 2022/03/25
+ * @URL https://programmers.co.kr/learn/courses/30/lessons/42885
  */
 public class Main {
     public static void main(String[] args) {
