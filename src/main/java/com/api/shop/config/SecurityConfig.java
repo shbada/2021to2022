@@ -54,6 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member/**")
                 .access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated();
+
+        http.logout()
+                .logoutUrl("/auth/logout")
+                .logoutSuccessUrl("/auth");
     }
 
     @Bean

@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class AuthControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -30,7 +32,7 @@ class AuthControllerTest {
 
     @DisplayName("회원 가입 validation 체크")
     @Test
-    void register_validation_미통과() throws Exception {
+    void register_validation_통과() throws Exception {
         mockMvc.perform(post("/auth/register")
                         .param("memberName", "seohae")
                         .param("password", "1234512345"))

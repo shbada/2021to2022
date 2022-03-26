@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +19,7 @@ public class MemberService {
      * 회원등록
      * @param memberForm
      */
-    public void saveMember(MemberForm memberForm) {
+    public MemberForm saveMember(MemberForm memberForm) {
         // password encoding
         memberForm.setPassword(passwordEncoder.encode(memberForm.getPassword()));
 
@@ -29,5 +28,7 @@ public class MemberService {
         member.setRoleUser();
 
         memberRepository.save(member);
+
+        return memberForm;
     }
 }
