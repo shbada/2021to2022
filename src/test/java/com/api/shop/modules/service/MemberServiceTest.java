@@ -2,23 +2,18 @@ package com.api.shop.modules.service;
 
 import com.api.shop.common.exception.BadRequestException;
 import com.api.shop.modules.entity.Member;
-import com.api.shop.modules.form.MemberForm;
+import com.api.shop.modules.form.MemberAddForm;
 import com.api.shop.modules.form.MemberUpdateForm;
 import com.api.shop.modules.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
@@ -69,10 +64,10 @@ class MemberServiceTest {
      * @return
      */
     private long registerMember() {
-        MemberForm memberForm = new MemberForm();
-        memberForm.setMemberName("kimseohae");
-        memberForm.setPassword("1234512345");
+        MemberAddForm memberAddForm = new MemberAddForm();
+        memberAddForm.setMemberName("kimseohae");
+        memberAddForm.setPassword("1234512345");
 
-        return memberService.saveMember(memberForm);
+        return memberService.saveMember(memberAddForm);
     }
 }

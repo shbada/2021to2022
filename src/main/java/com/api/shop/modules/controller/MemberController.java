@@ -1,13 +1,15 @@
 package com.api.shop.modules.controller;
 
 import com.api.shop.common.Output;
-import com.api.shop.modules.form.MemberForm;
+import com.api.shop.modules.entity.Member;
+import com.api.shop.modules.form.validator.MemberAddFormValidator;
 import com.api.shop.modules.form.MemberUpdateForm;
 import com.api.shop.modules.repository.MemberRepository;
 import com.api.shop.modules.service.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"MemberController"})
@@ -26,6 +28,16 @@ public class MemberController {
     @GetMapping("/")
     public ResponseEntity<?> getMemberList() {
         return output.send(memberRepository.findAll());
+    }
+
+    /**
+     * 회원 단건 조회
+     * @return
+     */
+    @GetMapping("/{idx}")
+    public ResponseEntity<?> getMember(@PathVariable long idx) {
+        Member member = memberService.getMember(idx);
+        return output.send(member);
     }
 
     /**
