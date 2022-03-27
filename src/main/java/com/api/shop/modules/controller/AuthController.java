@@ -34,8 +34,8 @@ public class AuthController {
      */
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @ModelAttribute MemberForm memberForm) {
-        MemberForm regMemberForm = memberService.saveMember(memberForm);
-        return output.send(regMemberForm);
+        Long idx = memberService.saveMember(memberForm);
+        return output.send(idx);
     }
 
     /**
