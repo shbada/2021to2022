@@ -1,4 +1,4 @@
-package com.algorithm._00_._Current;
+package com.algorithm._01_그리디_구현;
 
 import java.util.ArrayList;
 import java.util.HashMap;
