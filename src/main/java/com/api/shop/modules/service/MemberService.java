@@ -75,6 +75,7 @@ public class MemberService {
      * @param memberIdx
      * @param addressForm
      */
+    @Transactional
     public void updateMemberAddr(long memberIdx, AddressForm addressForm) {
         Member member = this.getMember(memberIdx);
 
