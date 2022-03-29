@@ -1,7 +1,9 @@
 package com.api.shop.modules.service;
 
 import com.api.shop.common.exception.BadRequestException;
+import com.api.shop.modules.entity.Address;
 import com.api.shop.modules.entity.Member;
+import com.api.shop.modules.form.AddressForm;
 import com.api.shop.modules.form.MemberAddForm;
 import com.api.shop.modules.form.MemberUpdateForm;
 import com.api.shop.modules.repository.MemberRepository;
@@ -66,5 +68,17 @@ public class MemberService {
         }
 
         return byId.get();
+    }
+
+    /**
+     * 회원 주소 정보 변경
+     * @param memberIdx
+     * @param addressForm
+     */
+    public void updateMemberAddr(long memberIdx, AddressForm addressForm) {
+        Member member = this.getMember(memberIdx);
+
+        Address address = new Address(addressForm.getCity(), addressForm.getStreet(), addressForm.getZipcode());
+        member.setAddress(address);
     }
 }

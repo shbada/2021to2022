@@ -23,6 +23,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Embedded // 내장타입을 명시
+    private Address address;
+
     /**
      * 유저 권한 셋팅
      */

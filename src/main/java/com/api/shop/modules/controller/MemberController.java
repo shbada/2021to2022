@@ -2,6 +2,7 @@ package com.api.shop.modules.controller;
 
 import com.api.shop.common.Output;
 import com.api.shop.modules.entity.Member;
+import com.api.shop.modules.form.AddressForm;
 import com.api.shop.modules.form.validator.MemberAddFormValidator;
 import com.api.shop.modules.form.MemberUpdateForm;
 import com.api.shop.modules.repository.MemberRepository;
@@ -48,6 +49,17 @@ public class MemberController {
     @PutMapping("/")
     public ResponseEntity<?> putMember(MemberUpdateForm memberUpdateForm) {
         memberService.updateMember(memberUpdateForm);
+        return output.send();
+    }
+
+    /**
+     * 회원 주소 정보 추가
+     * @param addressForm
+     * @return
+     */
+    @PutMapping("/{idx}/addr")
+    public ResponseEntity<?> putMemberAddr(@PathVariable long idx, AddressForm addressForm) {
+        memberService.updateMemberAddr(idx, addressForm);
         return output.send();
     }
 }
