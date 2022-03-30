@@ -15,7 +15,7 @@ public class Member {
     @GeneratedValue
     private Long idx;
 
-    @Column(unique=true) // unique
+    @Column(unique = true) // unique
     private String memberName;
 
     private String password;

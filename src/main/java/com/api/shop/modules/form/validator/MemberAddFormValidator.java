@@ -33,7 +33,7 @@ public class MemberAddFormValidator implements Validator {
 
         Optional<Member> byMemberName = memberRepository.findByMemberName(memberAddForm.getMemberName());
 
-        if (!byMemberName.isEmpty()) {
+        if (byMemberName.isPresent()) {
             throw new BadRequestException("이미 등록된 회원이름 입니다.");
         }
     }

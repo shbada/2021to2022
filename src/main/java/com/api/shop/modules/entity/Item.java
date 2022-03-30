@@ -1,5 +1,6 @@
 package com.api.shop.modules.entity;
 
+import com.api.shop.modules.form.ItemUpdateForm;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,12 +15,23 @@ import javax.persistence.Id;
 public class Item {
     @Id
     @GeneratedValue
-    @Column(name = "item_id")
-    private Long id;
+    @Column(name = "idx")
+    private Long idx;
 
-    private String name;
+    @Column(unique = true) // unique
+    private String itemName;
 
     private int price;
 
     private int stockQuantity;
+
+    /**
+     * 상품 정보 수정
+     * @param itemUpdateForm
+     */
+    public void updateItem(ItemUpdateForm itemUpdateForm) {
+        this.itemName = itemUpdateForm.getItemName();
+        this.price = itemUpdateForm.getPrice();
+        this.stockQuantity = itemUpdateForm.getStockQuantity();
+    }
 }
