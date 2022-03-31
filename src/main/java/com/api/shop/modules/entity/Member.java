@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +27,9 @@ public class Member {
 
     @Embedded // 내장타입을 명시
     private Address address;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orderList = new ArrayList<>();
 
     /**
      * 유저 권한 셋팅
