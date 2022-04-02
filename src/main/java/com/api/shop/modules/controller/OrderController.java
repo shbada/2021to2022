@@ -1,6 +1,8 @@
 package com.api.shop.modules.controller;
 
 import com.api.shop.common.Output;
+import com.api.shop.modules.entity.Item;
+import com.api.shop.modules.entity.Order;
 import com.api.shop.modules.form.ItemAddForm;
 import com.api.shop.modules.form.OrderAddForm;
 import com.api.shop.modules.repository.OrderRepository;
@@ -28,6 +30,16 @@ public class OrderController {
     @GetMapping("/")
     public ResponseEntity<?> getOrderList() {
         return output.send(orderRepository.findAll());
+    }
+
+    /**
+     * 주문 단건 조회
+     * @return
+     */
+    @GetMapping("/{idx}")
+    public ResponseEntity<?> getOrder(@PathVariable long idx) {
+        Order order = orderService.getOrder(idx);
+        return output.send(order);
     }
 
     /**

@@ -58,4 +58,19 @@ public class OrderService {
         orderRepository.save(order);
         return order.getIdx();
     }
+
+    /**
+     * 주문 단건 조회
+     * @param idx
+     * @return
+     */
+    public Order getOrder(long idx) {
+        Optional<Order> order = orderRepository.findById(idx);
+
+        if (order.isEmpty()) {
+            throw new BadRequestException("주문 정보가 존재하지 않습니다.");
+        }
+
+        return order.get();
+    }
 }

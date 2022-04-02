@@ -65,9 +65,11 @@ class OrderServiceTest {
 
     @Test
     @DisplayName("주문 등록 - 성공")
-    void addItem() {
+    void addOrder() {
+        /* member 등록 */
         long idx = registerMember();
 
+        /* item 등록 */
         ItemAddForm itemAddForm = new ItemAddForm();
         itemAddForm.setItemName("test1");
         itemAddForm.setPrice(1000);
@@ -75,6 +77,7 @@ class OrderServiceTest {
 
         Long itemIdx = itemService.addItem(itemAddForm);
 
+        /* Order parameter setting */
         OrderAddForm orderAddForm = new OrderAddForm();
         orderAddForm.setMemberIdx((int) idx);
         orderAddForm.setItemIdx(Math.toIntExact(itemIdx));
@@ -83,8 +86,27 @@ class OrderServiceTest {
 
         Long newOrderIdx = orderService.addOrder(orderAddForm);
 
-        Optional<Order> byId = orderRepository.findById(newOrderIdx);
+        /* 방금 신규 등록된 주문 조회 */
+        Order order = orderService.getOrder(newOrderIdx);
 
-        Assertions.assertEquals(byId.get().getIdx(), newOrderIdx);
+        /* check */
+        Assertions.assertEquals(order.getIdx(), newOrderIdx);
+    }
+
+    @Test
+    @DisplayName("주문 단건 조회 - 성공")
+    void getItem() {
+        /* 주문 등록 */
+        this.addOrder();
+
+        /* 주문 첫번째 idx 가져오기 */
+        List<Order> orderList = orderRepository.findAll();
+        Long orderIdx = orderList.get(0).getIdx();
+
+        /* 주문 단건 조회 수행 */
+        Order order = orderService.getOrder(orderIdx);
+
+        /* check */
+        Assertions.assertEquals(orderIdx, order.getIdx());
     }
 }
