@@ -5,8 +5,8 @@ spring:
   # Postgres Database
   datasource:
     url: jdbc:postgresql://localhost:5432/shopping
-    username: shopping
-    password: shopping
+    username: shpping
+    password: shpping
     driver-class-name: org.postgresql.Driver
   # Thymeleaf
   thymeleaf:
