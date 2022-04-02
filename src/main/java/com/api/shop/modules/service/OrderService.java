@@ -1,8 +1,7 @@
 package com.api.shop.modules.service;
 
 import com.api.shop.common.exception.BadRequestException;
-import com.api.shop.modules.entity.Member;
-import com.api.shop.modules.entity.Order;
+import com.api.shop.modules.entity.*;
 import com.api.shop.modules.form.OrderAddForm;
 import com.api.shop.modules.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +17,7 @@ public class OrderService {
     private final ModelMapper modelMapper;
     private final OrderRepository orderRepository;
     private final MemberService memberService;
+    private final ItemService itemService;
 
     /**
      * 회원의 주문 리스트 조회
@@ -41,8 +41,14 @@ public class OrderService {
      * @return
      */
     public Long addOrder(OrderAddForm orderAddForm) {
-        Long orderIdx = 0L;
+        Member member = memberService.getMember(orderAddForm.getMemberIdx());
+        Item item = itemService.getItem(orderAddForm.getItemIdx());
+        Address address = orderAddForm.getAddress();
 
-        return orderIdx;
+        OrderItem orderItem = OrderItem. createOrderItem(item, item.getPrice(), orderAddForm.getItemCount());
+        Order order = Order.createOrder(member, address, orderItem);
+
+        orderRepository.save(order);
+        return order.getIdx();
     }
 }

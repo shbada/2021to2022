@@ -25,4 +25,20 @@ public class OrderItem {
     private int orderPrices; //  주문 가격
 
     private int count; // 주문 수량
+
+    /**
+     * 주문 아이템 생성
+     * @param item
+     * @param price
+     * @param itemCount
+     * @return
+     */
+    public static OrderItem createOrderItem(Item item, int price, int itemCount) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrices(price);
+        orderItem.setCount(itemCount);
+
+        return orderItem;
+    }
 }
