@@ -1,5 +1,6 @@
 package com.api.shop.modules.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +40,17 @@ public class OrderItem {
         orderItem.setOrderPrices(price);
         orderItem.setCount(itemCount);
 
+        // 재고 수량 계산
+        item.removeStock(itemCount);
+
         return orderItem;
+    }
+
+    /**
+     * 주문 상품 전체 가격 조회
+     * @return
+     */
+    public int getTotalPrice() {
+        return getOrderPrices() * getCount();
     }
 }

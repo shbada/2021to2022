@@ -34,4 +34,12 @@ public class Item {
         this.price = itemUpdateForm.getPrice();
         this.stockQuantity = itemUpdateForm.getStockQuantity();
     }
+
+    /**
+     * 재고 수량 -
+     * @param itemCount
+     */
+    public void removeStock(int itemCount) {
+        this.stockQuantity = this.stockQuantity - itemCount;
+    }
 }

@@ -1,25 +1,28 @@
-package com.api.shop.modules.controller;
+package com.api.shop.modules.service;
 
-import com.api.shop.modules.entity.Member;
+import com.api.shop.modules.entity.Item;
 import com.api.shop.modules.entity.Order;
+import com.api.shop.modules.form.AddressForm;
+import com.api.shop.modules.form.ItemAddForm;
 import com.api.shop.modules.form.MemberAddForm;
-import com.api.shop.modules.repository.MemberRepository;
+import com.api.shop.modules.form.OrderAddForm;
 import com.api.shop.modules.repository.OrderRepository;
-import com.api.shop.modules.service.MemberService;
-import com.api.shop.modules.service.OrderService;
+import org.aspectj.weaver.ast.Or;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-class OrderControllerTest {
+@Transactional
+class OrderServiceTest {
     @Autowired
     OrderRepository orderRepository;
 
@@ -28,6 +31,9 @@ class OrderControllerTest {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    ItemService itemService;
 
     @DisplayName("주문 리스트 조회")
     @Test
@@ -55,5 +61,30 @@ class OrderControllerTest {
         memberAddForm.setPassword("1234512345");
 
         return memberService.saveMember(memberAddForm);
+    }
+
+    @Test
+    @DisplayName("주문 등록 - 성공")
+    void addItem() {
+        long idx = registerMember();
+
+        ItemAddForm itemAddForm = new ItemAddForm();
+        itemAddForm.setItemName("test1");
+        itemAddForm.setPrice(1000);
+        itemAddForm.setStockQuantity(100);
+
+        Long itemIdx = itemService.addItem(itemAddForm);
+
+        OrderAddForm orderAddForm = new OrderAddForm();
+        orderAddForm.setMemberIdx((int) idx);
+        orderAddForm.setItemIdx(Math.toIntExact(itemIdx));
+        orderAddForm.setItemCount(1);
+        orderAddForm.setAddressForm(new AddressForm("add1", "add2", "12345"));
+
+        Long newOrderIdx = orderService.addOrder(orderAddForm);
+
+        Optional<Order> byId = orderRepository.findById(newOrderIdx);
+
+        Assertions.assertEquals(byId.get().getIdx(), newOrderIdx);
     }
 }

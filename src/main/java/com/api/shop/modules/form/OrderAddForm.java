@@ -21,5 +21,5 @@ public class OrderAddForm {
     @Min(1)
     private int itemCount;
 
-    private Address address;
+    private AddressForm addressForm;
 }

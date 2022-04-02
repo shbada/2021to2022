@@ -28,9 +28,6 @@ public class Member {
     @Embedded // 내장타입을 명시
     private Address address;
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orderList = new ArrayList<>();
-
     /**
      * 유저 권한 셋팅
      */

@@ -1,6 +1,7 @@
 package com.api.shop.modules.entity;
 
 import com.api.shop.modules.entity.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +35,8 @@ public class Order {
 
     private LocalDateTime orderDate;
 
+    private int orderTotalPrices; //  주문 가격
+
     /**
      * OrderItem set Order
      * @param orderItem
@@ -58,6 +61,7 @@ public class Order {
         order.setStatus(OrderStatus.ORDER);
         order.setOrderDate(LocalDateTime.now());
 
+        order.setOrderTotalPrices(orderItem.getTotalPrice());
         return order;
     }
 }

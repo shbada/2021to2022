@@ -1,4 +1,7 @@
 spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false  # LAZY 로딩시 비어있는 bean 은 serialize 제외
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -14,7 +17,7 @@ spring:
   # JPA
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
