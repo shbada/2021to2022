@@ -51,7 +51,7 @@ public class OrderService {
         /* address */
         Address address = new Address(orderAddForm.getAddressForm().getCity(), orderAddForm.getAddressForm().getStreet(), orderAddForm.getAddressForm().getZipcode());
         /* orderItem */
-        OrderItem orderItem = OrderItem. createOrderItem(item, item.getPrice(), orderAddForm.getItemCount());
+        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), orderAddForm.getItemCount());
         /* order */
         Order order = Order.createOrder(member, address, orderItem);
 
