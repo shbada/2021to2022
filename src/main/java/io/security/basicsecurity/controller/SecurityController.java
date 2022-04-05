@@ -17,4 +17,13 @@ public class SecurityController {
     public String index() {
         return "home";
     }
+
+    /**
+     * 로그인 페이지
+     * @return
+     */
+    @GetMapping("/loginPage")
+    public String loginPage() {
+        return "loginPage";
+    }
 }
