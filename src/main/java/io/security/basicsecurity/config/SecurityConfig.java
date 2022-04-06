@@ -17,6 +17,26 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    // debug
+    /*
+       FilterChainProxy > 이 필터가 가지고 있는 필터들 목록들이 많이 있다.
+       nextFilter.doFilter() 시점에 additionalFilters 안의 순서대로 filter 를 수행시킨다.
+       우리가 설정 클래스 (securityConfig > configure 에서 설정한 API 관련된 필터들이 위에 설정된다.)
+     */
+    // FilterChainProxy
+
+    /*
+       FilterChainProxy > 이 필터가 가지고 있는 필터들 목록들이 많이 있다.
+       nextFilter.doFilter() 시점에 additionalFilters 안의 순서대로 filter 를 수행시킨다.
+       우리가 설정 클래스 (securityConfig > configure 에서 설정한 API 관련된 필터들이 위에 설정된다.)
+
+       UsernamePasswordAuthenticationFilter > attemptAuthentication()
+       Provider (AuthenticationManager 의 구현체) : 인증 방식을 처리할 provider 을 찾는다. -> DaoAuthenticationProvider 선택됨
+       UsernamePasswordAuthenticationToken 생성 > principal, authorities 등을 가지고있다. -> ProviderManger 로 반환 > UsernamePasswordAuthenticationFilter 로 반환
+       인증 결과를 UsernamePasswordAuthenticationFilter 에서 SecurityContextHolder.getContext.setAuthentication(authResult)로 저장한다.
+     */
+    // UsernamePasswordAuthenticationFilter
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
