@@ -1,4 +1,4 @@
-package com.spring.batch.repeat;
+package com.spring.batch.반복_오류제어;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
