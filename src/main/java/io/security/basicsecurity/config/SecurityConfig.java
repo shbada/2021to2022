@@ -6,9 +6,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -21,6 +21,12 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     // debug
     /*
        FilterChainProxy > 이 필터가 가지고 있는 필터들 목록들이 많이 있다.
@@ -105,6 +111,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .deleteCookies("remember-me") // remember-me 인증시, remember-me 쿠키명으로 생성된 쿠키를 삭제함
+
+                /** remember Me */
+                .and()
+
+                /*
+                   [로그인 완료시]
+                   스프링 시큐리티에서 사용자의 세션이 생성되었고, 그 세션이 성공한 인증 객체를 담고있다.
+                   서버가 인증을 성공한 그 사용자에게 세션을 생성할때 가지고있는 세션 아이디를 같이 보내고 응답 헤더에 실어서 보내고,
+                   클라이언트가 JSESSIONID 를 가지고있을 것이다.
+                   그 상태에서 클라이언트가 다시 서버에 접속하게 되면 인증을 안받아도 된다.
+                   위에서 받은 JSESSIONID 를 가지고 서버에 요청하고, 서버가 이 ID와 매칭되는 인증 정보를 꺼내기 때문이다.
+                   security Context 안에 인증객체가 있고, 이 정보를 계속적으로 가지고 이 사용자가 인증된 사용자인지 판단한다.
+
+                   클라이언트에서 JSESSIONID 를 삭제하고 루트 페이지로 이동하면, 다시 로그인을 해야한다. (기존의 세션을 찾지 못하므로)
+
+                   Remember-me 체크하고 로그인 후, JSESSIONID 안에 remember-me 이름으로 쿠키를 생성했는데,
+                   기본 JSESSIONID 를 삭제하고 루트 페이지로 가도 인증 정보가 유지된다.
+                   remember-me 의 value 에는 유저 아이디, 패스워드, 만료일이 들어있다.
+
+                   JSESSIONID 가 없다 하더라도, remember-me 쿠키명을 가지고 왔으면 이걸 확인하고 해당 쿠키 값으로
+                   유저 아이디/패스워드를 확인해서 다시 인증 정보를 생성한다.
+                 */
+                .rememberMe()
+                .rememberMeParameter("remember")
+                .tokenValiditySeconds(3600) // 1시간
+                .userDetailsService(userDetailsService) // 유저 정보를 조회하는 기능을 위한 클래스 설정
                 ;
     }
 }
