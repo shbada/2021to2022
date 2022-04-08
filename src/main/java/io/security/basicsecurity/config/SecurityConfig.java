@@ -133,6 +133,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                    JSESSIONID 가 없다 하더라도, remember-me 쿠키명을 가지고 왔으면 이걸 확인하고 해당 쿠키 값으로
                    유저 아이디/패스워드를 확인해서 다시 인증 정보를 생성한다.
                  */
+
+                /*
+                   rememberMeAuthenticationFilter
+                   사용자가 실시간 타임아웃 또는 해당 사용하고있는 세션이 끊긴 경우거나 등 인증 객체를 시큐리티 컨텍스트 안에서
+                   찾지 못하는 경우, 자동적으로 그 사용자의 인증을 유지하기 위해서 이 필터가 인증을 시도한다.
+                   다시 인증 객체를 사용자에게 전달해준다. 인증이 유지될 수 있도록한다.
+
+                   1) 인증 객체가 없는 경우
+                   2) remember-me 쿠키가 있는 경우
+
+                   위 2가지 경우를 만족했을때 위 필터가 작동한다.
+
+                   TokenBaseRememberMeServices : 만료기간 방식
+                   PersistentTokenBasedRememberMeServices : 영구적인 방식 (DB에 토큰 저장)
+
+                   - 세션이 만료되었더라도 인증을 유지할 수 있다.
+                 */
                 .rememberMe()
                 .rememberMeParameter("remember")
                 .tokenValiditySeconds(3600) // 1시간
