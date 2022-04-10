@@ -1,4 +1,4 @@
-package com.algorithm._00_알고리즘_구현.redo;
+package com.algorithm._00_알고리즘_구현.youtube1;
 
 /*
 백트래킹
