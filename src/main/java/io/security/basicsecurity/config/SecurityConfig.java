@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -53,6 +54,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        - 이 중에 SecurityContextLogoutHandler 가 로그아웃 처리
      */
     // LogoutFilter
+
+    /*
+       authentication 이 null 일경우 / null이 아닐 경우 처리
+       로그인 안한 상태로 루트 화면 접근시,
+       securityContextHolder.getContext().getAuthentication() : null 이다.
+
+       createAuthentication() : ROLE_ANONYMOUS 권한으로 익명 객체를 생성하여 securityContext 안에 저장한다.
+
+       그 이후,
+       AbstractSecurityInterceptor.java 에서 최종적으로 접근이 가능한지 인가처리를 한다.
+       여기서 securityContextHolder.getContext().getAuthentication() 가 null 이면 에러를 발생시킨다.
+       그러므로 인증 처리를 하지 않았어도 '익명 사용자용 인증 토큰'을 만들어서 설정되었다면 에러가 발생하지 않는다.
+
+       decide() : 권한 체크
+
+       -> 익명 사용자이면 에러가 발생하지만 AccessDeniedException 예외를 잡은 로직에서 isAnonymous 값을 설정한다.
+       AuthenticationTrustResolverImpl.java 에서 isAnonymous 값을 리턴한다.
+     */
+    // AnonymousAuthenticationFilter
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
