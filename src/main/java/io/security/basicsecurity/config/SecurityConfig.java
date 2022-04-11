@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -175,5 +176,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(3600) // 1시간
                 .userDetailsService(userDetailsService) // 유저 정보를 조회하는 기능을 위한 클래스 설정
                 ;
+
+        http    .sessionManagement()
+                .maximumSessions(1)
+                // true : 세션이 초과되면 인증 실패되어 세션이 생성되지 못함
+                // false : 기존 세션을 만료시키고, 새로운 세션 생성
+                // -> 두번째 세션이 생성되고 기존 세션은 만료시키는데, (서버에 세션은 2개 생성된게 맞다.)
+                // -> 첫번재 사용자가 이후 어떤 자원에 접근하려하면 서버가 세션 만료 체크를 해서(filter)
+                //    만료 되었다면 세션을 파기하고 화면에 메시지를 보여준다.
+                .maxSessionsPreventsLogin(true) // default(false)
+//                .expiredUrl("/expired") // 세션이 만료된 경우 이동할 페이지
+        ;
+
+        /** 세션 고정 공격 보호 */
+        http
+                .sessionManagement()
+                .sessionFixation()
+                .changeSessionId() // default
+//                .none() // 무방비상태
+//                .migrateSession() // 이전의 세션 속성을 그대로 새로운 세션 ID 생성
+//                .newSession()  // 이전의 세션 속성을 사용하지 못하고 새로 속성 설정하여 새로운 세션ID 생성
+
+        ;
+
+        /** 인증 API - 세션 정책 */
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 스프링 시큐리티가 필요시 생성 (default)
+//                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS) // 스프링 시큐리티가 항상 세션 생성
+//                .sessionCreationPolicy(SessionCreationPolicy.NEVER) // 스프링 시큐리티가 생성하지 않지만 이미 존재하면 사용
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 스프링 시큐리티가 생성하지 않고 존재해도 사용하지 않음
+        ;
     }
 }
