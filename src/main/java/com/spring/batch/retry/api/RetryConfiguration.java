@@ -42,8 +42,9 @@ public class RetryConfiguration {
                 .processor(processor())
                 .writer(writer())
                 .faultTolerant()
-//                .skip(RetryableException.class)
-//                .skipLimit(2)
+                /* skip 설정 추가 - 이유는 RetryItemProcessor.java 주석 참고 */
+                .skip(RetryableException.class)
+                .skipLimit(2)
                 /*
                 FaultTolerantStepBuilder > RetryCallback, RecoveryCallback 인자로 batchRetryTemplate.execute 메서드를 호출
                 retryCallback 안에서 ItemProcessor, ItemWriter 이 실행된다고 볼 수 있다.
@@ -86,6 +87,7 @@ public class RetryConfiguration {
                  */
                 .retry(RetryableException.class) // 이 에러 발생시 retry 기능 동작하도록
                 .noRetry(NoRetryException.class) // retry 예외 에러 설정
+                //.retryPolicy(limitCheckingItemSkipPolicy()) // policy 직접 만들어서 위를 대체하여 설정할 수 있다.
                 .retryLimit(2) // 재시도 가능 횟수
                 .build();
     }
