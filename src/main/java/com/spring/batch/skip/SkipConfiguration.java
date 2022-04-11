@@ -1,4 +1,4 @@
-package com.spring.batch.반복_오류제어.skip;
+package com.spring.batch.skip;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -54,7 +54,7 @@ public class SkipConfiguration {
 //                .retry(SkippableException.class)
 //                .retryLimit(2)
                 .skip(SkippableException.class) // 오류 발생시 이 예외는 skip 허용
-                .skipLimit(2) // 2번까지 skip 허용
+                .skipLimit(2) // 2번까지 skip 허용 (skip 은 전체 데이터로 센다)
 //                .noRollback(SkippableException.class)
                 .build();
     }

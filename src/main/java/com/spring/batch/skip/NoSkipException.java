@@ -1,4 +1,4 @@
-package com.spring.batch.반복_오류제어.skip;
+package com.spring.batch.skip;
 
 public class NoSkipException extends Exception {
 
