@@ -118,7 +118,7 @@ public class Tchapter04_게임개발 {
         q.offer(new Node(x, y, direction));
         // visited[x][y] = true;
 
-        /* 이동 0(북), 1(동), 2(남), 3(서) */
+        /* 이동 서(0) 남(1) 동(2) 북(3) */
         int[] dx = new int[]{0, 1, 0, -1};
         int[] dy = new int[]{-1, 0, 1, 0};
 
@@ -132,11 +132,15 @@ public class Tchapter04_게임개발 {
             for (int i = 0; i < dx.length; i++) {
                 // 왼쪽 방향을 바라보도록 위치 셋팅
                 // 0(북), 1(동), 2(남), 3(서)
-                // 0(북) -> 3(서)
-                // 1(동) -> 0(북)
-                // 2(남) -> 1(동)
-                // 3(서) -> 2(남)
+                // 0(북) -> 0(서)
+                // 1(동) -> 3(북)
+                // 2(남) -> 2(동)
+                // 3(서) -> 1(남)
                 int idx = (node.direction + i) % 4;
+                System.out.println("지금 바라보고 있는 방향 : " + node.direction);
+                System.out.println("i : " + i);
+                System.out.println("계산식 : " + (node.direction + i) + "%4 = " + ((node.direction + i) % 4));
+                System.out.println("회전 후 방향 : " + idx);
 
                 int nx = node.x + dx[idx];
                 int ny = node.y + dy[idx];
