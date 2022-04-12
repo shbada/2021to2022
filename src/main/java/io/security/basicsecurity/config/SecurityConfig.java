@@ -75,6 +75,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     // AnonymousAuthenticationFilter
 
+
+    /*
+       세션 관리/동시적 세션 제어/세션 고정 보호/세션 생성 정책
+     */
+    // SessionManagementFilter
+
+    /*
+       매 요청마다 현재 사용자의 세션 만료 여부 체크
+       세션이 만료되었을 경우 즉시 만료 처리
+
+       session.isExpired() == true
+       - 로그아웃 처리
+       - 즉시 오류 페이지 응답
+     */
+    // ConcurrentSessionFilter
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -207,5 +223,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionCreationPolicy(SessionCreationPolicy.NEVER) // 스프링 시큐리티가 생성하지 않지만 이미 존재하면 사용
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 스프링 시큐리티가 생성하지 않고 존재해도 사용하지 않음
         ;
+
+        /*
+         * 동일 계정으로 세션 생성시 (동일 계정의 세션 생성 허용 개수 : 1로 설정)
+         * [첫번째 사용자의 로그인 - user1]
+         * 1) ConcurrentSessionControlAuthenticationStrategy > session count 조회
+         * 2) ChangeSessionIdAuthenticationStrategy > 세션 고정 보호 (사용자가 인증할때 쿠키의 값을 session 다시 생성하여 셋팅 - 공격자의 쿠키 조작을 방지)
+         * 3) RegisterSessionAuthenticationStrategy > 인증하는 사용자의 세션 정보 등록 (registerNewSession())
+         * 4) ConcurrentSessionFilter
+         * 5) UsernamePasswordAuthenticationFilter
+         *
+         * 1) 두번째 로그인 유저가 로그인을 할 수 없게한다. : maxSessionsPreventsLogin(true)
+         * [두번째 사용자의 로그인 - user2] (위 user1 과 동일 계정)
+         * 1) ConcurrentSessionControlAuthenticationStrategy > session count 조회 (user1 이 이미 있으므로 count 가 1)
+         * -> 허용 개수 초과
+         * -> maxSessionsPreventsLogin(true) 이므로, exceptionIfMaximumExceeded 값이 true 고, 인증 예외를 발생시킨다.
+         * -> user2 의 인증 시도를 실패 예외로 넘겨준다. (unsuccessfulAuthentication)
+         * 2) ChangeSessionIdAuthenticationStrategy
+         * 3) RegisterSessionAuthenticationStrategy
+         * 4) ConcurrentSessionFilter
+         * 5) UsernamePasswordAuthenticationFilter
+         *
+         * 2) 두번째 로그인 유저가 세션을 생성하고, 기존 user1의 세션을 만료시킨다. : maxSessionsPreventsLogin(false)
+         * [두번째 사용자의 로그인 - user2] (위 user1 과 동일 계정)
+         * 1) ConcurrentSessionControlAuthenticationStrategy > session count 조회 (user1 이 이미 있으므로 count 가 1)
+         * -> 허용 개수 초과
+         * -> maxSessionsPreventsLogin(false) 이므로, user1(기존) 세션을 만료시킨다.
+         * 2) ChangeSessionIdAuthenticationStrategy
+         * 3) RegisterSessionAuthenticationStrategy
+         * 4) ConcurrentSessionFilter
+         * 5) UsernamePasswordAuthenticationFilter
+         *
+         * 3) user1(세션만료), user2(세션존재) 상태에서 user1로 다시 사이트에 요청해보자.
+         * [user1 첫번째 사용자가 사이트를 접속했다.] (user1, user2 세션이 생성된 상태)
+         * 1) ConcurrentSessionControlAuthenticationStrategy > session count 조회 (user1 이 이미 있으므로 count 가 1)
+         * -> 허용 개수 초과
+         * -> 위 단계 2)번에서 maxSessionsPreventsLogin(false)이므로, 기존 세션 정보 만료된 상태
+         * 2) ChangeSessionIdAuthenticationStrategy
+         * 3) RegisterSessionAuthenticationStrategy
+         * 4) ConcurrentSessionFilter
+         * -> 현재 사용자의 원래 세션 정보를 얻어온다.
+         * -> 사용자정보도 조회해서, 해당 세션 로그아웃 처리
+         * -> 그리고 만료되었다는 메시지를 화면에 보여준다.
+         * 5) UsernamePasswordAuthenticationFilter
+         */
+        http    .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+                ;
     }
 }
