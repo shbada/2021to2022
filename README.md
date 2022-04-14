@@ -1,8 +1,10 @@
 # spring-advanced-log
-[스프링 핵심 원리 - 고급편] 로그추적기+쓰레드로컬
+[스프링 핵심 원리 - 고급편] 로그추적기+쓰레드로컬.  
+github repository : https://github.com/westssun/spring-advanced-log/
 
 # springboot-aop
-[스프링 핵심 원리 - 고급편] AOP
+[스프링 핵심 원리 - 고급편] AOP  
+github repository : https://github.com/westssun/springboot-aop
 
 
 ### 수강기간
