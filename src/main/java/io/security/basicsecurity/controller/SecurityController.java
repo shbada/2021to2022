@@ -22,9 +22,13 @@ public class SecurityController {
      * 로그인 페이지
      * @return
      */
-    @GetMapping("/loginPage")
+//    @GetMapping("/loginPage")
+//    public String loginPage() {
+//        return "loginPage";
+//    }
+    @GetMapping("/login")
     public String loginPage() {
-        return "loginPage";
+        return "login";
     }
 
     @GetMapping("/user")
@@ -42,6 +46,11 @@ public class SecurityController {
     @GetMapping("/admin/list")
     public String adminList() {
         return "adminList";
+    }
+
+    @GetMapping("/denied")
+    public String denied() {
+        return "denied";
     }
 
 }
