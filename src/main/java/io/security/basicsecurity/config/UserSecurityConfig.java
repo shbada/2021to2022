@@ -78,7 +78,28 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .access("hasRole('ADMIN') or hasRole('SYS')")
                 .anyRequest().authenticated();
 
+        /**
+         * CSRF : default 로 설정되어있다.
+         * 모든 요청에 랜덤하게 생성된 토큰을 HTTP 파라미터로 요구한다.
+         * 요청시 전달되는 토큰 값과 서버에 저장된 실제 값과 비교한 후 일치하지 않으면 요청은 실패한다.
+         *
+         * 클라이언트가 최초 접속(요청)할때 서버에서 csrf token 을 발급해주고,
+         * 클라이언트는 해당 토큰을 hidden 으로 가지고있어서 서버에 요청할때 함께 보내야한다.
+         *
+         * GET 방식 제외 호출시 csrf 가 비어져있으면 에러 발생한다.
+         * CsrfFilter
+         * 1) 여기서 서버에 저장된 토큰이 있는지 체크한다.
+         * 2) 요청의 헤더&바디에 토큰을 설정하지 않았으므로 전송된 토큰은 null 이다.
+         * 3) null 이기 때문에 서버에 저장된 토큰과 전송된 토큰 비교하는 로직에서 값이 false 가 된다.
+         * 4) 그래서 InvalidCsrfTokenException 이 발생한다. (403)
+         *
+         * 서버에 있던 토큰을 header 에 넣어서 호출한다면? (POST)
+         * 1) 위 3)번에서 서버에 저장된 토큰과 전송된 토큰 비교하는 로직에서 값이 true 가 나온다.
+         * 2) 일치하므로 csrf 검사를 통과한다.
+         */
+
         http
+//                .csrf().disable() // csrf 비활성화 - CsrfFilter 가 아예 생성되지 않아서 사용되지않음
                 .formLogin()
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
