@@ -30,12 +30,16 @@ public class ApiItemWriter2 extends FlatFileItemWriter<ApiRequestVO> {
         ApiResponseVO response = apiService.service(items);
         System.out.println("response = " + response);
 
+        // response setting
         items.forEach(item -> item.setApiResponseVO(response));
 
+        /**
+         * 처리 후, 해당 내용들을 파일로 생성하자.
+         */
         super.setResource(new ClassPathResource("product2.txt"));
-        super.open(new ExecutionContext());
-        super.setLineAggregator(new DelimitedLineAggregator<>());
-        super.setAppendAllowed(true);
+        super.open(new ExecutionContext()); // itemWriter 은 itemStream 구현하므로, executionContext 객체 전달
+        super.setLineAggregator(new DelimitedLineAggregator<>()); // 구분자 방식 (default ,)
+        super.setAppendAllowed(true); // 파일 이어붙이기
         super.write(items);
     }
 }

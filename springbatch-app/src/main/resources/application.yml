@@ -37,6 +37,6 @@ spring:
   batch:
     job:
       names: ${job.name:NONE}
-      enabled: false
+      enabled: false  # 배치 자동 수행 막기
     jdbc:
       initialize-schema: always
