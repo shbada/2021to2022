@@ -1,4 +1,4 @@
-package com.algorithm._04_DFS;
+package com.algorithm._11_백트래킹;
 
 import java.util.ArrayList;
 import java.util.List;
