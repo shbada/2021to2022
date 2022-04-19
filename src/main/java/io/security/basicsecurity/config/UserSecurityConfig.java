@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Configuration
-@EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
+//@Configuration
+//@EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     // debug
     // ExceptionTranslationFilter
