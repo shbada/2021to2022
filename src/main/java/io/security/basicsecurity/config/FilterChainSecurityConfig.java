@@ -1,10 +1,6 @@
 package io.security.basicsecurity.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.FilterChainProxy;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 /**
  * 어떤 요청이 있다.
@@ -48,9 +44,9 @@ import org.springframework.web.filter.DelegatingFilterProxy;
  * - 스프링 시큐리티 초기화시 생성되는 필터들을 관리/제어
  * - 사용자의 요청을 필터 순서대로 호출하여 전달
  */
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//@Configuration
+//@EnableWebSecurity
+public class FilterChainSecurityConfig extends WebSecurityConfigurerAdapter {
     // 스프링 부트 기동시, 스프링 시큐리티 초기화
     /*
       WebSecurity > 빈을 생성하는데, 여기서 생성되는게 FilterChainProxy 다.
