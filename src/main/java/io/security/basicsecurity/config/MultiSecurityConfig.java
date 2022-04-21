@@ -61,6 +61,42 @@ class MultiSecurityConfig2 extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /**
+         * [formLogin -> Login 했을경우]
+         * 1) 인증 필터로 들어온다.
+         * AbstractAuthenticationProcessingFilter.java
+         * UsernamePasswordAuthenticationFilter
+         * > 사용자가 입력한 username, password 로 토큰 생성
+         * > 이 인증 객체를 AuthenticationManager().authenticate(authRequest); 로 넘겨서 전달된다.
+         * > 이 인증 객체를 통해서 인증 처리를 한다.
+         *
+         * ProviderManager.java (Authentication 의 구현체)
+         * > provider.authenticate(authentication) - 인증처리
+         *
+         * (인증 성공 후)
+         * AbstractUserDetailAuthenticationProvider
+         * > 최종 성공한 인증 결과를 UsernamePasswordAuthenticationToken 에 생성
+         *
+         * 그래서 UsernamePasswordAuthenticationToken 는 2개의 생성자가 존재
+         * (principal, credentials)
+         * 1) 로그인 정보를 담을 때
+         *
+         * (principal, credentials, authorities)
+         * 2) 최종 인증 결과를 담는다. (인증여부 true)
+         *
+         * 인증 성공 후, ProviderManager > 최종 인증 결과를 담은 인증객체 UsernamePasswordAuthenticationToken 를
+         * 최종적으로 UsernamePasswordAuthenticationFilter 에게 전달한다.
+         * 최종적으로 인증에 성공한 정보를 담은 인증객체를 가지고 여러 처리를 한다.
+         *
+         * 최종적으로 아래 객체에 저장한다.
+         * SecurityContextHolder.getContext().setAuthentication(authResult);
+         *
+         * 그래서 우리가 전역적으로 위 구문을 사용하여 인증 객체를 얻어올 수 있다.
+         * SecurityContextHolder.getContext().getAuthentication();
+         *
+         * 인가처리 필터에서도 사용함
+         * (AbstractSecurityInterceptor.java > securityContextHolder 안의 인증 객체를 가져와서 처리)
+         */
         http
                 .authorizeRequests()
                 .anyRequest().permitAll() // 모든 요청 허용
