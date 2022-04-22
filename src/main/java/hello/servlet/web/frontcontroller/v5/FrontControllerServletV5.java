@@ -53,6 +53,12 @@ public class FrontControllerServletV5 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * 1) handlerMappingMap 안의 value 를 꺼낸다.
+         * 2) handler 객체로 MyHandlerAdapter 를 꺼낸다.
+         * 3) handle() 가 호출되어 Controller 로직이 수행된다.
+         * 4) view 로직을 수행한다.
+         */
         /* 처리할 수 있는 handlerAdapter 을 찾는다. */
         Object handler = getHandler(request); // 현재 handler : MemberFormControllerV3
 

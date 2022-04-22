@@ -45,6 +45,13 @@ public class FrontControllerServletV2 extends HttpServlet {
 
         MyView view = controller.process(request, response);
 
+        /*
+            String viewPath = "/WEB-INF/views/members.jsp";
+            RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
+            dispatcher.forward(request, response);
+
+            각 ControllerV1 의 위 중복 코드를 공통 처리
+         */
         /* 메서드 공통 처리 */
         view.render(request, response);
     }

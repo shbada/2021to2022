@@ -45,6 +45,7 @@ public class FrontControllerServletV3 extends HttpServlet {
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
 
+        /* jsp 파일 경로도 공통처리 하여 중복을 없앴다. */
         MyView view = viewResolver(mv);
 
         view.render(mv.getModel(), request, response);
