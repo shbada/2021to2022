@@ -12,6 +12,7 @@ public class WhiteshipFactory extends DefaultShipFactory {
 
     private ShipPartsFactory shipPartsFactory;
 
+    // WhiteshipPartsFactory, WhitePartsProFactory
     public WhiteshipFactory(ShipPartsFactory shipPartsFactory) {
         this.shipPartsFactory = shipPartsFactory;
     }
