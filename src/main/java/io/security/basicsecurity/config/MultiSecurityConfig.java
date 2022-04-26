@@ -32,9 +32,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * -> 이번엔 첫번째 DefaultSecurityFilterChain 으로 간다.
  * -> 첫번째 설정 클래스에 해당하는 filters 가 적용된다.
  */
-@Configuration
-@EnableWebSecurity
-@Order(0) // Order 의 순서를 잘 설정해야한다. MultiSecurityConfig2 가 먼저 타면, /admin/**도 두번째껄 타게된다.
+//@Configuration
+//@EnableWebSecurity
+//@Order(0) // Order 의 순서를 잘 설정해야한다. MultiSecurityConfig2 가 먼저 타면, /admin/**도 두번째껄 타게된다.
 public class MultiSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * /admin url 요청 시 아래로 작동
@@ -54,8 +54,8 @@ public class MultiSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 }
 
-@Configuration
-@Order(1)
+//@Configuration
+//@Order(1)
 class MultiSecurityConfig2 extends WebSecurityConfigurerAdapter {
     /**
      * /admin 외의 url 요청 시 아래로 작동
