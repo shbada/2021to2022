@@ -25,6 +25,7 @@ public class ManagerSecurityConfig extends WebSecurityConfigurerAdapter {
        - provider.authenticate(authentication); 호출
      > DaoAuthenticationProvider.java
        - getUserDetailsService().loadUserByUsername -> UserDetails 타입의 유저 객체 얻음
+         (별도의 UserDetails 를 구현해서 처리할 수도 있다.)
        - ID는 검증되었다고 여기까지 판단은 가능
        - 그다음 Password 검증 > 사용자가 입력한 비밀번호와 UserDetails 객체의 비밀번호 유효성 체크
        - 성공시 인증 정보를 다시금 인증 객체 UsernamePasswordAuthenticationToken 에 저장
