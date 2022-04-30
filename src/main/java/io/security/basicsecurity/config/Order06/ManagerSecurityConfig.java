@@ -1,12 +1,12 @@
-package io.security.basicsecurity.config;
+package io.security.basicsecurity.config.Order06;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-@EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
+//@Configuration
+//@EnableWebSecurity // WebSecurityConfiguration 등 여러 클래스들을 import 해준다.
 public class ManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /*

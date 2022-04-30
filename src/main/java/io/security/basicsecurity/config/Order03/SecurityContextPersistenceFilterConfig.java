@@ -1,8 +1,10 @@
-package io.security.basicsecurity.config;
+package io.security.basicsecurity.config.Order03;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+//@Configuration
+//@EnableWebSecurity
 public class SecurityContextPersistenceFilterConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {

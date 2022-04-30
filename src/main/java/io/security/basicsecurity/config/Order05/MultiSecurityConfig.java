@@ -1,11 +1,7 @@
-package io.security.basicsecurity.config;
+package io.security.basicsecurity.config.Order05;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * 여러개가 있을때 Order 설정이 필요하다.

@@ -1,4 +1,4 @@
-package io.security.basicsecurity.config;
+package io.security.basicsecurity.config.ORder04;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
