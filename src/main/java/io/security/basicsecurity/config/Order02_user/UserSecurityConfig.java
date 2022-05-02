@@ -1,4 +1,4 @@
-package io.security.basicsecurity.config.Order02;
+package io.security.basicsecurity.config.Order02_user;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

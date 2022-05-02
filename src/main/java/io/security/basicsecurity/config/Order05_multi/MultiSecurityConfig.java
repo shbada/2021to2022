@@ -1,4 +1,4 @@
-package io.security.basicsecurity.config.Order05;
+package io.security.basicsecurity.config.Order05_multi;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;

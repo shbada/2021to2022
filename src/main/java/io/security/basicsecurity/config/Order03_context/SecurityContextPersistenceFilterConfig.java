@@ -1,4 +1,4 @@
-package io.security.basicsecurity.config.Order03;
+package io.security.basicsecurity.config.Order03_context;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
