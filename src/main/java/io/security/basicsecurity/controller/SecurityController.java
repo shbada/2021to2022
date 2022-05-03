@@ -17,6 +17,7 @@ public class SecurityController {
      * 기본 계정
      * user : user
      * password : console 에 출력되는 비밀번호
+     *
      * @return
      */
     @GetMapping("/")
@@ -62,6 +63,7 @@ public class SecurityController {
 
     /**
      * 로그인 페이지
+     *
      * @return
      */
 //    @GetMapping("/loginPage")
@@ -94,5 +96,4 @@ public class SecurityController {
     public String denied() {
         return "denied";
     }
-
 }
