@@ -1,4 +1,4 @@
-package com.algorithm._00_._Current;
+package com.algorithm._11_백트래킹;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -38,6 +38,11 @@ public class A15658_연산자_끼워넣기2 {
 
     static void dfs(int value, int sum) {
         for (int i = 0; i < 4; i++) {
+            /* value 가 배열의 길이보다 커지는 시점엔 반복문 탈출 */
+            if (value > arr.length - 1) {
+                break;
+            }
+
             if (opArr[i] != 0) {
                 opArr[i] = opArr[i] - 1; /* 연산자 사용 */
 
