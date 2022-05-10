@@ -20,7 +20,6 @@ import com.designpattern.report._09_decorator.step2_after.concreteDecorator.Trim
  * - 데코레이터를 조합하는 코드가 복잡할 수 있다.
  */
 public class App {
-
     private static boolean enabledSpamFilter = true;
 
     private static boolean enabledTrimming = true;

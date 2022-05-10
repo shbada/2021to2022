@@ -7,8 +7,7 @@ import com.designpattern.report._09_decorator.step2_after.component.CommentServi
  * Decorator 가 Component 를 감싸고있다.
  */
 public class CommentDecorator implements CommentService {
-
-    private CommentService commentService;
+    private final CommentService commentService; // Component
 
     public CommentDecorator(CommentService commentService) {
         this.commentService = commentService;

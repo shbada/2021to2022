@@ -4,7 +4,6 @@ import com.designpattern.report._09_decorator.step2_after.component.CommentServi
 import com.designpattern.report._09_decorator.step2_after.decorator.CommentDecorator;
 
 public class TrimmingCommentDecorator extends CommentDecorator {
-
     public TrimmingCommentDecorator(CommentService commentService) {
         super(commentService);
     }
