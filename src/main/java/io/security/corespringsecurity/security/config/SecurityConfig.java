@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 // root 는 접속 가능하도록 한다.
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/users").permitAll()
                 // Role 에 따른 처리
                 .antMatchers("/config").hasRole("ADMIN")
                 .antMatchers("/messages").hasRole("MANAGER")
