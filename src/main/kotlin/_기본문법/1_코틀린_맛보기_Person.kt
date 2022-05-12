@@ -1,3 +1,5 @@
+package _기본문법
+
 // name, age : property
 // Int? : null 이 될 수 있는 타입
 // Int? = null : 파라미터 default 값 설정
