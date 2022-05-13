@@ -1,6 +1,7 @@
 package io.security.corespringsecurity.security.config;
 
 import antlr.BaseAST;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,7 +18,20 @@ import java.security.cert.Extension;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserDetailsService userDetailsService;
+
+    /**
+     * 우리가 생성한 userDetailsService 를 사용하도록 셋팅
+     * @param auth
+     * @throws Exception
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
+
     /**
      * security 설정
      * @param http
@@ -45,18 +60,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // password encode
-        String password = passwordEncoder().encode("1111");
-
-        auth.inMemoryAuthentication().withUser("user").password(password).roles("USER");
-//        auth.inMemoryAuthentication().withUser("admin").password(password).roles("MANAGER");
-//        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN");
-        // 여러개의 ROLE을 줘야, ADMIN이 USER, MANAGER 이 접근 가능한 자원에 접근이 가능해진다.
-        auth.inMemoryAuthentication().withUser("manager").password(password).roles("MANAGER", "USER");
-        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN", "USER", "MANAGER");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        // password encode
+//        String password = passwordEncoder().encode("1111");
+//
+//        auth.inMemoryAuthentication().withUser("user").password(password).roles("USER");
+////        auth.inMemoryAuthentication().withUser("admin").password(password).roles("MANAGER");
+////        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN");
+//        // 여러개의 ROLE을 줘야, ADMIN이 USER, MANAGER 이 접근 가능한 자원에 접근이 가능해진다.
+//        auth.inMemoryAuthentication().withUser("manager").password(password).roles("MANAGER", "USER");
+//        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN", "USER", "MANAGER");
+//    }
 
     /**
      * 보안 필터를 적용할 필요가 없는 리소스를 설정해야한다. (.js, .css, .image 등)

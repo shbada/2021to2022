@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping(value="/users")
     public String createUser() {
-        return "user/login/resgister";
+        return "user/login/register";
     }
 
     @PostMapping(value = "/users")
