@@ -17,7 +17,6 @@ package com.designpattern.report._13_chain_of_responsibilities.step1_before;
  * 핸들러 체인을 사용해서 요청을 처리한다.
  */
 public class Client {
-
     public static void main(String[] args) {
         Request request = new Request("무궁화 꽃이 피었습니다.");
 

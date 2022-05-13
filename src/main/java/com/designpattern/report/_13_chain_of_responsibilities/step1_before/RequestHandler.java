@@ -1,7 +1,6 @@
 package com.designpattern.report._13_chain_of_responsibilities.step1_before;
 
 public class RequestHandler {
-
     public void handler(Request request) {
         // 아래 체크를 여기서 할건가?
         // -> AuthRequestHandler 여기서 하자. RequestHandler 을 상속해서.

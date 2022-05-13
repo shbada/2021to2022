@@ -4,3 +4,5 @@
 
 (1) 적용 후
 ![IMAGES](../report/images/Chain-of-Responsibility02.png)
+
+##### (복습) 2022-05-13

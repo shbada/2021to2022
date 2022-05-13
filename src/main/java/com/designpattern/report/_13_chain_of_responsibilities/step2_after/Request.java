@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Request {
-
     @Getter
     @Setter
     private String body;

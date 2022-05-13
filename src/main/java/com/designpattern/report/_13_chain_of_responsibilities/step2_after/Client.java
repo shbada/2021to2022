@@ -11,8 +11,10 @@ import com.designpattern.report._13_chain_of_responsibilities.step2_after.concre
  * [단점]
  * - 디버깅이 어렵다.
  */
+/**
+ * 요청을 보내는쪽
+ */
 public class Client {
-
     private RequestHandler requestHandler;
 
     public Client(RequestHandler requestHandler) {
