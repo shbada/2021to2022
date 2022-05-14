@@ -1,4 +1,4 @@
-package _기본문법
+package chapter2_코틀린기초
 
 // name, age : property
 // Int? : null 이 될 수 있는 타입
