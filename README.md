@@ -3,6 +3,7 @@
 
 ### 총 수강기간
 2022.01.02 ~ 2022.04.13
+- 총 78개의 주제 : https://github.com/westssun/spring-batch-start/tree/master/src/main/java/com/spring/batch
 
 ### 수강일지
 | | | |
