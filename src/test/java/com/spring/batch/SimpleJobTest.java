@@ -16,7 +16,7 @@ package com.spring.batch;
  * - @JobScope 컨텍스트를 생성해주며 해당 컨텍스트를 통해 JobParameter 등을 단위 테스트에서 DI 받을 수 있다.
  */
 
-import com.spring.batch.job.SimpleJobConfiguration;
+import com.spring.batch._16_STEP_종료코드.SimpleJobConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
