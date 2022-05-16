@@ -10,7 +10,6 @@ public class User {
         this.chatServer = chatServer;
     }
 
-
     public void sendMessage(String subject, String message) {
         chatServer.add(subject, message);
     }

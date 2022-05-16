@@ -13,7 +13,6 @@ public class ChatServer {
         this.messages = new HashMap<>();
     }
 
-
     public void add(String subject, String message) {
         if (messages.containsKey(subject)) {
             messages.get(subject).add(message);
