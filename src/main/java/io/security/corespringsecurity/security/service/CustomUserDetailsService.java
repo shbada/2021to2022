@@ -18,8 +18,15 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
+    /**
+     * 사용자정보 검증
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // exist user check
         Account account = userRepository.findByUsername(username);
 
         if (account == null) {

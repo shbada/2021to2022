@@ -1,10 +1,11 @@
 package io.security.corespringsecurity.security.config;
 
-import antlr.BaseAST;
+import io.security.corespringsecurity.security.provider.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -13,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.security.cert.Extension;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+//        auth.userDetailsService(userDetailsService);
+        // 우리가 만든 provider 사용
+        auth.authenticationProvider(authenticationProvider());
+    }
+
+    public AuthenticationProvider authenticationProvider() {
+        return new CustomAuthenticationProvider();
     }
 
     /**
@@ -44,9 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // root 는 접속 가능하도록 한다.
                 .antMatchers("/", "/users").permitAll()
                 // Role 에 따른 처리
-                .antMatchers("/config").hasRole("ADMIN")
-                .antMatchers("/messages").hasRole("MANAGER")
                 .antMatchers("/mypage").hasRole("USER")
+                .antMatchers("/messages").hasRole("MANAGER")
+                .antMatchers("/config").hasRole("ADMIN")
                 .anyRequest().authenticated()
 
                 .and()
