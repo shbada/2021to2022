@@ -57,6 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .formLogin()
+        /* 로그인 페이지 커스텀 설정 */
+                .loginPage("/login")
+                .defaultSuccessUrl("/") // 로그인 성공시 home 으로
+                .loginProcessingUrl("/login_proc") // login.html 에서 form action
+                .permitAll() // 로그인 화면은 권한 모두 허용
                 ;
     }
 
