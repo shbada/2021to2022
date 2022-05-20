@@ -26,7 +26,10 @@ public class SimpleProducer {
         KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
         String messageValue = "testMessage";
-        ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageValue);
+//        ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageValue);
+
+        // 메시지 키가 포함된 레코드 전송 (토픽 이름, 메시지 키, 메시지 값 순서)
+        ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, "key", messageValue);
 
         // '배치 전송'
         // 파라미터로 들어간 record를 프로듀서 내부에 가지고 있다가, 배치 형태로 묶어서 브로커에 전송한다.
