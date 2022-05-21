@@ -1,0 +1,37 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: h2
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  batch:
+    jdbc:
+      initialize-schema: embedded
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: postgresql
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springbatchdb
+    username: springbatch
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  batch:
+#    jdbc:
+#      initialize-schema: always
+    job:
+#      enabled: false # spring batch 자동실행 방지
+      names: ${job.name:NONE} # --job.name=batchJob1 로 실행시키겠다는 의미. 아무런 파라미터로 넘기지 않으면 NONE이라는 이름으로 실행되어 아무런 배치잡이 수행되지 않는다.
