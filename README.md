@@ -1,6 +1,9 @@
 # springbatch_test
 [springbatch] 블로그 포스팅을 위한 Job Repository
 
+# 아래 github repository 복습
+https://github.com/westssun/spring-batch-start
+
 
 ##### 포스팅 바로가기
 | | | |
