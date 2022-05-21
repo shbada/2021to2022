@@ -1,4 +1,4 @@
-package chapter4_클래스_객체_인터페이스._1_클래스_계층
+package chapter4_클래스_객체_인터페이스._1_인터페이스
 
 class Button2 : Clickable, Focusable {
     override fun click() {
