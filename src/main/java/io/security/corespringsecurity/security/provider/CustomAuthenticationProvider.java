@@ -1,10 +1,12 @@
 package io.security.corespringsecurity.security.provider;
 
+import io.security.corespringsecurity.security.common.FormWebAuthenticationDetails;
 import io.security.corespringsecurity.security.service.AccountContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -36,6 +38,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (!passwordEncoder.matches(password, accountContext.getAccount().getPassword())) {
             throw new BadCredentialsException("BadCredentialsException");
         }
+
+        // security Filter 에서 setDetails() 가 호출되면서 요청때 오는 부가정보들을 set 하기 때문에, 아래와 같이 꺼낼 수 있다.
+        // FormWebAuthenticationDetails 에서 설정한 secretKey 가져오기
+        FormWebAuthenticationDetails formWebAuthenticationDetails = (FormWebAuthenticationDetails) authentication.getDetails();
+        String secretKey = formWebAuthenticationDetails.getSecretKey();
+
+        if (secretKey == null || !"secret".equals(secretKey)) {
+            // 인증 실패하기
+            throw new InsufficientAuthenticationException("check secretKey");
+        }
+
 
         // 인증 성공시
         UsernamePasswordAuthenticationToken authenticationToken =

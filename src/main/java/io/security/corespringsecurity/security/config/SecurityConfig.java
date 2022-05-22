@@ -1,5 +1,6 @@
 package io.security.corespringsecurity.security.config;
 
+import io.security.corespringsecurity.security.common.FormAuthenticationDetailsSource;
 import io.security.corespringsecurity.security.provider.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+    private final FormAuthenticationDetailsSource formAuthenticationDetailsSource;
 
     /**
      * 우리가 생성한 userDetailsService 를 사용하도록 셋팅
@@ -61,6 +63,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/") // 로그인 성공시 home 으로
                 .loginProcessingUrl("/login_proc") // login.html 에서 form action
+                /*
+                 * UsernamePasswordAuthenticationFilter
+                 * 인증 시도시, usernamePasswordAuthenticationToken (authentication 객체) 를 만든다.
+                 * setDetails() 호출
+                 * -> 우리는 여기서 WebAuthenticationDetailSource 객체를 만들며 부가적인 기능을 수행한다.
+                 * -> WebAuthenticationDetailSource -> WebAuthenticationDetails 객체를 생성
+                 * 화면 : <input type="hidden" th:value="secret" name="secret_key" />
+                 */
+                /** formAuthenticationDetailsSource 커스텀 클래스 설정 */
+                .authenticationDetailsSource(formAuthenticationDetailsSource)
                 .permitAll() // 로그인 화면은 권한 모두 허용
                 ;
     }
