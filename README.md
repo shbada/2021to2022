@@ -12,3 +12,4 @@
 |5|5. 프로듀서의 중요 개념과 옵션값|https://devfunny.tistory.com/747|
 |6|6. 특정 파티션 설정, 프로듀서 전송 결과 Callback 클래스 생성하기|https://devfunny.tistory.com/751|
 |7|7. 프로젝트 생성하여 카프카 컨슈머 실행|https://devfunny.tistory.com/752|
+|8|8. 컨슈머의 중요 개념과 옵션값|https://devfunny.tistory.com/757|
