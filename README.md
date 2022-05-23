@@ -20,3 +20,5 @@
 |12|12. 로컬함수 확장 (코드 리팩토링, 로컬함수, 중첩함수)|https://devfunny.tistory.com/750|
 |13|13. 코틀린 인터페이스 구현|https://devfunny.tistory.com/753|
 |14|14. 코틀린의 가시성 변경자 (open, abstract, internal)|https://devfunny.tistory.com/756|
+|15|15. 코틀린 중첩 클래스|https://devfunny.tistory.com/763|
+|16|16. 봉인된 클래스: 클래스 계층 정의시 클래스 확장 제한 (sealed 변경자)|https://devfunny.tistory.com/764|
