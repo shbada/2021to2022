@@ -1,4 +1,4 @@
-package com.project.springbatch._3;
+package com.project.springbatch._03_jobExecution;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;

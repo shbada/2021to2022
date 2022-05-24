@@ -1,6 +1,7 @@
-package com.project.springbatch._4;
+package com.project.springbatch._1_start;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -13,50 +14,43 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /*
---job.name=stepTaskletTestJob
+--job.name=helloJob
  */
-
-/**
- * SimpleStepHandler.java
- * AbstractStep.java
- * TaskletStep.java
- */
-@Configuration
 @RequiredArgsConstructor
-public class CustomTaskletStepConfiguration {
-
-    // job 생성
+@Slf4j
+@Configuration // 빈 생성을 위해
+public class HelloJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job stepTaskletTestJob() {
-        return this.jobBuilderFactory.get("stepTaskletTestJob")
-                /* 각각의 스텝은 독립적으로 생성되어 Tasklet 이 생성된다.
-                 * Step 은 자기만의 Tasklet 을 가진다. */
-                .start(taskletTestStep1())
-                .next(taskletTestStep2())
+    public Job helloJob() {
+        return this.jobBuilderFactory.get("helloJob")
+                /* step start */
+                .start(helloStep1())
+                .next(helloStep2())
                 .build();
     }
 
     @Bean
-    public Step taskletTestStep1() {
-        return stepBuilderFactory.get("taskletTestStep1")
+    public Step helloStep1() {
+        return stepBuilderFactory.get("helloStep1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("taskletTestStep1");
+                        log.info("hello step1");
                         return RepeatStatus.FINISHED;
                     }
                 })
                 .build();
     }
 
-    @Bean
-    public Step taskletTestStep2() {
-        return stepBuilderFactory.get("taskletTestStep2")
-                // 빈으로 등록해도되고, 이렇게 객체 생성해도 된다.
-                .tasklet(new CustomTasklet())
+    public Step helloStep2() {
+        return stepBuilderFactory.get("helloStep2")
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("hello step2");
+                    return RepeatStatus.FINISHED;
+                })
                 .build();
     }
 }
