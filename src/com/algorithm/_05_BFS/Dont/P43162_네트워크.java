@@ -69,14 +69,14 @@ public class P43162_네트워크 {
             Node node = q.poll();
 
             int start = node.getY();
-            for (int i = 0; i < n; i++) {
+            for (int end = 0; end < n; end++) {
                 /* 방문 가능 조건 */
                 /* 방문하지 않았고, 숫자가 같을 경우  */
-                if (!visited[start][i] && graph[start][i] == graph[x][y]) {
-                    visited[start][i] = true;
+                if (!visited[start][end] && graph[start][end] == graph[x][y]) {
+                    visited[start][end] = true;
 
                     /* queue push */
-                    q.offer(new Node(start, i));
+                    q.offer(new Node(start, end));
                 }
             }
         }
