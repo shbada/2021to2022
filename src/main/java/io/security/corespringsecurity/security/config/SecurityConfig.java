@@ -1,6 +1,7 @@
 package io.security.corespringsecurity.security.config;
 
 import io.security.corespringsecurity.security.common.FormAuthenticationDetailsSource;
+import io.security.corespringsecurity.security.handler.CustomAuthenticationFailureHandler;
 import io.security.corespringsecurity.security.handler.CustomAuthenticationSuccessHandler;
 import io.security.corespringsecurity.security.provider.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final FormAuthenticationDetailsSource formAuthenticationDetailsSource;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     /**
      * 우리가 생성한 userDetailsService 를 사용하도록 셋팅
@@ -51,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 // root 는 접속 가능하도록 한다.
-                .antMatchers("/", "/users").permitAll()
+                .antMatchers("/", "/users", "user/login/**", "/login*").permitAll()
                 // Role 에 따른 처리
                 .antMatchers("/mypage").hasRole("USER")
                 .antMatchers("/messages").hasRole("MANAGER")
@@ -76,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /** formAuthenticationDetailsSource 커스텀 클래스 설정 */
                 .authenticationDetailsSource(formAuthenticationDetailsSource)
                 .successHandler(customAuthenticationSuccessHandler) // successHandler 설정
+                .failureHandler(customAuthenticationFailureHandler) // failureHandler 설정
                 .permitAll() // 로그인 화면은 권한 모두 허용
                 ;
     }
