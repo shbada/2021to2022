@@ -16,4 +16,5 @@
 |9|9. 컨슈머 오프셋 커밋 실습 (commit sync, commit async)|https://devfunny.tistory.com/760|
 |10|10. 컨슈머 리밸런싱 리스터 클래스 생성하기|https://devfunny.tistory.com/761|
 |11|11. 컨슈머 토픽, 파티션 명시적 선언과 정상 종료 처리 실습|https://devfunny.tistory.com/762|
-|12|12. 12. 카프카에서 제공하는 AdminClient 사용하여 정보 조회하기|https://devfunny.tistory.com/768|
+|12|12. 카프카에서 제공하는 AdminClient 사용하여 정보 조회하기|https://devfunny.tistory.com/768|
+|13|13. 토픽과 파티션|https://devfunny.tistory.com/772|
