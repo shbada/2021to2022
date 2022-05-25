@@ -23,3 +23,4 @@
 |15|15. 코틀린 중첩 클래스|https://devfunny.tistory.com/763|
 |16|16. 봉인된 클래스: 클래스 계층 정의시 클래스 확장 제한 (sealed 변경자)|https://devfunny.tistory.com/764|
 |17|17. 클래스의 생성자와 초기화 블록, 주 생성자와 부 생성자|https://devfunny.tistory.com/767|
+|18|18. 인터페이스의 프로퍼티 구현, 뒷받침하는 필드(field 식별자), 접근자의 가시성 변경|https://devfunny.tistory.com/771|
