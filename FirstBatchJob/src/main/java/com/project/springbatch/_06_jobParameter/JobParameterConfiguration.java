@@ -1,4 +1,4 @@
-package com.project.springbatch._02_jobParameter;
+package com.project.springbatch._06_jobParameter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

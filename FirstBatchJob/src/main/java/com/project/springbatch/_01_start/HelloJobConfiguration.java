@@ -1,4 +1,4 @@
-package com.project.springbatch._1_start;
+package com.project.springbatch._01_start;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

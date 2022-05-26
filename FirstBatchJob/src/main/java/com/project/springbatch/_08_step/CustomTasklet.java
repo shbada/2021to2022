@@ -1,4 +1,4 @@
-package com.project.springbatch._05_stepExecution;
+package com.project.springbatch._08_step;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -15,7 +15,7 @@ public class CustomTasklet implements Tasklet {
      */
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        System.out.println("executionTestStep3");
+        System.out.println("taskletTestStep2");
         return RepeatStatus.FINISHED;
     }
 }

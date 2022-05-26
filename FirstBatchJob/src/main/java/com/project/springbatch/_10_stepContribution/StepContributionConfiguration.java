@@ -1,4 +1,4 @@
-package com.project.springbatch._06_stepContribution;
+package com.project.springbatch._10_stepContribution;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
