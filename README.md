@@ -17,3 +17,5 @@ https://github.com/westssun/spring-batch-start
 |6|6. ExecutionContext (StepExecution, JobExecution 관계) 예제로 흐름 파악하기|https://devfunny.tistory.com/769|
 |7|7. BATCH 테이블 Prefix 변경해보기|https://devfunny.tistory.com/774|
 |8|8. JobRepository 를 사용하여 특정 JobName, JobParameters 에 해당하는 최신에 수행된 Job 정보 가져오기|https://devfunny.tistory.com/769|
+|0|(기존 포스팅) SpringBatch에서 JobLauncher 동기/비동기 실행|https://devfunny.tistory.com/688|
+|9|9. FlowBuilder를 사용해서 FlowJob 생성하기 |https://devfunny.tistory.com/776|
