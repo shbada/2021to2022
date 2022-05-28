@@ -18,4 +18,6 @@ https://github.com/westssun/spring-batch-start
 |7|7. BATCH 테이블 Prefix 변경해보기|https://devfunny.tistory.com/774|
 |8|8. JobRepository 를 사용하여 특정 JobName, JobParameters 에 해당하는 최신에 수행된 Job 정보 가져오기|https://devfunny.tistory.com/769|
 |0|(기존 포스팅) SpringBatch에서 JobLauncher 동기/비동기 실행|https://devfunny.tistory.com/688|
-|9|9. FlowBuilder를 사용해서 FlowJob 생성하기 |https://devfunny.tistory.com/776|
+|9|9. FlowBuilder를 사용해서 FlowJob 생성하기|https://devfunny.tistory.com/776|
+|10|10. STEP의 EXIT_CODE, STATUS 설정하기|https://devfunny.tistory.com/778|
+|11|11. JobParameters 검증 CustomValidator 만들기 (JobParametersValidator 구현), 스프링 배치가 제공해주는 DefaultJobParametersValidator 사용해보기|https://devfunny.tistory.com/779|
