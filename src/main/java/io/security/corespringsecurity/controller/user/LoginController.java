@@ -1,5 +1,6 @@
 package io.security.corespringsecurity.controller.user;
 
+import io.security.corespringsecurity.domain.Account;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -42,5 +43,17 @@ public class LoginController {
         }
 
         return "redirect:/login"; // 로그인 화면으로 리다이렉트
+    }
+
+    @GetMapping("/denied")
+    public String accessDenied(@RequestParam(value = "exception", required = false) String exception, Model model) {
+        // 인증 객체는 SecurityContextHolder 안에 있다.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Account account = (Account) auth.getPrincipal();
+
+        model.addAttribute("username", account.getUsername());
+        model.addAttribute("exception", exception);
+
+        return "user/login/denied";
     }
 }
