@@ -7,6 +7,7 @@
 | | | |
 |-|-|-|
 |Name|Status|수강일|
+|시큐리티 개념 - https://github.com/westssun/spring-security-start| | |
 |1) 강의소개|수강완료|2022/04/04|
 |2) 실전 프로젝트 예제 미리보기|수강완료|2022/04/04|
 |1) 프로젝트 구성 및 의존성 추가|수강완료|2022/04/04|
@@ -33,7 +34,8 @@
 |9) 인가 개념 및 필터 이해 : Authorization, FilterSecurityInterceptor|수강완료|2022/04/30|
 |10) 인가 결정 심의자 - AccessDecisionManager, AccessDecisionVoter|수강완료|2022/05/02|
 |11) 스프링 시큐리티 필터 및 아키텍처 정리|수강완료|2022/05/03|
-|여기서부터 실전 프로젝트| | |
+|여기서부터 실전 프로젝트 개발 - https://github.com/westssun/core-spring-security| | |
+|실전프로젝트 -인증 프로세스 Form 인증 구현| | |
 |1) 실전 프로젝트 생성|수강완료|2022/05/04|
 |2) 정적 자원 관리 - WebIgnore 설정|수강완료|2022/05/09|
 |3) 사용자 DB 등록 및 PasswordEncoder|수강완료|2022/05/10|
@@ -45,3 +47,5 @@
 |9) 인증 성공 핸들러 : CustomAuthenticationSuccessHandler|수강완료|2022/05/23|
 |10) 인증 실패 핸들러 : CustomAuthenticationFailureHandler|수강완료|2022/05/24|
 |11) 인증 거부 처리 - Access Denied|수강완료|2022/05/28|
+|실전프로젝트 - 인증 프로세스 Ajax 인증 구현| | |
+|12) 1) 흐름 및 개요|수강완료|2022/05/29|
