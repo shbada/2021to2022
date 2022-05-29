@@ -21,3 +21,4 @@ https://github.com/westssun/spring-batch-start
 |9|9. FlowBuilder를 사용해서 FlowJob 생성하기|https://devfunny.tistory.com/776|
 |10|10. STEP의 EXIT_CODE, STATUS 설정하기|https://devfunny.tistory.com/778|
 |11|11. JobParameters 검증 CustomValidator 만들기 (JobParametersValidator 구현), 스프링 배치가 제공해주는 DefaultJobParametersValidator 사용해보기|https://devfunny.tistory.com/779|
+|12|12. preventRestart() 지정에 따른 수행 과정 파악하기|https://devfunny.tistory.com/786|
