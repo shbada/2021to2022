@@ -20,3 +20,4 @@
 |13|13. 토픽과 파티션|https://devfunny.tistory.com/772|
 |14|14. 토픽 정리 정책(cleanup.policy), 토픽 삭제 정책(delete policy), 토픽 압축 정책(compact policy)|https://devfunny.tistory.com/777|
 |15|15. ISR(In-Sync-Replicas)|https://devfunny.tistory.com/780|
+|16|16. 카프카 프로듀서 - acks 옵션|https://devfunny.tistory.com/785|
