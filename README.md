@@ -26,3 +26,4 @@
 |18|18. 인터페이스의 프로퍼티 구현, 뒷받침하는 필드(field 식별자), 접근자의 가시성 변경|https://devfunny.tistory.com/771|
 |19|19. 코틀린의 toString(), equals(), hashCode(), copy() 메서드 구현과 자동생성 data 변경자, 클래스 위임 by|https://devfunny.tistory.com/773|
 |20|20. object 키워드 (객체 선언, 동반 객체, 무명 객체)|https://devfunny.tistory.com/781|
+|21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|
