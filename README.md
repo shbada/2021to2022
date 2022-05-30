@@ -27,3 +27,4 @@
 |19|19. 코틀린의 toString(), equals(), hashCode(), copy() 메서드 구현과 자동생성 data 변경자, 클래스 위임 by|https://devfunny.tistory.com/773|
 |20|20. object 키워드 (객체 선언, 동반 객체, 무명 객체)|https://devfunny.tistory.com/781|
 |21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|
+|22|22. 람다식의 로컬 변수 접근, 멤버 참조|https://devfunny.tistory.com/789|
