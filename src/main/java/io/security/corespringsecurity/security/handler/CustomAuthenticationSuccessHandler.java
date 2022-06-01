@@ -7,6 +7,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import java.io.IOException;
 /*
 설정 : SecurityConfig.java (.successHandler(customAuthenticationSuccessHandler))
  */
+@Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     // 이전에 사용자가 요청하고자했던 화면 값을 가지고있다.
     private RequestCache requestCache = new HttpSessionRequestCache();
