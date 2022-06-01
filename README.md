@@ -28,3 +28,4 @@
 |20|20. object 키워드 (객체 선언, 동반 객체, 무명 객체)|https://devfunny.tistory.com/781|
 |21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|
 |22|22. 람다식의 로컬 변수 접근, 멤버 참조|https://devfunny.tistory.com/789|
+|23|23. 컬렉션 함수형 API (filter, map, all, any, count, find, groupBy, flatMap, flatten)|https://devfunny.tistory.com/795|
