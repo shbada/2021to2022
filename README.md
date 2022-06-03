@@ -24,3 +24,4 @@
 |17|17. 멱등성(idempotence) 프로듀서와 트랜잭션(transaction) 프로듀서|https://devfunny.tistory.com/788|
 |18|18. 멀티 스레드 컨슈머 - 컨슈머 멀티 워커 스레드 전략과 카프카 컨슈머 멀티 스레드 전략|https://devfunny.tistory.com/793|
 |19|19. 컨슈머 랙(LAG)|https://devfunny.tistory.com/796|
+|20|20. 컨슈머 배포 프로세스 (중단, 무중단)|https://devfunny.tistory.com/797|
