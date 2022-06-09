@@ -25,3 +25,4 @@ https://github.com/westssun/spring-batch-start
 |13|13. incrementer 설정하기, JobParametersIncrementer 를 구현하여 커스텀 설정하기|https://devfunny.tistory.com/790|
 |14|14. 여러개 Tasklet을 선언할 경우, 마지막 Tasklet을 실행한다|https://devfunny.tistory.com/792|
 |15|15. STEP이 COMPELETED 상태로 완료되어도 재실행에 포함시키기 (allowStartIfCompleted(true)), STEP별 재실행 가능 횟수 설정하기 (startLimit())|https://devfunny.tistory.com/794|
+|16|16. ParentJob, ChildJob 관계 (JobStep 사용)|https://devfunny.tistory.com/798|
