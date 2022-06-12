@@ -28,3 +28,4 @@ https://github.com/westssun/spring-batch-start
 |16|16. ParentJob, ChildJob 관계 (JobStep 사용)|https://devfunny.tistory.com/798|
 |16|16. ParentJob, ChildJob 관계 (JobStep 사용)|https://devfunny.tistory.com/798|
 |17|17. JobFlowBuilder 흐름 제어하기 (Step 성공/실패에 따라 분기처리)|https://devfunny.tistory.com/801|
+|18|18. Job, Flow 혼용하여 Job 수행시키기|https://devfunny.tistory.com/802|
