@@ -50,3 +50,4 @@
 |실전프로젝트 - 인증 프로세스 Ajax 인증 구현| | |
 |12) 1) 흐름 및 개요|수강완료|2022/05/29|
 |13) 2) 인증 필터 - AjaxAuthenticationFilter|수강완료|2022/06/01|
+|14) 3) 인증 처리자 - AjaxAuthenticationProvider|수강완료|2022/06/13|

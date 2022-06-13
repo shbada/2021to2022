@@ -2,19 +2,25 @@ package io.security.corespringsecurity.security.provider;
 
 import io.security.corespringsecurity.security.common.FormWebAuthenticationDetails;
 import io.security.corespringsecurity.security.service.AccountContext;
+import io.security.corespringsecurity.security.token.AjaxAuthenticationToken;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * AjaxAuthenticationProvider 가 실제적으로 인증처리 하는 클래스
+ * 인증관리자(AuthenticationManager)로부터 이 AjaxAuthenticationProvider가 인증 처리를 할 수 있도록 위임받는다.
+ * authenticate()에 인자로 인증객체를 받고,
+ * authentication 여기에 아이디, 비밀번호 등 유저정보가 있다.
+ *
+ */
 @RequiredArgsConstructor
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class AjaxAuthenticationProvider implements AuthenticationProvider {
     private final UserDetailsService userDetailsService;
 
     private final PasswordEncoder passwordEncoder;
@@ -49,11 +55,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
 
-        // 인증 성공시
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(accountContext.getAccount(), null, accountContext.getAuthorities());
-
-        return authenticationToken;
+        // 인증 성공시 (AuthenticationManager 로 리턴)
+        return new AjaxAuthenticationToken(accountContext.getAccount(), null, accountContext.getAuthorities());
     }
 
     /**
@@ -64,6 +67,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         // 일치할때 CustomAuthenticationProvider 가 인증을 처리한다.
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+        return authentication.equals(AjaxAuthenticationToken.class);
     }
 }
