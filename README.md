@@ -31,3 +31,4 @@ https://github.com/westssun/spring-batch-start
 |18|18. Job, Flow 혼용하여 Job 수행시키기|https://devfunny.tistory.com/802|
 |0|(기존 포스팅) BATCH_JOB_EXECUTION, BATCH_STEP_EXECUTION의 EXIT_CODE, STATUS 컬럼 셋팅 정보|https://devfunny.tistory.com/698|
 |19|19. EXIT_CODE를 직접 만들어서 적용해보기|https://devfunny.tistory.com/803|
+|20|20. JobExecutionDecider 구현체 생성해서 커스텀 값으로 from().on() 설정|https://devfunny.tistory.com/805|
