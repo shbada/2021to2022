@@ -29,3 +29,4 @@
 |21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|
 |22|22. 람다식의 로컬 변수 접근, 멤버 참조|https://devfunny.tistory.com/789|
 |23|23. 컬렉션 함수형 API (filter, map, all, any, count, find, groupBy, flatMap, flatten)|https://devfunny.tistory.com/795|
+|24|24. 지연 계산(lazy) 컬렉션 연산 - 시퀀스(sequence) 사용|https://devfunny.tistory.com/804|
