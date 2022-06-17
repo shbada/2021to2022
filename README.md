@@ -7,3 +7,4 @@
 |-|-|-|
 |순번|제목|URL|
 |1|[JPA 프로그래밍] 1. JPA 란 무엇인가?|https://devfunny.tistory.com/813|
+|2|[JPA 프로그래밍] 2. 영속성 관리|https://devfunny.tistory.com/814|
