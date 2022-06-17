@@ -51,3 +51,4 @@
 |12) 1) 흐름 및 개요|수강완료|2022/05/29|
 |13) 2) 인증 필터 - AjaxAuthenticationFilter|수강완료|2022/06/01|
 |14) 3) 인증 처리자 - AjaxAuthenticationProvider|수강완료|2022/06/13|
+|15) 4) 인증 핸들러 - AjaxAuthenticationSuccessHandler, AjaxAuthenticationFailureHandler|수강완료|2022/06/17|
