@@ -9,4 +9,9 @@ public class MessageController {
     public String messages() throws Exception {
         return "user/messages";
     }
+
+    @GetMapping
+    public String apiMessage() {
+        return "message ok";
+    }
 }
