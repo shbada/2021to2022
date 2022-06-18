@@ -9,3 +9,4 @@
 |1|[JPA 프로그래밍] 1. JPA 란 무엇인가?|https://devfunny.tistory.com/813|
 |2|[JPA 프로그래밍] 2. 영속성 관리 (영속성 컨텍스트)|https://devfunny.tistory.com/814|
 |3|[JPA 프로그래밍] 3. 엔티티 매핑|https://devfunny.tistory.com/815|
+|4|[JPA 프로그래밍] 4. 연관관계 매핑 |https://devfunny.tistory.com/816|
