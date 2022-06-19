@@ -31,3 +31,4 @@
 |23|23. 컬렉션 함수형 API (filter, map, all, any, count, find, groupBy, flatMap, flatten)|https://devfunny.tistory.com/795|
 |24|24. 지연 계산(lazy) 컬렉션 연산 - 시퀀스(sequence) 사용|https://devfunny.tistory.com/804|
 |25|25. SAM 생성자|https://devfunny.tistory.com/819|
+|26|26. 수신 객체 지정 람다 (with, apply)|https://devfunny.tistory.com/820|
