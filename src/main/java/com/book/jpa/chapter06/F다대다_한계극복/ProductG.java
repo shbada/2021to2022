@@ -1,6 +1,9 @@
-package com.book.jpa.chapter06.D일대일;
+package com.book.jpa.chapter06.F다대다_한계극복;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,16 +12,11 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class LockerC {
+public class ProductG {
     @Id
     @Column(name= "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "NAME", nullable = false, length = 10)
     private String name;
-
-    @OneToOne(mappedBy = "lockerC")
-    private MemberC memberC;
 }
