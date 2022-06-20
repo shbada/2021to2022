@@ -54,3 +54,4 @@
 |15) 4) 인증 핸들러 - AjaxAuthenticationSuccessHandler, AjaxAuthenticationFailureHandler|수강완료|2022/06/17|
 |16) 5) 인증 및 인가 예외 처리 - AjaxLoginUrlAuthenticationEntryPoint, AjaxAccessDeniedHandler|수강완료|2022/06/18|
 |17) 6) Ajax Custom DSLs 구현하기|수강완료|2022/06/19|
+|18) 7) Ajax 로그인 구현 & CSRF 설정|수강완료|2022/06/20|
