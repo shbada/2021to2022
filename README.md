@@ -1,6 +1,8 @@
 # core-spring-security-3
-[실전 프로젝트] 스프링 시큐리티
-- 개념공부 바로가기 : https://github.com/westssun/spring-security-start
+[인프런 - Spring Security]
+- 1단계(개념): https://github.com/westssun/spring-security-start
+- 2단계(security설정) : https://github.com/westssun/core-spring-security-2 
+- 3단계(실전프로젝트) : (현재 repository) https://github.com/westssun/core-spring-security-3
 
 
 ### 수강일지
