@@ -1,6 +1,9 @@
-# spring-security-start
-[스프링 시큐리티] 처음부터 다시 시작
-
+# core-spring-security-1
+[인프런 - Spring Security]
+- 1단계(개념): (현재 repository) https://github.com/westssun/spring-security-start
+- 2단계(security설정) : https://github.com/westssun/core-spring-security-2 
+- 3단계(실전프로젝트) : https://github.com/westssun/core-spring-security-3
+- 
 ### 수강기간
 - 2022.04.04 ~ 2022.05.03
 
