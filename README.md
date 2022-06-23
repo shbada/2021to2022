@@ -1,6 +1,8 @@
 # core-spring-security
 [실전 프로젝트] 스프링 시큐리티
-- 개념공부 바로가기 : https://github.com/westssun/spring-security-start
+- 1단계(개념): https://github.com/westssun/spring-security-start
+- 2단계(security설정) : 현재 repository
+- 3단계(실전프로젝트) :
 
 
 ### 수강일지
@@ -55,5 +57,3 @@
 |16) 5) 인증 및 인가 예외 처리 - AjaxLoginUrlAuthenticationEntryPoint, AjaxAccessDeniedHandler|수강완료|2022/06/18|
 |17) 6) Ajax Custom DSLs 구현하기|수강완료|2022/06/19|
 |18) 7) Ajax 로그인 구현 & CSRF 설정|수강완료|2022/06/20|
-|실전프로젝트 - 인가 프로세스 DB 연동 웹 계층 구현| | |
-|19) 1) 스프링 시큐리티 인가 개요|수강완료|2022/06/22|
