@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 회원
+ */
 @Entity
 @Data
 @ToString(exclude = {"userRoles"})

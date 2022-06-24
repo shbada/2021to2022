@@ -67,9 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/mypage").hasRole("USER")
-                .antMatchers("/messages").hasRole("MANAGER")
-                .antMatchers("/config").hasRole("ADMIN")
+                .antMatchers("/mypage").hasRole("USER") /* USER 권한 접속 가능 */
+                .antMatchers("/messages").hasRole("MANAGER") /* MANAGER 권한 접속 가능 */
+                .antMatchers("/config").hasRole("ADMIN") /* ADMIN 권한 접속 가능 */
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 자원
+ */
 @Entity
 @Table(name = "RESOURCES")
 @Data

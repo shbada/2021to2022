@@ -9,6 +9,9 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * 권한
+ */
 @Entity
 @Table(name = "ROLE")
 @Getter

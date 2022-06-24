@@ -50,14 +50,17 @@ public class UserServiceImpl implements UserService {
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDto, Account.class);
 
-        if(accountDto.getRoles() != null){
+        if (accountDto.getRoles() != null) {
             Set<Role> roles = new HashSet<>();
+
             accountDto.getRoles().forEach(role -> {
                 Role r = roleRepository.findByRoleName(role);
                 roles.add(r);
             });
+
             account.setUserRoles(roles);
         }
+
         account.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         userRepository.save(account);
 
