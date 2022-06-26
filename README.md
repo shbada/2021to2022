@@ -28,3 +28,4 @@
 |20|20. 컨슈머 배포 프로세스 (중단, 무중단)|https://devfunny.tistory.com/797|
 |21|21. 스프링 카프카 프로듀서|https://devfunny.tistory.com/799|
 |22|22. 스프링 카프카 컨슈머|https://devfunny.tistory.com/800|
+|23|(총정리) Apache Kafka 기본 개념 총정리|https://devfunny.tistory.com/823|
