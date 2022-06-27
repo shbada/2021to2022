@@ -10,29 +10,44 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-public class UrlFilterInvocationSecurityMetadatsSource implements FilterInvocationSecurityMetadataSource {
+public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
+    /* requestMap 작성 : key(요청정보), value(권한정보 리스트) */
     private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap = new LinkedHashMap<>();
 
+    /**
+     * 얘를 호출할때 파라미터에 FilterInvocation, MethodInvocation 이 들어올 수 있기 때문에 Object Type이다.
+     * @param object
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-
+        /* 타입캐스팅 */
         HttpServletRequest request = ((FilterInvocation) object).getRequest();
 
+        /* 권한 정보 임시 추가 */
         requestMap.put(new AntPathRequestMatcher("/mypage"), Arrays.asList(new SecurityConfig("ROLE_USER")));
 
-        if(requestMap != null){
-            for(Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()){
+        if (requestMap != null) {
+            /* RequestMatcher : DB에서 가져온 요청 정보가 담겨져있을 것 */
+            for (Map.Entry<RequestMatcher, List<ConfigAttribute>> entry : requestMap.entrySet()) {
                 RequestMatcher matcher = entry.getKey();
-                if(matcher.matches(request)){
+
+                /* 요청 정보가 일치한게 있다면, getValue()해서 권한 정보를 리턴한다. */
+                if (matcher.matches(request)) {
                     return entry.getValue();
                 }
             }
         }
 
+        /* null을 리턴하면 AbstractSecurityInterceptor 에서 인가처리 로직이 더이상 수행되지 않음
+          -> 권한 심사 없이 다음 Filter 로 실행함
+        */
         return null;
     }
 
+    /** 아래 두개는 당장 쓰진 않음. DefaultFilterInvocationSecurityMetadataSource.java 에서 코드를 가져오자. */
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         Set<ConfigAttribute> allAttributes = new HashSet<>();

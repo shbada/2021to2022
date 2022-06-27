@@ -4,7 +4,7 @@ import io.security.corespringsecurity.security.common.FormWebAuthenticationDetai
 import io.security.corespringsecurity.security.handler.AjaxAuthenticationFailureHandler;
 import io.security.corespringsecurity.security.handler.AjaxAuthenticationSuccessHandler;
 import io.security.corespringsecurity.security.handler.FormAccessDeniedHandler;
-import io.security.corespringsecurity.security.metadatasource.UrlFilterInvocationSecurityMetadatsSource;
+import io.security.corespringsecurity.security.metadatasource.UrlFilterInvocationSecurityMetadataSource;
 import io.security.corespringsecurity.security.provider.AjaxAuthenticationProvider;
 import io.security.corespringsecurity.security.provider.FormAuthenticationProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(ajaxAuthenticationProvider());
     }
 
+    /**
+     * 인증 관리자 설정
+     * @return
+     * @throws Exception
+     */
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -96,11 +101,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     - 이제 accessDecisionManager.decide(authenticated, object, attributes); 를 수행한다. (모든 파라미터의 정보는 채워져있다.)
 
 
-                    리턴받은 requestMap에
+                    (추가) urlFilterInvocationSecurityMetadataSource 로 설정했으므로 아래 3줄은 의미 없는 코드가 되어 주석 처리
                  */
-                .antMatchers("/mypage").hasRole("USER") /* USER 권한 접속 가능 */
-                .antMatchers("/messages").hasRole("MANAGER") /* MANAGER 권한 접속 가능 */
-                .antMatchers("/config").hasRole("ADMIN") /* ADMIN 권한 접속 가능 */
+//                .antMatchers("/mypage").hasRole("USER") /* USER 권한 접속 가능 */
+//                .antMatchers("/messages").hasRole("MANAGER") /* MANAGER 권한 접속 가능 */
+//                .antMatchers("/config").hasRole("ADMIN") /* ADMIN 권한 접속 가능 */
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -117,8 +122,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
                 .accessDeniedPage("/denied")
                 .accessDeniedHandler(accessDeniedHandler())
-//        .and()
-//                .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
+        /*
+            FilterSecurityInterceptor 보다 앞에 설정하여, 우리가 설정한 파일이 먼저 셋팅되어 수행
+            FilterSecurityInterceptor.java > toFilter() 에서 수행될때 chain 파라미터에 우리가 만든 클래스가 있음
+            - FilterChainProxy.java 를 보면 우리가 만든 FilterSecurityInterceptor 이 원래의 FilterSecurityInterceptor 보다 먼저있다.
+            - 우리가 만든 FilterSecurityInterceptor엔 UrlFilterInvocationSecurityMetadataSource 로 설정되어있어서 우리껄 호출하게된다.
+            AbstractSecurityInterceptor.java > this.obtainSecurityMetadataSource().getAttributes(object);
+        */
+        .and()
+                .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
         ;
 
         http.csrf().disable();
@@ -166,16 +178,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return commonAccessDeniedHandler;
     }
 
+    /**
+     * UrlFilterInvocationSecurityMetadataSource 설정
+     * @return
+     * @throws Exception
+     */
     @Bean
     public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception {
 
         FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
         filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
-        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased());
-        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());
+        /*
+           - AffirmativeBased
+           - ConsensusBased
+           - UnanimousBased
+         */
+        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased()); // 접근 결정 관리자 설정 (3가지 타입이 있음)
+        /* 인증된 사용자인지 체크해야하기 때문에 인증관리자 설정 필요 */
+        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean()); // 인증 관리자
         return filterSecurityInterceptor;
     }
 
+    /**
+     * 접근 결정 관리자 설정
+     * @return
+     */
     private AccessDecisionManager affirmativeBased() {
         AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecistionVoters());
         return affirmativeBased;
@@ -187,8 +214,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() {
-        return new UrlFilterInvocationSecurityMetadatsSource();
+        return new UrlFilterInvocationSecurityMetadataSource();
     }
-
 
 }
