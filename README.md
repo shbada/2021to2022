@@ -33,3 +33,5 @@ https://github.com/westssun/spring-batch-start
 |19|19. EXIT_CODE를 직접 만들어서 적용해보기|https://devfunny.tistory.com/803|
 |20|20. JobExecutionDecider 구현체 생성해서 커스텀 값으로 from().on() 설정|https://devfunny.tistory.com/805|
 |21|21. Chunk 설정에 따른 reader(), processor(), writer() 수행 과정|https://devfunny.tistory.com/818|
+|22|22. ItemReader, ItemProcessor, ItemWriter의 메서드 직접 구현해보기|https://devfunny.tistory.com/821|
+|23|23. ItemStreamReader, ItemStreamWriter 구현 클래스 생성하기 (open(), update(), close())|https://devfunny.tistory.com/824|
