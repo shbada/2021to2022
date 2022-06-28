@@ -35,3 +35,4 @@ https://github.com/westssun/spring-batch-start
 |21|21. Chunk 설정에 따른 reader(), processor(), writer() 수행 과정|https://devfunny.tistory.com/818|
 |22|22. ItemReader, ItemProcessor, ItemWriter의 메서드 직접 구현해보기|https://devfunny.tistory.com/821|
 |23|23. ItemStreamReader, ItemStreamWriter 구현 클래스 생성하기 (open(), update(), close())|https://devfunny.tistory.com/824|
+|24|24. FlatFileItemReader (.csv 파일 읽어와서 데이터 출력하는 배치 생성)|https://devfunny.tistory.com/825|
