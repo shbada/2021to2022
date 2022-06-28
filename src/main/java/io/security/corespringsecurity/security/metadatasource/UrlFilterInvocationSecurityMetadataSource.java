@@ -15,6 +15,10 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
     /* requestMap 작성 : key(요청정보), value(권한정보 리스트) */
     private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap = new LinkedHashMap<>();
 
+    public UrlFilterInvocationSecurityMetadataSource(LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap) {
+        this.requestMap = requestMap;
+    }
+
     /**
      * 얘를 호출할때 파라미터에 FilterInvocation, MethodInvocation 이 들어올 수 있기 때문에 Object Type이다.
      * @param object

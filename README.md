@@ -14,3 +14,4 @@
 |2) 관리자 시스템 - 권한 도메인, 서비스, 리포지토리 구성|수강완료|2022/06/24|
 |3) 웹 기반 인가처리 DB 연동 - 주요 아키텍처 이해|수강완료|2022/06/25|
 |4) 웹 기반 인가처리 DB 연동 - FilterInvocationSecurityMetadataSource (1)|수강완료|2022/06/27|
+|5) 웹 기반 인가처리 DB 연동 - FilterInvocationSecurityMetadataSource (2)|수강완료|2022/06/28|
