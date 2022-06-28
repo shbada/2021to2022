@@ -7,9 +7,9 @@ public class Item {
 
     private Long id;
 
-    private String itemName;
-    private Integer price;
-    private Integer quantity;
+    private String itemName; // 이름
+    private Integer price; // 가격
+    private Integer quantity; // 수량
 
     public Item() {
     }
