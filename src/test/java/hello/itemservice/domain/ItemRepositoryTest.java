@@ -16,17 +16,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class ItemRepositoryTest {
 
+    /**
+     * 인터페이스 구현체가 아닌 인터페이스를 테스트한다.
+     * 향후 다른 구현체로 변경했을대 해당 구현체가 잘 동작하는지를 동일하게 해당 테스트코드를 재사용할 수 있다.
+     */
     @Autowired
     ItemRepository itemRepository;
 
     @AfterEach
     void afterEach() {
-        //MemoryItemRepository 의 경우 제한적으로 사용
+        // MemoryItemRepository 의 경우 제한적으로 사용
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
     }
 
+    /**
+     * 상품 저장
+     */
     @Test
     void save() {
         //given
@@ -40,6 +47,9 @@ class ItemRepositoryTest {
         assertThat(findItem).isEqualTo(savedItem);
     }
 
+    /**
+     * 상품 수정
+     */
     @Test
     void updateItem() {
         //given
@@ -58,6 +68,9 @@ class ItemRepositoryTest {
         assertThat(findItem.getQuantity()).isEqualTo(updateParam.getQuantity());
     }
 
+    /**
+     * 상품 조회
+     */
     @Test
     void findItems() {
         //given
@@ -87,6 +100,7 @@ class ItemRepositoryTest {
 
     void test(String itemName, Integer maxPrice, Item... items) {
         List<Item> result = itemRepository.findAll(new ItemSearchCond(itemName, maxPrice));
+        /* 순서까지 정상 매칭되어야한다. */
         assertThat(result).containsExactly(items);
     }
 }
