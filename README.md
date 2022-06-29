@@ -15,3 +15,4 @@
 |3) 웹 기반 인가처리 DB 연동 - 주요 아키텍처 이해|수강완료|2022/06/25|
 |4) 웹 기반 인가처리 DB 연동 - FilterInvocationSecurityMetadataSource (1)|수강완료|2022/06/27|
 |5) 웹 기반 인가처리 DB 연동 - FilterInvocationSecurityMetadataSource (2)|수강완료|2022/06/28|
+|6) 웹 기반 인가처리 실시간 반영하기 |수강완료|2022/06/29|
