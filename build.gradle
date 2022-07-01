@@ -21,6 +21,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// JdbcTemplate 추가 (별도로 설정 없이, 아래 의존성만 추가하면 이제 모두 사용할 수 있다.)
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// H2 데이터베이스 추가
+	runtimeOnly 'com.h2database:h2'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
