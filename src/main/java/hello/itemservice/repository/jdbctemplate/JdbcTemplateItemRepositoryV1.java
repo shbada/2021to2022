@@ -119,7 +119,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
             param.add(maxPrice);
         }
 
-        log.info("sql={}", sql);
+        log.info("sql={}", sql); // 쿼리를 콘솔에 출력
 
         return jdbcTemplate.query(sql, itemRowMapper(), param.toArray());
     }
