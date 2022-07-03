@@ -37,3 +37,4 @@ https://github.com/westssun/spring-batch-start
 |23|23. ItemStreamReader, ItemStreamWriter 구현 클래스 생성하기 (open(), update(), close())|https://devfunny.tistory.com/824|
 |24|24. FlatFileItemReader (.csv 파일 읽어와서 데이터 출력하는 배치 생성)|https://devfunny.tistory.com/825|
 |25|25. xml 파일 읽어서 출력하는 배치(StaxEventItemReader), josn 파일 읽어서 출력하는 배치(JsonItemReader) 생성해보기|https://devfunny.tistory.com/826|
+|26|26. Cursor - JdbcCursorItemReader, JpaCursorItemReader|https://devfunny.tistory.com/827|
