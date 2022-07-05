@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.RoleHierarchyVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -35,6 +37,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -228,7 +231,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private List<AccessDecisionVoter<?>> getAccessDecistionVoters() {
-        return Arrays.asList(new RoleVoter());
+        List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
+//        accessDecisionVoters.add(new IpAddressVoter(securityResourceService));
+//        accessDecisionVoters.add(new RoleVoter()); // RoleHierarchyVoter 적용이 안됬으므로, 상위 계층/하위 계층 관련없이 자신만의 권한만 사용 가능하다.
+        accessDecisionVoters.add(roleVoter());
+
+        return accessDecisionVoters;
+    }
+
+    /**
+     * ROLE_ADMIN이 ROLE_MANAGER, ROLE_USER 권한의 자원에 접근이 가능하다.
+     * @return
+     */
+    @Bean
+    public AccessDecisionVoter<? extends Object> roleVoter() {
+
+        RoleHierarchyVoter roleHierarchyVoter = new RoleHierarchyVoter(roleHierarchy());
+        return roleHierarchyVoter;
+    }
+
+    /**
+     * SecurityInitializer 클래스에서 설정해준 RoleHierarchyImpl
+     * @return
+     */
+    @Bean
+    public RoleHierarchyImpl roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        return roleHierarchy;
     }
 
     /**

@@ -3,7 +3,9 @@ package io.security.corespringsecurity.security.listener;
 import io.security.corespringsecurity.domain.entity.Account;
 import io.security.corespringsecurity.domain.entity.Resources;
 import io.security.corespringsecurity.domain.entity.Role;
+import io.security.corespringsecurity.domain.entity.RoleHierarchy;
 import io.security.corespringsecurity.repository.ResourcesRepository;
+import io.security.corespringsecurity.repository.RoleHierarchyRepository;
 import io.security.corespringsecurity.repository.RoleRepository;
 import io.security.corespringsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RoleHierarchyRepository roleHierarchyRepository;
+
     private static AtomicInteger count = new AtomicInteger(0);
 
     @Override
@@ -57,7 +62,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         roles.add(adminRole);
         createResourceIfNotFound("/admin/**", "", roles, "url");
         Account account = createUserIfNotFound("admin", "pass", "admin@gmail.com", 10,  roles);
-        
+
+        Role managerRole = createRoleIfNotFound("ROLE_MANAGER", "매니저권한");
+        Role userRole = createRoleIfNotFound("ROLE_USER", "사용자권한");
+        createRoleHierarchyIfNotFound(managerRole, adminRole);
+        createRoleHierarchyIfNotFound(userRole, managerRole);
+
 //        Set<Role> roles1 = new HashSet<>();
 //
 //        Role managerRole = createRoleIfNotFound("ROLE_MANAGER", "매니저");
@@ -121,5 +131,36 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .build();
         }
         return resourcesRepository.save(resources);
+    }
+
+    /**
+     * ROLE_HIERARCHY 샘플 데이터 등록
+     * child            parent
+     * ROLE_ADMIN
+     * ROLE_MANAGER     ROLE_ADMIN
+     * ROLE_USER        ROLE_MANAGER
+     * @param childRole
+     * @param parentRole
+     */
+    @Transactional
+    public void createRoleHierarchyIfNotFound(Role childRole, Role parentRole) {
+
+        RoleHierarchy roleHierarchy = roleHierarchyRepository.findByChildName(parentRole.getRoleName());
+        if (roleHierarchy == null) {
+            roleHierarchy = RoleHierarchy.builder()
+                    .childName(parentRole.getRoleName())
+                    .build();
+        }
+        RoleHierarchy parentRoleHierarchy = roleHierarchyRepository.save(roleHierarchy);
+
+        roleHierarchy = roleHierarchyRepository.findByChildName(childRole.getRoleName());
+        if (roleHierarchy == null) {
+            roleHierarchy = RoleHierarchy.builder()
+                    .childName(childRole.getRoleName())
+                    .build();
+        }
+
+        RoleHierarchy childRoleHierarchy = roleHierarchyRepository.save(roleHierarchy);
+        childRoleHierarchy.setParentName(parentRoleHierarchy);
     }
 }
