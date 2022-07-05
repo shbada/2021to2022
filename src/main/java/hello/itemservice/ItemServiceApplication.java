@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Profile;
 
 //@Import(MemoryConfig.class) /* MemoryConfig 를 설정 파일로 사용 */
 //@Import(JdbcTemplateV1Config.class) /* JdbcTemplateV1Config 를 설정 파일로 사용 */
-@Import(JdbcTemplateV2Config.class) /* JdbcTemplateV2Config 를 설정 파일로 사용 */
+//@Import(JdbcTemplateV2Config.class) /* JdbcTemplateV2Config 를 설정 파일로 사용 */
+@Import(JdbcTemplateV3Config.class) /* JdbcTemplateV3Config 를 설정 파일로 사용 */
 /* scanBasePackages 지정 안하면 현재 위치 기준 하위가 모두 컴포넌트 대상이 됨 */
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
