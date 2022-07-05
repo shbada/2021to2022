@@ -29,16 +29,16 @@ public class JdbcPagingConfiguration {
     public final DataSource dataSource;
 
     @Bean
-    public Job job() throws Exception {
-        return jobBuilderFactory.get("batchJob")
+    public Job jdbcPagingJob() throws Exception {
+        return jobBuilderFactory.get("jdbcPagingJob")
                 .incrementer(new RunIdIncrementer())
-                .start(step1())
+                .start(jdbcPagingStep1())
                 .build();
     }
 
     @Bean
-    public Step step1() throws Exception {
-        return stepBuilderFactory.get("step1")
+    public Step jdbcPagingStep1() throws Exception {
+        return stepBuilderFactory.get("jdbcPagingStep1")
                 .<Customer, Customer>chunk(10)
                 .reader(customItemReader())
                 .writer(customItemWriter())

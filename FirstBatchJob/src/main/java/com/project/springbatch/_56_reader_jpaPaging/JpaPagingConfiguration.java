@@ -23,31 +23,31 @@ public class JpaPagingConfiguration {
     private final EntityManagerFactory entityManagerFactory;
 
     @Bean
-    public Job job() throws Exception {
-        return jobBuilderFactory.get("batchJob")
+    public Job jpaPagingJob() throws Exception {
+        return jobBuilderFactory.get("jpaPagingJob")
                 .incrementer(new RunIdIncrementer())
-                .start(step1())
+                .start(jpaPagingStep1())
                 .build();
     }
 
     @Bean
-    public Step step1() throws Exception {
-        return stepBuilderFactory.get("step1")
-                .<Customer, Customer>chunk(10)
-                .reader(customItemReader())
-                .writer(customItemWriter())
+    public Step jpaPagingStep1() throws Exception {
+        return stepBuilderFactory.get("jpaPagingStep1")
+                .<PagingCustomer, PagingCustomer>chunk(10)
+                .reader(jpaPagingCustomItemReader())
+                .writer(jpaPagingCustomItemWriter())
                 .build();
     }
 
     @Bean
-    public JpaPagingItemReader<Customer> customItemReader() {
+    public JpaPagingItemReader<PagingCustomer> jpaPagingCustomItemReader() {
         /*
            JpaPagingItemReader - doOpen() 호출 -> entityManager 생성
            AbstractItemCountingItemStreamItemReader - update() : 상태정보 업데이트
            JpaPagingItemReader - doReadPage()
            - 쿼리 수행 (pageSize 만큼 데이터를 가져온다.)
          */
-        return new JpaPagingItemReaderBuilder<Customer>()
+        return new JpaPagingItemReaderBuilder<PagingCustomer>()
                 .name("jpaPagingItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(10)
@@ -56,10 +56,10 @@ public class JpaPagingConfiguration {
     }
 
     @Bean
-    public ItemWriter<Customer> customItemWriter() {
+    public ItemWriter<PagingCustomer> jpaPagingCustomItemWriter() {
         return items -> {
-            for (Customer customer : items) {
-                System.out.println(customer.getAddress().getLocation());
+            for (PagingCustomer pagingCustomer : items) {
+                System.out.println(pagingCustomer.getAddress().getLocation());
             }
         };
     }

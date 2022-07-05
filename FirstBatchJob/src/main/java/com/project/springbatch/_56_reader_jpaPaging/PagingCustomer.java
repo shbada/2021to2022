@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 @Getter
 @Setter
 @Entity
-public class Customer {
+public class PagingCustomer {
 
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class Customer {
     private String username;
     private int age;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "pagingCustomer")
     private Address address;
 
 }
