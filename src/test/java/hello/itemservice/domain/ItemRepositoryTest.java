@@ -13,6 +13,17 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/*
+@SpringBootApplication 어노테이션을 찾는다.
+위 어노테이션의 설정을 그대로 가져온다.
+따라서 @Import(JdbcTemplate..) 도 동일하게 설정된다.
+
+테스트용 전용 데이터베이스를 두는 것이 테스트할때 좋다.
+롤백도 하는게 좋다. (DELETE 데이터보다 롤백이 더 좋다.)
+
+- 테스트는 다른 테스트와 격리해야한다.
+- 테스트는 반복해서 실행할 수 있어야한다.
+ */
 @SpringBootTest
 class ItemRepositoryTest {
 
