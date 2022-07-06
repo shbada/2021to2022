@@ -10,6 +10,7 @@ import io.security.corespringsecurity.security.metadatasource.UrlFilterInvocatio
 import io.security.corespringsecurity.security.provider.AjaxAuthenticationProvider;
 import io.security.corespringsecurity.security.provider.FormAuthenticationProvider;
 import io.security.corespringsecurity.security.service.SecurityResourceService;
+import io.security.corespringsecurity.security.voter.IpAddressVoter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -232,8 +233,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private List<AccessDecisionVoter<?>> getAccessDecistionVoters() {
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
-//        accessDecisionVoters.add(new IpAddressVoter(securityResourceService));
 //        accessDecisionVoters.add(new RoleVoter()); // RoleHierarchyVoter 적용이 안됬으므로, 상위 계층/하위 계층 관련없이 자신만의 권한만 사용 가능하다.
+        /* IP 심의자 추가 - 가장 먼저 선언되어야한다. */
+        accessDecisionVoters.add(new IpAddressVoter(securityResourceService));
         accessDecisionVoters.add(roleVoter());
 
         return accessDecisionVoters;
