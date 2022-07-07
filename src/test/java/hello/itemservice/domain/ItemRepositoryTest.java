@@ -5,9 +5,16 @@ import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
@@ -25,6 +32,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 - 테스트는 반복해서 실행할 수 있어야한다.
  */
 @SpringBootTest
+
+/*
+   스프링이 제공하는 @Transactional 는 로직이 성공적으로 수행되면 커밋하도록 동작한다.
+   이 어노테이션은 테스트에서 동작하면 예외적으로 동작한다.
+   테스트에 있으면 스프링은 테스트를 트랜잭션 안에서 실행하고, 테스트가 끝나면 트랜잭션을 자동으로 롤백한다.
+
+   위치가 클래스명 위면 모든 메서드에 적용되고, 메서드 위에 두면 해당 메서드만 적용된다.
+
+   - 트랜잭션 시작
+   로직 수행
+   - 트렌잭션 강제로 롤백
+
+   테스트 케이스나 클래스에 @Transactional 을 붙였을때만 이렇게 동작한다.
+   Service, Repository 에도 @Transactional이 있을때 다 다른 트랜잭션으로 동작하느냐?
+   -> 트랜잭션이 테스트에서 시작하기 때문에 테스트에서 시작한 트랜잭션에 참여하게된다. (기존 트랜잭션으로 그대로 이어진다.)
+   같은 트랜잭션 범위에 모든 코드가 들어간다고 이해하자.
+ */
+@Transactional
 class ItemRepositoryTest {
 
     /**
@@ -34,18 +59,40 @@ class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;
 
+    /**
+     * 스프링이 제공해주는 JdbcTransactionManager
+     * PlatformTransactionManager 가 나중에 나온거라 이거 쓰면 된다.
+     * PlatformTransactionManager 를 JdbcTransactionManager가 구현함
+     */
+//    @Autowired
+//    PlatformTransactionManager transactionManager;
+//
+//    TransactionStatus transactionStatus;
+//
+//    @BeforeEach
+//    void beforeEach() {
+//        // 트랜잭션 시작
+//        transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//    }
+
     @AfterEach
     void afterEach() {
         // MemoryItemRepository 의 경우 제한적으로 사용
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
+
+//        /** 롤백 수행 */
+//        transactionManager.rollback(transactionStatus);
     }
 
     /**
      * 상품 저장
      */
     @Test
+    @Transactional
+    @Commit /* 해당 메서드는 커밋을 수행하겠다는 의미 */
+//    @Rollback(value = false)
     void save() {
         //given
         Item item = new Item("itemA", 10000, 10);
