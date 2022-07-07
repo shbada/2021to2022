@@ -20,3 +20,5 @@
 |8) 계층 권한 적용하기- RoleHierarchy|수강완료|2022/07/05|
 |9) 아이피 접속 제한하기 - CustomIpAddressVoter|수강완료|2022/07/06|
 |실전프로젝트 - 인가 프로세스 DB 연동 서비스 계층 구현| | |
+|1) Method 방식 개요|수강완료|2022/07/08|
+|3) 어노테이션 권한 설정 - @PreAuthorize, @PostAuthorize, @Secured, @RolesAllowed|수강완료|2022/07/08|
