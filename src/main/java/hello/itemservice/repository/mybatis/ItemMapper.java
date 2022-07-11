@@ -12,6 +12,12 @@ import java.util.Optional;
 /**
  * Mybatis 매핑 XML을 호출해주는 Mapper 인터페이스
  * @Mapper 어노테이션 필수
+ *
+ * Mybatis 스프링 연동 모듈
+ *
+ * Mybatis 스프링 연동 모듈이 @Mapper인 인터페이스를 모두 찾는다.
+ * 위 인터페이스를 기반으로 동적 프록시 객체를 생성한다.
+ * 실제 객체를 만들어내서 이를 기반으로 스프링 빈으로 등록한다.
  */
 @Mapper
 public interface ItemMapper {

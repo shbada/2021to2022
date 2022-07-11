@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * ItemRepository 에서 ItemSearchCond, ItemUpdateDto 를 사용하기 때문에
+ * ItemRepository 에서 ItemSearchCond, ItemUpdateDto 를 사용 하기 때문에
  * 패키지 구조를 같이 두었다.
  *
  * ItemService 랑 같은 패키지에 두면 ItemRepository에서 ItemSearchCond, ItemUpdateDto 를 사용해야해서
