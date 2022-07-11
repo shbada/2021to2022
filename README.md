@@ -25,3 +25,4 @@
 |-|아이템 13. clone 재정의는 주의해서 진행하라|포스팅 준비중|
 |-|아이템 14. Comparable을 구현할지 고려하라|포스팅 준비중|
 |07/11|아이템 15. 클래스와 멤버의 접근 권한을 최소화하라|https://devfunny.tistory.com/540|
+|07/11|아이템 16. public 클래스에서는 public 필드가 아닌 접근자 메서드를 사용하라|https://devfunny.tistory.com/542|
