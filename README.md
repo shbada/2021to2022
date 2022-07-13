@@ -44,3 +44,4 @@ https://github.com/westssun/spring-batch-start
 |30|30. 스프링 배치 MultiThread(멀티 스레드) Job 수행하여 분석|https://devfunny.tistory.com/832|
 |31|31. 스프링 배치 Parallel Steps(병렬) 수행하여 분석|https://devfunny.tistory.com/833|
 |32|32. 스프링 배치 Partitioning(파티셔닝) Job 수행하여 분석|https://devfunny.tistory.com/834|
+|33|33. 스프링 배치SynchronizedItemStreamReader로 thread-safe 설정하기|https://devfunny.tistory.com/835|
