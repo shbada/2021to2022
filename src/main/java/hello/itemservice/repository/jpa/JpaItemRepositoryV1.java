@@ -15,6 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+/*
+@Repository가 있으면 JPA 에러 발생시 스프링 데이터 에러로 예외가 변환된다.
+
+- @Repository가 붙은 클래스는 컴포넌트 스캔의 대상이 된다.
+- @Repository가 붙은 클래스는 예외 변환 AOP의 적용 대상이 된다.
+  -> 스프링과 JPA를 함께 사용하는 경우 스프링은 JPA 예외 변환기('PersistenceExceptionTranslator')를 등록한다.
+  -> 예외 변환 AOP 프록시는 JPA 관련 예외가 발생하면 JPA 예외 변환기를 통해 예외를 스프링 데이터 접근 예외로 변환한다.
+
+아래 2개 어노테이션(@Repository, @Transactional)
+을 주석처리하면 해당 Repository 객체가 프록시 객체로 생성되지 않는다.
+ */
 @Repository
 @Transactional // JPA에서는 데이터 변경시 필수다.
 public class JpaItemRepositoryV1 implements ItemRepository {
