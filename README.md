@@ -28,3 +28,4 @@
 |07/11|아이템 16. public 클래스에서는 public 필드가 아닌 접근자 메서드를 사용하라|https://devfunny.tistory.com/542|
 |07/12|아이템 17. 변경 가능성을 최소화하라|https://devfunny.tistory.com/543|
 |07/13|아이템 18. 상속보다는 컴포지션을 사용하라|https://devfunny.tistory.com/544|
+|07/14|아이템 19. 상속을 고려해 설계하고 문서화하라. 그러지 않았다면 상속을 금지하라|https://devfunny.tistory.com/548|
