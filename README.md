@@ -29,3 +29,4 @@
 |07/12|아이템 17. 변경 가능성을 최소화하라|https://devfunny.tistory.com/543|
 |07/13|아이템 18. 상속보다는 컴포지션을 사용하라|https://devfunny.tistory.com/544|
 |07/14|아이템 19. 상속을 고려해 설계하고 문서화하라. 그러지 않았다면 상속을 금지하라|https://devfunny.tistory.com/548|
+|07/15|아이템 20. 추상 클래스보다는 인터페이스를 우선하라|https://devfunny.tistory.com/551|
