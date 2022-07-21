@@ -46,3 +46,4 @@ https://github.com/westssun/spring-batch-start
 |32|32. 스프링 배치 Partitioning(파티셔닝) Job 수행하여 분석|https://devfunny.tistory.com/834|
 |33|33. 스프링 배치SynchronizedItemStreamReader로 thread-safe 설정하기|https://devfunny.tistory.com/835|
 |34|34. 스프링 배치 Test 코드 작성|https://devfunny.tistory.com/836|
+|35|35. 스프링배치JobExplorer, JobRegistry, JobOperator 알아보기 (With JobRegistryBeanPostProcessor)|https://devfunny.tistory.com/837|
