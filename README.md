@@ -36,3 +36,4 @@
 |07/19|아이템 24. 멤버 클래스는 되도록 static으로 만들라|https://devfunny.tistory.com/561|
 |07/21|아이템 25. 톱레벨 클래스는 한 파일에 하나만 담으라|https://devfunny.tistory.com/562|
 |07/25|아이템 26. 로 타입은 사용하지 말라|https://devfunny.tistory.com/563|
+|07/26|아이템 27. 비검사 경고를 제거하라|https://devfunny.tistory.com/573|
