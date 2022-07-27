@@ -37,3 +37,4 @@
 |07/21|아이템 25. 톱레벨 클래스는 한 파일에 하나만 담으라|https://devfunny.tistory.com/562|
 |07/25|아이템 26. 로 타입은 사용하지 말라|https://devfunny.tistory.com/563|
 |07/26|아이템 27. 비검사 경고를 제거하라|https://devfunny.tistory.com/573|
+|07/27|아이템 28. 배열보다는 리스트를 사용하라|https://devfunny.tistory.com/574|
