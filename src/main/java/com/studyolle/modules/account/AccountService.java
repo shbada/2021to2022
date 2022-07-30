@@ -105,10 +105,13 @@ public class AccountService implements UserDetailsService {
      * @param account
      */
     public void login(Account account) {
+        /* UsernamePasswordAuthenticationToken 수동 생성 */
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new UserAccount(account),
                 account.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
+
+        /* SecurityContextHolder Context 인증객체 수동 저장 */
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 
@@ -138,7 +141,10 @@ public class AccountService implements UserDetailsService {
      * @param account
      */
     public void completeSignUp(Account account) {
+        /* 계정의 이메일 인증 처리 */
         account.completeSignUp();
+
+        /* 로그인 */
         login(account);
     }
 

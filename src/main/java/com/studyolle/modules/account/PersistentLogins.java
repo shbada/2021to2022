@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 public class PersistentLogins {
-
     @Id
     @Column(length = 64)
     private String series;
@@ -26,5 +25,4 @@ public class PersistentLogins {
 
     @Column(name = "last_used", nullable = false, length = 64)
     private LocalDateTime lastUsed;
-
 }

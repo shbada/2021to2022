@@ -1,6 +1,5 @@
 package com.studyolle.modules.account;
 
-import com.studyolle.modules.study.Study;
 import com.studyolle.modules.tag.Tag;
 import com.studyolle.modules.zone.Zone;
 import lombok.*;
@@ -12,14 +11,17 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "id")
-@Builder @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
-
     @Id @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true) /* 중복 불가능 */
     private String email;
 
     @Column(unique = true)
@@ -27,36 +29,38 @@ public class Account {
 
     private String password;
 
+    /* 이메일 검증 */
     private boolean emailVerified;
 
     private String emailCheckToken;
 
     private LocalDateTime emailCheckTokenGeneratedAt;
 
-    private LocalDateTime joinedAt;
+    private LocalDateTime joinedAt; // 가입일자
 
-    private String bio;
+    private String bio; // 자기소개
 
     private String url;
 
-    private String occupation;
+    private String occupation; // 직업
 
-    private String location;
+    private String location; // 지역 varchar(255) 기본 매핑
 
-    @Lob @Basic(fetch = FetchType.EAGER)
-    private String profileImage;
+    @Lob /* CLOB */
+    @Basic(fetch = FetchType.EAGER) /* 즉시로딩 */
+    private String profileImage; // 프로필 이미지
 
-    private boolean studyCreatedByEmail;
+    private boolean studyCreatedByEmail; // 스터디 생성 여부를 이메일로 받을것인가?
 
-    private boolean studyCreatedByWeb = true;
+    private boolean studyCreatedByWeb; // 스터디 생성 여부를 웹으로 받을것인가?
 
-    private boolean studyEnrollmentResultByEmail;
+    private boolean studyEnrollmentResultByEmail; // 스터디 모임 가입신청 결과를 이메일로 받을것인가?
 
-    private boolean studyEnrollmentResultByWeb = true;
+    private boolean studyEnrollmentResultByWeb; // 스터디 모임 가입신청 결과를 웹으로 받을것인가?
 
-    private boolean studyUpdatedByEmail;
+    private boolean studyUpdatedByEmail; // 스터디 변경 정보를 이메일로 받을것인가?
 
-    private boolean studyUpdatedByWeb = true;
+    private boolean studyUpdatedByWeb; // 스터디 변경 정보를 웹으로 받을것인가?
 
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();

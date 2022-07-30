@@ -37,7 +37,6 @@ import static com.studyolle.modules.account.SettingsController.SETTINGS;
 @RequestMapping(ROOT + SETTINGS)
 @RequiredArgsConstructor
 public class SettingsController {
-
     static final String ROOT = "/";
     static final String SETTINGS = "settings";
     static final String PROFILE = "/profile";

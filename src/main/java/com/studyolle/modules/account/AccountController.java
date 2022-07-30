@@ -48,6 +48,7 @@ public class AccountController {
      */
     @PostMapping("/sign-up")
     public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors) {
+        /* validation check */
         if (errors.hasErrors()) {
             return "account/sign-up";
         }
@@ -73,11 +74,14 @@ public class AccountController {
         Account account = accountRepository.findByEmail(email);
 
         String view = "account/checked-email";
+
+        /* check1. 이메일 유효 확인 */
         if (account == null) {
             model.addAttribute("error", "wrong.email");
             return view;
         }
 
+        /* check2. 토큰 유효 확인 */
         if (!account.isValidToken(token)) {
             model.addAttribute("error", "wrong.token");
             return view;
@@ -141,6 +145,7 @@ public class AccountController {
 
         /* 자기 자신 여부 */
         model.addAttribute("isOwner", accountToView.equals(account));
+
         return "account/profile";
     }
 

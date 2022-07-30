@@ -4,6 +4,7 @@ pwd
 npm init
 npm install bootstrap
 npm install jquery --save
+npm install @yaireo/tagify
 
 git ignore 추가 : src/main/resources/static/node_modules
 
