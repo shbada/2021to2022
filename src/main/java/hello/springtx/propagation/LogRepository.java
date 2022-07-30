@@ -3,6 +3,7 @@ package hello.springtx.propagation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.Optional;
@@ -13,7 +14,9 @@ import java.util.Optional;
 public class LogRepository {
     private final EntityManager em;
 
-    @Transactional
+//    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW) // 항상 신규 트랜잭션을 생성
+    // 그리고 REQUIRES_NEW 는 신규 트랜잭션이므로 rollbackOnly 표시가 되지 않는다. 그냥 해당 트랜잭션이 물리 롤백되고 끝난다.
     public void save(Log logMessage) {
         log.info("log 저장");
         em.persist(logMessage);

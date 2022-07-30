@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MemberRepository {
     private final EntityManager em;
 
-    @Transactional
+    @Transactional // 트랜잭션 전파의 기본 값은 REQUIRED 이다.
     public void save(Member member) {
         log.info("member 저장");
         em.persist(member);

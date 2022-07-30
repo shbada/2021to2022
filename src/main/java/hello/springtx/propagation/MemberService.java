@@ -3,6 +3,7 @@ package hello.springtx.propagation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -19,6 +20,9 @@ public class MemberService {
      * save()에 각각 트랜잭션을 설정한 예시다.
      * @param username
      */
+    @Transactional // 추가 (repository에서는 제거)
+    // repository 트랜잭션을 주석처리하고, Service에 선언하여 트랜잭션 하나만 사용해보자.
+    // MemberService 를 시작할 때 부터 종료할 때 까지의 모든 로직을 하나의 트랜잭션으로 묶을 수 있다.
     public void joinV1(String username) {
         Member member = new Member(username);
         Log logMessage = new Log(username);
@@ -38,6 +42,7 @@ public class MemberService {
      * 현재 별도의 트랜잭션은 설정하지 않는다.
      * @param username
      */
+    @Transactional // 추가
     public void joinV2(String username) {
         Member member = new Member(username);
         Log logMessage = new Log(username);
