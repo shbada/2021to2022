@@ -21,9 +21,11 @@ public class Study {
     @Id @GeneratedValue
     private Long id;
 
+    /* study_managers 테이블 생성 */
     @ManyToMany
     private Set<Account> managers = new HashSet<>();
 
+    /* study_members 테이블 생성 */
     @ManyToMany
     private Set<Account> members = new HashSet<>();
 
@@ -40,9 +42,11 @@ public class Study {
     @Lob @Basic(fetch = FetchType.EAGER)
     private String image;
 
+    /* study_tags 테이블 생성 */
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
 
+    /* study_zones 테이블 생성 */
     @ManyToMany
     private Set<Zone> zones = new HashSet<>();
 

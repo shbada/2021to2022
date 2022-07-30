@@ -39,6 +39,7 @@ public class Event {
     /**
      * 모임 생성한 회원 정보
      */
+    /* event 테이블의 컬럼 : created_by_id */
     @ManyToOne
     private Account createdBy;
 

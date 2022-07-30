@@ -23,9 +23,11 @@ public class Enrollment {
     @Id @GeneratedValue
     private Long id;
 
+    /* 테이블 enrollment : 컬럼 event_id */
     @ManyToOne
     private Event event;
 
+    /* 테이블 enrollment : 컬럼 account_id */
     @ManyToOne
     private Account account;
 
