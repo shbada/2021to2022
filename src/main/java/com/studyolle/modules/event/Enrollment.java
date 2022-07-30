@@ -17,7 +17,9 @@ import java.time.LocalDateTime;
         subgraphs = @NamedSubgraph(name = "study", attributeNodes = @NamedAttributeNode("study"))
 )
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "id")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 public class Enrollment {
 
     @Id @GeneratedValue

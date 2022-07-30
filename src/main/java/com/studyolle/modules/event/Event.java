@@ -27,7 +27,9 @@ enrollments 설정 이유 (N + 1)
         attributeNodes = @NamedAttributeNode("enrollments")
 )
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "id")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 public class Event {
 
     @Id @GeneratedValue
