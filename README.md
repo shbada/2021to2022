@@ -3,7 +3,7 @@
 
 #### 수강 일정
 (1) 2022.06.27 ~ 2022.07.18 : https://github.com/westssun/itemservice-db.  
-(2) 2022.07.19 ~ 
+(2) 2022.07.19 ~ 2022.07.30 : https://github.com/westssun/springtx
 
 ### 수강일지
 | | | |
