@@ -1,4 +1,4 @@
-package com.algorithm._00_._Current;
+package com.algorithm._06_BinarySearch;
 
 import java.util.Arrays;
 import java.util.Scanner;
