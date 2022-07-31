@@ -1,9 +1,9 @@
 # itemservice-db
 [인프런 강의] 스프링 DB 2편 - 데이터 접근 활용 기술
 
-#### 수강 일정 : 
-(1) 2022.06.27 ~ 2022.07.18.  
-(2) https://github.com/westssun/springtx
+#### 수강 일정
+(1) 2022.06.27 ~ 2022.07.18 : https://github.com/westssun/itemservice-db.  
+(2) 2022.07.19 ~ 2022.07.30 : https://github.com/westssun/springtx
 
 ### 수강일지
 | | | |
