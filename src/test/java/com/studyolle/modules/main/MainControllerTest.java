@@ -2,8 +2,8 @@ package com.studyolle.modules.main;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
-import com.studyolle.modules.account.AccountRepository;
-import com.studyolle.modules.account.AccountService;
+import com.studyolle.modules.account.repository.AccountRepository;
+import com.studyolle.modules.account.service.AccountService;
 import com.studyolle.modules.account.form.SignUpForm;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -3,10 +3,14 @@ package com.studyolle.modules.event;
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
 import com.studyolle.modules.account.AccountFactory;
-import com.studyolle.modules.account.AccountRepository;
+import com.studyolle.modules.account.repository.AccountRepository;
 import com.studyolle.modules.account.WithAccount;
-import com.studyolle.modules.account.Account;
-import com.studyolle.modules.study.Study;
+import com.studyolle.entity.Account;
+import com.studyolle.entity.Event;
+import com.studyolle.entity.Study;
+import com.studyolle.common.enums.EventType;
+import com.studyolle.modules.event.repository.EnrollmentRepository;
+import com.studyolle.modules.event.service.EventService;
 import com.studyolle.modules.study.StudyFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +31,10 @@ class EventControllerTest extends ContainerBaseTest {
     @Autowired MockMvc mockMvc;
     @Autowired StudyFactory studyFactory;
     @Autowired AccountFactory accountFactory;
-    @Autowired EventService eventService;
-    @Autowired EnrollmentRepository enrollmentRepository;
+    @Autowired
+    EventService eventService;
+    @Autowired
+    EnrollmentRepository enrollmentRepository;
     @Autowired AccountRepository accountRepository;
 
     @Test

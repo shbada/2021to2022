@@ -1,6 +1,6 @@
 package com.studyolle.modules.event.event;
 
-import com.studyolle.modules.event.Enrollment;
+import com.studyolle.entity.Enrollment;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

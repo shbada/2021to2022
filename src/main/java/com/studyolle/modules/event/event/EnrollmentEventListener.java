@@ -1,15 +1,15 @@
 package com.studyolle.modules.event.event;
 
-import com.studyolle.infra.config.AppProperties;
-import com.studyolle.infra.mail.EmailMessage;
-import com.studyolle.infra.mail.EmailService;
-import com.studyolle.modules.account.Account;
-import com.studyolle.modules.event.Enrollment;
-import com.studyolle.modules.event.Event;
-import com.studyolle.modules.notification.Notification;
-import com.studyolle.modules.notification.NotificationRepository;
-import com.studyolle.modules.notification.NotificationType;
-import com.studyolle.modules.study.Study;
+import com.studyolle.config.AppProperties;
+import com.studyolle.modules.mail.EmailMessage;
+import com.studyolle.modules.mail.EmailService;
+import com.studyolle.entity.Account;
+import com.studyolle.entity.Enrollment;
+import com.studyolle.entity.Event;
+import com.studyolle.entity.Notification;
+import com.studyolle.modules.notification.repository.NotificationRepository;
+import com.studyolle.common.enums.NotificationType;
+import com.studyolle.entity.Study;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

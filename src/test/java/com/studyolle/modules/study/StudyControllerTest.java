@@ -3,9 +3,12 @@ package com.studyolle.modules.study;
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
 import com.studyolle.modules.account.AccountFactory;
-import com.studyolle.modules.account.AccountRepository;
+import com.studyolle.modules.account.repository.AccountRepository;
 import com.studyolle.modules.account.WithAccount;
-import com.studyolle.modules.account.Account;
+import com.studyolle.entity.Account;
+import com.studyolle.entity.Study;
+import com.studyolle.modules.study.repository.StudyRepository;
+import com.studyolle.modules.study.service.StudyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class StudyControllerTest extends ContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired StudyService studyService;
-    @Autowired StudyRepository studyRepository;
+    @Autowired
+    StudyService studyService;
+    @Autowired
+    StudyRepository studyRepository;
     @Autowired AccountRepository accountRepository;
     @Autowired AccountFactory accountFactory;
     @Autowired StudyFactory studyFactory;

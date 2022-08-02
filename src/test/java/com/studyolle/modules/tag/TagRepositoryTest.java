@@ -1,7 +1,8 @@
 package com.studyolle.modules.tag;
 
 import com.studyolle.infra.ContainerBaseTest;
-import com.studyolle.infra.MockMvcTest;
+import com.studyolle.entity.Tag;
+import com.studyolle.modules.tag.repository.TagRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 class TagRepositoryTest extends ContainerBaseTest {
 
-    @Autowired TagRepository tagRepository;
+    @Autowired
+    TagRepository tagRepository;
 
     @Test
     void findAll() {

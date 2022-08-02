@@ -2,8 +2,10 @@ package com.studyolle.modules.account;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
-import com.studyolle.infra.mail.EmailMessage;
-import com.studyolle.infra.mail.EmailService;
+import com.studyolle.modules.mail.EmailMessage;
+import com.studyolle.modules.mail.EmailService;
+import com.studyolle.modules.account.repository.AccountRepository;
+import com.studyolle.entity.Account;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AccountControllerTest extends ContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired AccountRepository accountRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     @MockBean
     EmailService emailService;

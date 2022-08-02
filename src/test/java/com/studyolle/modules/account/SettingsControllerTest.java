@@ -3,12 +3,15 @@ package com.studyolle.modules.account;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
-import com.studyolle.modules.tag.Tag;
-import com.studyolle.modules.zone.Zone;
-import com.studyolle.modules.tag.TagForm;
-import com.studyolle.modules.zone.ZoneForm;
-import com.studyolle.modules.tag.TagRepository;
-import com.studyolle.modules.zone.ZoneRepository;
+import com.studyolle.modules.account.repository.AccountRepository;
+import com.studyolle.modules.account.service.AccountService;
+import com.studyolle.entity.Account;
+import com.studyolle.entity.Tag;
+import com.studyolle.entity.Zone;
+import com.studyolle.modules.tag.form.TagForm;
+import com.studyolle.modules.zone.form.ZoneForm;
+import com.studyolle.modules.tag.repository.TagRepository;
+import com.studyolle.modules.zone.repository.ZoneRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.studyolle.modules.account.SettingsController.*;
+import static com.studyolle.modules.account.controller.SettingsController.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,11 +32,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class SettingsControllerTest extends ContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired AccountRepository accountRepository;
+    @Autowired
+    AccountRepository accountRepository;
     @Autowired PasswordEncoder passwordEncoder;
     @Autowired ObjectMapper objectMapper;
     @Autowired TagRepository tagRepository;
-    @Autowired AccountService accountService;
+    @Autowired
+    AccountService accountService;
     @Autowired ZoneRepository zoneRepository;
 
     private Zone testZone = Zone.builder().city("test").localNameOfCity("테스트시").province("테스트주").build();
