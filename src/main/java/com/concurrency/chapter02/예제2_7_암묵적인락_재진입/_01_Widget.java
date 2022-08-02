@@ -1,4 +1,4 @@
-package com.concurrency.chapter02;
+package com.concurrency.chapter02.예제2_7_암묵적인락_재진입;
 
 /**
  * synchronized
