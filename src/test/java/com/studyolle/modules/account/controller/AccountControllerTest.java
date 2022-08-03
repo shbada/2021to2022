@@ -1,4 +1,4 @@
-package com.studyolle.modules.account;
+package com.studyolle.modules.account.controller;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;

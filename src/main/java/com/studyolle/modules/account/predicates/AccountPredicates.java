@@ -1,7 +1,7 @@
 package com.studyolle.modules.account.predicates;
 
 import com.querydsl.core.types.Predicate;
-import com.studyolle.modules.account.QAccount;
+import com.studyolle.entity.QAccount;
 import com.studyolle.entity.Tag;
 import com.studyolle.entity.Zone;
 import java.util.Set;

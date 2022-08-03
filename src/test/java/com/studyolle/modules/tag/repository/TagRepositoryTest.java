@@ -1,4 +1,4 @@
-package com.studyolle.modules.tag;
+package com.studyolle.modules.tag.repository;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.entity.Tag;

@@ -1,8 +1,9 @@
-package com.studyolle.modules.account;
+package com.studyolle.modules.account.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
+import com.studyolle.modules.account.WithAccount;
 import com.studyolle.modules.account.repository.AccountRepository;
 import com.studyolle.modules.account.service.AccountService;
 import com.studyolle.entity.Account;

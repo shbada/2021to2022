@@ -1,4 +1,4 @@
-package com.studyolle.modules.study;
+package com.studyolle.modules.study.controller;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
@@ -7,6 +7,7 @@ import com.studyolle.modules.account.repository.AccountRepository;
 import com.studyolle.modules.account.WithAccount;
 import com.studyolle.entity.Account;
 import com.studyolle.entity.Study;
+import com.studyolle.modules.study.StudyFactory;
 import com.studyolle.modules.study.repository.StudyRepository;
 import com.studyolle.modules.study.service.StudyService;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +31,8 @@ public class StudyControllerTest extends ContainerBaseTest {
     StudyRepository studyRepository;
     @Autowired AccountRepository accountRepository;
     @Autowired AccountFactory accountFactory;
-    @Autowired StudyFactory studyFactory;
+    @Autowired
+    StudyFactory studyFactory;
 
     @Test
     @WithAccount("keesun")

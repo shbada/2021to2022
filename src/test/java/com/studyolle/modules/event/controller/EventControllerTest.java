@@ -1,4 +1,4 @@
-package com.studyolle.modules.event;
+package com.studyolle.modules.event.controller;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;

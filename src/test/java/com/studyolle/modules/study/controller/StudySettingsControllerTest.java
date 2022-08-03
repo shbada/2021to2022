@@ -1,4 +1,4 @@
-package com.studyolle.modules.study;
+package com.studyolle.modules.study.controller;
 
 import com.studyolle.infra.ContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
@@ -7,6 +7,7 @@ import com.studyolle.modules.account.repository.AccountRepository;
 import com.studyolle.modules.account.WithAccount;
 import com.studyolle.entity.Account;
 import com.studyolle.entity.Study;
+import com.studyolle.modules.study.StudyFactory;
 import com.studyolle.modules.study.repository.StudyRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class StudySettingsControllerTest extends ContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired StudyFactory studyFactory;
+    @Autowired
+    StudyFactory studyFactory;
     @Autowired AccountFactory accountFactory;
     @Autowired AccountRepository accountRepository;
     @Autowired

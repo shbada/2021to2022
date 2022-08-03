@@ -2,12 +2,7 @@ package com.studyolle.modules.study.repository;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.JPQLQuery;
-import com.studyolle.entity.Study;
-import com.studyolle.modules.study.QStudy;
-import com.studyolle.modules.tag.QTag;
-import com.studyolle.entity.Tag;
-import com.studyolle.modules.zone.QZone;
-import com.studyolle.entity.Zone;
+import com.studyolle.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

@@ -3,6 +3,8 @@ package com.studyolle.modules.zone.service;
 import com.studyolle.entity.Zone;
 import com.studyolle.modules.zone.repository.ZoneRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,9 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class ZoneService {
-
     private final ZoneRepository zoneRepository;
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void initZoneData() throws IOException {
         if (zoneRepository.count() == 0) {
             Resource resource = new ClassPathResource("zones_kr.csv");
