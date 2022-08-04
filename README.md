@@ -43,3 +43,5 @@
 |08/01|아이템 31. 한정적 와일드카드를 사용해 API 유연성을 높이라|https://devfunny.tistory.com/579|
 |08/02|아이템 32. 제네릭과 가변인수를 함께 쓸 때는 신중하라|https://devfunny.tistory.com/582|
 |08/03|아이템 33. 타입 안전 이종 컨테이너를 고려하라|https://devfunny.tistory.com/585|
+|08/04|아이템 34. int 상수 대신 열거 타입을 사용하라|https://devfunny.tistory.com/586|
+|08/04|아이템 35. ordinal 메서드 대신 인스턴스 필드를 사용하라|https://devfunny.tistory.com/587|
