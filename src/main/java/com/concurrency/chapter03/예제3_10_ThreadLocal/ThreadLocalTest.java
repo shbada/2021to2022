@@ -27,5 +27,6 @@ package com.concurrency.chapter03.예제3_10_ThreadLocal;
  ThreadLocal를 사용할때 재사용성을 크게 떨어뜨릴 수 있고, 객체간에 눈에 보이지 않는 연결 관계를 만들어내기 쉽기 떄문에
  정확하게 영향도를 파악하여 사용해야한다.
  */
-public class ThreadLocal {
+public class ThreadLocalTest {
+    private static final ThreadLocal<Integer> threadLocalId = new ThreadLocal<>();
 }
