@@ -20,6 +20,7 @@ public class ExceptionAdvice {
             log.info("requested '{}'", req.getRequestURI());
         }
         log.error("bad request", e);
+
         return "error";
     }
 }

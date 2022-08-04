@@ -22,9 +22,14 @@ public class NotificationInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        // 인증 정보
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (modelAndView != null && !isRedirectView(modelAndView) && authentication != null && authentication.getPrincipal() instanceof UserAccount) {
+            // 인증 객체 얻기
             Account account = ((UserAccount)authentication.getPrincipal()).getAccount();
+
+            // 알림 여부 체크 (화면에 보여질 아이콘 설정)
             long count = notificationRepository.countByAccountAndChecked(account, false);
             modelAndView.addObject("hasNotification", count > 0);
         }

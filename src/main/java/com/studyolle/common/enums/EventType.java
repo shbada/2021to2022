@@ -2,6 +2,7 @@ package com.studyolle.common.enums;
 
 public enum EventType {
 
-    FCFS, CONFIRMATIVE;
+    FCFS, // 선착순
+    CONFIRMATIVE; // 관리자 확인
 
 }

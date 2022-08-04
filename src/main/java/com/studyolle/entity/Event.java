@@ -22,8 +22,9 @@ enrollments 설정 이유 (N + 1)
 : 같이 조회해야한다.
  */
 @NamedEntityGraph(
-        name = "Event.withEnrollments",
-        attributeNodes = @NamedAttributeNode("enrollments")
+        name = "Event.withEnrollments", // 엔티티 그래프 이름 정의
+        /* 지연 로딩임에도, 함께 조회할 속성 enrollments 를 선택했으므로 Event 조회시 함께 조회한다. */
+        attributeNodes = @NamedAttributeNode("enrollments") // 함께 조회할 속성 선택
 )
 @Entity
 @Getter
