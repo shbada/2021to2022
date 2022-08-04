@@ -25,3 +25,5 @@
 |2022/08/04|chapter03|예제3_9_로컬변수_스택한정|
 |2022/08/04|chapter03|예제3_10_ThreadLocal|
 |2022/08/04|chapter03|예제3_12_불변객체_volatile키워드|
+|2022/08/04|chapter03|volatile 포스팅 : https://devfunny.tistory.com/841|
+|2022/08/04|chapter03|ThreadLocal 포스팅 : https://devfunny.tistory.com/842|
