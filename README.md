@@ -45,3 +45,4 @@
 |08/03|아이템 33. 타입 안전 이종 컨테이너를 고려하라|https://devfunny.tistory.com/585|
 |08/04|아이템 34. int 상수 대신 열거 타입을 사용하라|https://devfunny.tistory.com/586|
 |08/04|아이템 35. ordinal 메서드 대신 인스턴스 필드를 사용하라|https://devfunny.tistory.com/587|
+|08/05|아이템 36. 비트 필드 대신 EnumSet을 사용하라|https://devfunny.tistory.com/588|
