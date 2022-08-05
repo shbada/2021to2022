@@ -27,3 +27,5 @@
 |2022/08/04|chapter03|예제3_12_불변객체_volatile키워드|
 |2022/08/04|chapter03|volatile 포스팅 : https://devfunny.tistory.com/841|
 |2022/08/04|chapter03|ThreadLocal 포스팅 : https://devfunny.tistory.com/842|
+|2022/08/05|chapter03|예제3_15_객체_올바르게_공개하지않으면_문제발생|
+|-|chapter04|-|
