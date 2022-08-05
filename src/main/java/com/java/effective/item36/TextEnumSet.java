@@ -13,7 +13,7 @@ public class TextEnumSet {
 
     // 어떤 Set을 넘겨도 되나, EnumSet 이 가장 좋다.
     public void applyStyles(Set<Style> styles) {
-
+//        EnumSet
     }
 
     public static void main(String[] args) {
