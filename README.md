@@ -3,8 +3,8 @@
 
 ### [수강일정]
 2022.08.05 ~ 진행중 
-
-### Project ERD
+   
+### [Project ERD]
 ![IMAGES](ERD.png)
    
 ### [수강일지]
