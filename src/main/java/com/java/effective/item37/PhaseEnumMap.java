@@ -45,5 +45,9 @@ public enum PhaseEnumMap {
         public static Transition from(PhaseEnumMap from, PhaseEnumMap to) {
             return m.get(from).get(to);
         }
+
+        public static void main(String[] args) {
+            System.out.println(m);
+        }
     }
 }

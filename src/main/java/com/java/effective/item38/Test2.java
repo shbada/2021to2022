@@ -1,5 +1,6 @@
 package com.java.effective.item38;
 
+import java.nio.file.LinkOption;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -22,5 +23,6 @@ public class Test2 {
             System.out.printf("%f %s %f = %f%n", x, op, y, op.apply(x, y));
         }
 
+//        LinkOption
     }
 }
