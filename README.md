@@ -29,3 +29,6 @@
 |2022/08/04|chapter03|ThreadLocal 포스팅 : https://devfunny.tistory.com/842|
 |2022/08/05|chapter03|예제3_15_객체_올바르게_공개하지않으면_문제발생|
 |-|chapter04|-|
+|2022/08/06|chapter04|예제4_1_자바_모니더패턴_스레드안정성확보|
+|2022/08/06|chapter04|예제4_2_한정기법_스레드안정성확보|
+|2022/08/06|chapter04|예제4_3_private_final변수_동기화|
