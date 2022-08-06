@@ -31,8 +31,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     //querydsl 추가
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}" // querydsl 라이브러리
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}" //  Querydsl 관련 코드 생성 기능 제공
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -47,22 +47,22 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-//querydsl 추가 시작
+//querydsl 추가 시작 (위에 plugin 추가 부분과 맞물림)
 def querydslDir = "$buildDir/generated/querydsl"
 querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 }
 
-sourceSets {
+sourceSets { // IDE의 소스 폴더에 자동으로 넣어준다.
     main.java.srcDir querydslDir
 }
 
 configurations {
-    querydsl.extendsFrom compileClasspath
+    querydsl.extendsFrom compileClasspath // 컴파일이 될때 같이 수행
 }
 
 compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
+    options.annotationProcessorPath = configurations.querydsl // Q파일을 생성해준다.
 }
 //querydsl 추가 끝
