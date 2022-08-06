@@ -13,7 +13,9 @@ public class PasswordFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        PasswordForm passwordForm = (PasswordForm)target;
+        PasswordForm passwordForm = (PasswordForm) target;
+
+        /* 패스워드 일치여부 확인 */
         if (!passwordForm.getNewPassword().equals(passwordForm.getNewPasswordConfirm())) {
             errors.rejectValue("newPassword", "wrong.value", "입력한 새 패스워드가 일치하지 않습니다.");
         }

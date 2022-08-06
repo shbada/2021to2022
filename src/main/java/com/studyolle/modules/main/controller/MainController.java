@@ -26,7 +26,9 @@ public class MainController {
     @GetMapping("/")
     public String home(@CurrentAccount Account account, Model model) {
         if (account != null) {
+            /* 유저의 정보와 유저의 tag, zone 정보 함께 조회 */
             Account accountLoaded = accountRepository.findAccountWithTagsAndZonesById(account.getId());
+
             model.addAttribute(accountLoaded);
             model.addAttribute("enrollmentList", enrollmentRepository.findByAccountAndAcceptedOrderByEnrolledAtDesc(accountLoaded, true));
             model.addAttribute("studyList", studyRepository.findByAccount(
@@ -36,6 +38,7 @@ public class MainController {
                     studyRepository.findFirst5ByManagersContainingAndClosedOrderByPublishedDateTimeDesc(account, false));
             model.addAttribute("studyMemberOf",
                     studyRepository.findFirst5ByMembersContainingAndClosedOrderByPublishedDateTimeDesc(account, false));
+
             return "index-after-login";
         }
 

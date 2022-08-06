@@ -94,7 +94,7 @@ public class AccountController {
         /* 인증 완료 */
         accountService.completeSignUp(account);
 
-        model.addAttribute("numberOfUser", accountRepository.count());
+        model.addAttribute("numberOfUser", accountRepository.count()); // 회원수
         model.addAttribute("nickname", account.getNickname());
 
         return view;

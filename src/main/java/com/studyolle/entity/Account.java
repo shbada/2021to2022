@@ -73,15 +73,27 @@ public class Account {
         this.emailCheckTokenGeneratedAt = LocalDateTime.now();
     }
 
+    /**
+     * 이메일 인증 완료 처리
+     */
     public void completeSignUp() {
         this.emailVerified = true;
         this.joinedAt = LocalDateTime.now();
     }
 
+    /**
+     * 토큰 유효성 체크
+     * @param token
+     * @return
+     */
     public boolean isValidToken(String token) {
         return this.emailCheckToken.equals(token);
     }
 
+    /**
+     * 인증 이메일은 1시간에 한번만 전송 가능
+     * @return
+     */
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
     }
