@@ -52,3 +52,4 @@
 |08/06|아이템 40. @Override 애너테이션을 일관되게 사용하라|https://devfunny.tistory.com/592|
 |08/06|아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라|https://devfunny.tistory.com/593|
 |08/06|아이템 42. 익명 클래스보다는 람다를 사용하라|https://devfunny.tistory.com/594|
+|08/07|아이템 43. 람다보다는 메서드 참조를 사용하라|https://devfunny.tistory.com/596|
