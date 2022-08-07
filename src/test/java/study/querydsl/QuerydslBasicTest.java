@@ -101,4 +101,45 @@ public class QuerydslBasicTest {
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
+
+    /*
+        member.username.eq("member1") // username = 'member1'
+        member.username.ne("member1") //username != 'member1'
+        member.username.eq("member1").not() // username != 'member1'
+        member.username.isNotNull() //이름이 is not null
+        member.age.in(10, 20) // age in (10,20)
+        member.age.notIn(10, 20) // age not in (10, 20)
+        member.age.between(10,30) //between 10, 30
+        member.age.goe(30) // age >= 30
+        member.age.gt(30) // age > 30
+        member.age.loe(30) // age <= 30
+        member.age.lt(30) // age < 30
+        member.username.like("member%") //like 검색
+        member.username.contains("member") // like ‘%member%’ 검색
+        member.username.startsWith("member") //like ‘member%’ 검색
+     */
+    @Test
+    public void search() {
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1")
+                        .and(member.age.eq(10)))
+                .fetchOne();
+        // 검색 조건은 .and() , . or() 를 메서드 체인으로 연결할 수 있다.
+
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void searchAndParam() {
+        List<Member> result1 = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"),
+                        member.age.eq(10))
+                .fetch();
+        // where() 에 파라미터로 검색조건을 추가하면 AND 조건이 추가됨
+        // -> null 값은 무시
+
+        assertThat(result1.size()).isEqualTo(1);
+    }
 }
