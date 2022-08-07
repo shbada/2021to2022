@@ -343,6 +343,7 @@ public class QuerydslBasicTest {
         em.persist(new Member("teamB"));
         em.persist(new Member("teamC"));
 
+        // cross join
         List<Member> result = queryFactory
                 .select(member)
                 .from(member, team)
