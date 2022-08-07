@@ -52,10 +52,13 @@ public class EventController {
      */
     @GetMapping("/new-event")
     public String newEventForm(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
+
         model.addAttribute(study);
         model.addAttribute(account);
         model.addAttribute(new EventForm());
+
         return "event/form";
     }
 
@@ -71,14 +74,18 @@ public class EventController {
     @PostMapping("/new-event")
     public String newEventSubmit(@CurrentAccount Account account, @PathVariable String path,
                                  @Valid EventForm eventForm, Errors errors, Model model) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
+
         if (errors.hasErrors()) {
             model.addAttribute(account);
             model.addAttribute(study);
             return "event/form";
         }
 
+        /* 모임 생성 */
         Event event = eventService.createEvent(modelMapper.map(eventForm, Event.class), study, account);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -96,6 +103,7 @@ public class EventController {
         model.addAttribute(account);
         model.addAttribute(event);
         model.addAttribute(studyRepository.findStudyWithManagersByPath(path));
+
         return "event/view";
     }
 
@@ -108,16 +116,19 @@ public class EventController {
      */
     @GetMapping("/events")
     public String viewStudyEvents(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        /* Study 조회 */
         Study study = studyService.getStudy(path);
         model.addAttribute(account);
         model.addAttribute(study);
 
+        /* 스터디의 모임 리스트 조회 */
         List<Event> events = eventRepository.findByStudyOrderByStartDateTime(study);
         List<Event> newEvents = new ArrayList<>();
         List<Event> oldEvents = new ArrayList<>();
+
         events.forEach(e -> {
             if (e.getEndDateTime().isBefore(LocalDateTime.now())) {
-                oldEvents.add(e);
+                oldEvents.add(e); // 지난 모임
             } else {
                 newEvents.add(e);
             }
@@ -140,11 +151,14 @@ public class EventController {
     @GetMapping("/events/{id}/edit")
     public String updateEventForm(@CurrentAccount Account account,
                                   @PathVariable String path, @PathVariable("id") Event event, Model model) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
         model.addAttribute(study);
         model.addAttribute(account);
         model.addAttribute(event);
         model.addAttribute(modelMapper.map(event, EventForm.class));
+
         return "event/update-form";
     }
 
@@ -162,8 +176,10 @@ public class EventController {
     public String updateEventSubmit(@CurrentAccount Account account, @PathVariable String path,
                                     @PathVariable("id") Event event, @Valid EventForm eventForm, Errors errors,
                                     Model model) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
         eventForm.setEventType(event.getEventType());
+
         eventValidator.validateUpdateForm(eventForm, event, errors);
 
         if (errors.hasErrors()) {
@@ -173,7 +189,9 @@ public class EventController {
             return "event/update-form";
         }
 
+        /* 모임 수정 */
         eventService.updateEvent(event, eventForm);
+
         return "redirect:/study/" + study.getEncodedPath() +  "/events/" + event.getId();
     }
 
@@ -201,8 +219,12 @@ public class EventController {
     @PostMapping("/events/{id}/enroll")
     public String newEnrollment(@CurrentAccount Account account,
                                 @PathVariable String path, @PathVariable("id") Event event) {
+        /* Study 조회 */
         Study study = studyService.getStudyToEnroll(path);
+
+        /* 모임 참가 신청 */
         eventService.newEnrollment(event, account);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -216,8 +238,12 @@ public class EventController {
     @PostMapping("/events/{id}/disenroll")
     public String cancelEnrollment(@CurrentAccount Account account,
                                    @PathVariable String path, @PathVariable("id") Event event) {
+        /* Study 조회 */
         Study study = studyService.getStudyToEnroll(path);
+
+        /* 모임 참가 취소 */
         eventService.cancelEnrollment(event, account);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -232,8 +258,12 @@ public class EventController {
     @GetMapping("events/{eventId}/enrollments/{enrollmentId}/accept")
     public String acceptEnrollment(@CurrentAccount Account account, @PathVariable String path,
                                    @PathVariable("eventId") Event event, @PathVariable("enrollmentId") Enrollment enrollment) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 모임 참가 승인 */
         eventService.acceptEnrollment(event, enrollment);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -248,8 +278,12 @@ public class EventController {
     @GetMapping("/events/{eventId}/enrollments/{enrollmentId}/reject")
     public String rejectEnrollment(@CurrentAccount Account account, @PathVariable String path,
                                    @PathVariable("eventId") Event event, @PathVariable("enrollmentId") Enrollment enrollment) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 모임 참가 반려 */
         eventService.rejectEnrollment(event, enrollment);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -264,8 +298,12 @@ public class EventController {
     @GetMapping("/events/{eventId}/enrollments/{enrollmentId}/checkin")
     public String checkInEnrollment(@CurrentAccount Account account, @PathVariable String path,
                                     @PathVariable("eventId") Event event, @PathVariable("enrollmentId") Enrollment enrollment) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 모임 출석 체크 */
         eventService.checkInEnrollment(enrollment);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 
@@ -280,8 +318,12 @@ public class EventController {
     @GetMapping("/events/{eventId}/enrollments/{enrollmentId}/cancel-checkin")
     public String cancelCheckInEnrollment(@CurrentAccount Account account, @PathVariable String path,
                                           @PathVariable("eventId") Event event, @PathVariable("enrollmentId") Enrollment enrollment) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 모임 출석 취소 */
         eventService.cancelCheckInEnrollment(enrollment);
+
         return "redirect:/study/" + study.getEncodedPath() + "/events/" + event.getId();
     }
 

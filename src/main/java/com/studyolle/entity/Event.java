@@ -122,6 +122,10 @@ public class Event {
         return this.enrollments.stream().filter(Enrollment::isAccepted).count();
     }
 
+    /**
+     * 모임 참가 신청
+     * @param enrollment
+     */
     public void addEnrollment(Enrollment enrollment) {
         this.enrollments.add(enrollment);
         enrollment.setEvent(this);
@@ -132,6 +136,10 @@ public class Event {
         enrollment.setEvent(null);
     }
 
+    /**
+     * 선착순 모임에 인원 가입 가능 여부 체크
+     * @return
+     */
     public boolean isAbleToAcceptWaitingEnrollment() {
         return this.eventType == EventType.FCFS && this.limitOfEnrollments > this.getNumberOfAcceptedEnrollments();
     }
@@ -165,6 +173,7 @@ public class Event {
 
     public void acceptNextWaitingEnrollment() {
         if (this.isAbleToAcceptWaitingEnrollment()) {
+            /* 대기자 조회 */
             Enrollment enrollmentToAccept = this.getTheFirstWaitingEnrollment();
             if (enrollmentToAccept != null) {
                 enrollmentToAccept.setAccepted(true);
@@ -172,6 +181,10 @@ public class Event {
         }
     }
 
+    /**
+     * 모임 참가자 대기 조회
+     * @return
+     */
     private Enrollment getTheFirstWaitingEnrollment() {
         for (Enrollment e : this.enrollments) {
             if (!e.isAccepted()) {
