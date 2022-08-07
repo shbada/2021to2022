@@ -151,6 +151,9 @@ public class QuerydslBasicTest {
         -> 결과가 둘 이상이면 : com.querydsl.core.NonUniqueResultException
         fetchFirst() : limit(1).fetchOne()
         fetchResults() : 페이징 정보 포함, total count 쿼리 추가 실행
+        -> 페이징 쿼리가 복잡해지면 데이터,totalCount 조회 쿼리가 다를 수도 있다.
+           성능 때문에 totalCount 쿼리를 좀더 간단하게 조회할 수 있으므로,
+           성능이 중요할경우 둘을 따로 조회하자.
         fetchCount() : count 쿼리로 변경해서 count 수 조회
      */
     @Test
