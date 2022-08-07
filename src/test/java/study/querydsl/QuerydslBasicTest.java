@@ -204,6 +204,7 @@ public class QuerydslBasicTest {
                 .where(member.age.eq(100))
                 .orderBy(member.age.desc(), member.username.asc().nullsLast())
                 .fetch();
+        // nullsLast(), nullsFirst()
 
         Member member5 = result.get(0);
         Member member6 = result.get(1);
