@@ -74,12 +74,29 @@ public class QuerydslBasicTest {
         // member1을 찾아라.
         // factory 생성시 entityManager를 넘겨줘야한다.
 //        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        QMember m = new QMember("m"); // 별칭 명시해줘야한다. (구분값)
+//        QMember m = new QMember("m"); // 별칭 명시해줘야한다. (구분값)
+
+        // 같은 테이블을 조인해야 하는 경우에만 "m"을 지정해서 사용하자. 그 외에는 startQuerydsl3() 처럼 사용하자.
+//        QMember m = new QMember("m"); //별칭 직접 지정
+        QMember m = QMember.member; //기본 인스턴스 사용
+        // static import도 가능
 
         Member findMember = queryFactory
                 .select(m)
                 .from(m)
                 .where(m.username.eq("member1"))// 파라미터 바인딩 처리
+                .fetchOne();
+
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void startQuerydsl3() {
+        // member1을 찾아라.
+        Member findMember = queryFactory
+                .select(member)
+                .from(member)
+                .where(member.username.eq("member1"))
                 .fetchOne();
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
