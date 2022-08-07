@@ -82,9 +82,17 @@ public class StudyEventListener {
         notification.setMessage(message);
         notification.setAccount(account);
         notification.setNotificationType(notificationType);
+
         notificationRepository.save(notification);
     }
 
+    /**
+     * 스터디 생성 메일 알림
+     * @param study
+     * @param account
+     * @param contextMessage
+     * @param emailSubject
+     */
     private void sendStudyCreatedEmail(Study study, Account account, String contextMessage, String emailSubject) {
         Context context = new Context();
         context.setVariable("nickname", account.getNickname());

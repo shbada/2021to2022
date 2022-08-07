@@ -33,14 +33,28 @@ public class StudyService {
      * @return
      */
     public Study createNewStudy(Study study, Account account) {
+        // study 저장
         Study newStudy = repository.save(study);
+
+        // manger 저장
         newStudy.addManager(account);
+
         return newStudy;
     }
 
+    /**
+     * 관리자 체크 및 스터디 조회
+     * @param account
+     * @param path
+     * @return
+     */
     public Study getStudyToUpdate(Account account, String path) {
+        /* study 조회 */
         Study study = this.getStudy(path);
+
+        /* manager 체크 */
         checkIfManager(account, study);
+
         return study;
     }
 
@@ -62,6 +76,8 @@ public class StudyService {
      */
     public void updateStudyDescription(Study study, StudyDescriptionForm studyDescriptionForm) {
         modelMapper.map(studyDescriptionForm, study);
+
+        /* 알림 */
         eventPublisher.publishEvent(new StudyUpdateEvent(study, "스터디 소개를 수정했습니다."));
     }
 
@@ -159,9 +175,15 @@ public class StudyService {
      * @return
      */
     public Study getStudyToUpdateStatus(Account account, String path) {
+        /* 스터디 정보 조회 */
         Study study = repository.findStudyWithManagersByPath(path);
+
+        /* Study 존재 여부 조회 */
         checkIfExistingStudy(path, study);
+
+        /* Manager 체크 */
         checkIfManager(account, study);
+
         return study;
     }
 
@@ -192,7 +214,10 @@ public class StudyService {
      * @param study
      */
     public void publish(Study study) {
+        /* 스터디 오픈 */
         study.publish();
+
+        /* 알림 수행 */
         this.eventPublisher.publishEvent(new StudyCreatedEvent(study));
     }
 
@@ -201,7 +226,10 @@ public class StudyService {
      * @param study
      */
     public void close(Study study) {
+        /* 스터디 종료 */
         study.close();
+
+        /* 알림 수행 */
         eventPublisher.publishEvent(new StudyUpdateEvent(study, "스터디를 종료했습니다."));
     }
 
@@ -210,7 +238,7 @@ public class StudyService {
      * @param study
      */
     public void startRecruit(Study study) {
-        study.startRecruit();
+        study.startRecruit(); // 모집시작
         eventPublisher.publishEvent(new StudyUpdateEvent(study, "팀원 모집을 시작합니다."));
     }
 
@@ -219,7 +247,7 @@ public class StudyService {
      * @param study
      */
     public void stopRecruit(Study study) {
-        study.stopRecruit();
+        study.stopRecruit(); // 모집종료
         eventPublisher.publishEvent(new StudyUpdateEvent(study, "팀원 모집을 중단했습니다."));
     }
 

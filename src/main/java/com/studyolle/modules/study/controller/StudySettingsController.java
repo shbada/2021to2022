@@ -56,6 +56,7 @@ public class StudySettingsController {
         model.addAttribute(account);
         model.addAttribute(study);
         model.addAttribute(modelMapper.map(study, StudyDescriptionForm.class));
+
         return "study/settings/description";
     }
 
@@ -86,6 +87,7 @@ public class StudySettingsController {
         studyService.updateStudyDescription(study, studyDescriptionForm);
 
         attributes.addFlashAttribute("message", "스터디 소개를 수정했습니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/description";
     }
 
@@ -103,6 +105,7 @@ public class StudySettingsController {
 
         model.addAttribute(account);
         model.addAttribute(study);
+
         return "study/settings/banner";
     }
 
@@ -124,6 +127,7 @@ public class StudySettingsController {
         studyService.updateStudyImage(study, image);
 
         attributes.addFlashAttribute("message", "스터디 이미지를 수정했습니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
     }
 
@@ -135,7 +139,10 @@ public class StudySettingsController {
      */
     @PostMapping("/banner/enable")
     public String enableStudyBanner(@CurrentAccount Account account, @PathVariable String path) {
+        /* 스터디 정보 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 배너 사용여부 - 사용으로 변경 */
         studyService.enableStudyBanner(study);
 
         return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
@@ -149,7 +156,10 @@ public class StudySettingsController {
      */
     @PostMapping("/banner/disable")
     public String disableStudyBanner(@CurrentAccount Account account, @PathVariable String path) {
+        /* 스터디 정보 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 배너 사용여부 - 사용안함으로 변경 */
         studyService.disableStudyBanner(study);
 
         return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
@@ -171,9 +181,11 @@ public class StudySettingsController {
         model.addAttribute(account);
         model.addAttribute(study);
 
+        /* 스터디의 태그 리스트 셋팅 */
         model.addAttribute("tags", study.getTags().stream()
                 .map(Tag::getTitle).collect(Collectors.toList()));
 
+        /* 모든 태그 리스트 조회 */
         List<String> allTagTitles = tagRepository.findAll().stream()
                 .map(Tag::getTitle).collect(Collectors.toList());
 
@@ -226,6 +238,7 @@ public class StudySettingsController {
 
         /* 태그 삭제 수행 */
         studyService.removeTag(study, tag);
+
         return ResponseEntity.ok().build();
     }
 
@@ -245,13 +258,16 @@ public class StudySettingsController {
         model.addAttribute(account);
         model.addAttribute(study);
 
-        /* 지역 조회 */
+        /* 스터디의 지역 조회 */
         model.addAttribute("zones", study.getZones().stream().map(Zone::toString).collect(Collectors.toList()));
 
         /* 모든 지역 조회 */
-        List<String> allZones = zoneRepository.findAll().stream().map(Zone::toString).collect(Collectors.toList());
+        List<String> allZones = zoneRepository.findAll().stream()
+                .map(Zone::toString)
+                .collect(Collectors.toList());
 
         model.addAttribute("whitelist", objectMapper.writeValueAsString(allZones));
+
         return "study/settings/zones";
     }
 
@@ -266,7 +282,10 @@ public class StudySettingsController {
     @ResponseBody
     public ResponseEntity addZone(@CurrentAccount Account account, @PathVariable String path,
                                   @RequestBody ZoneForm zoneForm) {
+        /* 스터디의 zone 조회 */
         Study study = studyService.getStudyToUpdateZone(account, path);
+
+        /* city, province 로 zone 조회 - 기존 초기 적재된 zone 에 해당되어야 가능 */
         Zone zone = zoneRepository.findByCityAndProvince(zoneForm.getCityName(), zoneForm.getProvinceName());
         if (zone == null) {
             return ResponseEntity.badRequest().build();
@@ -300,6 +319,7 @@ public class StudySettingsController {
 
         /* 지역 정보 삭제 */
         studyService.removeZone(study, zone);
+
         return ResponseEntity.ok().build();
     }
 
@@ -358,6 +378,7 @@ public class StudySettingsController {
         studyService.close(study);
 
         attributes.addFlashAttribute("message", "스터디를 종료했습니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
     }
 
@@ -372,15 +393,20 @@ public class StudySettingsController {
     @PostMapping("/recruit/start")
     public String startRecruit(@CurrentAccount Account account, @PathVariable String path, Model model,
                                RedirectAttributes attributes) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
 
+        /* 시간제한 체크 */
         if (!study.canUpdateRecruiting()) {
             attributes.addFlashAttribute("message", "1시간 안에 인원 모집 설정을 여러번 변경할 수 없습니다.");
             return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
         }
 
+        /* Sutdy 모집 시작 변경 */
         studyService.startRecruit(study);
+
         attributes.addFlashAttribute("message", "인원 모집을 시작합니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
     }
 
@@ -390,14 +416,19 @@ public class StudySettingsController {
     @PostMapping("/recruit/stop")
     public String stopRecruit(@CurrentAccount Account account, @PathVariable String path, Model model,
                               RedirectAttributes attributes) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdate(account, path);
+
+        /* 시간제한 체크 */
         if (!study.canUpdateRecruiting()) {
             attributes.addFlashAttribute("message", "1시간 안에 인원 모집 설정을 여러번 변경할 수 없습니다.");
             return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
         }
 
+        /* Sutdy 모집 종료 변경 */
         studyService.stopRecruit(study);
         attributes.addFlashAttribute("message", "인원 모집을 종료합니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
     }
 
@@ -413,8 +444,10 @@ public class StudySettingsController {
     @PostMapping("/study/path")
     public String updateStudyPath(@CurrentAccount Account account, @PathVariable String path, String newPath,
                                   Model model, RedirectAttributes attributes) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
 
+        /* Study Path validation 체크 */
         if (!studyService.isValidPath(newPath)) {
             model.addAttribute(account);
             model.addAttribute(study);
@@ -422,9 +455,11 @@ public class StudySettingsController {
             return "study/settings/study";
         }
 
+        /* Study path 변경 */
         studyService.updateStudyPath(study, newPath);
 
         attributes.addFlashAttribute("message", "스터디 경로를 수정했습니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
     }
 
@@ -440,8 +475,10 @@ public class StudySettingsController {
     @PostMapping("/study/title")
     public String updateStudyTitle(@CurrentAccount Account account, @PathVariable String path, String newTitle,
                                    Model model, RedirectAttributes attributes) {
+        /* Study 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
 
+        /* 스터디명 validaton check */
         if (!studyService.isValidTitle(newTitle)) { // title validation check
             model.addAttribute(account);
             model.addAttribute(study);
@@ -449,9 +486,11 @@ public class StudySettingsController {
             return "study/settings/study";
         }
 
+        /* 스터디명 변경 */
         studyService.updateStudyTitle(study, newTitle);
 
         attributes.addFlashAttribute("message", "스터디 이름을 수정했습니다.");
+
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
     }
 
@@ -464,8 +503,12 @@ public class StudySettingsController {
      */
     @PostMapping("/study/remove")
     public String removeStudy(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        /* 스터디 조회 */
         Study study = studyService.getStudyToUpdateStatus(account, path);
+
+        /* study 삭제 */
         studyService.remove(study);
+        
         return "redirect:/";
     }
 

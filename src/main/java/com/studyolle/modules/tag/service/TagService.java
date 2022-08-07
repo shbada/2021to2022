@@ -20,9 +20,12 @@ public class TagService {
      */
     public Tag findOrCreateNew(String tagTitle) {
         Tag tag = tagRepository.findByTitle(tagTitle);
+
+        // 존재하지않는 tag 라면 신규 등록
         if (tag == null) {
             tag = tagRepository.save(Tag.builder().title(tagTitle).build());
         }
+
         return tag;
     }
 

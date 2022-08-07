@@ -88,6 +88,7 @@ public class StudyController {
 
         model.addAttribute(account);
         model.addAttribute(study);
+
         return "study/view";
     }
 
@@ -105,6 +106,7 @@ public class StudyController {
 
         model.addAttribute(account);
         model.addAttribute(study);
+
         return "study/members";
     }
 
@@ -116,8 +118,10 @@ public class StudyController {
      */
     @GetMapping("/study/{path}/join")
     public String joinStudy(@CurrentAccount Account account, @PathVariable String path) {
-        /* 스터디 가입 */
+        /* 스터디 조회 */
         Study study = studyRepository.findStudyWithMembersByPath(path);
+
+        /* 스터디 가입 */
         studyService.addMember(study, account);
 
         return "redirect:/study/" + study.getEncodedPath() + "/members";
@@ -131,8 +135,10 @@ public class StudyController {
      */
     @GetMapping("/study/{path}/leave")
     public String leaveStudy(@CurrentAccount Account account, @PathVariable String path) {
-        /* 스터디 탈퇴 */
+        /* 스터디 조회 */
         Study study = studyRepository.findStudyWithMembersByPath(path);
+
+        /* 스터디 탈퇴 */
         studyService.removeMember(study, account);
 
         return "redirect:/study/" + study.getEncodedPath() + "/members";

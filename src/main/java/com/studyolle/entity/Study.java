@@ -67,6 +67,10 @@ public class Study {
 
     private int memberCount;
 
+    /**
+     * Study 의 manager 저장
+     * @param account
+     */
     public void addManager(Account account) {
         this.managers.add(account);
     }
@@ -112,7 +116,11 @@ public class Study {
         }
     }
 
+    /**
+     * 팀원 모집 시작
+     */
     public void startRecruit() {
+        /* 인원 모집 설정 1시간 시간제한 체크 */
         if (canUpdateRecruiting()) {
             this.recruiting = true;
             this.recruitingUpdatedDateTime = LocalDateTime.now();
@@ -121,7 +129,11 @@ public class Study {
         }
     }
 
+    /**
+     * 팀원 모집 종료
+     */
     public void stopRecruit() {
+        /* 인원 모집 설정 1시간 시간제한 체크 */
         if (canUpdateRecruiting()) {
             this.recruiting = false;
             this.recruitingUpdatedDateTime = LocalDateTime.now();
@@ -130,6 +142,10 @@ public class Study {
         }
     }
 
+    /**
+     * 인원 모집 설정 1시간 시간제한 체크
+     * @return
+     */
     public boolean canUpdateRecruiting() {
         return this.published && this.recruitingUpdatedDateTime == null || this.recruitingUpdatedDateTime.isBefore(LocalDateTime.now().minusHours(1));
     }
