@@ -162,6 +162,7 @@ public class SettingsController {
     public String updateNotificationsForm(@CurrentAccount Account account, Model model) {
         model.addAttribute(account);
         model.addAttribute(modelMapper.map(account, Notifications.class));
+
         return SETTINGS + NOTIFICATIONS;
     }
 
@@ -285,12 +286,14 @@ public class SettingsController {
     public ResponseEntity addZone(@CurrentAccount Account account, @RequestBody ZoneForm zoneForm) {
         /* 존재하는 지역 체크 */
         Zone zone = zoneRepository.findByCityAndProvince(zoneForm.getCityName(), zoneForm.getProvinceName());
+
         if (zone == null) {
             return ResponseEntity.badRequest().build();
         }
 
         /* 지역 저장 */
         accountService.addZone(account, zone);
+
         return ResponseEntity.ok().build();
     }
 
@@ -305,12 +308,14 @@ public class SettingsController {
     public ResponseEntity removeZone(@CurrentAccount Account account, @RequestBody ZoneForm zoneForm) {
         /* 존재하는 지역 체크 */
         Zone zone = zoneRepository.findByCityAndProvince(zoneForm.getCityName(), zoneForm.getProvinceName());
+
         if (zone == null) {
             return ResponseEntity.badRequest().build();
         }
 
         /* 지역 삭제 */
         accountService.removeZone(account, zone);
+
         return ResponseEntity.ok().build();
     }
 
@@ -324,6 +329,7 @@ public class SettingsController {
     public String updateAccountForm(@CurrentAccount Account account, Model model) {
         model.addAttribute(account);
         model.addAttribute(modelMapper.map(account, NicknameForm.class));
+
         return SETTINGS + ACCOUNT;
     }
 
