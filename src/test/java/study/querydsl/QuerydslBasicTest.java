@@ -1,7 +1,11 @@
 package study.querydsl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
@@ -12,6 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import study.querydsl.dto.MemberDto;
+import study.querydsl.dto.QMemberDto;
+import study.querydsl.dto.UserDto;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.QMember;
 import study.querydsl.entity.QTeam;
@@ -669,5 +676,326 @@ public class QuerydslBasicTest {
         for (String s : result) {
             System.out.println(s);
         }
+    }
+
+    /**
+     * 프로젝션: select 대상 지정
+     * 프로젝션 대상이 하나면 타입을 명확하게 지정할 수 있음
+     */
+    @Test
+    public void simpleProjection() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    /**
+     * 프로젝션 대상이 둘 이상이면 튜플이나 DTO로 조회
+     */
+    @Test
+    public void tupleProjection() {
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        /* 반환은 DTO로 변환해서 반환하도록 하자. */
+        for (Tuple tuple : result) {
+            String username = tuple.get(member.username);
+            Integer age = tuple.get(member.age);
+            System.out.println("username=" + username);
+            System.out.println("age=" + age);
+        }
+    }
+
+    /**
+     * JQPL 방식
+     * 생성자 방식만 지원함
+     */
+    @Test
+    public void findDtoByJQPL() {
+        List<MemberDto> result = em.createQuery(
+                        "select new study.querydsl.dto.MemberDto(m.username, m.age) " +
+                                "from Member m", MemberDto.class)
+                .getResultList();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto : " + memberDto);
+        }
+    }
+
+
+    /**
+     * Querydsl 빈 생성(Bean population)
+     * 1) 프로퍼티 접근 - Setter
+     */
+    @Test
+    public void findDtoBySetter() {
+        // 기본생성자가 존재해야한다.
+        // MemberDto 생성 후 각 값을 셋팅하기 때문
+        List<MemberDto> result = queryFactory
+                .select(Projections.bean(MemberDto.class, member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto : " + memberDto);
+        }
+    }
+
+    /**
+     * Querydsl 빈 생성(Bean population)
+     * 2) 필드 직접 접근
+     */
+    @Test
+    public void findDtoByField() {
+        // 필드에 값을 꽂는다. (getter, setter 호출이 아님)
+        List<MemberDto> result = queryFactory
+                .select(Projections.fields(MemberDto.class, member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto : " + memberDto);
+        }
+    }
+
+    /**
+     * Querydsl 빈 생성(Bean population)
+     * 프로퍼티나, 필드 접근 생성 방식에서 이름이 다를 때 해결 방안
+     */
+    @Test
+    public void findUserDtoByField() {
+        QMember memberSub = new QMember("memberSub");
+
+        List<UserDto> fetch = queryFactory
+                .select(Projections.fields(UserDto.class,
+                                member.username.as("name"),
+//                                ExpressionUtils.as(member.username, "name"),
+                                ExpressionUtils.as(
+                                        JPAExpressions
+                                                .select(memberSub.age.max())
+                                                .from(memberSub), "age")
+                        )
+                ).from(member)
+                .fetch();
+
+        for (UserDto userDto : fetch) {
+            System.out.println("userDto : " + userDto);
+        }
+    }
+
+    /**
+     * Querydsl 빈 생성(Bean population)
+     * 3) 생성자 사용
+     * 런타임 단계에서 에러 체크 가능
+     */
+    @Test
+    public void findDtoByConstructor() {
+        /* 생성자 매개변수와 타입이 동일해야한다. */
+        List<MemberDto> result = queryFactory
+                .select(Projections.constructor(MemberDto.class, member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto : " + memberDto);
+        }
+    }
+
+    /**
+     * @QueryProjection 활용
+     * 장점 : 컴파일러로 타입을 체크
+     * 단점 : DTO에 QueryDSL 어노테이션을 유지해야 하는 점과 DTO까지 Q 파일을 생성해야한다.
+     */
+    @Test
+    public void findDtoByQueryProjection() {
+        List<MemberDto> result = queryFactory
+                .select(new QMemberDto(member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto : " + memberDto);
+        }
+    }
+
+    /**
+     * 중복제거
+     */
+    @Test
+    public void distinct() {
+        List<String> result = queryFactory
+                .select(member.username).distinct()
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s : " + s);
+        }
+    }
+
+    /**
+     * 동적쿼리
+     * 1) BooleanBuilder
+     */
+    @Test
+    public void dynamicQuery_BooleanBuilder() {
+        String usernameParameter = "member1";
+        Integer ageParam = 10;
+
+        List<Member> result = searchMember1(usernameParameter, ageParam);
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember1(String usernameCond, Integer ageCond) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if (usernameCond != null) {
+            builder.and(member.username.eq(usernameCond));
+        }
+
+        if (ageCond != null) {
+            builder.and(member.age.eq(ageCond));
+        }
+
+        return queryFactory
+                .selectFrom(member)
+                .where(builder)
+                .fetch();
+    }
+
+    /**
+     * 동적쿼라
+     * 2) Where 다중 파라미터 사용
+     */
+    @Test
+    public void 동적쿼리_WhereParam() throws Exception {
+        String usernameParam = "member1";
+        Integer ageParam = 10;
+
+        List<Member> result = searchMember2(usernameParam, ageParam);
+
+        Assertions.assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember2(String usernameCond, Integer ageCond) {
+        return queryFactory
+                .selectFrom(member)
+                .where(usernameEq(usernameCond), ageEq(ageCond))
+//                .where(allEq(usernameCond,ageCond))
+                .fetch();
+    }
+
+    /* where 조건에 null 값은 무시된다. */
+    private BooleanExpression usernameEq(String usernameCond) {
+        return usernameCond != null ? member.username.eq(usernameCond) : null;
+    }
+
+    private BooleanExpression ageEq(Integer ageCond) {
+        return ageCond != null ? member.age.eq(ageCond) : null;
+    }
+
+    /* 조합 가능 */
+    private BooleanExpression allEq(String usernameCond, Integer ageCond) {
+        return usernameEq(usernameCond).and(ageEq(ageCond));
+    }
+
+    /**
+     * 쿼리 한번으로 대량 데이터 수정
+     */
+    @Test
+    public void bulkUpdate() {
+        long count = queryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+        /* SQL이 실행되는데, 이때 영속성 컨텍스트와 다른 데이터인데,
+           우선순위가 영속성 컨텍스트가 높기 때문에 이전 데이터가 유지되어 문제가 생긴다.
+           쿼리는 분명 정상적으로 나갔는데, 영속성 컨텍스트에 존재한다면 영속성 컨텍스트를 우선적으로 가져온다.
+           */
+        List<Member> list = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        /* 영속성 컨텍스트 초기화 */
+        em.flush();
+        em.clear();
+
+        List<Member> list2 = queryFactory
+                .selectFrom(member)
+                .fetch();
+    }
+
+    /**
+     * 쿼리 한번으로 대량 데이터 수정
+     */
+    @Test
+    public void bulkAdd() {
+        long addUpdateCount = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+//                .set(member.age, member.age.add(-1))
+                .execute();
+    }
+
+    /**
+     * 쿼리 한번으로 대량 데이터 삭제
+     */
+    @Test
+    public void bulkDelete() {
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.gt(18))
+                .execute();
+    }
+
+    /**
+     * JPQL 배치와 마찬가지로, 영속성 컨텍스트에 있는 엔티티를 무시하고 실행되기 때문에
+     * 배치 쿼리를 실행하고 나면 영속성 컨텍스트를 초기화 하는 것이 안전하다.
+     *
+     * 영속성 컨텍스트와 DB 데이터가 다르게되기 때문
+     */
+
+    /**
+     * Sql Function 사용
+     * -> SQL function은 JPA와 같이 Dialect에 등록된 내용만 호출할 수 있다.
+     *
+     * 예를들어 H2Dialect 안에 function으로 등록되어있는 함수 사용이 가능하다.
+     * 만약 직접 등록이 필요하다면,
+     * Dialect 상속한 파일을 직접 생성해서 yml에 등록해서 사용해야한다.
+     */
+    @Test
+    public void sqlFunction() {
+        String result = queryFactory
+                .select(Expressions.stringTemplate("function('replace', {0}, {1}, {2})",
+                        member.username, "member", "M"))
+                .from(member)
+                .fetchFirst();
+    }
+
+    /**
+     * 소문자로 변경
+     */
+    @Test
+    public void sqlFunction2() {
+        queryFactory
+                .select(member.username)
+                .from(member)
+                .where(member.username.eq(Expressions.stringTemplate("function('lower', {0})",
+                        member.username)));
+
+        // lower 같은 ansi 표준 함수들은 querydsl이 상당부분 내장하고 있다. 따라서 다음과 같이 처리해도 결과는 같다.
+        queryFactory
+                .select(member.username)
+                .from(member)
+                .where(member.username.eq(member.username.lower()));
     }
 }
