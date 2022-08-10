@@ -61,3 +61,4 @@
 |08/08|아이템 49. 매개변수가 유효한지 검사하라|https://devfunny.tistory.com/612|
 |08/09|아이템 50. 적시에 방어적 복사본을 만들라|https://devfunny.tistory.com/613|
 |08/09|아이템 51. 메서드 시그니처를 신중히 설계하라|https://devfunny.tistory.com/621|
+|08/10|아이템 52. 다중정의는 신중히 사용하라|https://devfunny.tistory.com/622|
