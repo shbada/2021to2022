@@ -13,7 +13,7 @@ spring:
         format_sql: true # query pretty
         use_sql_comments: true # execute Jpql show
   profiles:
-    active: local
+    active: test
 logging.level:
   org.hibernate.SQL: debug # hibernate execute query log
 # org.hibernate.type: trace # binding parameter log
