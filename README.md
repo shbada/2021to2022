@@ -62,3 +62,5 @@
 |08/09|아이템 50. 적시에 방어적 복사본을 만들라|https://devfunny.tistory.com/613|
 |08/09|아이템 51. 메서드 시그니처를 신중히 설계하라|https://devfunny.tistory.com/621|
 |08/10|아이템 52. 다중정의는 신중히 사용하라|https://devfunny.tistory.com/622|
+|08/10|아이템 53. 가변인수는 신중히 사용하라|https://devfunny.tistory.com/624|
+|08/10|아이템 54. null이 아닌 빈 컬렉션이나 배열을 반환하라|https://devfunny.tistory.com/625|
