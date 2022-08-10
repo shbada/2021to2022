@@ -47,3 +47,4 @@ https://github.com/westssun/spring-batch-start
 |33|33. 스프링 배치SynchronizedItemStreamReader로 thread-safe 설정하기|https://devfunny.tistory.com/835|
 |34|34. 스프링 배치 Test 코드 작성|https://devfunny.tistory.com/836|
 |35|35. 스프링배치JobExplorer, JobRegistry, JobOperator 알아보기 (With JobRegistryBeanPostProcessor)|https://devfunny.tistory.com/837|
+|36|36. CustomItemProcessor 여러개를 이어서 수행시키기 (Processor 체이닝)|https://devfunny.tistory.com/843|
