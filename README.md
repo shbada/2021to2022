@@ -65,3 +65,8 @@
 |08/10|아이템 53. 가변인수는 신중히 사용하라|https://devfunny.tistory.com/624|
 |08/10|아이템 54. null이 아닌 빈 컬렉션이나 배열을 반환하라|https://devfunny.tistory.com/625|
 |08/11|아이템 55. 옵셔널 반환은 신중히 하라|https://devfunny.tistory.com/628|
+|08/12|아이템 56. 공개된 API 요소에는 항상 문서화 주석을 작성하라|https://devfunny.tistory.com/629|
+|08/12|아이템 57. 지역변수의 범위를 최소화하라|https://devfunny.tistory.com/631|
+|08/12|아이템 58. 전통적인 for 문보다는 for-each문을 사용하라|https://devfunny.tistory.com/632|
+|08/12|아이템 59. 라이브러리를 익히고 사용하라|https://devfunny.tistory.com/635|
+|08/12|아이템 60. 정확한 답이 필요하다면 float와 double은 피하라|https://devfunny.tistory.com/636|
