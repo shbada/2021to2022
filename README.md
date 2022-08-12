@@ -8,6 +8,7 @@ https://github.com/westssun/spring-batch-start
 - 총 아이템 35개 포스팅 완료
 - 기간 : 2022.05.21 ~ 2022.07.21
 - (2022.08.10) 아이템36 추가 
+- (2022.08.12) 아이템37 추가 
 
 #### 포스팅 바로가기
 | | | |
@@ -52,3 +53,4 @@ https://github.com/westssun/spring-batch-start
 |34|34. 스프링 배치 Test 코드 작성|https://devfunny.tistory.com/836|
 |35|35. 스프링배치JobExplorer, JobRegistry, JobOperator 알아보기 (With JobRegistryBeanPostProcessor)|https://devfunny.tistory.com/837|
 |36|36. CustomItemProcessor 여러개를 이어서 수행시키기 (Processor 체이닝)|https://devfunny.tistory.com/843|
+|37|37. DB 조회한 데이터를 .josn 파일로 생성하는 배치 (JsonFileItemWriter)|https://devfunny.tistory.com/847|
