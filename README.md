@@ -77,3 +77,5 @@
 |08/14|아이템 65. 리플렉션보다는 인터페이스를 사용하라|https://devfunny.tistory.com/646|
 |08/14|아이템 66. 네이티브 메서드는 신중히 사용하라|https://devfunny.tistory.com/647|
 |08/14|아이템 67. 최적화는 신중히 하라|https://devfunny.tistory.com/649|
+|08/14|아이템 67. 최적화는 신중히 하라|https://devfunny.tistory.com/649|
+|08/14|아이템 68. 일반적으로 통용되는 명명 규칙을 따르라|https://devfunny.tistory.com/652|
