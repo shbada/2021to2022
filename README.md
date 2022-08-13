@@ -70,3 +70,4 @@
 |08/12|아이템 58. 전통적인 for 문보다는 for-each문을 사용하라|https://devfunny.tistory.com/632|
 |08/12|아이템 59. 라이브러리를 익히고 사용하라|https://devfunny.tistory.com/635|
 |08/12|아이템 60. 정확한 답이 필요하다면 float와 double은 피하라|https://devfunny.tistory.com/636|
+|08/13|아이템 61. 박싱된 기본 타입보다는 기본 타입을 사용하라|https://devfunny.tistory.com/639|
