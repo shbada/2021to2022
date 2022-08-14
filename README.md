@@ -79,3 +79,13 @@
 |08/14|아이템 67. 최적화는 신중히 하라|https://devfunny.tistory.com/649|
 |08/14|아이템 67. 최적화는 신중히 하라|https://devfunny.tistory.com/649|
 |08/14|아이템 68. 일반적으로 통용되는 명명 규칙을 따르라|https://devfunny.tistory.com/652|
+|08/14|아이템 69. 예외는 진짜 예외 상황에만 사용하라|https://devfunny.tistory.com/653|
+|08/14|아이템 70. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라|https://devfunny.tistory.com/654|
+|08/14|아이템 71. 필요 없는 검사 예외 사용은 피하라|https://devfunny.tistory.com/655|
+|08/14|아이템 72. 표준 예외를 사용하라|https://devfunny.tistory.com/657|
+|08/14|아이템 73. 추상화 수준에 맞는 예외를 던져라|https://devfunny.tistory.com/662|
+|08/14|아이템 74. 메서드가 던지는 모든 예외를 문서화하라|https://devfunny.tistory.com/663|
+|08/14|아이템 75. 예외의 상세 메시지에 실패 관련 정보를 담으라|https://devfunny.tistory.com/664|
+|08/14|아이템 76. 가능한 한 실패 원자적으로 만들라|https://devfunny.tistory.com/666|
+|08/14|아이템 77. 예외를 무시하지 말라|https://devfunny.tistory.com/667|
+|08/14|아이템 78. 공유 중인 가변 데이터는 동기화해 사용하라|https://devfunny.tistory.com/669|
