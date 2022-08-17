@@ -6,6 +6,6 @@ import java.util.concurrent.CountDownLatch;
 public class ExamQueue {
 //    BlockingQueue
 //    CountDownLatch
-
+//Object
 
 }
