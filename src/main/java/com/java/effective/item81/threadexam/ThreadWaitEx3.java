@@ -75,7 +75,7 @@ class Table3{
     public void remove(String dishName) {
         synchronized(this) {
             String name = Thread.currentThread().getName();
-            while (dishes.size() ==0) {
+            while (dishes.size() == 0) {
                 System.out.println(name+" is waiting");
 
                 try {

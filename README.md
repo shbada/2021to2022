@@ -92,3 +92,4 @@
 |08/14|아이템 79. 과도한 동기화는 피하라|https://devfunny.tistory.com/852|
 |08/15|아이템 80. 스레드보다는 실행자, 태스크, 스트림을 애용하라|https://devfunny.tistory.com/853|
 |08/17|아이템 81. wait와 notify보다는 동시성 유틸리티를 애용하라|https://devfunny.tistory.com/854|
+|08/18|아이템 82. 스레드 안정성 수준을 문서화하라|https://devfunny.tistory.com/856|
