@@ -97,3 +97,4 @@
 |08/19|아이템 84. 프로그램의 동작을 스레드 스케줄러에 기대지 말라|https://devfunny.tistory.com/858|
 |08/20|아이템 85. 자바 직렬화의 대안을 찾으라|https://devfunny.tistory.com/859|
 |08/20|아이템 86. Serializable을 구현할지는 신중히 결정하라|https://devfunny.tistory.com/860|
+|08/20|아이템 87. 커스텀 직렬화 형태를 고려해보라|https://devfunny.tistory.com/861|
