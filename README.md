@@ -93,3 +93,7 @@
 |08/15|아이템 80. 스레드보다는 실행자, 태스크, 스트림을 애용하라|https://devfunny.tistory.com/853|
 |08/17|아이템 81. wait와 notify보다는 동시성 유틸리티를 애용하라|https://devfunny.tistory.com/854|
 |08/18|아이템 82. 스레드 안정성 수준을 문서화하라|https://devfunny.tistory.com/856|
+|08/19|아이템 83. 지연 초기화는 신중히 사용하라|https://devfunny.tistory.com/857|
+|08/19|아이템 84. 프로그램의 동작을 스레드 스케줄러에 기대지 말라|https://devfunny.tistory.com/858|
+|08/20|아이템 85. 자바 직렬화의 대안을 찾으라|https://devfunny.tistory.com/859|
+|08/20|아이템 86. Serializable을 구현할지는 신중히 결정하라|https://devfunny.tistory.com/860|
