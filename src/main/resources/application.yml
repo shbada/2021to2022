@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 
 #Redis
 redis:
@@ -12,14 +12,4 @@ feign:
     url: http://localhost:6060
   httpclient:
     connection-timeout: 1
-
-spring:
-  jpa:
-    database-platform: org.hibernate.dialect.Oracle10gDialect
-  # JPA (DB)
-  datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: seohae
-    password: seohae
 
