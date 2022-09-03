@@ -27,14 +27,36 @@ import java.util.Set;
  *      > Payment 정보를 참조해야하다면 Payment를 넘겨줘야한다.
  *      > 의존성을 최대한 낮추는 것이 좋다. 정답은 없다. 경우에 따라 다르다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private Set<String> usernames = new HashSet<>();
 
     private Set<String> reviews = new HashSet<>();
 
-    private void studyReviews(GHIssue issue) throws IOException {
+    /* GHIssue 객체를 파라미터로 받는다. */
+
+    /**
+     * 스터디 리뷰 이슈에 작성되어있는 리뷰의 목록과 리뷰를 읽어옵니다.
+     * @param issue
+     * @throws IOException
+     */
+    /* 이름을 바꿔보자. */
+    // before : studyReviews
+    // 메서드 이름 마우스 우측 > Refactor > reName (Shift + f6)
+    // after : loadReviews
+
+    /* 매개변수를 바꿔보자. */
+    // before : GHIssue issue
+    // 가져올 이슈는 오직 단건이고, main의 로직을 가져오면 매개변수를 안받아도 된다. (30번으로 정해져 있으므로)
+    private void loadReviews() throws IOException {
+        GitHub gitHub = GitHub.connect();
+        // repository 가져오기
+        GHRepository repository = gitHub.getRepository("whiteship/live-study");
+        // issue 가져오기
+        GHIssue issue = repository.getIssue(30);
+
         List<GHIssueComment> comments = issue.getComments();
+
         for (GHIssueComment comment : comments) {
             usernames.add(comment.getUserName());
             reviews.add(comment.getBody());
@@ -50,12 +72,16 @@ public class StudyDashboard {
     }
 
     public static void main(String[] args) throws IOException {
-        GitHub gitHub = GitHub.connect();
-        GHRepository repository = gitHub.getRepository("whiteship/live-study");
-        GHIssue issue = repository.getIssue(30);
+//        GitHub gitHub = GitHub.connect();
+//        // repository 가져오기
+//        GHRepository repository = gitHub.getRepository("whiteship/live-study");
+//        // issue 가져오기
+//        GHIssue issue = repository.getIssue(30);
 
-        StudyDashboard studyDashboard = new StudyDashboard();
-        studyDashboard.studyReviews(issue);
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done();
+        studyDashboard.loadReviews();
+
+        // 출력
         studyDashboard.getUsernames().forEach(System.out::println);
         studyDashboard.getReviews().forEach(System.out::println);
     }

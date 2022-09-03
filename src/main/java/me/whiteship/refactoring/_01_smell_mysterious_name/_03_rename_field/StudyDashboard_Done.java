@@ -22,11 +22,12 @@ import java.util.Set;
    > record 키워드를 사용으로 많은 코드를 대체할 수 있다.
  * 자바에서는 Getter, Stter 메서드 이름도 필드의 이름과 비슷하게 간주할 수 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
-    private Set<String> usernames = new HashSet<>();
+    // usernames -> reviewer가 더 낫지않을까?
+        private Set<StudyReview> studyReviews = new HashSet<>();
 
-    private Set<String> reviews = new HashSet<>();
+//    private Set<StudyReview> reviews = new HashSet<>();
 
     /**
      * 스터디 리뷰 이슈에 작성되어 있는 리뷰어 목록과 리뷰를 읽어옵니다.
@@ -39,23 +40,31 @@ public class StudyDashboard {
 
         List<GHIssueComment> reviews = issue.getComments();
         for (GHIssueComment review : reviews) {
-            usernames.add(review.getUserName());
-            this.reviews.add(review.getBody());
+            StudyReview studyReview = new StudyReview(review.getUserName(), review.getBody());
+
+            // get 메서드는 아니지만 get 메서드의 역할을 해준다.
+            System.out.println(studyReview.reviewer());
+            System.out.println(studyReview.review());
+
+            studyReviews.add(studyReview);
         }
     }
 
-    public Set<String> getUsernames() {
-        return usernames;
+    public Set<StudyReview> getStudyReviews() {
+        return studyReviews;
     }
 
-    public Set<String> getReviews() {
-        return reviews;
-    }
+    //    public Set<String> getReviewer() {
+//        return reviewer;
+//    }
+//
+//    public Set<String> getReviews() {
+//        return reviews;
+//    }
 
     public static void main(String[] args) throws IOException {
-        StudyDashboard studyDashboard = new StudyDashboard();
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done();
         studyDashboard.loadReviews();
-        studyDashboard.getUsernames().forEach(System.out::println);
-        studyDashboard.getReviews().forEach(System.out::println);
+        studyDashboard.getStudyReviews().forEach(System.out::println);
     }
 }
