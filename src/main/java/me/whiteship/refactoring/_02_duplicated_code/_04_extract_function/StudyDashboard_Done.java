@@ -18,38 +18,43 @@ import java.util.Set;
  * - 한줄 짜리 메서드도 괜찮은가?
  * - 거대한 함수 안에 들어있는 주석은 추출한 함수를 찾는데 있어서 좋은 단서가 될 수 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private void printParticipants(int eventId) throws IOException {
-        // Get github issue to check homework
-        GitHub gitHub = GitHub.connect();
-        GHRepository repository = gitHub.getRepository("whiteship/live-study");
-        GHIssue issue = repository.getIssue(eventId);
+        /* 상당 부분이 구현이다. 코드가 잘 안읽힌다. */
 
-        // Get participants
-        Set<String> participants = new HashSet<>();
-        issue.getComments().forEach(c -> participants.add(c.getUserName()));
+        /* 메서드로 추출 완료 */
+        GHIssue issue = getGhIssue(eventId);
+        Set<String> participants = getUsernames(issue);
+        print(participants);
+    }
 
-        // Print participants
+    private static void print(Set<String> participants) {
         participants.forEach(System.out::println);
     }
 
-    private void printReviewers() throws IOException {
-        // Get github issue to check reviews
+    private static Set<String> getUsernames(GHIssue issue) throws IOException {
+        // participants -> usernames (usernames 를 추출하므로 usernames가 더 확실해보인다.)
+        Set<String> usernames = new HashSet<>();
+        issue.getComments().forEach(c -> usernames.add(c.getUserName()));
+        return usernames;
+    }
+
+    private static GHIssue getGhIssue(int eventId) throws IOException {
         GitHub gitHub = GitHub.connect();
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
-        GHIssue issue = repository.getIssue(30);
+        GHIssue issue = repository.getIssue(eventId);
+        return issue;
+    }
 
-        // Get reviewers
-        Set<String> reviewers = new HashSet<>();
-        issue.getComments().forEach(c -> reviewers.add(c.getUserName()));
-
-        // Print reviewers
-        reviewers.forEach(System.out::println);
+    private void printReviewers() throws IOException {
+        GHIssue issue = getGhIssue(30);
+        Set<String> reviewers = getUsernames(issue);
+        print(reviewers);
     }
 
     public static void main(String[] args) throws IOException {
-        StudyDashboard studyDashboard = new StudyDashboard();
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done();
         studyDashboard.printReviewers();
         studyDashboard.printParticipants(15);
     }
