@@ -1,6 +1,9 @@
 # rxjava_lecture
 [강의] Kevin의 알기 쉬운 RxJava 1부
 
+### 2부 바로가기
+* [[강의] Kevin의 알기 쉬운 RxJava 2부](https://github.com/westssun/rxjava-lecture-2)
+
 ### [수강일정]
 2022.08.21 ~ 2022.09.03
    
