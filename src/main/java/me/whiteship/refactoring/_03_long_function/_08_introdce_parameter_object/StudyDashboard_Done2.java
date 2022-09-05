@@ -23,23 +23,33 @@ import java.util.concurrent.Executors;
  * > 2) 함수에 전달할 매개변수 개수를 줄일 수 있다.
  * > 3) 도메인을 이해하는데 중요한 역할을 하는 클래스로 발전할 수도 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done2 {
+
+    private final int totalNumberOfEvents;
+
+    public StudyDashboard_Done2(int totalNumberOfEvents) {
+        this.totalNumberOfEvents = totalNumberOfEvents;
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard();
+        StudyDashboard_Done2 studyDashboard = new StudyDashboard_Done2(15);
         studyDashboard.print();
     }
 
     private void print() throws IOException, InterruptedException {
         GitHub gitHub = GitHub.connect();
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
+
+        /* 레코드로 묶음 &*/
         List<Participant> participants = new CopyOnWriteArrayList<>();
 
-        int totalNumberOfEvents = 15;
+        /*  totalNumberOfEvents 를 필드 값으로 지정해보자.
+            Refactor > Introduce Field > constructor
+         */
         ExecutorService service = Executors.newFixedThreadPool(8);
         CountDownLatch latch = new CountDownLatch(totalNumberOfEvents);
 
-        for (int index = 1 ; index <= totalNumberOfEvents ; index++) {
+        for (int index = 1; index <= totalNumberOfEvents; index++) {
             int eventId = index;
             service.execute(new Runnable() {
                 @Override
@@ -77,7 +87,7 @@ public class StudyDashboard {
              PrintWriter writer = new PrintWriter(fileWriter)) {
             participants.sort(Comparator.comparing(Participant::username));
 
-            writer.print(header(totalNumberOfEvents, participants.size()));
+            writer.print(header(totalNumberOfEvents));
 
             participants.forEach(p -> {
                 String markdownForHomework = getMarkdownForParticipant(totalNumberOfEvents, p);
@@ -86,24 +96,28 @@ public class StudyDashboard {
         }
     }
 
-    private double getRate(int totalNumberOfEvents, Participant p) {
+    /*
+     매개변수 선택하고 Refactor > Introduce Parameter Object..
+     */
+    private double getRate(Participant p) {
         long count = p.homework().values().stream()
                 .filter(v -> v == true)
                 .count();
-        double rate = count * 100 / totalNumberOfEvents;
+        double rate = count * 100 / this.totalNumberOfEvents;
         return rate;
     }
 
     private String getMarkdownForParticipant(int totalNumberOfEvents, Participant p) {
-        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(totalNumberOfEvents, p));
+        /* new ParticipantPrinter(totalNumberOfEvents, p) 를 생성하여 전달 */
+        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(p));
     }
 
     /**
      * | 참여자 (420) | 1주차 | 2주차 | 3주차 | 참석율 |
      * | --- | --- | --- | --- | --- |
      */
-    private String header(int totalNumberOfEvents, int totalNumberOfParticipants) {
-        StringBuilder header = new StringBuilder(String.format("| 참여자 (%d) |", totalNumberOfParticipants));
+    private String header(int totalNumberOfEvents) {
+        StringBuilder header = new StringBuilder(String.format("| 참여자 (%d) |", totalNumberOfEvents));
 
         for (int index = 1; index <= totalNumberOfEvents; index++) {
             header.append(String.format(" %d주차 |", index));

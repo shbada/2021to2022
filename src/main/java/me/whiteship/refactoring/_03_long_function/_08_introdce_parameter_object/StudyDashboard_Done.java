@@ -23,16 +23,18 @@ import java.util.concurrent.Executors;
  * > 2) 함수에 전달할 매개변수 개수를 줄일 수 있다.
  * > 3) 도메인을 이해하는데 중요한 역할을 하는 클래스로 발전할 수도 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard();
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done();
         studyDashboard.print();
     }
 
     private void print() throws IOException, InterruptedException {
         GitHub gitHub = GitHub.connect();
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
+
+        /* 레코드로 묶음 &*/
         List<Participant> participants = new CopyOnWriteArrayList<>();
 
         int totalNumberOfEvents = 15;
@@ -86,16 +88,20 @@ public class StudyDashboard {
         }
     }
 
-    private double getRate(int totalNumberOfEvents, Participant p) {
-        long count = p.homework().values().stream()
+    /*
+     매개변수 선택하고 Refactor > Introduce Parameter Object..
+     */
+    private double getRate(ParticipantPrinter participantPrinter) {
+        long count = participantPrinter.p().homework().values().stream()
                 .filter(v -> v == true)
                 .count();
-        double rate = count * 100 / totalNumberOfEvents;
+        double rate = count * 100 / participantPrinter.totalNumberOfEvents();
         return rate;
     }
 
     private String getMarkdownForParticipant(int totalNumberOfEvents, Participant p) {
-        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(totalNumberOfEvents, p));
+        /* new ParticipantPrinter(totalNumberOfEvents, p) 를 생성하여 전달 */
+        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(new ParticipantPrinter(totalNumberOfEvents, p)));
     }
 
     /**

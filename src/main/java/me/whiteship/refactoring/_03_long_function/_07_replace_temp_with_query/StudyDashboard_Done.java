@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._03_long_function._08_introdce_parameter_object;
+package me.whiteship.refactoring._03_long_function._07_replace_temp_with_query;
 
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueComment;
@@ -16,26 +16,29 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 리팩토링 8. 매개변수 객체 만들기 (Introduce Parameter Object)
- * - 같은 매개변수들이 여러 메서드에 걸쳐 나타난다면 그 매개변수들을 묶은 자료 구조를 만들 수 있다.
- * - 그렇게 만든 자료구조는,
- * > 1) 해당 데이터간의 관계를 보다 명시적으로 나타낼 수 있다.
- * > 2) 함수에 전달할 매개변수 개수를 줄일 수 있다.
- * > 3) 도메인을 이해하는데 중요한 역할을 하는 클래스로 발전할 수도 있다.
+ * 15번 반복 수행하여,
+ * 15번들의 참여자들의 참석율을 계산하고, 마크다운 파일을 만드는 로직
+ *
+ * 리팩토링 7. 임시 변수를 질의 함수로 바꾸기 (Replace Temp With Query)
+ * - 변수를 사용하면 반복해서 동일한 식을 계산하는 것을 피할 수 있고, 이름을 사용해 의미를 표현할 수 있다.
+ * - 긴 함수를 리팩토링할 때, 그러한 임시 변수를 함수로 추출하여 분리한다면 빼낸 함수로 전달해야할 매개변수를 줄일 수 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard();
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done();
         studyDashboard.print();
     }
 
     private void print() throws IOException, InterruptedException {
         GitHub gitHub = GitHub.connect();
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
+
+        // 참여율을 쭉 쌓는다.
         List<Participant> participants = new CopyOnWriteArrayList<>();
 
-        int totalNumberOfEvents = 15;
+        // 15번 반복
+        int totalNumberOfEvents = 15; // 슬라이딩 기법 (사용 직전에 선언)
         ExecutorService service = Executors.newFixedThreadPool(8);
         CountDownLatch latch = new CountDownLatch(totalNumberOfEvents);
 
@@ -73,6 +76,7 @@ public class StudyDashboard {
         latch.await();
         service.shutdown();
 
+        // 마크다운으로 출력한다.
         try (FileWriter fileWriter = new FileWriter("participants.md");
              PrintWriter writer = new PrintWriter(fileWriter)) {
             participants.sort(Comparator.comparing(Participant::username));
@@ -80,21 +84,30 @@ public class StudyDashboard {
             writer.print(header(totalNumberOfEvents, participants.size()));
 
             participants.forEach(p -> {
-                String markdownForHomework = getMarkdownForParticipant(totalNumberOfEvents, p);
+                /** 메서드로 추출 */
+//                double rate = getRate(totalNumberOfEvents, p);
+
+                /** 메서드로 추출 */
+//                String markdownForHomework = getMarkDownForParticipant(totalNumberOfEvents, p, rate);
+
+                /** 임시 변수를 질의 함수로 바꾸기 */
+                String markdownForHomework = getMarkDownForParticipant(totalNumberOfEvents, p);
                 writer.print(markdownForHomework);
             });
         }
     }
 
-    private double getRate(int totalNumberOfEvents, Participant p) {
+    private static double getRate(int totalNumberOfEvents, Participant p) {
         long count = p.homework().values().stream()
                 .filter(v -> v == true)
                 .count();
+
+        // 참석율 계산
         double rate = count * 100 / totalNumberOfEvents;
         return rate;
     }
 
-    private String getMarkdownForParticipant(int totalNumberOfEvents, Participant p) {
+    private String getMarkDownForParticipant(int totalNumberOfEvents, Participant p) {
         return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(totalNumberOfEvents, p));
     }
 
@@ -102,15 +115,15 @@ public class StudyDashboard {
      * | 참여자 (420) | 1주차 | 2주차 | 3주차 | 참석율 |
      * | --- | --- | --- | --- | --- |
      */
-    private String header(int totalNumberOfEvents, int totalNumberOfParticipants) {
+    private String header(int totalEvents, int totalNumberOfParticipants) {
         StringBuilder header = new StringBuilder(String.format("| 참여자 (%d) |", totalNumberOfParticipants));
 
-        for (int index = 1; index <= totalNumberOfEvents; index++) {
+        for (int index = 1; index <= totalEvents; index++) {
             header.append(String.format(" %d주차 |", index));
         }
         header.append(" 참석율 |\n");
 
-        header.append("| --- ".repeat(Math.max(0, totalNumberOfEvents + 2)));
+        header.append("| --- ".repeat(Math.max(0, totalEvents + 2)));
         header.append("|\n");
 
         return header.toString();

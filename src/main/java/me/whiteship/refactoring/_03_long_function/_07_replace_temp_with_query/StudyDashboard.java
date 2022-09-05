@@ -15,6 +15,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 15번 반복 수행하여,
+ * 15번들의 참여자들의 참석율을 계산하고, 마크다운 파일을 만드는 로직
+ *
+ * 리팩토링 7. 임시 변수를 질의 함수로 바꾸기 (Replace Temp With Query)
+ * - 변수를 사용하면 반복해서 동일한 식을 계산하는 것을 피할 수 있고, 이름을 사용해 의미를 표현할 수 있다.
+ * - 긴 함수를 리팩토링할 때, 그러한 임시 변수를 함수로 추출하여 분리한다면 빼낸 함수로 전달해야할 매개변수를 줄일 수 있다.
+ */
 public class StudyDashboard {
 
     public static void main(String[] args) throws IOException, InterruptedException {

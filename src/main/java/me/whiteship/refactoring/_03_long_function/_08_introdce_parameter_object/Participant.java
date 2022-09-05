@@ -3,6 +3,9 @@ package me.whiteship.refactoring._03_long_function._08_introdce_parameter_object
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * record 키워드 사용
+ */
 public record Participant(String username, Map<Integer, Boolean> homework) {
     public Participant(String username) {
         this(username, new HashMap<>());
