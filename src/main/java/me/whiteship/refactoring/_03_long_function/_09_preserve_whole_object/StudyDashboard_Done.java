@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -24,17 +23,26 @@ import java.util.concurrent.Executors;
  * - 이 기술을 적용하기 전에 의존성을 고려해야한다.
  * - 어쩌면 해당 메소드의 위치가 적절하지 않을 수도 있다.
  * (기능 편애 "Feature Envy" 냄세에 해당한다.)
+ *
+ *
+ * ---
+ * 여러 매개변수 -> Participant 로 변경
+ * : 이게 더 나은 방법인지 고민해보자.
+ * 이게 다른 도메인에도 적용할 계획이 있는가?
+ * 다른 도메인에 적용할거라면 차라리 HashMap 이 낫겠다.
+ *
+ * 옮긴 다음 고민. 그럼 이 함수는 이 위치에 있는게 맞을까?
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private final int totalNumberOfEvents;
 
-    public StudyDashboard(int totalNumberOfEvents) {
+    public StudyDashboard_Done(int totalNumberOfEvents) {
         this.totalNumberOfEvents = totalNumberOfEvents;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard(15);
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done(15);
         studyDashboard.print();
     }
 
@@ -87,23 +95,17 @@ public class StudyDashboard {
             writer.print(header(participants.size()));
 
             participants.forEach(p -> {
-                String markdownForHomework = getMarkdownForParticipant(p.username(), p.homework());
+                // p.username(), p.homework() 각각의 파라미터를 Participant 자체를 넘겨준다.
+                String markdownForHomework = getMarkdownForParticipant(p);
                 writer.print(markdownForHomework);
             });
         }
     }
 
-    double getRate(Map<Integer, Boolean> homework) {
-        long count = homework.values().stream()
-                .filter(v -> v == true)
-                .count();
-        return (double) (count * 100 / this.totalNumberOfEvents);
-    }
-
-    private String getMarkdownForParticipant(String username, Map<Integer, Boolean> homework) {
-        return String.format("| %s %s | %.2f%% |\n", username,
-                checkMark(homework, this.totalNumberOfEvents),
-                getRate(homework));
+    private String getMarkdownForParticipant(Participant participant) {
+        return String.format("| %s %s | %.2f%% |\n", participant.username(),
+                checkMark(participant, this.totalNumberOfEvents),
+                participant.getRate(this.totalNumberOfEvents));
     }
 
     /**
@@ -127,10 +129,10 @@ public class StudyDashboard {
     /**
      * |:white_check_mark:|:white_check_mark:|:white_check_mark:|:x:|
      */
-    private String checkMark(Map<Integer, Boolean> homework, int totalEvents) {
+    private String checkMark(Participant participant, int totalEvents) {
         StringBuilder line = new StringBuilder();
         for (int i = 1 ; i <= totalEvents ; i++) {
-            if(homework.containsKey(i) && homework.get(i)) {
+            if(participant.homework().containsKey(i) && participant.homework().get(i)) {
                 line.append("|:white_check_mark:");
             } else {
                 line.append("|:x:");

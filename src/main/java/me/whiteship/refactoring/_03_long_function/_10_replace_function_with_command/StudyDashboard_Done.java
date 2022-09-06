@@ -28,16 +28,16 @@ import java.util.concurrent.Executors;
  *
  * - 대부분의 경우에 "커맨드"보다는 "함수"를 사용하지만, 커맨드 말고 다른 방법
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private final int totalNumberOfEvents;
 
-    public StudyDashboard(int totalNumberOfEvents) {
+    public StudyDashboard_Done(int totalNumberOfEvents) {
         this.totalNumberOfEvents = totalNumberOfEvents;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard(15);
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done(15);
         studyDashboard.print();
     }
 
@@ -85,55 +85,24 @@ public class StudyDashboard {
         latch.await();
         service.shutdown();
 
-        try (FileWriter fileWriter = new FileWriter("participants.md");
-            PrintWriter writer = new PrintWriter(fileWriter)) {
-            participants.sort(Comparator.comparing(Participant::username));
-
-            writer.print(header(participants.size()));
-
-            participants.forEach(p -> {
-                String markdownForHomework = getMarkdownForParticipant(p);
-                writer.print(markdownForHomework);
-            });
-        }
+        /* 커맨드로 빼보자. */
+        // 1. 메서드 추출
+        new StudyPrinter(this.totalNumberOfEvents, participants).execute();
     }
 
-    private String getMarkdownForParticipant(Participant p) {
-        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, this.totalNumberOfEvents),
-                p.getRate(this.totalNumberOfEvents));
-    }
-
-    /**
-     * | 참여자 (420) | 1주차 | 2주차 | 3주차 | 참석율 |
-     * | --- | --- | --- | --- | --- |
-     */
-    private String header(int totalNumberOfParticipants) {
-        StringBuilder header = new StringBuilder(String.format("| 참여자 (%d) |", totalNumberOfParticipants));
-
-        for (int index = 1; index <= this.totalNumberOfEvents; index++) {
-            header.append(String.format(" %d주차 |", index));
-        }
-        header.append(" 참석율 |\n");
-
-        header.append("| --- ".repeat(Math.max(0, this.totalNumberOfEvents + 2)));
-        header.append("|\n");
-
-        return header.toString();
-    }
-
-    /**
-     * |:white_check_mark:|:white_check_mark:|:white_check_mark:|:x:|
-     */
-    private String checkMark(Participant p, int totalEvents) {
-        StringBuilder line = new StringBuilder();
-        for (int i = 1 ; i <= totalEvents ; i++) {
-            if(p.homework().containsKey(i) && p.homework().get(i)) {
-                line.append("|:white_check_mark:");
-            } else {
-                line.append("|:x:");
-            }
-        }
-        return line.toString();
-    }
+    // 2. 클래스로 옮기기 (StudyPrinter.java)
+//    private void execute(List<Participant> participants) throws IOException {
+//        try (FileWriter fileWriter = new FileWriter("participants.md");
+//            PrintWriter writer = new PrintWriter(fileWriter)) {
+//            participants.sort(Comparator.comparing(Participant::username));
+//
+//            writer.print(header(participants.size()));
+//
+//            participants.forEach(p -> {
+//                String markdownForHomework = getMarkdownForParticipant(p);
+//                writer.print(markdownForHomework);
+//            });
+//        }
+//    }
 
 }
