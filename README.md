@@ -14,3 +14,6 @@
 |Processor와 Subject란?|수강완료|2022/09/05|-|
 |Cold Publisher와 Hot Publisher 리뷰|수강완료|2022/09/05|-|
 |PublishSubject|수강완료|2022/09/05|-|
+|AsyncSubject|수강완료|2022/09/06|-|
+|BehaviorSubject|수강완료|2022/09/06|-|
+|ReplaySubject|수강완료|2022/09/06|-|
