@@ -20,16 +20,16 @@ import java.util.concurrent.Executors;
  * - "조건"과 "액션" 모두 "의도"를 표현해야한다.
  * - 기술적으로는 "함수 추출하기"와 동일한 리팩토링이지만 의도만 다를 뿐이다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private final int totalNumberOfEvents;
 
-    public StudyDashboard(int totalNumberOfEvents) {
+    public StudyDashboard_Done(int totalNumberOfEvents) {
         this.totalNumberOfEvents = totalNumberOfEvents;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard(15);
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done(15);
         studyDashboard.print();
     }
 
@@ -70,15 +70,25 @@ public class StudyDashboard {
     }
 
     private Participant findParticipant(String username, List<Participant> participants) {
-        Participant participant;
-        if (participants.stream().noneMatch(p -> p.username().equals(username))) {
-            participant = new Participant(username);
-            participants.add(participant);
-        } else {
-            participant = participants.stream().filter(p -> p.username().equals(username)).findFirst().orElseThrow();
-        }
+        // 조건문을 분해하고 나니, 이렇게 삼항연산자로 변경까지 도달했다.
+        return isNewParticipant(username, participants) ?
+                createNewParticipant(username, participants) :
+                findExistingParticipant(username, participants);
+    }
 
+    private static Participant findExistingParticipant(String username, List<Participant> participants) {
+        return participants.stream().filter(p -> p.username().equals(username)).findFirst().orElseThrow();
+    }
+
+    private static Participant createNewParticipant(String username, List<Participant> participants) {
+        Participant participant;
+        participant = new Participant(username);
+        participants.add(participant);
         return participant;
+    }
+
+    private static boolean isNewParticipant(String username, List<Participant> participants) {
+        return participants.stream().noneMatch(p -> p.username().equals(username));
     }
 
 }

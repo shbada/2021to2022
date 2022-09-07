@@ -21,26 +21,45 @@ import java.util.concurrent.Executors;
  * = 반복문을 여러개로 쪼개면 보다 쉽게 이해하고 수정할 수 있다.
  * = 성능 문제를 야기할 수 있지만, "리팩토링"은 "성능 최적화"와 별개의 작업이다. 리팩토링을 마친 이후에 성능 최적화 시도를 할 수 있다.
  */
-public class StudyDashboard {
+public class StudyDashboard_Done {
 
     private final int totalNumberOfEvents;
     private final List<Participant> participants;
     private final Participant[] firstParticipantsForEachEvent;
 
-    public StudyDashboard(int totalNumberOfEvents) {
+    public StudyDashboard_Done(int totalNumberOfEvents) {
         this.totalNumberOfEvents = totalNumberOfEvents;
+
+        // concurrency에 지원하는 객체
+        // 새로운 element 가 추가될때 기존을 copy하여 새롭게 객체를 생성한다.
         participants = new CopyOnWriteArrayList<>();
         firstParticipantsForEachEvent = new Participant[this.totalNumberOfEvents];
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StudyDashboard studyDashboard = new StudyDashboard(15);
+        StudyDashboard_Done studyDashboard = new StudyDashboard_Done(15);
         studyDashboard.print();
     }
 
     private void print() throws IOException, InterruptedException {
         GHRepository ghRepository = getGhRepository();
 
+        // 필드 올리기
+        // Refactoring > Introduce Field
+
+        checkGithubIssues(ghRepository);
+
+        new StudyPrinter(this.totalNumberOfEvents, this.participants).execute();
+        printFirstParticipants();
+    }
+
+    private void checkGithubIssues(GHRepository ghRepository) throws InterruptedException {
+        // 멀티 스레드 프로그래밍
+        // 이슈의 모든 코멘트를 읽어올때 시간이 많이 소요된다.
+        // 여러개의 스레드를 만든다.
+        // 쓰레드를 8개를 만들어서 멀티 스레드 프로그래밍을 한다. (8개를 동시에 돌릴 수 있다.)
+        // 15개의 이슈이므로, 15개 스레드가 돌면 좋다.
+        // 풀에는 8개지만 이 풀에 있는 8개 스레드를 가지고 15개의 스레드를 만들어서 수행한다.
         ExecutorService service = Executors.newFixedThreadPool(8);
         CountDownLatch latch = new CountDownLatch(totalNumberOfEvents);
 
@@ -52,20 +71,12 @@ public class StudyDashboard {
                     try {
                         GHIssue issue = ghRepository.getIssue(eventId);
                         List<GHIssueComment> comments = issue.getComments();
-                        Date firstCreatedAt = null;
-                        Participant first = null;
 
-                        for (GHIssueComment comment : comments) {
-                            Participant participant = findParticipant(comment.getUserName(), participants);
-                            participant.setHomeworkDone(eventId);
+                        checkHomework(comments, participants, eventId);
 
-                            if (firstCreatedAt == null || comment.getCreatedAt().before(firstCreatedAt)) {
-                                firstCreatedAt = comment.getCreatedAt();
-                                first = participant;
-                            }
-                        }
-
-                        firstParticipantsForEachEvent[eventId - 1] = first;
+                        // 인라인 리팩토링
+//                        Participant first = findFirst(comments);
+                        firstParticipantsForEachEvent[eventId - 1] = findFirst(comments);
                         latch.countDown();
                     } catch (IOException e) {
                         throw new IllegalArgumentException(e);
@@ -76,9 +87,29 @@ public class StudyDashboard {
 
         latch.await();
         service.shutdown();
+    }
 
-        new StudyPrinter(this.totalNumberOfEvents, this.participants).execute();
-        printFirstParticipants();
+    private Participant findFirst(List<GHIssueComment> comments) throws IOException {
+        Date firstCreatedAt = null;
+        Participant first = null;
+
+        // 루프를 역할별로 쪼개보자.
+        for (GHIssueComment comment : comments) {
+            Participant participant = findParticipant(comment.getUserName(), participants);
+
+            if (firstCreatedAt == null || comment.getCreatedAt().before(firstCreatedAt)) {
+                firstCreatedAt = comment.getCreatedAt();
+                first = participant;
+            }
+        }
+        return first;
+    }
+
+    private void checkHomework(List<GHIssueComment> comments, List<Participant> participants, int eventId) {
+        for (GHIssueComment comment : comments) {
+            Participant participant = findParticipant(comment.getUserName(), participants);
+            participant.setHomeworkDone(eventId);
+        }
     }
 
     private void printFirstParticipants() {
