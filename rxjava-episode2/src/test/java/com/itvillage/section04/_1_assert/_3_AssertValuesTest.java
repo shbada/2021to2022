@@ -1,4 +1,4 @@
-package com.itvillage.section04;
+package com.itvillage.section04._1_assert;
 
 import com.itvillage.common.CarMaker;
 import com.itvillage.section03.SampleObservable;
