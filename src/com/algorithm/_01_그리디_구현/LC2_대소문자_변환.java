@@ -25,15 +25,15 @@ public class LC2_대소문자_변환 {
         StringBuilder result = new StringBuilder();
 
         // CASE 1
-//        for (int i = 0; i < target.length(); i++) {
-//            char c = target.charAt(i);
-//
-//            if (Character.isUpperCase(c)) {
-//                result.append(Character.toLowerCase(c));
-//            } else {
-//                result.append(Character.toUpperCase(c));
-//            }
-//        }
+        for (int i = 0; i < target.length(); i++) {
+            char c = target.charAt(i);
+
+            if (Character.isUpperCase(c)) {
+                result.append(Character.toLowerCase(c));
+            } else {
+                result.append(Character.toUpperCase(c));
+            }
+        }
 
         // CASE 2
 //        for (char c : target.toCharArray()) {
