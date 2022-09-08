@@ -10,24 +10,31 @@ package me.whiteship.refactoring._04_long_parameter_list._14_replace_parameter_w
  *
  * src/test/java/me/whiteship/refactoring/_04_long_parameter_list/_14_replace_parameter_with_query
  */
-public class Order {
+public class Order_Done {
 
     private int quantity;
 
     private double itemPrice;
 
-    public Order(int quantity, double itemPrice) {
+    public Order_Done(int quantity, double itemPrice) {
         this.quantity = quantity;
         this.itemPrice = itemPrice;
     }
 
     public double finalPrice() {
         double basePrice = this.quantity * this.itemPrice;
-        int discountLevel = this.quantity > 100 ? 2 : 1;
-        return this.discountedPrice(basePrice, discountLevel);
+//        int discountLevel = discountLevel(); // 책임을 옮긴다.
+        return this.discountedPrice(basePrice);
     }
 
-    private double discountedPrice(double basePrice, int discountLevel) {
-        return discountLevel == 2 ? basePrice * 0.90 : basePrice * 0.95;
+    private int discountLevel() {
+        return this.quantity > 100 ? 2 : 1;
+    }
+
+    /* Refactoring > Change Signature */
+    private double discountedPrice(double basePrice) {
+        // 매개변수 빼고 이 함수를 호출한다.
+        // 책임이 옮겨왔다. (finalPrice() -> discountedPrice())
+        return discountLevel() == 2 ? basePrice * 0.90 : basePrice * 0.95;
     }
 }

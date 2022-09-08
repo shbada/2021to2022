@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 리팩토링 후에도 테스트는 동일하게 통과
+ */
 class OrderTest {
 
     @Test

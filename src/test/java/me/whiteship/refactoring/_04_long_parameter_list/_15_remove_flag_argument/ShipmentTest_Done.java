@@ -4,20 +4,20 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ShipmentTest {
+class ShipmentTest_Done {
 
     @Test
     void deliveryDate() {
         LocalDate placedOn = LocalDate.of(2021, 12, 15);
         Order orderFromWA = new Order(placedOn, "WA");
 
-        Shipment shipment = new Shipment();
+        Shipment_Done shipment = new Shipment_Done();
 
         // flag 이름을 보기 전까지는 보기 어렵다.
-        assertEquals(placedOn.plusDays(1), shipment.deliveryDate(orderFromWA, true));
-        assertEquals(placedOn.plusDays(2), shipment.deliveryDate(orderFromWA, false));
+        assertEquals(placedOn.plusDays(1), shipment.rushDeliveryDate(orderFromWA));
+        assertEquals(placedOn.plusDays(2), shipment.regularDeliveryDate(orderFromWA));
     }
 
 }

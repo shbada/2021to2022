@@ -12,23 +12,32 @@ import java.time.LocalDate;
  *
  * src/test/java/me/whiteship/refactoring/_04_long_parameter_list/_15_remove_flag_argument
  */
-public class Shipment {
+public class Shipment_Done {
 
     public LocalDate deliveryDate(Order order, boolean isRush) {
         if (isRush) {
-            int deliveryTime = switch (order.getDeliveryState()) {
-                case "WA", "CA", "OR" -> 1;
-                case "TX", "NY", "FL" -> 2;
-                default -> 3;
-            };
-            return order.getPlacedOn().plusDays(deliveryTime);
+            // 각각에 조건에 해당하는 각각의 조건들을 클래스로 분리하라
+            return rushDeliveryDate(order);
         } else {
-            int deliveryTime = switch (order.getDeliveryState()) {
-                case "WA", "CA" -> 2;
-                case "OR", "TX", "NY" -> 3;
-                default -> 4;
-            };
-            return order.getPlacedOn().plusDays(deliveryTime);
+            return regularDeliveryDate(order);
         }
+    }
+
+    public static LocalDate regularDeliveryDate(Order order) {
+        int deliveryTime = switch (order.getDeliveryState()) {
+            case "WA", "CA" -> 2;
+            case "OR", "TX", "NY" -> 3;
+            default -> 4;
+        };
+        return order.getPlacedOn().plusDays(deliveryTime);
+    }
+
+    public static LocalDate rushDeliveryDate(Order order) {
+        int deliveryTime = switch (order.getDeliveryState()) {
+            case "WA", "CA", "OR" -> 1;
+            case "TX", "NY", "FL" -> 2;
+            default -> 3;
+        };
+        return order.getPlacedOn().plusDays(deliveryTime);
     }
 }
