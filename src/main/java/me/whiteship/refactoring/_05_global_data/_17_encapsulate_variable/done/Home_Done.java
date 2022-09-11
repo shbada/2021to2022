@@ -1,4 +1,6 @@
-package me.whiteship.refactoring._05_global_data._17_encapsulate_variable;
+package me.whiteship.refactoring._05_global_data._17_encapsulate_variable.done;
+
+import me.whiteship.refactoring._05_global_data._17_encapsulate_variable.Thermostats;
 
 /**
  * 리팩토링 17. 변수 캡슐화하기 (Encapsulate Variable)
@@ -8,11 +10,14 @@ package me.whiteship.refactoring._05_global_data._17_encapsulate_variable;
  *   > 함수를 사용해서 값을 변경하면 보다 쉽게 검증 로직을 추가하거나 변경에 따르는 후속 작업을 추가하는 것이 편리하다.
  * - 불변 데이터의 경우에는 이런 리팩토링을 적용할 필요가 없다.
  */
-public class Home {
+public class Home_Done {
 
     public static void main(String[] args) {
-        System.out.println(Thermostats.targetTemperature); // 값 조회
-        Thermostats.targetTemperature = 68; // 값 설정  (말도 안되게 설정이 가능해버림)
-        Thermostats.readInFahrenheit = false; // 값 설정
+        // get method 변경
+        System.out.println(Thermostats_Done.getTargetTemperature()); // 값 조회
+
+        // set method 변경
+        Thermostats_Done.setTargetTemperature(68); // 값 설정  (말도 안되게 설정이 가능해버림)
+        Thermostats_Done.setReadInFahrenheit(false); // 값 설정
     }
 }
