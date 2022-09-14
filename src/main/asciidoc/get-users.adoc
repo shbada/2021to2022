@@ -1,0 +1,25 @@
+= API : 사용자 정보 조회 
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:curl-request.adoc
+
+[[overview]]
+== Overview
+operation::get-users[snippets='curl-request']
+
+[[overview-request-dto]]
+=== Request
+operation::get-users[snippets='path-parameters']
+
+=== Request Example
+operation::get-users[snippets='http-request']
+
+[[overview-response-dto]]
+=== Response
+operation::get-users[snippets='response-fields']
+
+=== Response Example
+operation::get-users[snippets='response-body']
