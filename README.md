@@ -1,4 +1,4 @@
-# maven-restapidocs
+# spring-rest-docs-with-maven
 [rest-api-docs] practice project
 
 ### 정리
