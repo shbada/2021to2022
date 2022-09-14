@@ -15,14 +15,14 @@ package me.whiteship.refactoring._06_mutable_data._18_split_variable;
  *  한 변수가 여러번 할당되는 경우 옳은가? 함수의 용도가 맞는가? 고민해보자.
  *  한 변수는 하나의 책임만 갖도록 리팩토링 하자.
  */
-public class Haggis {
+public class Haggis_Done {
 
     private double primaryForce;
     private double secondaryForce;
     private double mass;
     private int delay;
 
-    public Haggis(double primaryForce, double secondaryForce, double mass, int delay) {
+    public Haggis_Done(double primaryForce, double secondaryForce, double mass, int delay) {
         this.primaryForce = primaryForce;
         this.secondaryForce = secondaryForce;
         this.mass = mass;
@@ -31,15 +31,17 @@ public class Haggis {
 
     public double distanceTravelled(int time) {
         double result;
-        double acc = primaryForce / mass;
+        final double primaryAcceleration = primaryForce / mass; // 첫번째
         int primaryTime = Math.min(time, delay);
-        result = 0.5 * acc * primaryTime * primaryTime;
+        result = 0.5 * primaryAcceleration * primaryTime * primaryTime;
 
         int secondaryTime = time - delay;
         if (secondaryTime > 0) {
-            double primaryVelocity = acc * delay;
-            acc = (primaryForce + secondaryForce) / mass;
-            result += primaryVelocity * secondaryTime + 0.5 * acc * secondaryTime + secondaryTime;
+            final double primaryVelocity = primaryAcceleration * delay;
+
+            // 변수 생성
+            final double secondaryAcceleration = (primaryForce + secondaryForce) / mass; // 두번째
+            result += primaryVelocity * secondaryTime + 0.5 * secondaryAcceleration * secondaryTime + secondaryTime;
         }
 
         return result;
