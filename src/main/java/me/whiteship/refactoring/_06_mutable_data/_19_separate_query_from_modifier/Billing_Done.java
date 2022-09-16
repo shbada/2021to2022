@@ -1,12 +1,12 @@
 package me.whiteship.refactoring._06_mutable_data._19_separate_query_from_modifier;
 
-public class Billing {
+public class Billing_Done {
 
     private Customer customer;
 
     private EmailGateway emailGateway;
 
-    public Billing(Customer customer, EmailGateway emailGateway) {
+    public Billing_Done(Customer customer, EmailGateway emailGateway) {
         this.customer = customer;
         this.emailGateway = emailGateway;
     }
@@ -20,16 +20,12 @@ public class Billing {
         double result = customer.getInvoices().stream()
                 .map(Invoice::getAmount)
                 .reduce((double) 0, Double::sum);
-
         // 2. sendBill
         sendBill();
         return result;
     }
 
-    /**
-     * public 으로 변경
-     */
-    public void sendBill() {
+    private void sendBill() {
         emailGateway.send(formatBill(customer));
     }
 
