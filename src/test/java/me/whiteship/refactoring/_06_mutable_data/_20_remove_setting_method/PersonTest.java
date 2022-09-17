@@ -9,7 +9,7 @@ class PersonTest {
     @Test
     void person() {
         Person person = new Person();
-        person.setId(10);
+        person.setId(10); // Id 값은 한번 설정된 이후 변경되지 않는다.
         person.setName("keesun");
         assertEquals(10, person.getId());
         assertEquals("keesun", person.getName());

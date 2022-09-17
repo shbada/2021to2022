@@ -1,7 +1,6 @@
-package me.whiteship.refactoring._06_mutable_data._22_combine_functions_into_transform;
+package me.whiteship.refactoring._06_mutable_data._22_combine_functions_into_transform.done;
 
-import java.time.Month;
-import java.time.Year;
+import me.whiteship.refactoring._06_mutable_data._22_combine_functions_into_transform.Reading;
 
 /**
  * 여러 함수를 변환 함수로 묶기
@@ -10,17 +9,17 @@ import java.time.Year;
  * - 소스 데이터가 변경될 수 있다면 "여러 함수를 클래스로 묶기"를 사용하자
  * - 변환 함수를 사용해서 불변 데이터의 필드로 생성해두고 재사용할 수도 있다.
  */
-public class Client1 {
+public class Client1_Done extends ReadingClient {
 
     double baseCharge;
 
-    public Client1(Reading reading) {
-        this.baseCharge = baseRate(reading.month(), reading.year()) * reading.quantity();
+    public Client1_Done(Reading reading) {
+        this.baseCharge = enrichReading(reading).baseCharge();
     }
 
-    private double baseRate(Month month, Year year) {
-        return 10;
-    }
+//    private double baseRate(Month month, Year year) {
+//        return 10;
+//    }
 
     public double getBaseCharge() {
         return baseCharge;

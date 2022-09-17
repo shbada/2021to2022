@@ -9,6 +9,7 @@ class DiscountTest {
     @Test
     void discount() {
         Discount discount = new Discount(100);
+        // discount가 없을때 수행하면 버그
 //        assertEquals(100, discount.getDiscountedTotal());
 
         discount.setDiscount(10);
