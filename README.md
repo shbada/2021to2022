@@ -1,6 +1,22 @@
 # B2B Service
+## Package
 
-### Package
+- __interfaces__
+  - 사용자에게 정보를 보여주고 사용자의 명령을 해석하는 일을 책임진다.
+  - DTO, Mapper, Controller
+- __application__
+  - 수행할 작업을 정의하고 표현력 있는 도메인 객체가 문제를 해결하게 한다. 이 계층에서 책임지는 작업은 업무상 중요하거나 다른 시스템의 응용 계층과 상호 작용하는 데 필요한 것들이다. 이 계층은 얇게 유지되고, 오직 작업을 조정하고 아래에 위치한 계층에 포함된 도메인 객체의 협력자에게 작업을 위임한다.
+  - xxxFacade
+- __domain__
+  - 업무 개념과 업무 상황에 대한 정보, 업무 규칙을 표현하는 일을 책임진다.
+  - Service, Command, Query, Entity
+- __infrastructure__
+  - 상위 계층을 지원하는 일반화된 기술적 기능을 제공한다.
+  - RedisConnector, Low level 구현체
+  
+---
+
+## In Project
 ```bash
 ├── src
 │   ├── main
