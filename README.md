@@ -1,4 +1,4 @@
-# B2B Service
+# ddd-practice-package-project
 ## Package
 
 - __interfaces__
