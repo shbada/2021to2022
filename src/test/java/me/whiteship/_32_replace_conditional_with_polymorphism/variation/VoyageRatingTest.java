@@ -1,5 +1,8 @@
-package me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.variation;
+package me.whiteship._32_replace_conditional_with_polymorphism.variation;
 
+import me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.variation.Voyage;
+import me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.variation.VoyageHistory;
+import me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.variation.VoyageRating;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

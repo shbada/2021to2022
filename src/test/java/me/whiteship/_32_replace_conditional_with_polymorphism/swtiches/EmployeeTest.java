@@ -1,5 +1,6 @@
-package me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.swtiches;
+package me.whiteship._32_replace_conditional_with_polymorphism.swtiches;
 
+import me.whiteship.refactoring._11_primitive_obsession._32_replace_conditional_with_polymorphism.swtiches.Employee;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
