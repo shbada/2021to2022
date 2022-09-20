@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._18_middle_man._38_remove_middle_man;
+package me.whiteship.refactoring._18_middle_man._38_remove_middle_man.done;
 
 public class Person {
 
@@ -13,12 +13,5 @@ public class Person {
 
     public Person getManager() {
         return this.department.getManager();
-    }
-
-    // person.getManager()
-    // 중재자 제거하기 수행
-    // person.getDepartment().getManager()
-    public Department getDepartment() {
-        return department;
     }
 }
