@@ -20,11 +20,13 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.reactivestreams:reactive-streams:1.0.4'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'io.projectreactor:reactor-core:3.4.23'
 }
 
 tasks.named('test') {

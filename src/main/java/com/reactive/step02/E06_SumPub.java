@@ -7,56 +7,46 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Publisher -> [Data1] -> Opreator -> [Data2(Data1 변환)] -> Opration2 -> [Data3(Data2 변환)] -> Subscriber
- * 1) map (D1 -> f -> D2)
- */
 @Slf4j
-public class E05_PubSub {
+public class E06_SumPub {
     public static void main(String[] args) {
-        // pub -> data1 -> mapPub -> data2 -> logSub (위에서 아래로 데이터가 흐른다 : 다운스트림)
-        //              <- subscribe(logSub) (아래에서 위로 데이터가 흐른다 : 업스트림)
-        //              -> onSubscribe(s)
-        //              -> onNext
-        //              -> onNext
-        //              -> onComplete
         Publisher<Integer> pub = iterPub(Stream.iterate(1, a -> a + 1).limit(10).collect(Collectors.toList()));
 
-        // 2단계 적용
-        Publisher<Integer> mapPub = mapPub(pub, (Function<Integer, Integer>) s -> s * 10);
-        Publisher<Integer> map2Pub = mapPub(pub, (Function<Integer, Integer>) s -> -s);
-
-        // 구독자
-        Subscriber<Integer> sub = logSub();
+        // sum : 데이터가 날라와도 logSub에 다 던지는게 아닌 계산을 계속 진행하다가, 합계를 전부 계산 완료했을때 logSub에 던진다.
+        Publisher<Integer> sumPup = sumPub(pub);
 
         // 구독 시작
-//        pub.subscribe(sub);
-//        mapPub.subscribe(sub);
-        map2Pub.subscribe(sub);
+        sumPup.subscribe(logSub());
     }
 
-    /**
-     * 중간 연결
-     * @param pub
-     * @param f
-     * @return
-     */
-    private static Publisher<Integer> mapPub(Publisher<Integer> pub, Function<Integer, Integer> f) {
+    private static Publisher<Integer> sumPub(Publisher<Integer> pub) {
         return new Publisher<Integer>() {
-            // pub -> data1 -> mapPub(Subscriber 생성) -> data2 -> logSub
+            // 중개 역할
             @Override
-            public void subscribe(Subscriber<? super Integer> sub) { // logSub
-//                pub.subscribe(sub);
+            public void subscribe(Subscriber<? super Integer> sub) {
                 pub.subscribe(new DelegateSub(sub) {
+                    int sum = 0;
                     @Override
                     public void onNext(Integer i) {
-                        sub.onNext(f.apply(i));
+                        // 넘기면 안된다.
+                        sum += i;
+
+                        // 결과를 넘기는건 모든 데이터의 합계를 완료했을 때
+                        // 완료를 알 수 있는 법 : onComplete()
                     }
-                }); // 새로운 Subscriber
+
+                    /**
+                     * Publisher가 완료의 신호를 줄때, 그때 Sub의 onNext를 호출해서 데이터를 한번 전달한다.
+                     */
+                    @Override
+                    public void onComplete() {
+                        sub.onNext(sum);
+                        sub.onComplete();
+                    }
+                });
             }
         };
     }

@@ -7,62 +7,52 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Publisher -> [Data1] -> Opreator -> [Data2(Data1 변환)] -> Opration2 -> [Data3(Data2 변환)] -> Subscriber
- * 1) map (D1 -> f -> D2)
- */
 @Slf4j
-public class E05_PubSub {
+public class E10_GenericReducePub {
     public static void main(String[] args) {
-        // pub -> data1 -> mapPub -> data2 -> logSub (위에서 아래로 데이터가 흐른다 : 다운스트림)
-        //              <- subscribe(logSub) (아래에서 위로 데이터가 흐른다 : 업스트림)
-        //              -> onSubscribe(s)
-        //              -> onNext
-        //              -> onNext
-        //              -> onComplete
         Publisher<Integer> pub = iterPub(Stream.iterate(1, a -> a + 1).limit(10).collect(Collectors.toList()));
 
-        // 2단계 적용
-        Publisher<Integer> mapPub = mapPub(pub, (Function<Integer, Integer>) s -> s * 10);
-        Publisher<Integer> map2Pub = mapPub(pub, (Function<Integer, Integer>) s -> -s);
-
-        // 구독자
-        Subscriber<Integer> sub = logSub();
+        Publisher<String> sumPup = reducePub(pub, "", (a, b) -> a + b); // 초기데이터 , 함수 전달
 
         // 구독 시작
-//        pub.subscribe(sub);
-//        mapPub.subscribe(sub);
-        map2Pub.subscribe(sub);
+        sumPup.subscribe(logSub());
     }
 
-    /**
-     * 중간 연결
-     * @param pub
-     * @param f
-     * @return
-     */
-    private static Publisher<Integer> mapPub(Publisher<Integer> pub, Function<Integer, Integer> f) {
-        return new Publisher<Integer>() {
-            // pub -> data1 -> mapPub(Subscriber 생성) -> data2 -> logSub
+    // 1, 2, 3, 4, 5
+    // 0 -> (0, 1) -> 0 + 1 = 1
+    // 1 -> (1, 2) -> 1 + 2 = 3
+    // 2 -> (3, 3) -> 3 + 3 = 6
+    // ...
+    private static <T, R> Publisher<R> reducePub(Publisher<T> pub, R init, BiFunction<R, T, R> bf) {
+        return new Publisher<R>() {
             @Override
-            public void subscribe(Subscriber<? super Integer> sub) { // logSub
-//                pub.subscribe(sub);
-                pub.subscribe(new DelegateSub(sub) {
+            public void subscribe(Subscriber<? super R> sub) {
+
+                pub.subscribe(new E09_DelegateGenericOutputSub<T, R>(sub) {
+                    R result = init;
+
                     @Override
-                    public void onNext(Integer i) {
-                        sub.onNext(f.apply(i));
+                    public void onNext(T i) {
+                        result = bf.apply(result, i);
                     }
-                }); // 새로운 Subscriber
+
+                    @Override
+                    public void onComplete() {
+                        sub.onNext(result);
+
+                        sub.onComplete();
+                    }
+                });
             }
         };
     }
 
-    private static Subscriber<Integer> logSub() {
-        Subscriber<Integer> sub = new Subscriber<Integer>() {
+    private static <T> Subscriber<T> logSub() {
+        return new Subscriber<T>() {
             @Override
             public void onSubscribe(Subscription s) {
                 // Subscription 의 request 를 요청해야한다.
@@ -71,7 +61,7 @@ public class E05_PubSub {
             }
 
             @Override
-            public void onNext(Integer i) {
+            public void onNext(T i) {
                 log.debug("onNext:{}", i);
             }
 
@@ -85,7 +75,6 @@ public class E05_PubSub {
                 log.debug("onComplete");
             }
         };
-        return sub;
     }
 
     private static Publisher<Integer> iterPub(List<Integer> iter) {
