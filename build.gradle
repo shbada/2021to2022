@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.reactivestreams:reactive-streams:1.0.4'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'io.projectreactor:reactor-core:3.4.23'
+    implementation 'io.netty:netty-all:4.1.82.Final'
 }
 
 tasks.named('test') {

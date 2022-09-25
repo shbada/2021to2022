@@ -91,11 +91,25 @@ public class ReactiveApplication {
         return te;
     }
 
-    public static void main(String[] args) {
-        try (ConfigurableApplicationContext c = SpringApplication.run(ReactiveApplication.class, args)) {
+    /**
+     * @Async(value = "myThreadPool")
+     * @return
+     */
+    @Bean
+    ThreadPoolTaskExecutor myThreadPool() {
+        ThreadPoolTaskExecutor te = new ThreadPoolTaskExecutor();
+        // 어떤 경우에도 스레드를 1개만 갖겠다는 설정
+        te.setCorePoolSize(1); // core 가 다 차면, Queue를 채우고, Queue까지 다 찼을때 maxPoolSize까지 스레드 개수를 추가하다가 그때도 부족하면 에러가 난다.
+        te.setMaxPoolSize(1);
+        te.initialize();
+        return te;
+    }
 
-        }
-//        SpringApplication.run(ReactiveApplication.class, args);
+    public static void main(String[] args) {
+//        try (ConfigurableApplicationContext c = SpringApplication.run(ReactiveApplication.class, args)) {
+//
+//        }
+        SpringApplication.run(ReactiveApplication.class, args);
     }
 
     @Autowired
