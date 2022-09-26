@@ -4,9 +4,7 @@ import com.reactive.step05.E26_MyService;
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.Netty4ClientHttpRequestFactory;
-import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.AsyncRestTemplate;
@@ -15,7 +13,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class E27_MyController {
+public class E27_MyGController {
     private final E26_MyService myService;
 
     AsyncRestTemplate rt = new AsyncRestTemplate(

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
@@ -25,6 +26,12 @@ import java.util.concurrent.Future;
 @Slf4j
 @EnableAsync // @Async 비동기 수행을 위한 어노테이션 선언
 public class ReactiveApplication {
+
+    @Bean
+    NettyReactiveWebServerFactory nettyReactiveWebServerFactory() {
+        return new NettyReactiveWebServerFactory();
+    }
+
     @Component
     public static class MyService {
         // 리스너 처리를 하고싶다면? ListenableFuture
@@ -109,6 +116,9 @@ public class ReactiveApplication {
 //        try (ConfigurableApplicationContext c = SpringApplication.run(ReactiveApplication.class, args)) {
 //
 //        }
+
+        System.setProperty("reactor.ipc.netty.workerCount", "1");
+        System.setProperty("reactor.ipc.netty.pool.maxConnections", "2000");
         SpringApplication.run(ReactiveApplication.class, args);
     }
 

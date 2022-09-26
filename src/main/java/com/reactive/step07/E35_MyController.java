@@ -21,7 +21,7 @@ public class E35_MyController {
     AsyncRestTemplate rt = new AsyncRestTemplate(
             new Netty4ClientHttpRequestFactory(new NioEventLoopGroup(1)));
 
-    @GetMapping("/rest")
+    @GetMapping("/step07/rest")
     public DeferredResult<String> rest(int idx) {
         DeferredResult<String> dr = new DeferredResult<>();
 
