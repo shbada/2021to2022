@@ -35,8 +35,8 @@ public class E05_PubSub {
 
         // 구독 시작
 //        pub.subscribe(sub);
-//        mapPub.subscribe(sub);
-        map2Pub.subscribe(sub);
+        mapPub.subscribe(sub);
+//        map2Pub.subscribe(sub);
     }
 
     /**
@@ -85,6 +85,7 @@ public class E05_PubSub {
                 log.debug("onComplete");
             }
         };
+
         return sub;
     }
 

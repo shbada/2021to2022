@@ -9,6 +9,7 @@ import org.reactivestreams.Subscription;
 @Slf4j
 public class DelegateSub implements Subscriber<Integer> {
     private Subscriber sub;
+
     public DelegateSub(Subscriber sub) {
         this.sub = sub;
     }
