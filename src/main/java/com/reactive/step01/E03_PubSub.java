@@ -66,6 +66,8 @@ public class E03_PubSub {
                 // subscription의 reuqest()
 //                subscription.request(Long.MAX_VALUE); // 전부 다 받기
                 this.subscription.request(1); // 1개 받기
+
+                System.out.println(Thread.currentThread().getName() + " : E03_PubSub.onSubscribe");
             }
 
             int bufferSize = 2;

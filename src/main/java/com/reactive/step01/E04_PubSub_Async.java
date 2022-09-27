@@ -109,6 +109,8 @@ public class E04_PubSub_Async {
 
                 // 이것도 동일한 쓰레드 내에서 처리되야한다. (새로운 스레드 만들어서 request 날리면 안된다.)
                 this.subscription.request(1); // 1개 받기
+
+                System.out.println(Thread.currentThread().getName() + " : E03_PubSub.onSubscribe");
             }
 
             int bufferSize = 2;
