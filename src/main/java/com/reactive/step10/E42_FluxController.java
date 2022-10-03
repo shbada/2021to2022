@@ -27,7 +27,7 @@ public class E42_FluxController {
        return Mono.just(new Event(id, "event" + id));
     }
 
-    @GetMapping("/event/{id}")
+    @GetMapping("/event/list/{id}")
     Mono<List<Event>> hello(@PathVariable long id) {
         // Mono 안에 리스트를 담는다면?
         List<Event> list = Arrays.asList(new Event(1L, "event1"), new Event(2L, "event2"));

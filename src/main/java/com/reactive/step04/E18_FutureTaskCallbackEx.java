@@ -52,9 +52,9 @@ public class E18_FutureTaskCallbackEx {
         CallbackFutureTask f = new CallbackFutureTask(() -> {
             Thread.sleep(2000);
 
-            if (1 == 1) {
-                throw new RuntimeException("Aysnc ERROR!!!"); // 고의 에러 발생
-            }
+//            if (1 == 1) {
+//                throw new RuntimeException("Aysnc ERROR!!!"); // 고의 에러 발생
+//            }
 
             log.info("Async");
             return "Hello";

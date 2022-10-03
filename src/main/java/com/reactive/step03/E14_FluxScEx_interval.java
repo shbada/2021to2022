@@ -18,7 +18,7 @@ public class E14_FluxScEx_interval {
                 .take(10) // 10개만 받고 끝낸다.
                 .subscribe(s -> log.debug("onNext:{}", s)); // 별도의 스레드에서 수행된다.
 
-        log.debug("exit");
+        log.debug("exit1");
         TimeUnit.SECONDS.sleep(5);
 
         // main 스레드가 종료되도 이 스레드는 작업을 마치기 전까지는 JVM이 내려가지 않는다.
@@ -30,6 +30,6 @@ public class E14_FluxScEx_interval {
             System.out.println("Hello");
         });
 
-        System.out.println("exit");
+        System.out.println("exit2");
     }
 }

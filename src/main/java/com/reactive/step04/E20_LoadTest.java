@@ -21,7 +21,7 @@ public class E20_LoadTest {
          * 100개가 동시에 2초정도 걸림
          * 각 요청별로 스레드가 생성되어 총 스레드 100개가 생성되었다.
          */
-        basic("http://localhost:8080/async");
+//        basic("http://localhost:8080/async");
 
         /**
          * application.properties 에 'server.tomcat.max-threads=20' 추가 후 수행해보자.
@@ -30,7 +30,7 @@ public class E20_LoadTest {
          * 100개의 요청이 갔지만 스레드는 20개까지만 생성 가능하므로 나머지 80개는 큐에서 대기중이였다.
          * 스레드가 풀리면 다음 20개, 그 다음 20개.. 이렇게 되면서 2초짜리 작업 x 5  = 10초 정도 걸린다.
          */
-        basic("http://localhost:8080/async");
+//        basic("http://localhost:8080/async");
 
         /**
          * callable 호출해보자. (비동기)
@@ -40,7 +40,7 @@ public class E20_LoadTest {
          * 서블릿 스레드 / 작업 스레드
          * 서블릿 스레드는 20개로 돌려쓰지만, 2초짜리 작업인 작업 스레드는 100개를 만들어 사용한 것이다.
          */
-        basic("http://localhost:8080/callable");
+//        basic("http://localhost:8080/callable");
 
         /**
          * application.properties 에 'server.tomcat.max-threads=1' 로 변경 후 수행해보자.
@@ -56,7 +56,7 @@ public class E20_LoadTest {
          * (결론)
          * 서블릿 스레드는 빠르게 반환되어 1개의 스레드를 가지고도 많은 요청을 처리할 수는 있다.
          */
-        basic("http://localhost:8080/callable");
+//        basic("http://localhost:8080/callable");
 
         /**
          * E21_DeferredResultController.java 도 동일하게 수행해보자.

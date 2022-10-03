@@ -34,5 +34,14 @@ public class E19_MyController {
             Thread.sleep(2000);
             return "hello"; // 결과를 클라이언트에 내려준다.
         };
+
+//        return new Callable<String>() {
+//            @Override
+//            public String call() throws Exception {
+//                log.info("async"); // console 에는 이미 찍히고, (MvcAsync1 이라는 별도의 쓰레드로 실행 - 스프링)
+//                Thread.sleep(2000);
+//                return "hello"; // 결과를 클라이언트에 내려준다.
+//            }
+//        };
     }
 }
