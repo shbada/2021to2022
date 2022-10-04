@@ -14,3 +14,4 @@ DDD START!의 재출간판인 [도메인 주도 개발 시작하기](https://www
 |5|[Domain Driven Design] 5. DIP(Dependency Inversion Principle, 의존 역전 원칙)|https://devfunny.tistory.com/873|
 |6|[Domain Driven Design] 6. 도메인 영역의 구성요소 (엔티티, 밸류, 애그리거트, 리포지토리)|https://devfunny.tistory.com/874|
 |7|[Domain Driven Design] 7. 응용 서비스, 인프라스트럭처 개요, 모듈 구조|https://devfunny.tistory.com/875|
+|8|[Domain Driven Design] 8. 애그리거트 (Aggregate)|https://devfunny.tistory.com/880|
