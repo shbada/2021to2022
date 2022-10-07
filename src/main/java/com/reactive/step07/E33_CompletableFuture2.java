@@ -17,7 +17,7 @@ public class E33_CompletableFuture2 {
 
             CompletionStage : 하나의 비동기 작업을 수행하고, 이게 완료가 됬을때 의존적으로 또다른 작업을 수행할 수 있도록 하는 것
          */
-//        CompletableFuture.runAsync(() -> log.info("runAsync"));
+        CompletableFuture.runAsync(() -> log.info("runAsync"));
         CompletableFuture
                 /** 계속 같은 스레드 */
 //                .runAsync(() -> log.info("runAsync")) // 수행된 백그라운드 스레드 (결과값을 사용할 수 없다)
