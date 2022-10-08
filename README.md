@@ -1,4 +1,6 @@
 # ddd-practice-package-project
+- 사이드 프로젝트 바로가기 : https://github.com/cIonecoder
+
 ## Package
 
 - __interfaces__
