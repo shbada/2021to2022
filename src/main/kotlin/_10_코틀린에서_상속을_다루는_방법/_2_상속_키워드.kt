@@ -1,4 +1,4 @@
-package _10_코틀린에서_상속_다루는_방법
+package _10_코틀린에서_상속을_다루는_방법
 
 /*
 1. final : override 할수 없게 한다. default로 보이지 않게 존재한다.

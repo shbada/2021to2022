@@ -1,4 +1,4 @@
-package _10_코틀린에서_상속_다루는_방법
+package _10_코틀린에서_상속을_다루는_방법
 
 /*
 open class Base (상위)
