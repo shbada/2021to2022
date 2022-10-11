@@ -17,3 +17,4 @@ DDD START!의 재출간판인 [도메인 주도 개발 시작하기](https://www
 |8|[Domain Driven Design] 8. 애그리거트 (Aggregate)|https://devfunny.tistory.com/880|
 |9|[Domain Driven Design] 9. 애그리거트 루트 (Aggregate Root)|https://devfunny.tistory.com/884|
 |10|[Domain Driven Design] 10. 리포지토리와 애그리거트, 애그리거트 간의 참조 관계|https://devfunny.tistory.com/885|
+|11|[Domain Driven Design] 11. 애그리거트 간 집합 연관, 애그리거트의 팩토리 역할|https://devfunny.tistory.com/886|
