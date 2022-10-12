@@ -12,13 +12,13 @@
     </parent>
 
     <groupId>com.greglturnquist</groupId>
-    <artifactId>hacking-spring-boot-ch2-reactive</artifactId>
+    <artifactId>hacking-spring-boot-ch2b-reactive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Hacking with Spring Boot - Chapter 2 - Reactive Data</name>
+    <name>Hacking with Spring Boot - Chapter 2b - Reactive Data</name>
     <description>Demo project for Hacking with Spring Boot</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <build>
