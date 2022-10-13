@@ -9,13 +9,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.greglturnquist</groupId>
-    <artifactId>hacking-spring-boot-ch3-reactive</artifactId>
+    <artifactId>hacking-spring-boot-ch4-reactive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Hacking with Spring Boot - Chapter 3 - Reactive Dev Tools</name>
+    <name>Hacking with Spring Boot - Chapter 4 - Reactive Testing</name>
     <description>Demo project for Hacking with Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -36,28 +36,18 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <!-- tag::devtools[] -->
-        <!--
-        1) 애플리케이션 재시작, 리로드 자동화
-        2) 환경설정 정보 기본값 제공
-        3) 자동설정 변경사항 로깅
-        4) 정적 자원 제외
-        5) 라이브 리로드 지원 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
-        <!-- end::devtools[] -->
 
         <!-- tag::blockhound[] -->
-        <!-- 애플리케이션에서 적절하게 설정되면 자바 에이전트 API를 이용해서
-        블로킹 메서드를 검출하고, 해당 스레드가 블로킹 메서드 호출을 허용하는지 검사할 수 있다. -->
         <dependency>
             <groupId>io.projectreactor.tools</groupId>
-            <artifactId>blockhound</artifactId>
-            <version>1.0.3.RELEASE</version>
+            <artifactId>blockhound-junit-platform</artifactId>
+            <version>1.0.6.RELEASE</version>
+            <scope>test</scope>
         </dependency>
         <!-- end::blockhound[] -->
 
@@ -65,12 +55,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
@@ -88,11 +72,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>
-                        com.greglturnquist.hackingspringboot.reactive.HackingSpringBootApplicationPlainBlockHound
-                    </mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
