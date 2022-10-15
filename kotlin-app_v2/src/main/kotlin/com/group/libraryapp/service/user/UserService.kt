@@ -46,7 +46,9 @@ class UserService( // 상속 가능하게 하려면 open (open 계속 써주는�
 
     @Transactional(readOnly = true)
     fun getUserLoanHistories(): List<UserLoanHistoryResponse> {
-        return userRepository.findAllWithHistoryList().map { user -> // 1) select user
+//        return userRepository.findAllWithHistoryList().map { user -> // 1) select user
+        // queryDsl method 호출로 변경
+        return userRepository.findAllWithHistories().map { user -> // 1) select user
             // 여기서 N + 1 문제 발생
             // 위 1)번에서 조회된 유저 데이터 개수만큼 계속해서 select userLoanHistory 쿼리가 수행된다.
             // 때문에 유저가 100명이라면 총 101번의 쿼리가 발생하고, 유저가 1000명이라면 총 1001번의 쿼리가 발생한다.

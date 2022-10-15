@@ -9,6 +9,8 @@ import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
 import com.group.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.group.libraryapp.dto.book.response.BookStatResponse
+import com.group.libraryapp.repository.BookQuerydslRepository
+import com.group.libraryapp.repository.UserLoanHistoryQuerydslRepository
 import com.group.libraryapp.util.fail
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class BookService(
     private val bookRepository: BookRepository,
+    private val bookQuerydslRepository: BookQuerydslRepository,
     private val userRepository: UserRepository,
-    private val userLoanHistoryRepository: UserLoanHistoryRepository
+    private val userLoanHistoryRepository: UserLoanHistoryRepository,
+    private val userLoanHistoryQuerydslRepository: UserLoanHistoryQuerydslRepository
 ) {
     @Transactional
     fun saveBook(request: BookRequest) {
@@ -48,7 +52,9 @@ class BookService(
     @Transactional(readOnly = true)
     fun countLoanedBook(): Int {
 //        return userLoanHistoryRepository.findAllByStatus(UserLoanStatus.LOANED).size
-        return userLoanHistoryRepository.countByStatus(UserLoanStatus.LOANED).toInt()
+//        return userLoanHistoryRepository.countByStatus(UserLoanStatus.LOANED).toInt()
+        // queryDSL 메서드 호출로 변경
+        return userLoanHistoryQuerydslRepository.count(UserLoanStatus.LOANED).toInt()
     }
 
     @Transactional(readOnly = true)
@@ -56,7 +62,9 @@ class BookService(
 //        return bookRepository.findAll() // List<Book>
 //            .groupBy { book -> book.type } // Map<BookType, List<Book>>
 //            .map { (type, books) -> BookStatResponse(type, books.size) }
-        return bookRepository.getStats()
+//        return bookRepository.getStats()
+        // queryDSL 메서드 호출로 변경
+        return bookQuerydslRepository.getStats()
     }
 
 //    @Transactional(readOnly = true)
