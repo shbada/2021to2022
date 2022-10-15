@@ -1,6 +1,6 @@
 package com.group.libraryapp.domain.user
 
-import com.group.libraryapp.domain.Book
+import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanHistory.UserLoanHistory
 import javax.persistence.*
 
@@ -56,7 +56,7 @@ class User constructor( // getter 는 들어있다.
     }
 
     fun loadBook(book: Book) {
-        this.userLoanHistoryList.add(UserLoanHistory(this, book.name, false))
+        this.userLoanHistoryList.add(UserLoanHistory(this, book.name))
     }
 
     fun returnBook(bookName: String) {

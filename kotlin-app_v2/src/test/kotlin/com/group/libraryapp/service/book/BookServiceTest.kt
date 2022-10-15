@@ -1,11 +1,13 @@
 package com.group.libraryapp.service.book
 
-import com.group.libraryapp.domain.Book
-import com.group.libraryapp.domain.BookRepository
+import com.group.libraryapp.domain.book.Book
+import com.group.libraryapp.domain.book.BookRepository
+import com.group.libraryapp.domain.book.BookType
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.domain.user.loanHistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
+import com.group.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
@@ -33,7 +35,7 @@ class BookServiceTest @Autowired constructor(
     @Test
     fun saveBook() {
         // given
-        val request = BookRequest("A")
+        val request = BookRequest("A", BookType.COMPUTER)
 
         // when
         bookService.saveBook(request)
@@ -42,13 +44,15 @@ class BookServiceTest @Autowired constructor(
         val books = bookRepository.findAll()
         assertThat(books).hasSize(1)
         assertThat(books[0].name).isEqualTo("A")
+        assertThat(books[0].type).isEqualTo(BookType.COMPUTER)
     }
 
     @Test
     @DisplayName("책 대출이 정상적으로 작동한다.")
     fun loanBook() {
         // given
-        bookRepository.save(Book("A"))
+        /** Book 에 필드를 추가해도 테스트 코드에는 영향을 주고싶지 않다. - fixture 메서드 생성 (companion object) */
+        bookRepository.save(Book.fixture("A"))
         val savedUser = userRepository.save(User("KIM", null))
         val request = BookLoanRequest("KIM", "A")
 
@@ -60,16 +64,16 @@ class BookServiceTest @Autowired constructor(
         assertThat(results).hasSize(1)
         assertThat(results[0].bookName).isEqualTo("A")
         assertThat(results[0].user.id).isEqualTo(savedUser.id)
-        assertThat(results[0].isReturn).isFalse
+        assertThat(results[0].status).isEqualTo(UserLoanStatus.LOANED)
     }
 
     @Test
     @DisplayName("책이 대출되어있다면, 신규 대출이 실패한다.")
     fun loadBookFailTest() {
         // given
-        bookRepository.save(Book("A"))
+        bookRepository.save(Book.fixture("A"))
         val savedUser = userRepository.save(User("KIM", null))
-        userLoanHistoryRepository.save(UserLoanHistory(savedUser, "A", false))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "A"))
         val request = BookLoanRequest("KIM", "A")
 
         // when & then
@@ -86,7 +90,7 @@ class BookServiceTest @Autowired constructor(
         // given
 //        bookRepository.save(Book("A"))
         val savedUser = userRepository.save(User("KIM", null))
-        userLoanHistoryRepository.save(UserLoanHistory(savedUser, "A", false))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "A"))
         val request = BookReturnRequest("KIM", "A")
 
 
@@ -96,6 +100,6 @@ class BookServiceTest @Autowired constructor(
         // then
         val results = userLoanHistoryRepository.findAll()
         assertThat(results).hasSize(1)
-        assertThat(results[0].isReturn).isTrue // 반납 완료 (true)
+        assertThat(results[0].status).isEqualTo(UserLoanStatus.RETURNED) // 반납 완료 (true)
     }
 }

@@ -1,7 +1,6 @@
-package com.group.libraryapp.domain
+package com.group.libraryapp.domain.book
 
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.*
 
 interface BookRepository : JpaRepository<Book, Long> {
     // kotlin 에서 ?를 사용해서 Book? 가 null이 가능해져서 Optional 을 제외할 수는 있다.
