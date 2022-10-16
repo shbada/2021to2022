@@ -11,8 +11,8 @@
 |&#9745;|step2|싱글쓰레드와 멀티쓰레드|-|
 |&#9745;|step3|start()와 run()|-|
 |&#9745;|step4|데몬쓰레드|-|
-|&#9744;|step5|쓰레드의 동기화|-|
-|&#9744;|step6|wait()과 notify()|-|
-|&#9744;|step7|Lock과 Condition을 이용한 동기화|-|
-|&#9744;|step8|volatile|-|
-|&#9744;|step9|fork & join 프레임웍|-|
+|&#9745;|step5|쓰레드의 동기화|-|
+|&#9745;|step6|wait()과 notify()|-|
+|&#9745;|step7|Lock을 이용한 동기화|-|
+|&#9745;|step8|volatile|-|
+|&#9745;|step9|fork & join 프레임웍|-|
