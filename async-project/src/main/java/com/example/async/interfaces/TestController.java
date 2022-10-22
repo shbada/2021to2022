@@ -3,15 +3,20 @@ package com.example.async.interfaces;
 import com.example.async.application.TestFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.Callable;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/test")
 public class TestController {
     private final TestFacade testFacade;
 
@@ -20,7 +25,7 @@ public class TestController {
 
     WebClient client = WebClient.create();
 
-    @GetMapping("/test")
+    @GetMapping("/home")
     public Mono<String> rest(int idx) {
         // Mono 리턴
         Mono<ClientResponse> res = client.get().uri(SERVICE_URL1, idx).exchange();
@@ -29,7 +34,7 @@ public class TestController {
         return body;
     }
 
-    @GetMapping("/rest/chain")
+    @GetMapping("/rest_chain")
     public Mono<String> restChain(int idx) {
         Mono<String> body = client.get().uri(SERVICE_URL1, idx).exchange()
                 .flatMap(c -> c.bodyToMono(String.class))

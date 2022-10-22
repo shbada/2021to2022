@@ -1,0 +1,17 @@
+###
+GET http://localhost:8080/sync/callable
+
+###
+GET http://localhost:8080/sync/callable2
+
+###
+GET http://localhost:8080/test/home?idx=1
+
+###
+GET http://localhost:8080/test/rest_chain?idx=2
+
+###
+GET http://localhost:8080/sync/home?idx=2
+
+###
+GET http://localhost:8080/async/home?idx=2

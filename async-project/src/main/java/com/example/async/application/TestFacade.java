@@ -1,6 +1,6 @@
 package com.example.async.application;
 
-import com.example.async.service.TestService;
+import com.example.async.domain.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
