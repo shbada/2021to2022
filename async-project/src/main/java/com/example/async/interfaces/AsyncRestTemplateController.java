@@ -42,6 +42,9 @@ public class AsyncRestTemplateController {
     /**
      * 스프링은 컨트롤러에서 ListenableFuture를 리턴하면 해당 스레드는 즉시 반납하고,
      * 스프링 MVC가 자동으로 등록해준 콜백에 의해 결과가 처리
+     *
+     * 클라이언트의 요청이 들어 올 때, MainApplication의 스레드 상태를 살펴보면, tomcat 스레드는 그대로 1개 (http-nio-8080-exec-1)
+     * 그러나 비동기 작업을 처리하기 위해서 순간적으로 백그라운드에 100개의 스레드 새로 생성
      * @param idx
      * @return
      */
