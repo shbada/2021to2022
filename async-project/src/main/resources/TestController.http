@@ -15,3 +15,6 @@ GET http://localhost:8080/sync/home?idx=2
 
 ###
 GET http://localhost:8080/async/home?idx=2
+
+###
+GET http://localhost:8080/async/home2?idx=2

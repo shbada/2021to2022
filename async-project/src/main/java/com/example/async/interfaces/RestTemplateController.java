@@ -43,6 +43,10 @@ public class RestTemplateController {
 
     @GetMapping("/step1")
     public String rest(int idx) {
+        /*
+            MainApplication의 tomcat 스레드는 클라이언트의 요청을 처리하며,
+            외부 서비스(RemoteApplication)로 요청(Network I/O)을 보낸 후, 응답이 올 때까지 대기하고 있는 상태
+         */
         String forObject = rt.getForObject(SERVICE_URL1,
                 String.class,
                 "hello" + idx);
