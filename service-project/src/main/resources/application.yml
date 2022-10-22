@@ -2,4 +2,5 @@ server:
   port: 8081
   tomcat:
     threads:
-      max: 1 # ??? ? ?? thread ? ? ??
+      max: 1000 # TomcatMax1000Controller
+#      max: 1 # TomcatMax1Controller

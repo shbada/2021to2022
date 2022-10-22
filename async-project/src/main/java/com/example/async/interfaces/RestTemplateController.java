@@ -23,6 +23,10 @@ public class RestTemplateController {
 
     static final String SERVICE_URL1 = "http://localhost:8081/service?req={req}";
     static final String SERVICE_URL2 = "http://localhost:8081/service2?req={req}";
+
+    static final String STEP2_SERVICE_URL1 = "http://localhost:8081/step2/service?req={req}";
+    static final String STEP2_SERVICE_URL2 = "http://localhost:8081/step2/service2?req={req}";
+
     static final String CALLABLE_URL1 = "http://localhost:8081/callable";
     static final String CALLABLE_URL2 = "http://localhost:8081/callable2";
 
@@ -46,6 +50,7 @@ public class RestTemplateController {
         /*
             MainApplication의 tomcat 스레드는 클라이언트의 요청을 처리하며,
             외부 서비스(RemoteApplication)로 요청(Network I/O)을 보낸 후, 응답이 올 때까지 대기하고 있는 상태
+            (외부 서비스로부터의 요청에 대한 응답을 받기 전까지는 blocking 상태)
          */
         String forObject = rt.getForObject(SERVICE_URL1,
                 String.class,

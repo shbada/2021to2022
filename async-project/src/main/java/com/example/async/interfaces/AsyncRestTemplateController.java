@@ -22,6 +22,9 @@ public class AsyncRestTemplateController {
     static final String SERVICE_URL1 = "http://localhost:8081/service?req={req}";
     static final String SERVICE_URL2 = "http://localhost:8081/service2?req={req}";
 
+    static final String STEP2_SERVICE_URL1 = "http://localhost:8081/step2/service?req={req}";
+    static final String STEP2_SERVICE_URL2 = "http://localhost:8081/step2/service2?req={req}";
+
     // asynchronous
 //    AsyncRestTemplate rt = new AsyncRestTemplate();
 

@@ -18,3 +18,9 @@ GET http://localhost:8080/async/home?idx=2
 
 ###
 GET http://localhost:8080/async/home2?idx=2
+
+###
+GET http://localhost:8080/sync/step2/home?idx=3
+
+###
+GET http://localhost:8080/hell/home?idx=2

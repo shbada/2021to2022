@@ -1,5 +1,6 @@
-package com.example.async.interfaces;
+package com.example.async.interfaces.callbackHell;
 
+import com.example.async.application.RestTemplateFacade;
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +29,22 @@ import org.springframework.web.context.request.async.DeferredResult;
 @Slf4j
 @RequestMapping("/hell")
 public class CallbackHellController {
+    private final RestTemplateFacade restTemplateFacade;
+
     static final String SERVICE_URL1 = "http://localhost:8081/service?req={req}";
     static final String SERVICE_URL2 = "http://localhost:8081/service2?req={req}";
 
+    static final String STEP2_SERVICE_URL1 = "http://localhost:8081/step2/service?req={req}";
+    static final String STEP2_SERVICE_URL2 = "http://localhost:8081/step2/service2?req={req}";
+
     AsyncRestTemplate rt = new AsyncRestTemplate(
             new Netty4ClientHttpRequestFactory(new NioEventLoopGroup(1)));
+
+
+    @GetMapping("/home")
+    public void loadTest(int idx) throws InterruptedException {
+        restTemplateFacade.loadTest("http://localhost:8080/hell/call?idx=" + idx);
+    }
 
     /**
      * 콜백 헬
@@ -40,18 +52,18 @@ public class CallbackHellController {
      * @param idx
      * @return
      */
-    @GetMapping("/step2")
+    @GetMapping("/call")
     public DeferredResult<String> restCallbackHell(int idx) {
         // 오브젝트를 만들어서 컨트롤러에서 리턴하면 언제가 될지 모르지만 언제인가 DeferredResult에 값을 써주면
         // 그 값을 응답으로 사용
         DeferredResult<String> dr = new DeferredResult<>();
 
         ListenableFuture<ResponseEntity<String>> f1
-                = rt.getForEntity(SERVICE_URL1, String.class, "hello" + idx);
+                = rt.getForEntity(STEP2_SERVICE_URL1, String.class, "hello" + idx);
 
         f1.addCallback(s -> {
             ListenableFuture<ResponseEntity<String>> f2
-                    = rt.getForEntity(SERVICE_URL2, String.class, s.getBody());
+                    = rt.getForEntity(STEP2_SERVICE_URL2, String.class, s.getBody());
 
             f2.addCallback(s2 -> {
                 dr.setResult(s2.getBody());

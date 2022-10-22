@@ -11,7 +11,7 @@ import java.util.concurrent.Callable;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class RemoteController {
+public class TomcatMax1Controller {
     private final RemoteFacade remoteFacade;
 
     /**
