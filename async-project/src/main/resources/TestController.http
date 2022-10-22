@@ -1,26 +1,23 @@
-###
+### callable 동기
 GET http://localhost:8080/sync/callable
 
-###
+### callable 비동기
 GET http://localhost:8080/sync/callable2
 
-###
+### Mono 리턴
 GET http://localhost:8080/test/home?idx=1
 
-###
+### Mono Chain 방식
 GET http://localhost:8080/test/rest_chain?idx=2
 
-###
+### client(RestTemplate) + server(TomcatMax1Controller, TomcatMax1000Controller)
 GET http://localhost:8080/sync/home?idx=2
 
-###
+### client(AsyncRestTemplate / return ListenableFuture) + server(TomcatMax1Controller, TomcatMax1000Controller)
 GET http://localhost:8080/async/home?idx=2
 
-###
+### client(AsyncRestTemplate / return String) + server(TomcatMax1Controller, TomcatMax1000Controller)
 GET http://localhost:8080/async/home2?idx=2
 
-###
-GET http://localhost:8080/sync/step2/home?idx=3
-
-###
+### server(service1, service2) callback hell
 GET http://localhost:8080/hell/home?idx=2
