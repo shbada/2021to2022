@@ -26,6 +26,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    /* Netty */
+    implementation 'io.netty:netty-all:4.1.84.Final'
 }
 
 tasks.named('test') {

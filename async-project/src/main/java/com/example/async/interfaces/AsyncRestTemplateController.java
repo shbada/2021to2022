@@ -1,9 +1,11 @@
 package com.example.async.interfaces;
 
 import com.example.async.application.RestTemplateFacade;
+import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.Netty4ClientHttpRequestFactory;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,17 @@ public class AsyncRestTemplateController {
     static final String SERVICE_URL2 = "http://localhost:8081/service2?req={req}";
 
     // asynchronous
-    AsyncRestTemplate rt = new AsyncRestTemplate();
+//    AsyncRestTemplate rt = new AsyncRestTemplate();
+
+    // asynchronous + netty non-blocking
+    /*
+        Netty 적용
+        1) 비동기 요청을 처리하는 스레드의 수도 Netty의 non blocking I/O를 이용함으로써 비동기 요청을 처리하는 스레드도 줄여보기
+        2) 결과 : tomcat 스레드 1개, netty가 non blocking I/O를 사용하는데 필요로 하는 몇개의 스레드가 추가
+        -> 결과적으로 tomcat의 스레드 1개, netty의 non blocking I/O를 이용하기위한 필요한 스레드의 수만큼만 생성되어 클라이언트의 요청을 모두 처리
+     */
+    AsyncRestTemplate rt = new AsyncRestTemplate(
+            new Netty4ClientHttpRequestFactory(new NioEventLoopGroup(1)));
 
     /**
      * http://localhost:8080/async/home?idx=2
