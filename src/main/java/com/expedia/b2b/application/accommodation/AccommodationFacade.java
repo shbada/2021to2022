@@ -3,9 +3,10 @@ package com.expedia.b2b.application.accommodation;
 import com.expedia.b2b.domain.*;
 import com.expedia.b2b.domain.accommodation.AccommodationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class AccommodationFacade {
     private final AccommodationService accommodationService;

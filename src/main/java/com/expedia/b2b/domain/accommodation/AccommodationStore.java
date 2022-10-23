@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 /**
  * Adapter Service
  */
-@Service
 public interface AccommodationStore {
     void saveAccommodation(Accommodation accommodation);
     void saveAccommodationRole(AccommodationRole accommodationRole);
