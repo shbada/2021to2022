@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccommodationRoomFee {
+public class AccommodationRoomFee extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +31,4 @@ public class AccommodationRoomFee {
     private int active;
     private String feeName;
     private BigDecimal fee;
-
-    private String lastModifiedBy;
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private LocalDateTime createdAt;
 }

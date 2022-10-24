@@ -1,7 +1,12 @@
-package com.expedia.b2b.infrastructure;
+package com.expedia.b2b.infrastructure.accommodation;
 
 import com.expedia.b2b.domain.*;
 import com.expedia.b2b.domain.accommodation.AccommodationStore;
+import com.expedia.b2b.infrastructure.AccommodationRepository;
+import com.expedia.b2b.infrastructure.AccommodationRoleRepository;
+import com.expedia.b2b.infrastructure.AccommodationRoomFeeRepository;
+import com.expedia.b2b.infrastructure.AccommodationRoomInfoRepository;
+import com.expedia.b2b.infrastructure.AccommodationRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

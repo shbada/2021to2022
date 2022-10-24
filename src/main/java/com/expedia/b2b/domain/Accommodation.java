@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Accommodation {
+public class Accommodation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,9 +36,4 @@ public class Accommodation {
     private String respeEmail;
     private String respeHpno;
     private String telNo;
-
-    private String lastModifiedBy;
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private LocalDateTime createdAt;
 }

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccommodationRole {
+public class AccommodationRole extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +30,4 @@ public class AccommodationRole {
     private String progStatusCd;
     private String stoppedDts;
     private String stoppedRsn;
-
-    private String lastModifiedBy;
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private LocalDateTime createdAt;
 }

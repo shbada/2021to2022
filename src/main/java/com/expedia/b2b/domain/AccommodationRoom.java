@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccommodationRoom {
+public class AccommodationRoom extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,9 +29,4 @@ public class AccommodationRoom {
     private String roomType;
     private String roomName;
     private int maxEntranceCnt;
-
-    private String lastModifiedBy;
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private LocalDateTime createdAt;
 }

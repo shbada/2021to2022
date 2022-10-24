@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccommodationGroupCommonCode {
+public class AccommodationGroupCommonCode extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,9 +22,4 @@ public class AccommodationGroupCommonCode {
     private String grpCode;
     private String grpCodeName;
     private String grpCodeDesc;
-
-    private String lastModifiedBy;
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private LocalDateTime createdAt;
 }
