@@ -11,7 +11,8 @@ import net.jcip.annotations.*;
  */
 @NotThreadSafe
 public class UnsafeCountingFactorizer extends GenericServlet implements Servlet {
-    private long count = 0; /** 상태 추가 */
+    /** 상태 추가 */
+    private long count = 0;
 
     public long getCount() {
         return count;
