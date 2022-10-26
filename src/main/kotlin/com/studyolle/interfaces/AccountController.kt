@@ -20,7 +20,7 @@ class AccountController(
 ) {
     @PostMapping
     fun signUpSubmit(
-        @RequestBody @Valid signUpForm: AccountDto.SignUpForm
+        @RequestBody signUpForm: AccountDto.SignUpForm
     ) {
         accountFacade.processNewAccount(AccountDtoMapper.of(signUpForm))
     }

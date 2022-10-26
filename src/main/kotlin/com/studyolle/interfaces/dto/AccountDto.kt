@@ -12,8 +12,8 @@ class AccountDto {
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{3,20}$")
         var nickname: String,
 
-        @Email
         @NotBlank
+        @Email
         val email: String,
 
         @NotBlank
