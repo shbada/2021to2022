@@ -1,6 +1,7 @@
 package com.studyolle.domain.account
 
 import com.studyolle.domain.Account
+import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -10,6 +11,11 @@ class AccountService(
     private val passwordEncoder: PasswordEncoder,
     private val emailService: EmailService
 ) {
+    private val log = LoggerFactory.getLogger(this::class.java)
+
+    /**
+     * 회원가입
+     */
     fun processNewAccount(signUpForm: AccountCommand.SignUpForm) {
         /* 신규 회원 저장 */
         saveNewAccount(signUpForm)
@@ -31,6 +37,9 @@ class AccountService(
         accountStore.saveNewAccount(account)
     }
 
+    /**
+     * 토큰 검증
+     */
     fun sendSignUpConfirmEmail(newAccount: Account) {
         /* email content */
         val contentMap = mutableMapOf<String, String>();
@@ -43,5 +52,23 @@ class AccountService(
 
         /* send */
         emailService.sendEmail(contentMap.entries.joinToString())
+    }
+
+    fun completeSignUp(email: String, token: String) {
+        /* email 로 회원 조회 */
+        val account: Account? = accountStore.getAccountByEmail(email)
+
+        /* check1. 이메일 유효 확인 */
+        if (account == null) {
+            throw Exception()
+        }
+
+        /* check2. 토큰 유효 확인 */
+        if (!account.isValidToken(token)) {
+            log.info("isValidToken false")
+        }
+
+        /* 계정의 이메일 인증 처리 */
+        account.completeSignUp()
     }
 }

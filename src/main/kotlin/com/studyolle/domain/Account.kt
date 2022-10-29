@@ -23,6 +23,9 @@ class Account (
     var emailCheckToken: String? = null,
     var emailCheckTokenGeneratedAt: LocalDateTime? = null,
 
+    // 가입일자
+    var joinedAt : LocalDateTime? = null,
+
     /* account_tags 테이블 생성 */
     @ManyToMany
     val tags: Set<Tag> = HashSet(),
@@ -34,5 +37,14 @@ class Account (
     fun generateEmailCheckToken() {
         emailCheckToken = UUID.randomUUID().toString()
         emailCheckTokenGeneratedAt = LocalDateTime.now()
+    }
+
+    fun isValidToken(token: String): Boolean {
+        return emailCheckToken == token
+    }
+
+    fun completeSignUp(){
+        emailVerified = true
+        joinedAt = LocalDateTime.now()
     }
 }

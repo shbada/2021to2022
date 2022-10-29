@@ -12,4 +12,8 @@ class AccountStoreImpl(
     override fun saveNewAccount(account: Account): Account {
         return accountRepository.save(account)
     }
+
+    override fun getAccountByEmail(email: String): Account? {
+        return accountRepository.findByEmail(email)
+    }
 }
