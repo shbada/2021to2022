@@ -1,5 +1,5 @@
 # kotlin-lecture
-자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide)
+강의 : 자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide)
 
 ### [수강일정]
 - 수강완료 
