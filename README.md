@@ -1,5 +1,6 @@
-# java_MultiThread_Concurrency
-[강의] 자바 멀티쓰레드 이해하기
+# concurrency_lecture1
+- [STEP1]
+  - [강의] 자바 멀티쓰레드 이해하기
 
 ### [수강일정]
 - 2022.10.31 ~ 진행중
