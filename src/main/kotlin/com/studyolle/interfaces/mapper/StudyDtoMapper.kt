@@ -7,6 +7,7 @@ class StudyDtoMapper {
     companion object {
         fun of(registerForm: StudyDto.RegisterForm): StudyCommand.RegisterForm =
             StudyCommand.RegisterForm(
+                email = registerForm.email,
                 path = registerForm.path,
                 title = registerForm.title,
                 shortDescription = registerForm.shortDescription,

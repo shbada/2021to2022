@@ -47,5 +47,7 @@ class Study(
     val useBanner : Boolean = false,
     var memberCount : Int = 0,
 ) {
-
+    fun addManager(account: Account?) {
+        members.add(account!!)
+    }
 }

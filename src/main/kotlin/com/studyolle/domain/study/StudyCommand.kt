@@ -4,6 +4,7 @@ import com.studyolle.domain.Study
 
 class StudyCommand {
     data class RegisterForm(
+        val email: String,
         val path: String,
         val title: String,
         var shortDescription: String,
