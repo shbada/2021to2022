@@ -12,4 +12,8 @@ class StudyFacade(
         studyService.createNewStudy(registerForm)
     }
 
+    fun getStudy(studyIdx: Long) {
+        studyService.getStudy(studyIdx)
+    }
+
 }

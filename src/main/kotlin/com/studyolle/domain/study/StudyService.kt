@@ -1,11 +1,14 @@
 package com.studyolle.domain.study
 
+import com.studyolle.common.exception.BadRequestException
+import com.studyolle.common.exception.ErrorMessage
 import com.studyolle.domain.Account
 import com.studyolle.domain.Study
 import com.studyolle.domain.account.AccountStore
 import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class StudyService(
@@ -16,16 +19,23 @@ class StudyService(
 
     fun createNewStudy(registerForm: StudyCommand.RegisterForm) {
         /* get manager */
-        val manager: Account? = accountStore.getAccountByEmail(registerForm.email)
-
-        if (manager == null) {
-            // error
-        }
+        val manager: Account = accountStore.getAccountByEmail(registerForm.email)
+            ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
 
         val study: Study = registerForm.toEntity()
         study.addManager(manager);
 
         /* 스터디 저장 */
         studyStore.createNewStudy(study)
+    }
+
+    fun getStudy(studyIdx: Long): Study {
+        val study: Optional<Study> = studyStore.getStudy(studyIdx)
+
+        if (study.isEmpty) {
+            throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+        }
+
+        return study.get()
     }
 }
