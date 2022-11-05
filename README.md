@@ -19,3 +19,6 @@
 |_step07_daemonThread|수강완료|2022/11/04|-|
 |_step08_callable|수강완료|2022/11/04|-|
 |_step09_parallel_exam|수강완료|2022/11/04|-|
+|_step10_synchronized|수강완료|2022/11/05|-|
+|_step11_static_data_sync|수강완료|2022/11/05|-|
+|_step12_deadlock|수강완료|2022/11/05|-|
