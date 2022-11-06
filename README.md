@@ -22,3 +22,4 @@
 |_step10_synchronized|수강완료|2022/11/05|-|
 |_step11_static_data_sync|수강완료|2022/11/05|-|
 |_step12_deadlock|수강완료|2022/11/05|-|
+|_step13_Reentrant_Locks|수강완료|2022/11/06|-|
