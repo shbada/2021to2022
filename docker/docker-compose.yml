@@ -1,14 +1,8 @@
 # docker compose -f docker-compose.yml up -d --build
-# docker compose -f docker-compose.yml build --no-cache
-# redis-cli: docker exec -it {containerId} redis-cli
-   # keys *
-   # get key {keyName}
 # postgresql
    # psql -U studyollejpa
    # create database studyolle;
    # grant all privileges on database studyolle to studyollejpa;
-# API 테스트
-  # Login 요청
 
 version: "3.9"
 
