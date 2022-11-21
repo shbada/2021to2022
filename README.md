@@ -1,5 +1,7 @@
 # java_algorithm
 
+### 목표
+- 매일 1문제씩 풀기
 
 ### 백준
 - https://www.acmicpc.net/
