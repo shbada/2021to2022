@@ -1,8 +1,7 @@
 package com.studyolle.interfaces
 
 import com.studyolle.application.StudyFacade
-import com.studyolle.common.output.CommonResponse
-import com.studyolle.common.output.ResponseDto
+import com.studyolle.common.response.CommonResponse
 import com.studyolle.interfaces.dto.StudyDto
 import com.studyolle.interfaces.mapper.StudyDtoMapper
 import lombok.RequiredArgsConstructor

@@ -1,6 +1,6 @@
 package com.studyolle.common.exception
 
-import com.studyolle.common.output.CommonResponse
+import com.studyolle.common.response.CommonResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler

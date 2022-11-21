@@ -1,4 +1,4 @@
-package com.studyolle.common.output
+package com.studyolle.common.response
 
 import com.studyolle.common.exception.ErrorMessage
 import org.springframework.http.ResponseEntity

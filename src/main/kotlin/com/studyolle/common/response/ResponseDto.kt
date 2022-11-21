@@ -1,4 +1,4 @@
-package com.studyolle.common.output
+package com.studyolle.common.response
 
 class ResponseDto<T> {
     var code: String = "00"
