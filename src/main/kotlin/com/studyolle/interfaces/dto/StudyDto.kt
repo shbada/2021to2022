@@ -27,4 +27,15 @@ class StudyDto {
         @NotBlank
         val fullDescription: String,
     )
+
+    data class LeaveForm(
+        @NotBlank
+        @Email
+        var email: String,
+
+        @NotBlank
+        @Length(min = 2, max = 20)
+        @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{2,20}$")
+        var path: String,
+    )
 }

@@ -38,4 +38,13 @@ class StudyService(
 
         return study.get()
     }
+
+    fun findStudyWithMembersByPath(path: String): Study {
+        return studyStore.findStudyWithMembersByPath(path)
+    }
+
+    fun removeMember(study: Study, email: String) {
+        val account = accountStore.getAccountByEmail(email)
+        study.removeMember(account)
+    }
 }

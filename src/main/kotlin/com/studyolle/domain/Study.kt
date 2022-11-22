@@ -50,4 +50,9 @@ class Study(
     fun addManager(account: Account?) {
         members.add(account!!)
     }
+
+    fun removeMember(account: Account?) {
+        this.members.remove(account)
+        this.memberCount--
+    }
 }

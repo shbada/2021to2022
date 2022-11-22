@@ -16,4 +16,8 @@ class StudyStoreImpl(
     override fun getStudy(studyIdx: Long): Optional<Study> {
         return studyRepository.findById(studyIdx)
     }
+
+    override fun findStudyWithMembersByPath(path: String): Study {
+        return studyRepository.findStudyWithMembersByPath(path)
+    }
 }

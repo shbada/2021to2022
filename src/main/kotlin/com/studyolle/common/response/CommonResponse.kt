@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity
 
 class CommonResponse {
     companion object {
+        fun send(): ResponseEntity<ResponseDto<Void>> {
+            return ResponseEntity.ok().body(ResponseDto())
+        }
+
         fun <T> send(items: T): ResponseEntity<ResponseDto<T>> {
             return ResponseEntity.ok().body(ResponseDto<T>().apply {
                 data = items
