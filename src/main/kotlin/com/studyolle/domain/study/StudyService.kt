@@ -39,12 +39,14 @@ class StudyService(
         return study.get()
     }
 
-    fun findStudyWithMembersByPath(path: String): Study {
+    fun findStudyWithMembersByPath(path: String): Study? {
         return studyStore.findStudyWithMembersByPath(path)
     }
 
     fun removeMember(study: Study, email: String) {
         val account = accountStore.getAccountByEmail(email)
+            ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+
         study.removeMember(account)
     }
 }

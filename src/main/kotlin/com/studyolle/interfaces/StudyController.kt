@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*
 class StudyController(
     private val studyFacade: StudyFacade,
 ) {
-
     /**
      * 스터디 등록
      */

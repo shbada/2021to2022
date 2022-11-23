@@ -1,5 +1,7 @@
 package com.studyolle.application
 
+import com.studyolle.common.exception.BadRequestException
+import com.studyolle.common.exception.ErrorMessage
 import com.studyolle.domain.Study
 import com.studyolle.domain.study.StudyCommand
 import com.studyolle.domain.study.StudyService
@@ -17,8 +19,9 @@ class StudyFacade(
         studyService.getStudy(studyIdx)
     }
 
-    fun findStudyWithMembersByPath(path: String): Study {
-        return studyService.findStudyWithMembersByPath(path);
+    fun findStudyWithMembersByPath(path: String): Study? {
+        return studyService.findStudyWithMembersByPath(path)
+            ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
     }
 
     fun removeMember(study: Study, email: String) {
