@@ -40,7 +40,7 @@ class MileageServiceAsyncTest {
     }
 
     /**
-     * 1초
+     * 2초
      * threadName : ForkJoinPool.commonPool-worker-19
      * threadName : ForkJoinPool.commonPool-worker-5
      * @throws InterruptedException
