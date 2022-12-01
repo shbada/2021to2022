@@ -1,8 +1,8 @@
 package com.mileage.interfaces.mapper;
 
 import com.mileage.common.util.DateUtil;
-import com.mileage.domain.mileageHistory.MileageHistoryCommand;
-import com.mileage.domain.mileageHistory.MileageHistorySearchCommand;
+import com.mileage.domain.mileagehistory.MileageHistoryCommand;
+import com.mileage.domain.mileagehistory.MileageHistorySearchCommand;
 import com.mileage.interfaces.dto.MileageHistoryDto;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.mileage.domain.mileageHistory;
+package com.mileage.domain.mileagehistory;
 
 import com.mileage.domain.MileageHistory;
 

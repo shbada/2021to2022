@@ -1,9 +1,9 @@
 package com.mileage.application;
 
 import com.mileage.domain.MileageHistory;
-import com.mileage.domain.mileageHistory.MileageHistoryCommand;
-import com.mileage.domain.mileageHistory.MileageHistorySearchCommand;
-import com.mileage.domain.mileageHistory.MileageHistoryService;
+import com.mileage.domain.mileagehistory.MileageHistoryCommand;
+import com.mileage.domain.mileagehistory.MileageHistorySearchCommand;
+import com.mileage.domain.mileagehistory.MileageHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

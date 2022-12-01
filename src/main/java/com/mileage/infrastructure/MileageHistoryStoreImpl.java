@@ -1,7 +1,7 @@
 package com.mileage.infrastructure;
 
 import com.mileage.domain.MileageHistory;
-import com.mileage.domain.mileageHistory.MileageHistoryStore;
+import com.mileage.domain.mileagehistory.MileageHistoryStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

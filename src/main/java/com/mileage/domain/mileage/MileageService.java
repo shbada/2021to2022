@@ -5,7 +5,7 @@ import com.mileage.common.lock.RedissonExecuteService;
 import com.mileage.common.lock.RedissonLock;
 import com.mileage.common.response.ErrorCode;
 import com.mileage.domain.Mileage;
-import com.mileage.domain.mileageHistory.MileageHistoryService;
+import com.mileage.domain.mileagehistory.MileageHistoryService;
 import com.mileage.infrastructure.MileageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

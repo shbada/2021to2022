@@ -1,7 +1,7 @@
 package com.mileage.domain;
 
 import com.mileage.domain.enums.MileageManageType;
-import com.mileage.domain.mileageHistory.MileageHistoryCommand;
+import com.mileage.domain.mileagehistory.MileageHistoryCommand;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
