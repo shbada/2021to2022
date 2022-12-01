@@ -35,3 +35,4 @@
 |kafka-configs.sh|수강완료|2022/10/20|-|
 |kafka-console-producer.sh|수강완료|2022/10/20|-|
 |kafka-console-consumer.sh|수강완료|2022/11/09|-|
+|kafka-consumer-groups.sh|수강완료|2022/12/01|-|
