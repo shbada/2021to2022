@@ -5,6 +5,7 @@ import com.mileage.domain.mileage.MileageReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,5 +16,10 @@ public class MileageReaderImpl implements MileageReader {
     @Override
     public Optional<Mileage> findById(Long mileageIdx) {
         return mileageRepository.findById(mileageIdx);
+    }
+
+    @Override
+    public List<Mileage> findAll() {
+        return mileageRepository.findAll();
     }
 }

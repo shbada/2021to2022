@@ -5,13 +5,18 @@ import com.mileage.common.lock.RedissonExecuteService;
 import com.mileage.common.lock.RedissonLock;
 import com.mileage.common.response.ErrorCode;
 import com.mileage.domain.Mileage;
+import com.mileage.domain.external.ItemService;
+import com.mileage.domain.external.MemberService;
 import com.mileage.domain.mileagehistory.MileageHistoryService;
 import com.mileage.infrastructure.MileageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +27,8 @@ public class MileageService {
     private final MileageHistoryService mileageHistoryService;
     private final RedissonExecuteService redissonExecuteService;
     private final MileageRepository mileageRepository;
+    private final ItemService itemService;
+    private final MemberService memberService;
 
     @RedissonLock(key = "mileageIdx")
     public int charge(Long mileageIdx, MileageCommand.SavePoint savePoint) {
@@ -94,5 +101,37 @@ public class MileageService {
         }
 
         return getMileage.get();
+    }
+
+    /**
+     * 동기
+     * @return
+     */
+    public List<Mileage> getPointList() {
+        int itemCnt = itemService.callItemTest();
+        int memberCnt = memberService.callMemberTest();
+
+//        log.info("(itemCnt + memberCnt) : " + itemCnt + memberCnt);
+
+        return mileageReader.findAll();
+    }
+
+    /**
+     * 비동기
+     * @return
+     */
+    public List<Mileage> getAsyncPointList() {
+        CompletableFuture<Integer> itemFuture = CompletableFuture.supplyAsync(itemService::callItemTest);
+        CompletableFuture<Integer> memberFuture = CompletableFuture.supplyAsync(memberService::callMemberTest);
+
+//        CompletableFuture<Integer> integerCompletableFuture = itemFuture.thenCombine(memberFuture, Integer::sum);
+
+//        try {
+//            log.info("(itemCnt + memberCnt) : " + integerCompletableFuture.get());
+//        } catch (InterruptedException | ExecutionException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        return mileageReader.findAll();
     }
 }

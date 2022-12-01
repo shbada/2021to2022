@@ -2,6 +2,8 @@ package com.mileage.domain;
 
 import com.mileage.common.exception.BadRequestException;
 import com.mileage.common.response.ErrorCode;
+import com.mileage.domain.mileage.MileageCommand;
+import com.mileage.domain.mileagehistory.MileageHistoryCommand;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,5 +32,13 @@ public class Mileage extends BaseEntity {
         }
 
         this.point = this.point - usePoint;
+    }
+
+    public MileageCommand.Info toCommand() {
+        MileageCommand.Info info = new MileageCommand.Info();
+        info.setMileageIdx(this.idx);
+        info.setPoint(this.point);
+
+        return info;
     }
 }

@@ -25,4 +25,13 @@ public class MileageDto {
         private Long mileageIdx;
         private int point;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class InfoResponse {
+        private Long mileageIdx;
+        private int point;
+    }
 }

@@ -16,4 +16,13 @@ public class MileageCommand {
         private int point;
         private MileageManageType mileageManageType;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Info {
+        private Long mileageIdx;
+        private int point;
+    }
 }
