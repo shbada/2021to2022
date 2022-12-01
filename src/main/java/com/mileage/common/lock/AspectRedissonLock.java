@@ -13,6 +13,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Component
@@ -36,9 +37,8 @@ public class AspectRedissonLock {
 
         try {
             /* get lock */
-            boolean isPossible = rLock.tryLock(distributeLock.waitTime(), distributeLock.leaseTime(), distributeLock.timeUnit());
+            boolean isPossible = rLock.tryLock(3L, 3L, TimeUnit.SECONDS);
 
-//            isPossible = false;
             if (!isPossible) {
                 throw new LockFailException();
             }
@@ -51,7 +51,6 @@ public class AspectRedissonLock {
             throw be;
         } catch (Exception e) {
             e.printStackTrace();
-            Thread.currentThread().interrupt();
             throw new LockFailException();
         } finally {
             rLock.unlock();

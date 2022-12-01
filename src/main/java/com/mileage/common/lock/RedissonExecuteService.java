@@ -18,6 +18,12 @@ import java.util.concurrent.TimeUnit;
 public class RedissonExecuteService {
     private final RedissonClient redissonClient;
 
+    /**
+     * 람다 활용
+     * @param mileageIdx
+     * @param callable
+     * @return
+     */
     public Mileage execute(Long mileageIdx, Callable<Mileage> callable) {
         /* create key */
         String key = String.valueOf(mileageIdx);
