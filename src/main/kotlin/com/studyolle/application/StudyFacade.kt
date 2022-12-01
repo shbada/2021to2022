@@ -19,7 +19,7 @@ class StudyFacade(
         studyService.getStudy(studyIdx)
     }
 
-    fun findStudyWithMembersByPath(path: String): Study? {
+    fun findStudyWithMembersByPath(path: String): Study {
         return studyService.findStudyWithMembersByPath(path)
             ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
     }
