@@ -60,7 +60,8 @@ class MileageServiceAsyncTest {
         // given
 
         // when
-        ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+        // thread 30개, 쓰레드풀의 쓰레드 10개, 그러므로 3초 x 3 = 9초
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
         IntStream.range(0, threadCount).forEach(e -> executorService.submit(() -> {
@@ -82,7 +83,8 @@ class MileageServiceAsyncTest {
         // given
 
         // when
-        ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+        // thread 30개, 쓰레드풀의 쓰레드 10개,
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
         IntStream.range(0, threadCount).forEach(e -> executorService.submit(() -> {
