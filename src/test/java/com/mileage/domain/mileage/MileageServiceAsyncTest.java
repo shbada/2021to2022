@@ -58,9 +58,10 @@ class MileageServiceAsyncTest {
     @Test
     void 동기방식_포인트_조회한다_동시요청() throws InterruptedException {
         // given
+        int threadCount = 100; // 100 개 요청
 
         // when
-        // thread 30개, 쓰레드풀의 쓰레드 10개, 그러므로 3초 x 3 = 9초
+        // thread 100개, 쓰레드풀의 쓰레드 10개, 그러므로 3초 x 10 = 30초
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
@@ -81,6 +82,7 @@ class MileageServiceAsyncTest {
     @Test
     void 비동기방식_포인트_조회한다_동시요청() throws InterruptedException {
         // given
+        int threadCount = 100; // 100 개 요청
 
         // when
         // thread 30개, 쓰레드풀의 쓰레드 10개,
