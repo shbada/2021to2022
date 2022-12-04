@@ -124,13 +124,17 @@ public class MileageService {
         CompletableFuture<Integer> itemFuture = CompletableFuture.supplyAsync(itemService::callItemTest);
         CompletableFuture<Integer> memberFuture = CompletableFuture.supplyAsync(memberService::callMemberTest);
 
+//        List<Mileage> all = mileageReader.findAll();
+//
 //        CompletableFuture<Integer> integerCompletableFuture = itemFuture.thenCombine(memberFuture, Integer::sum);
-
+//
 //        try {
 //            log.info("(itemCnt + memberCnt) : " + integerCompletableFuture.get());
 //        } catch (InterruptedException | ExecutionException e) {
 //            throw new RuntimeException(e);
 //        }
+//
+//        return all;
 
         return mileageReader.findAll();
     }

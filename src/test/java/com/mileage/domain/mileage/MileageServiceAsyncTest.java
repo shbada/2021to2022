@@ -85,7 +85,9 @@ class MileageServiceAsyncTest {
         int threadCount = 100; // 100 개 요청
 
         // when
-        // thread 30개, 쓰레드풀의 쓰레드 10개,
+        // thread 100개, 쓰레드풀의 쓰레드 10개
+        // 해당 메서드가 CompletableFuture을 호출하고 결과값을 받거나(블로킹)하지 않으므로 호출하고 끝
+        // 결국 걸리는 시간은 mileageReader.findAll() 을 100개 수행하는 시간일 것
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
