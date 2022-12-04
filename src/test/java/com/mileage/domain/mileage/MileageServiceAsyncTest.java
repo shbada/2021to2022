@@ -56,6 +56,16 @@ class MileageServiceAsyncTest {
     }
 
     @Test
+    void 비동기방식_포인트_조회한다_결과블로킹() throws InterruptedException {
+        // given
+
+        // when
+        mileageService.getAsyncPointListUseCombine();
+
+        // then
+    }
+
+    @Test
     void 동기방식_포인트_조회한다_동시요청() throws InterruptedException {
         // given
         int threadCount = 100; // 100 개 요청
@@ -94,6 +104,32 @@ class MileageServiceAsyncTest {
         IntStream.range(0, threadCount).forEach(e -> executorService.submit(() -> {
                     try {
                         mileageService.getAsyncPointList();
+                    } finally {
+                        countDownLatch.countDown();
+                    }
+                }
+        ));
+
+        countDownLatch.await();
+
+        // then
+    }
+
+    @Test
+    void 비동기방식_포인트_조회한다_동시요청_결과블로킹() throws InterruptedException {
+        // given
+        int threadCount = 100; // 100 개 요청
+
+        // when
+        // thread 100개, 쓰레드풀의 쓰레드 10개, 그러므로 2초 x 10 = 20초
+        // 근데 34초 걸림
+        // 아무래도 thenCombine() 로직에 시간이 걸리는거같다 ?
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+
+        IntStream.range(0, threadCount).forEach(e -> executorService.submit(() -> {
+                    try {
+                        mileageService.getAsyncPointListUseCombine();
                     } finally {
                         countDownLatch.countDown();
                     }
