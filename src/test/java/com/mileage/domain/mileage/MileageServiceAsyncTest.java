@@ -121,9 +121,19 @@ class MileageServiceAsyncTest {
         int threadCount = 100; // 100 개 요청
 
         // when
-        // thread 100개, 쓰레드풀의 쓰레드 10개, 그러므로 2초 x 10 = 20초
-        // 근데 34초 걸림
-        // 아무래도 thenCombine() 로직에 시간이 걸리는거같다 ?
+        // thread 100개, 쓰레드풀의 쓰레드 10개
+        // 34초 걸림
+        // 2022-12-05 21:01:10.248  INFO 78885 --- [pool-1-thread-3] c.mileage.domain.mileage.MileageService  : (itemCnt + memberCnt) : 2
+        // 2022-12-05 21:01:10.251  INFO 78885 --- [pool-1-thread-4] c.mileage.domain.mileage.MileageService  : (itemCnt + memberCnt) : 2
+        // ...
+        // 2022-12-05 21:01:12.275  INFO 78885 --- [pool-1-thread-3] c.mileage.domain.mileage.MileageService  : (itemCnt + memberCnt) : 2
+        // 1바퀴인 쓰레드 10개가 2초걸림
+        // 그 다음
+        // 2022-12-05 21:01:13.259  INFO 78885 --- [pool-1-thread-8] c.mileage.domain.mileage.MileageService  : (itemCnt + memberCnt) : 2
+        // 그 다음
+        // 2022-12-05 21:01:16.287  INFO 78885 --- [pool-1-thread-9] c.mileage.domain.mileage.MileageService  : (itemCnt + memberCnt) : 2
+        // 10개씩 -> 3초 수행
+        // -> 10 x 3초 = 30초 정도?
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
