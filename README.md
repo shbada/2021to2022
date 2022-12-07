@@ -1,7 +1,5 @@
 # elasticsearch
 
-### Project List
-| | |
-|-|-|
-|프로젝트명|공부목적|
-|elasticsearch|[API] Elasticsearch|
+#### [1) elasticsearch](https://github.com/seohaem/elasticsearch/tree/master/elasticsearch)
+> SpringBoot + ElasticSearch API 호출 연습
+
