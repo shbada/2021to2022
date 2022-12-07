@@ -1,0 +1,15 @@
+spring:
+  # Postgres Database
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jpa_book
+    username: jpa_book
+    password: jpabook
+    driver-class-name: org.postgresql.Driver
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
