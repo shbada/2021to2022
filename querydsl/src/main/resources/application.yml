@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb # http://localhost:8080/h2-console
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create  # table drop -> create
+    properties:
+      hibernate:
+        # show_sql: true # system.out.println()
+        format_sql: true # query pretty
+        use_sql_comments: true # execute Jpql show
+  profiles:
+    active: local
+logging.level:
+  org.hibernate.SQL: debug # hibernate execute query log
+# org.hibernate.type: trace # binding parameter log
