@@ -1,0 +1,2 @@
+com/sp/fc/BasicTestApplicationTest.java
+ com.sp.fc.BasicTestApplicationTest
