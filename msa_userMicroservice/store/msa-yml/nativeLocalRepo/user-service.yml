@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username : sa
+    password: 1234. # '{cipher}adsadasdqweqweqweqweqw' 암호화된 문자열이라는 표시로 표기
+
+order_service:
+  # Url: htto://127.0.0.1:8000/order-service/%s/orders
+  url : http://order-service/order-service/%s/orders
+  # RestTemplate Bean 메소드에 @LoadBalanced 어노테이션 추가시, 127.0.0.1:8000 -> Microservice name (order-service)로 변경 가능
+  exception:
+    order_is_empty: user's orders is empty.

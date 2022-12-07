@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+#      name: ecommerce  # config-service 에 설정된 yml 파일명
+      name: user-service
+  profiles:
+    active: dev
