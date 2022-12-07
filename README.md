@@ -52,7 +52,7 @@
 
 #### [9) lombok-study](https://github.com/seohaem/java/tree/master/lombok-study)
 > lombok의 delombok 코드 확인 및 정리   
-> 포스팅 : https://devfunny.tistory.com/520
+> blog  : https://devfunny.tistory.com/520
 
 ---
 
