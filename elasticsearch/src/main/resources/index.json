@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "serviceId": {
+        "type": "keyword"
+      },
+      "location": {
+        "type": "geo_point"
+      },
+      "startDate": {
+        "type": "date"
+      },
+      "endDate": {
+        "type": "date"
+      },
+      "imgPath": {
+        "type": "text"
+      }
+    }
+  }
+}
