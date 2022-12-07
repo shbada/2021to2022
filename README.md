@@ -33,7 +33,7 @@
 ---
 
 #### [7) studyolle_redo](https://github.com/seohaem/side-project/tree/master/studyolle_redo)
-> 목표 : [studyolle] 강의 내용 직접 구현해보기
+> 목표 : [studyolle] 강의 내용 직접 구현해보기  
 > 강의 git : https://github.com/seohaem/jpa/tree/master/studyolle_jpa
 
 ---
