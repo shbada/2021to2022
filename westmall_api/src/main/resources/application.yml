@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/westmalldb?characeterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: westmall
+      password: westmall
+  jpa:
+    show-sql: true # query 출력
+    hibernate:
+      ddl-auto: create # 항상 새로 생성하고, 종료되면 자동으로 drop 처리한다. (운영에선 none 대부분)
+    properties:
+      format_sql: true # query format
