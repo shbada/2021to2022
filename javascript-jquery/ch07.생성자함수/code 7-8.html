@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        //프로토타입: 생성자 함수로 생성된 객체가 공통으로 가지는 공간.
+        
+        function Student(name, korean, math, english, science){
+            this.이름 = name;
+            this.국어 = korean;
+            this.수학 = math;
+            this.영어 = english;
+            this.과학 = science;
+        }
+        
+        //프로토타입은 우리가 만드는 것이 아니다.
+        //함수 안에 자동으로 만들어지는 arguments와 마찬가지로, 자바스크립트의 모든 함수는 변수 prototype을 갖는다.
+        //prototype : 객체
+        
+        //프로토타입을 사용하면, 기존 객체에 추가로 메서드를 제공할 수 있다.
+        Student.prototype.getSum = function () { };
+        Student.prototype.getAverage = function() { };
+        Student.prototype.toString = function() { };
+    </script>
+</body>
+</html>

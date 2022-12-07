@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        function test(a, b, c, d){
+            console.log(`${a}:${b}:${c}:${d}`);
+        }
+        
+        var array = [1,2];
+        
+        test(273, 52, ...array);
+        
+        test(...array, ...array);
+    </script>
+</body>
+</html>
