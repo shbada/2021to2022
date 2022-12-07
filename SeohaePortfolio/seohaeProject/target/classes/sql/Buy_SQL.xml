@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="buySql">
+	<select id="getCartList" parameterType="String" resultType="com.co.kr.cart.vo.CartVo">
+		select C.CART_NO,
+			   C.PD_AMOUNT,
+			   C.USER_ID,
+			   C.PD_NO,
+			   B.PD_NAME,
+			   B.PD_URL,
+			   B.PD_PRICE
+			   FROM BOOKCART C, BOOK B 
+	     WHERE C.CART_NO = #{cart_no}
+	     AND   B.PD_NO = (SELECT PD_NO FROM BOOKCART WHERE CART_NO = #{cart_no}) 
+	     
+	     /* com.co.kr.buy.dao.BuyDao.getCartList - 장바구니에서 상품 가져오기  */   
+	</select>
+	
+	<insert id="buyInsert" parameterType="com.co.kr.buy.vo.BuyVo">
+		INSERT INTO BUY(BUY_NO, 
+						BUY_TOTALBINO, 
+						BUY_REGDATE, 
+						BUY_NAME, 
+						BUY_PHONE, 
+						BUY_ZIP_CODE, 
+						BUY_FIRST_ADDR, 
+						BUY_SECOND_ADDR, 
+						USER_ID)
+		values (buy_no_seq.nextval, 
+				#{buyTotalbino},
+				to_char(sysdate, 'YYYY-MM-DD HH:MI'),
+				#{buyName},
+				#{buyPhone},
+				#{buyZipCode},
+				#{buyFirstAddr},
+				#{buySecondAddr},
+				#{userId}
+		)
+		
+		/* com.co.kr.buy.dao.BuyDao.buyInsert - 구매 완료 */   
+	</insert>
+	
+	<select id="cartList" parameterType="String" resultType="com.co.kr.cart.vo.CartVo">
+		SELECT PD_AMOUNT,
+			   PD_NO  
+			   FROM BOOKCART WHERE CART_NO = #{cartNo}
+			   
+		/* com.co.kr.buy.dao.BuyDao.cartList - 장바구니 조회 */   	
+	</select>
+	
+	<select id="getBuy_no" parameterType="com.co.kr.cart.vo.CartVo" resultType="int">
+		SELECT MAX(BUY_NO) FROM BUY WHERE USER_ID=#{userId}
+		
+		/* com.co.kr.buy.dao.BuyDao.getBuy_no - 구매번호 가져오기 */   
+	</select>
+	
+	<insert id="buyInfo_insert" parameterType="java.util.HashMap">
+		INSERT INTO BUY_INFO (BUY_NO, 
+							  PD_NO, 
+							  PD_QT, 
+							  PD_PRICE
+							  ) 
+		values (#{buyNo},
+				#{pdNo},
+				#{pdAmount},
+				(SELECT PD_PRICE FROM BOOK WHERE PD_NO = #{pdNo}) 
+		)
+		
+		/* com.co.kr.buy.dao.BuyDao.buyInfo_insert - 구매내역 상세정보 저장 */   
+	</insert>
+	
+	<delete id="delete_product" parameterType="String">
+		DELETE FROM BOOKCART WHERE CART_NO = #{cartNo}
+		
+		/* com.co.kr.buy.dao.BuyDao.delete_product - 장바구니에서 구매된 상품 삭제 */   
+	</delete>
+
+	<select id="purchaseHistory" parameterType="String" resultType="com.co.kr.buy.vo.BuyVo">
+		select
+				B.BUY_NO, 
+				B.BUY_TOTALBINO, 
+				B.BUY_REGDATE, 
+				B.BUY_NAME, 
+				B.BUY_PHONE, 
+				B.BUY_ZIP_CODE, 
+				B.BUY_FIRST_ADDR, 
+				B.BUY_SECOND_ADDR, 
+				B.USER_ID,
+				I.PD_NO, 
+				I.PD_QT, 
+				I.PD_PRICE,
+                P.PD_NAME,
+                P.PD_URL
+			FROM BUY B JOIN BUY_INFO I ON B.BUY_NO = I.buy_no 
+                 JOIN BOOK P ON I.PD_NO = P.PD_NO AND B.USER_ID = #{userId}
+			ORDER BY B.BUY_NO DESC
+			
+			/* com.co.kr.buy.dao.BuyDao.purchaseHistory - 구매내역 조회 */   
+	</select>
+	
+	<select id="buyDetail" parameterType="com.co.kr.buy.vo.BuyVo" resultType="com.co.kr.buy.vo.BuyVo">
+		select DISTINCT
+				B.BUY_NO, 
+				B.BUY_TOTALBINO, 
+				B.BUY_REGDATE, 
+				B.BUY_NAME, 
+				B.BUY_PHONE, 
+				B.BUY_ZIP_CODE, 
+				B.BUY_FIRST_ADDR, 
+				B.BUY_SECOND_ADDR, 
+				B.USER_ID,
+				I.PD_NO, 
+				I.PD_QT, 
+				I.PD_PRICE,
+                P.PD_NAME,
+                P.PD_URL
+			FROM BUY B JOIN BUY_INFO I ON B.BUY_NO = I.buy_no 
+                 JOIN BOOK P ON I.PD_NO = P.PD_NO AND B.BUY_NO = #{buyNo}
+			
+			/* com.co.kr.buy.dao.BuyDao.buyDetail - 구매내역 상세정보 */   
+	</select>
+	
+	<insert id="buyUseBino" parameterType="com.co.kr.bino.vo.BinoVo">
+	    <![CDATA[
+	        INSERT INTO BINO
+	        (
+	            BINO_NO,
+	            BINO,
+				USER_ID,
+				BINO_REGDATE,
+				BINO_YN,
+				BINO_CG
+	        )
+	        VALUES
+	        (
+	            seq_bino.NEXTVAL,
+	            #{bino}, 
+	            #{userId}, 
+	            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
+	            #{binoYn}, 
+	            #{binoCg}
+	        )
+	    ]]>
+	    
+	    /* com.co.kr.buy.dao.BuyDao.buyUseBino - 구매시 bino 사용내역 저장 */   
+	</insert>
+</mapper>

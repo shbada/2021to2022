@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="noticeSql">
+	<select id="selectNotice" parameterType="com.co.kr.notice.vo.NoticeVo" resultType="com.co.kr.notice.vo.NoticeVo">
+   		SELECT 
+   			A.RM,
+			A.NO,
+			A.TITLE, 
+			A.CONTENTS, 
+			A.WRITER, 
+			A.IMG,
+			(substr(REGDATE,0,10)) AS REGDATE, 
+			A.VIEW_CNT,
+			A.LIKE_CNT
+		FROM (
+      SELECT ROWNUM rnum,
+      S.*
+      FROM
+      (
+        SELECT
+          RANK() OVER(ORDER BY REGDATE ASC)RM,
+          N.NO, 
+          N.TITLE, 
+          N.CONTENTS, 
+          N.WRITER, 
+          N.IMG, 
+          N.REGDATE, 
+          N.VIEW_CNT,
+          (SELECT COUNT(NO) FROM NOTICE_LIKE_BOARD WHERE 1=1 AND NO = N.NO) AS LIKE_CNT
+        FROM NOTICE N
+        WHERE
+          1 = 1
+         <if test='searchView !=null and searchView != "" '>
+         	AND (TITLE LIKE '%' || #{searchView} || '%' OR WRITER LIKE '%' || #{searchView} || '%')
+         </if>
+        AND USE_YN = 'Y'
+        ORDER BY NO DESC
+      ) S
+    ) A
+    WHERE rnum BETWEEN #{startRowNo} and #{endRowNo}
+    
+    /*com.co.kr.notice.dao.NoticeDao.selectNotice - 공지사항 목록 */
+   </select>
+   
+   <select id="getListBaordCount" parameterType="com.co.kr.notice.vo.NoticeVo" resultType="int">
+		SELECT COUNT(*) FROM NOTICE WHERE 1=1
+		<if test='searchView !=null and searchView != "" '>
+         	AND (TITLE LIKE '%' || #{searchView} || '%' OR WRITER LIKE '%' || #{searchView} || '%')
+        </if>		
+        
+        /*com.co.kr.notice.dao.NoticeDao.getListBaordCount - 공지사항 글 총개수 */
+	</select>
+	
+	<select id="noticeInfo" parameterType="int" resultType="com.co.kr.notice.vo.NoticeVo">
+		SELECT
+			NO,
+			TITLE,
+			CONTENTS,
+			WRITER,
+			IMG,
+			REGDATE,
+			VIEW_CNT
+		FROM NOTICE
+		WHERE 1=1
+		<if test="value != '' and value != null ">
+			AND NO = #{no}
+		</if>
+		
+		/*com.co.kr.notice.dao.NoticeDao.noticeInfo - 공지글 상세정보 */
+	</select>
+	
+	<!-- 업로드 -->
+<insert id="insertNotice" parameterType="com.co.kr.notice.vo.NoticeVo" useGeneratedKeys="true" keyProperty="no">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+        SELECT NOTICE_FILE_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    <![CDATA[
+         
+        INSERT INTO NOTICE
+        (
+            NO,
+            TITLE, 
+            CONTENTS, 
+            WRITER, 
+            REGDATE, 
+            USE_YN
+        )
+        VALUES
+        (
+            #{no}, 
+            #{title}, 
+            #{contents}, 
+            #{writer}, 
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 
+            'Y'
+        )
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.insertNotice - 공지글 작성완료 */
+</insert>
+	
+	<insert id="insertFile">
+    <![CDATA[
+        INSERT INTO NOTICE_FILE
+        (
+            NO,
+            BOARD_NO,
+            O_NAME,
+            FILE_NAME,
+            FILE_SIZE,
+            REG_DE, 
+            USER_ID,
+            USE_YN
+        )
+        VALUES
+        (
+            NOTICE_FILE_SEQ.NEXTVAL,
+            #{boardNo},
+            #{oName},
+            #{fileName},
+            #{fileSize},
+            SYSDATE,
+            #{userId},
+            'Y'
+        )
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.insertFile - 파일 업로드 완료 */
+	</insert>
+	
+	<select id="selectFileList" parameterType="int" resultType="com.co.kr.notice.vo.UploadFileVo">
+    <![CDATA[
+        SELECT
+            NO,
+            O_NAME,
+            ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+        FROM
+            NOTICE_FILE
+        WHERE
+            BOARD_NO = #{no}
+            AND USE_YN = 'Y'
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.selectFileList - 해당글의 등록된 파일조회 */
+	</select>
+	
+	<select id="downloadFile" parameterType="int" resultType="com.co.kr.notice.vo.UploadFileVo">
+		<![CDATA[
+			SELECT
+				O_NAME,
+				FILE_NAME
+			FROM
+				NOTICE_FILE
+			WHERE
+				board_no=#{no}
+		]]>
+		
+		/*com.co.kr.notice.dao.NoticeDao.downloadFile - 파일다운로드 */
+	</select>
+	
+	<insert id="insertFile2" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO NOTICE_FILE
+        (
+            NO,
+            BOARD_NO,
+            O_NAME,
+            FILE_NAME,
+            FILE_SIZE,
+            REG_DE, 
+            USER_ID,
+            USE_YN
+        )
+        VALUES
+        (
+            NOTICE_FILE_SEQ.NEXTVAL,
+            #{boardNo},
+            #{oName},
+            #{fileName},
+            #{fileSize},
+            SYSDATE,
+            #{userId},
+            'Y'
+        )
+    ]]>
+	</insert>
+	
+	<update id="noticeUpdate" parameterType="hashmap">
+    <![CDATA[
+        UPDATE NOTICE 
+        SET
+            TITLE = #{title},
+            CONTENTS = #{contents}
+        WHERE
+            no = #{no}    
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.noticeUpdate - 공지글 수정완료 */
+	</update>
+	
+	<update id="deleteFileList" parameterType="hashmap">
+    <![CDATA[
+        UPDATE NOTICE_FILE SET
+            USE_YN = 'N'
+        WHERE
+            BOARD_NO = #{no}  
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.deleteFileList - 해당 공지글의 등록된 파일삭제 */
+	</update>
+	
+	<update id="updateFile" parameterType="hashmap">
+    <![CDATA[
+        UPDATE NOTICE_FILE SET
+            USE_YN = 'Y'
+        WHERE
+            BOARD_NO = #{no}   
+    ]]>
+    
+    /*com.co.kr.notice.dao.NoticeDao.updateFile - 파일 업로드 */
+	</update>
+	
+	<select id="noticeViewCnt" parameterType="int" resultType="int">
+		SELECT VIEW_CNT FROM NOTICE WHERE 1=1 AND NO = #{no}
+	</select>
+	
+	<update id="noticeUpdateCnt" parameterType="int">
+		<![CDATA[
+			UPDATE NOTICE
+				SET
+					VIEW_CNT = VIEW_CNT + 1
+				WHERE NO = #{no}		
+		]]>
+		
+	/*com.co.kr.notice.dao.NoticeDao.noticeUpdateCnt - 공지글 조회수 증가 */
+	</update>
+	
+	<select id="noticeLike" parameterType="com.co.kr.notice.vo.NoticeVo" resultType="com.co.kr.notice.vo.NoticeVo">
+		SELECT NO,
+			   USER_ID,
+			   REG_DE
+		   FROM NOTICE_LIKE_BOARD
+		   WHERE 1=1
+		   <if test="no != '' and no != null">
+		   	AND NO=#{no}
+		   </if>
+		   <if test="writer != '' and writer != null">
+		   	AND USER_ID = #{writer}
+		   </if>
+		   
+		   /*com.co.kr.notice.dao.NoticeDao.noticeLike - 추천수 접속 아이디로 추천 여부 조회 */
+	</select>
+	
+	<insert id="insertNoticeLike" parameterType="com.co.kr.notice.vo.NoticeVo">
+		<![CDATA[
+		INSERT INTO NOTICE_LIKE_BOARD
+			(
+				NO,
+				USER_ID,
+				REG_DE
+			)VALUES(
+				#{no},
+				#{writer},
+				TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			)
+		]]>
+		
+		/*com.co.kr.notice.dao.NoticeDao.insertNoticeLike - 추천수 개수 증가 */
+	</insert>
+	
+	<select id="noticeLikeCnt" resultType="int">
+		SELECT COUNT(NO) FROM NOTICE_LIKE_BOARD WHERE 1=1 AND NO = #{no}
+		
+		/*com.co.kr.notice.dao.NoticeDao.noticeLikeCnt - 추천수 총 개수 가져오기 */
+	</select>
+</mapper>

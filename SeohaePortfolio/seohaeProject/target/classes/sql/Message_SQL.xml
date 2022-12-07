@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messageSql">
+    <insert id="MessageWriteSave" parameterType="com.co.kr.message.vo.MessageVo">
+		INSERT INTO MESSAGE(
+			MSG_NO, 
+			MSG_SEND, 
+			MSG_REGDATE, 
+			MSG_GET,
+			MSG_NAME,
+			MSG_DESC
+		) VALUES (
+			MESSAGE_SEQ.NEXTVAL, 
+			#{msgSend}, 
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
+			#{msgGet},
+			#{msgName},
+			#{msgDesc}
+		)
+		
+		/* com.co.kr.message.dao.MessageDao.MessageWriteSave - 쪽지 전송완료 */
+	</insert>
+	
+	<insert id="MessageSendWriteSave" parameterType="com.co.kr.message.vo.MessageVo">
+		INSERT INTO MESSAGE(
+			MSG_NO, 
+			MSG_SEND, 
+			MSG_REGDATE, 
+			MSG_GET,
+			MSG_NAME,
+			MSG_DESC
+		) VALUES (
+			MESSAGE_SEQ.NEXTVAL, 
+			#{userId}, 
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
+			#{msgGet},
+			#{msgName},
+			#{msgDesc}
+		)
+		
+		/* com.co.kr.message.dao.MessageDao.MessageSendWriteSave - 쪽지 전송완료_받은편지함 답장보내기 */
+	</insert>
+	
+	<select id="messageList" parameterType="com.co.kr.message.vo.MessageVo" resultType="com.co.kr.message.vo.MessageVo">
+	SELECT  MSG_NO, 
+			MSG_SEND, 
+			MSG_REGDATE, 
+			MSG_GET,
+			MSG_NAME,
+			MSG_DESC,
+			MSG_READYN
+    FROM MESSAGE
+            WHERE MSG_GETYN='Y' AND MSG_GET=#{userId}
+           		ORDER BY MSG_NO DESC
+           		
+     /* com.co.kr.message.dao.MessageDao.messageList - 받은쪽지함 목록 */      		
+	</select>
+	
+	<select id="MessageSendList" parameterType="com.co.kr.message.vo.MessageVo" resultType="com.co.kr.message.vo.MessageVo">
+	SELECT  MSG_NO, 
+			MSG_SEND, 
+			MSG_REGDATE, 
+			MSG_GET,
+			MSG_NAME,
+			MSG_DESC,
+			MSG_READYN
+    FROM MESSAGE
+            WHERE MSG_SENDYN='Y' AND MSG_SEND=#{userId}
+           		ORDER BY MSG_NO DESC
+    
+     /* com.co.kr.message.dao.MessageDao.MessageSendList - 보낸쪽지함 목록 */   
+	</select>
+	
+	<update id="MessageSendDelete" parameterType="com.co.kr.message.vo.MessageVo">
+			UPDATE MESSAGE
+				SET 
+					MSG_SENDYN = 'N'
+				WHERE MSG_NO = #{msgNo}
+				
+	/* com.co.kr.message.dao.MessageDao.MessageSendDelete - 보낸쪽지 삭제 */   
+	</update>
+	
+	<update id="MessageGetDelete" parameterType="com.co.kr.message.vo.MessageVo">
+			UPDATE MESSAGE
+				SET 
+					MSG_GETYN = 'N'
+				WHERE MSG_NO = #{msgNo}
+				
+	/* com.co.kr.message.dao.MessageDao.MessageGetDelete - 받은쪽지 삭제 */   
+	</update>
+	
+	<select id="messageDetail" parameterType="com.co.kr.message.vo.MessageVo" resultType="com.co.kr.message.vo.MessageVo">
+	SELECT  MSG_NO, 
+			MSG_SEND, 
+			MSG_REGDATE, 
+			MSG_GET,
+			MSG_NAME,
+			MSG_DESC,
+			MSG_READYN
+    	FROM MESSAGE
+            WHERE MSG_NO=#{msgNo}
+            
+    /* com.co.kr.message.dao.MessageDao.messageDetail - 쪽지 상세정보 */   
+	</select>
+	
+	<select id="MessageIdCheck" parameterType="String" resultType="int">
+	SELECT COUNT(*)
+			FROM USERS
+				WHERE user_id= #{idCheck} AND USER_DEL_YN != 'Y'
+				
+	/* com.co.kr.message.dao.MessageDao.MessageIdCheck - 받는이의 회원아이디 존재여부 */   
+	</select>
+	
+	<select id="messageNewCount" parameterType="String" resultType="int">
+	 SELECT COUNT(*)
+			FROM MESSAGE
+				WHERE MSG_GET = #{userId}
+				AND MSG_READYN = 'N'
+				
+	/* com.co.kr.message.dao.MessageDao.messageNewCount - 새로온 쪽지 개수확인 */   
+	</select>
+	
+	<update id="messageReadYn" parameterType="com.co.kr.message.vo.MessageVo">
+			UPDATE MESSAGE
+				SET 
+					MSG_READYN = 'Y'
+				WHERE MSG_NO = #{msgNo}
+				
+	/* com.co.kr.message.dao.MessageDao.messageReadYn - 보낸쪽지 읽음여부 */   
+	</update>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cartSql">
+
+	<insert id="cartInsert" parameterType="com.co.kr.cart.vo.CartVo">
+		INSERT INTO BOOKCART(
+			CART_NO, 
+			USER_ID, 
+			PD_NO, 
+			PD_AMOUNT
+		) VALUES (
+			seq_cart.NEXTVAL, 
+			#{user_id}, 
+			#{pdNo}, 
+			#{pdAmount}
+		)
+		
+	/* com.co.kr.cart.dao.CartDao.cartInsert - 장바구니 추가  */
+	</insert>
+	
+	<select id="sumMoney" resultType="int">
+		SELECT NVL(SUM(PD_PRICE * PD_AMOUNT), 0) money
+        FROM BOOKCART C, BOOK P
+        WHERE C.PD_NO = P.PD_NO AND C.USER_ID = #{userId}
+        
+    /* com.co.kr.cart.dao.CartDao.sumMoney - 장바구니 총 가격  */
+	</select>
+	
+	<select id="cartList" parameterType="string" resultType="com.co.kr.cart.vo.CartVo">
+		SELECT
+			C.CART_NO,
+			C.USER_ID,
+			P.PD_NO,
+			P.PD_CG,
+			P.PD_INFO,
+			P.PD_NAME,
+			P.PD_URL,
+			C.PD_AMOUNT,
+			P.PD_PRICE,
+			(PD_PRICE * PD_AMOUNT) MONEY
+				FROM USERS U, BOOK P, BOOKCART C
+					WHERE U.USER_ID = C.USER_ID
+						AND P.PD_NO = C.PD_NO
+						AND C.USER_ID = #{user_id}
+					 ORDER BY C.CART_NO
+	
+	/* com.co.kr.cart.dao.CartDao.cartList - 장바구니 목록  */
+	</select>
+	
+	<update id="cartUpdate" parameterType="com.co.kr.cart.vo.CartVo">
+		UPDATE BOOKCART
+			SET 
+				PD_AMOUNT = #{pdAmount}
+				WHERE USER_ID= #{user_id}
+				AND PD_NO = #{pdNo}
+				
+	/* com.co.kr.cart.dao.CartDao.cartUpdate - 장바구니 수량수정  */
+	</update>
+	
+	<delete id="cartListDelete" parameterType="com.co.kr.cart.vo.CartVo">
+		DELETE FROM BOOKCART WHERE CART_NO = #{cartNo}
+		
+	/* com.co.kr.cart.dao.CartDao.cartListDelete - 장바구니 삭제  */
+	</delete>
+	
+	<select id="countCart" parameterType="com.co.kr.cart.vo.CartVo" resultType="int">
+		SELECT COUNT(*)
+			FROM BOOKCART
+				WHERE USER_ID= #{user_id}
+				AND PD_NO = #{pdNo}
+				
+	/* com.co.kr.cart.dao.CartDao.countCart - 장바구니에 해당 상품이 존재하는지 확인  */
+	</select>
+	
+	<update id="UpdateCount" parameterType="com.co.kr.cart.vo.CartVo">
+		UPDATE BOOKCART
+			SET 
+				PD_AMOUNT = PD_AMOUNT + #{pdAmount}
+				WHERE USER_ID= #{user_id}
+				AND PD_NO = #{pdNo}
+				
+	/* com.co.kr.cart.dao.CartDao.UpdateCount - 장바구니에 추가될 상품이 원래부터 존재하면 그 개수에 더해줌  */
+	</update>
+	
+	<select id="cartBookDetail" parameterType="com.co.kr.cart.vo.CartVo" resultType="com.co.kr.cart.vo.CartVo">
+		SELECT
+			P.PD_NO,
+			P.PD_NAME,
+			P.PD_URL,
+			P.PD_PRICE
+				FROM BOOK P
+					WHERE P.PD_NO = #{pdNo}
+					
+	/* com.co.kr.cart.dao.CartDao.cartBookDetail - 상품 번호로 상품 정보 조회 - 장바구니에 insert 위함  */
+	</select>
+</mapper>
