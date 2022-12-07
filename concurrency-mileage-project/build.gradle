@@ -1,0 +1,80 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'java'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2021.0.5")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
+
+    /* feign */
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    /* querydsl */
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}" // querydsl 라이브러리
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}" //  Querydsl 관련 코드 생성 기능 제공
+    /* redis */
+    implementation 'org.redisson:redisson-spring-boot-starter:3.17.7'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets { // IDE의 소스 폴더에 자동으로 넣어준다.
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath // 컴파일이 될때 같이 수행
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl // Q파일을 생성해준다.
+}
