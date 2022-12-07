@@ -7,5 +7,4 @@
 |kafka-basic-setting||
 |kafka-lecture||
 |kafka-project||
-|elasticsearch||
 |messagebroker-rabbitmq||
