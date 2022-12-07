@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.test'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //swagger
+    compile "io.springfox:springfox-swagger2:2.9.2"
+    compile "io.springfox:springfox-swagger-ui:2.9.2"
+
+    //redis
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
+    compile "redis.clients:jedis:2.9.0"
+    compile "org.springframework.session:spring-session-data-redis"
+
+    //okhttp
+    compile "com.squareup.okhttp3:okhttp:4.2.0"
+
+    //slf4j
+    compile "org.slf4j:jcl-over-slf4j:1.7.25"
+
+    //jpa, ojdbc6
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:2.1.8.RELEASE"
+    compile "com.oracle.ojdbc:ojdbc8:19.3.0.0"
+    compile "com.oracle.ojdbc:orai18n:19.3.0.0"
+
+    //elasticsearch
+    compile "org.elasticsearch:elasticsearch:7.4.0"
+
+    //feign
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign:2.1.0.RELEASE"
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

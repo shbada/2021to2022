@@ -1,0 +1,44 @@
+# feign URL
+feign:
+  test-api:
+    url: http://localhost:7070
+  httpclient:
+    connection-timeout: 1
+
+#Redis
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+#Elastic
+elastic:
+  host: 127.0.0.1
+  port: 9200
+
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+  # JPA (DB)
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: seohae
+    password: seohae
+    driver:
+      class-name: oracle.jdbc.OracleDriver
+  main:
+      allow-bean-definition-overriding: true
+
+
+  # 콘솔 창에 출력되는 로깅 메세지를 색으로 구분해서 출력
+  output:
+    ansi:
+      enabled: always
+
+#Log4j
+logging:
+  file: C:/intelliJLog/technology_add/technology_add.log
+  level:
+    com:
+      tutorial:
+        springboot: DEBUG
