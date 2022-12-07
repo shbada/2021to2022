@@ -1,0 +1,16 @@
+server:
+  #port: 8081
+  port: 0  # 랜덤포트
+
+spring:
+  application:
+    name: my-first-service
+
+eureka:
+  client:
+    fetch-registry: true  # true: 유레카 등록
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:  # 유레카에 아래 형식으로 인스턴스 등록할 것임을 설정
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
