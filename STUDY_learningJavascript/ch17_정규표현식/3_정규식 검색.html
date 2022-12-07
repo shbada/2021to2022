@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    const input = "As I was going to Saint Ives";
+    const re = /\w{3,}/ig;
+
+    input.match(re); // ["was", "going", "Saint", "Ives"]
+    input.search(re); // 5 (세글자 이상으로 이루어진 첫 단어의 인덱스가 5이다)
+
+    /\w{3,}/ig.exec(input);
+    /\w{3,}/ig.test(input); // 많이쓴다.
+</script>
+<body>
+
+</body>
+</html>

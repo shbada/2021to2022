@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * textContent, innerHTML 프로퍼티
+     * 이 프로퍼티를 통해 요소의 콘텐츠에 접근하거나 수정할 수 있다.
+
+     * 1. textContent : HTML 태그를 모두 제거하고 순수한 텍스트 데이터만 제공
+     * 2. innerHTML : HTML 태그를 그대로 제공한다.
+                      -> HTML 태그를 수정하면서 DOM 이 그에 맞게 변경된다.
+     */
+
+    const p1 = document.createElement('p');
+    const p2 = document.createElement('p');
+
+    p1.textContent = "I was created AA!";
+    p2.textContent = "I was also created AA!";
+
+    const parent = document.getElementById('content');
+    console.log(parent);
+
+    const firstChild = parent.childNodes[0];
+
+    // insertBefore : 첫번째 매개변수(삽입할 요소), 두번째 매개변수(삽입할 위치)
+    parent.insertBefore(p1, firstChild);
+    parent.appendChild(p2);
+</script>
+<body>
+    <!-- ID 중복은 경고하지않지만, 유일한 ID를 사용해야 할 것. -->
+    <div id = "content">
+        <p>This is a <i>simple</i> HTML file.</p>
+        <div class="callout">
+            <p>This is as fancy as  ...</p>
+        </div>
+        <p>IDs (such as <span class ="code">#content</span></p>
+        <div id = "callout2" class="callout fancy">
+            <p>A single HTML element can have multiple classes.</p>
+        </div>
+    </div>
+</body>
+</html>

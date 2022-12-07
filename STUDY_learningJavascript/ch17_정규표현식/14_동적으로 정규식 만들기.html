@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    // 정규식 리터럴 사용이 RegExp 생성자보다 좋다.
+    // 하지만, RegExp 생성자가 필요할 때가 있다. -> 동적으로 정규식을 만들어야할때.
+
+
+    // ex) 사용자 이름의 배열이 있고, 문자열에서 그 배열을 사용해 일치하는 사용자 이름을 찾고 싶다.
+
+    const users = ["mary", "nick", "arthur", "sam"];
+    const text = "User @arthur started the backup and 15:15, " + "and @nick and @yvette restored it at 18:35.";
+    const userRegex = new RegExp(`@(?:{users.join('|')})\\b`, 'g');
+    text.match(userRegex); // ["@arthur", "@nicl", "@yvette" ]
+
+    // 위는 동적으로 정규식을 만들었다.
+    // 단어 경계 메타 문자인 b 앞에 역슬래시를 2개 사용했다.
+    // 역슬래시를 2개 쓰지 않았다면 정규식 엔진은 \b 를 리터럴 문자 b로 판단한다.
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.12 이터레이터와 제너레이터</title>
+</head>
+<script>
+    /**
+     제너레이터란? 이터레이터를 사용해 자신의 실행을 제어하는 함수이다.
+     함수는 매개변수를 받고 값을 반환하지만, 해당 함수를 호출하는 호출자는 매개변수 외에는
+     함수의 실행을 제어할 방법이 없다.
+     함수를 호출하면 그 함수가 종료될때까지 제어권을 함수에게 완전히 넘기는 것이다.
+     제너레이터는 이와 다르다.
+
+     - 제너레이터는 언제든 호출자에게 제어권을 넘길 수 있다.
+     - 제너레이터는 호출한 즉시 실행되지 않는다. 이터레잍를 반환후 next 메서드를 호출함에 따라 실행된다.
+
+     제너레이터를 만들때에는 function* 처럼 *을 function 키워드 뒤에 붙힌다.
+     return 외에 yield 키워드를 사용할 수 있다.
+     */
+
+    // 제너레이터 생성
+    function* rainbow() {
+        yield 'AA';
+        yield 'BB';
+        yield 'CC';
+        yield 'DD';
+        yield 'EE';
+    }
+
+    // 제너레이터를 호출해보자.
+    const it = rainbow();
+
+    // 제너레이터는 이터레잍를 반환한다.
+    for (let color of rainbow()) {
+        console.log(color);
+    }
+
+    /**
+     yield 표현식의 값은 호출자가 제너레이터의 이터레이터에서 next를 호출할때 제공하는 매개변수이다.
+     아래 제너레이터를 호출하면 이터레이터를 얻는다.
+     */
+
+    function* interrogate() {
+        const name = yield "what is your name?";
+        const color = yield "what is your favorite color?";
+        return `${name}'s favorite color is ${color}.`;
+    }
+
+    /**
+     현재까지 제너레이터의 어떤 부분도 아직 실행되지않은 상태이다.
+     next 를 호출하면 제너레이터는 첫번째 행을 실행하려 하지만,
+     그 행에는 yield 표현식이 들어있으므로 제너레이터는 반드시 제어권을 호출자에게 넘겨야 한다.
+     제너레이터의 첫번째 행이 완료되려면 호출자가 next 를 다시 호출해야한다.
+     그러면 name 은 next 에서 전달하는 값을 받는다.
+     */
+
+    const sh = interrogate();
+
+    // yield 선언 차례대로 찾아간다.
+
+    // value: "what is your name?",  done: false
+    sh.next();
+
+    // value: "what is your favorite color?",  done: false
+    // 여기서 'Ethan'은 바로 위에 next 메서드 실행시 찾아간 name 에 담긴다.
+    sh.next('Ethan');
+
+    // value: "Ethan's favorite color is orange.",  done: false
+    // 여기서 'orange'은 바로 위에 next 메서드 실행시 찾아간 color 에 담긴다.
+    sh.next('orange');
+
+</script>
+<body>
+
+</body>
+</html>

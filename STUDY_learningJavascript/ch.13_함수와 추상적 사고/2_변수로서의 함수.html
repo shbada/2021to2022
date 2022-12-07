@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.13 함수와 추상적 사고</title>
+</head>
+<script>
+    /**
+     변수가 있을 수 있는 곳에 함수가 있을 수도 있다.
+
+     - 함수를 가리키는 변수를 만들어 별명을 정할 수 있다.
+     - 배열에 함수를 넣을 수 있다.
+     - 다른 타입의 데이터와 섞일 수 있다.
+     - 함수를 객체의 프로퍼티로 사용할 수 있다.
+     - 함수를 함수에 전달할 수 있다.
+     - 함수가 함수를 반환할 수 있다.
+     - 함수를 매개변수로 받는 함수를 반환하는 것도 가능하다.
+     */
+
+    /** (1) - 함수를 가리키는 변수를 만들어 별명을 정할 수 있다. */
+    function addChairDeskCap(x) {
+        console.log(x);
+    }
+
+    // 별명을 썼다.
+    // 여기서 f에 addChairDeskCap 함수 자체가 아닌 호출결과를 저장하는 것이다.
+    const f = addChairDeskCap;
+    console.log(f(1));
+
+    /** (2) - 배열에 함수를 넣을 수 있다. */
+    const pipeline = [
+        function a1() {
+            console.log('a');
+        },
+
+        function a2() {
+            console.log('b');
+        }
+    ]
+
+    /** (3) - 함수를 함수에 전달할 수 있다. */
+    function sum(arr, f) {
+        // f가 매개변수에 전달되지않으면 undefined 라서 에러가 발생하는데,
+        // 해당 에러를 방지하기 위해 아래 코드를 추가한 것이다.
+        if (typeof f != 'function') f = x => x;
+
+        return arr.reduce((a, x => a += f(x), 0));
+    }
+
+    sum([1,2,3]); // 6
+    sum([1,2,3], x => x*x); // 14
+    sum([1,2,3], x => Math.pow(x, 3)); // 36
+
+    /** (4) - 함수가 함수를 반환할 수 있다. */
+    function newSummer(f) {
+        return arr => sum(arr, f);
+    }
+
+    const sumOfSquares = newSummer(x => x*x);
+    const sumOfCubes = newSummer(x => Math.pow(x, 3));
+    sumOfSquares([1,2,3]); // returns 14
+    sumOfCubes([1,2,3]); // returns 36
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.12 이터레이터와 제너레이터</title>
+</head>
+<script>
+    /**
+     이터레이터 프로토콜은 모든 객체를 이터러블 객체로 바꿀수 있다.
+     이터러블 객체란?
+     value, done 프로퍼티가 있는 객체를 반환하는 next 메서드를 가진 객체
+     */
+
+    class Log {
+        constructor() {
+            this.messages = [];
+        }
+        // 메세지에 타임스탬프를 붙힌다.
+        add(message) {
+            this.messages.push({message, timestamp: Date.now()});
+        }
+        // Symbol.iterator 추가
+        /* (1)의 방법
+        [Symbol.iterator]() {
+            return this.messages.values();
+        }
+        */
+
+        // (2)의 방법. 직접 이터레이터를 생성
+        [Symbol.iterator]() {
+            let i = 0;
+            const messages = this.messages;
+            return {
+                next() {
+                    if ( i >= messages.length) // log 가 존재한다면,
+                        return { value: undefined, done: true};
+                    return { value: messages[i++], done: false};
+                }
+            }
+        }
+    }
+
+    const log = new Log();
+    log.add("AA");
+    log.add("BB");
+    log.add("CC");
+
+    // messages 배열에서 이터레이터를 가져와 이터레이터를 프로토콜로 구현
+    for (let entry of log) {
+        console.log(`${entry.message} @ ${entry.timestamp}`);
+    }
+</script>
+<body>
+
+</body>
+</html>

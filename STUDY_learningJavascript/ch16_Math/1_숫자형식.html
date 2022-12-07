@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 1. 고정소수점
+     * toFixed()
+     * 수점 뒤 자릿수를 지정하는 형식 (반올림)
+     */
+
+    const x = 19.51;
+    x.toFixed(1); // "19.5"
+
+    /**
+     * 2. 지수표기법
+     * toExponential()
+     */
+
+    const x2 = 3800.5;
+    x2.toExponential(4); // "3.8006e+3"
+
+    /**
+     * 3. 고정전체 자리수
+     * toPrecision()
+     * 소수점이 어디 나타나든 관계없이 숫자 몇개로 표현하느냐
+     */
+
+    let x3 = 1000;
+    x3.toPrecision(5); // "1000.0";
+
+    /**
+     * 4. 다른 진수
+     * toString()에 기수를 매개변수로 쓴다.
+     * 2진수, 8진수, 16진수 표현
+     */
+
+    const x4 = 12;
+    x4.toString(); // 10진수
+    x4.toString(10); // 10진수
+    x4.toString(16) // 16진수 : "c"
+
+    /**
+     * 이외 다른 고급 숫자형식이 필요하다면, Numeral.js 라이브러리 사용 권장.
+     */
+</script>
+<body>
+
+</body>
+</html>

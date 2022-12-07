@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * DOM : 문서 객체 모델
+     * HTML 문서의 구조를 나타내는 표기법인 동시에 브라우저가 HTML 문서를 조작하는 핵심이다.
+     * 트리 구조 > 노드로 구성
+     * 루트 노드를 제외하면 모든 노드에 부모가 있으며, 자식노드는 있어도되고 없어도 된다.
+     * 루트 노드 : 문서 (document)
+     * 자식 노드 : <html> 요소 하나 뿐
+     * <html> 요소에는 자식으로 <head> , <body> 요소가 있다.
+
+     * DOM 트리의 모든 노드는 Node 클래스의 인스턴스이다.
+     * Node 객체에는 트리구조를 나타내는 parentNode, childNodes 프로퍼티, 자신에 대한 nodeName, nodeType 프로퍼티가 있다.
+
+     * 모든 노드가 HTML 요소는 아니다.
+     * 문단 태그 (<p>)는 HTML 요소이지만, 그 문단에 포함된 텍스트는 텍스트 노드이다.
+     */
+
+    /**
+     * html 파일의 전체 페이지 구조를 콘솔에 출력하는 함수.
+     * @param node
+     * @param prefix
+     */
+    function printDOM(node, prefix) {
+        console.log(prefix + node.nodeName);
+
+        for ( let i = 0; i < node.childNodes.length; i++) {
+            printDOM(node.childNodes[i], prefix + '\t');
+        }
+    }
+
+    printDOM(document, '');
+</script>
+<body>
+
+</body>
+</html>

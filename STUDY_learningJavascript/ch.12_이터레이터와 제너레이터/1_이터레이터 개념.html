@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.12 이터레이터와 제너레이터</title>
+</head>
+<script>
+    /**
+     이터레이터란? 위치 파악을 할 수 있는 것이다.
+     배열로 예를 들어보자.
+     자바스크립트 배열 중에 특정 값의 위치를 얻을 수 있다.
+     */
+    const book =["AA", "BB", "CC", "DD", "EE"]; // 배열 선언
+
+    const it = book.values();
+
+    console.log(it.next()); // AA
+    console.log(it.next()); // BB
+    console.log(it.next()); // CC
+    console.log(it.next()); // DD
+    console.log(it.next()); // EE
+    console.log(it.next()); // undefined
+    console.log(it.next()); // undefined
+
+    /**
+     여기서 알수있는점은, it.next()는 마지막 배열 값을 출력했어도,
+     그다음에 호출된다면 undefined 라는 것이다.
+     value 는 undefined 가 되지만 next는 계속 호출이 가능하다.
+     이터레이터가 끝까지 진행하면 뒤로 돌아가서 다른 데이터를 제공할 수 없다.
+     */
+
+    const sh = book.values();
+
+    let current = sh.next(); // 첫번째 값 지정
+    // 반복문
+    while(!current.done) {
+        console.log(current.value);
+        current = sh.next(); // 계속해서 다음 값 저장
+    }
+
+    /**
+     이터레이터는 모두 독립적이다.
+     새 이터레이터를 만들때마다 처음부터 시작하고 각 다른 요소를 가리키는 이터레이터를 동시에 사용할 수 있다.
+     */
+
+    const it1 = book.values();
+    const it2 = book.values();
+    // 이터레이터 시작 전
+
+    // it1으로 2개의 값 읽어오기
+    it1.next();
+    it1.next();
+
+    // it2로 1개의 값 읽어오기
+    it2.next();
+
+    // it1으로 1개의 값 더 읽어오기
+    it1.next();
+
+    /** 결국 위 it1, it2는 서로 독립적이며 같은 배열에서 따로 움직일 수 있다는 것이다.*/
+</script>
+<body>
+
+</body>
+</html>

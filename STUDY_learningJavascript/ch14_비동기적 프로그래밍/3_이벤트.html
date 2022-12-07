@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.14 비동기적 프로그래밍</title>
+</head>
+<script>
+    /**
+     이벤트가 일어나면 이벤트 발생을 담당하는 개체에서 이벤트가 일어났음을 알린다.
+     */
+
+    const c = new Countdown(5);
+
+    // on 메소드가 이벤트를 주시하는 부분이다.
+    c.on('tick', function(i) {
+        if (i>0) console.log(i + ',,,');
+    });
+
+    c.go()
+        .then(function () {
+        console.log('GO!');
+    })
+        .catch(function (err) {
+            console.error(err.message);
+        })
+</script>
+<body>
+
+</body>
+</html>
