@@ -1,7 +1,7 @@
 # side-project
 
 #### [1) SeohaePortfolio](https://github.com/seohaem/side-project/tree/master/SeohaePortfolio)
-> 목표 : [포트폴리오] BinoProject 
+> 목표 : [포트폴리오] BinoProject   
 > 기간 : 2017.11.01 ~ 2018.01.01
 
 ---
@@ -12,7 +12,7 @@
 ---
 
 #### [3) instagram-clone](https://github.com/seohaem/side-project/tree/master/instagram-clone)
-> 목표 : [clone project] instagram 기능 구현해보기   
+> 목표 : [clone project] instagram 기능 구현해보기    
 > 기간 : 2021/12/14 ~ 2022/01
 
 ---
@@ -33,7 +33,7 @@
 ---
 
 #### [7) studyolle_redo](https://github.com/seohaem/side-project/tree/master/studyolle_redo)
-> 목표 : [studyolle] 강의 내용 직접 구현해보기  
+> 목표 : [studyolle] 강의 내용 직접 구현해보기     
 > 강의 git : https://github.com/seohaem/jpa/tree/master/studyolle_jpa
 
 ---
