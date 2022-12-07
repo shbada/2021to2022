@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 함수 표현식
+        var add = function(x,y){
+            return x+y;
+        }
+        
+        // 변수 plus에 함수의 참조값을 가지는 함수 변수 add를 그대로 할당할 수 있다
+        var plus = add;
+        
+        console.log(add(3,4));
+        console.log(plus(5,6));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // func2()와 func3()내부 함수는 자신을 둘러싼 부모 함수인 func1()의 변수에 접근 가능하므로, 
+        // func2()와 func3()도 that변수로 func1()의 this바인딩 된 객체인 myObject에 접근 가능하게 된다.
+        var value = 100;
+        
+        var myObject = {
+            value:1,
+            func1:function(){
+                var that = this;
+                this.value += 1;
+                console.log('func1() called. this.value: '+this.value);
+                func2 = function(){
+                    that.value += 1;
+                    console.log('func2() called this.value: '+this.value);
+                    func3 = function(){
+                        that.value += 1;
+                        console.log('func3() called this.value: '+that.value);
+                    }
+                    func3();
+                }
+                func2();
+            }
+        }
+        myObject.func1();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

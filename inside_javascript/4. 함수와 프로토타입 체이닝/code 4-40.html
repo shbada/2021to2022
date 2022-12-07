@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 문자열의 표준 빌트인 프로토타입 객체 String.prototype에 testMethod()를 추가
+        String.prototype.testMethod = function(){
+            console.log('This is the String.prototype.testMethod()');
+        }
+        
+        var str = 'this is test';
+        // 프로토타입 체이닝으로 String.prototype에 정의한 testMethod()가 호출하는 것이 가능
+        str.testMethod();
+        console.log(String.prototype);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var Person = function(arg){
+            var name = arg ? arg : 'zzoon';
+            var Func = function() {};
+        
+            Func.prototype = {
+                getName:function(){
+                    return name;
+                },
+                setName=function(){
+                    name=arg;
+                }
+            };
+            
+            // 즉시 실행 함수에서 반환되는 Func이 클로저가 되고,
+            // 이 함수가 참조하는 name 프로퍼티가 자유 변수가 된다.
+            return Func;
+        }();
+        
+        var me = new Person();
+        console.log(me.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

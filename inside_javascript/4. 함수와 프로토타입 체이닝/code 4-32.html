@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function myFunction(){
+            console.log(arguments);
+            arguments.shift(); // 에러발생
+            
+            // arguments 객체를 배열로 변환
+            var args = Array.prototype.slice.apply(arguments);
+        }
+        
+        myFunction(1,2,3);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

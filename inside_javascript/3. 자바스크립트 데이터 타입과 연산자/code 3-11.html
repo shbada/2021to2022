@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var a = 100;
+        var objA = {value:100};
+        
+        // 함수 내부에서 매개변수 num을 이용해서 100을 200으로 바꿔도 변수 a의 값은 변하지 않는다는 것을 알 수 있다.
+        function changeArg(num, obj){
+            num = 200;
+            obj.value = 200;
+            console.log(num); // 200
+            console.log(obj); // {value:200}
+        }
+        
+        changeArg(a, objA);
+        console.log(a); // 100
+        console.log(objA); // {value:100}
+    </script>
+</head>
+<body>
+
+</body>
+</html>

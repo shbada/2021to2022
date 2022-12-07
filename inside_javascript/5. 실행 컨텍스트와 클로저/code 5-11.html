@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 전역 변수로서 외부에 노출
+        // 다른 함수에서 이 배열에 수비게 접근하여 값을 바꿀 수도 있고, 실수로 같은 이름의 변수를 만들어 버그가 생길 수도 있다.
+        var buffAr = [
+            'I am',
+            '',
+            'live in',
+            '',
+            'You are',
+            '',
+            'years old'
+        ];
+        
+        function getConpletedStr(name, city, age){
+            buffAr[1] = name;
+            buffAr[3] = city;
+            buffAr[5] = age;
+            return buffAr.join('');
+        };
+                               
+        var str = getConpletedStr('zzoon','seoul',16);
+        console.log(str);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

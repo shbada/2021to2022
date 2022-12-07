@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var person_obj = {
+             _init : function() {
+                  console.log('person init');
+             },
+             getName : function() {
+                  return this._name;
+             },
+             setName : function(name) {
+                  this._name = name;
+             }
+        };
+        var student_obj = {
+             _init : function() {
+                  console.log("student init");
+             },
+             getName : function() {
+                  return "Student Name : "+ this._name;
+             }
+        };
+        
+        var Person = subClass(person_obj);
+        var person = new Person();
+        person.setName('zzoon');
+        console.log(person.getName()); // zzoon
+        var Student = Person.subClass(student_obj); // Student 클래스 정의
+        var student = new Student();
+        student.setName('iam');
+        console.log(student.getName()); // Student Name : iam
+        console.log(Person.toString()); // Person이 Function을 상속 받는지 확인
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

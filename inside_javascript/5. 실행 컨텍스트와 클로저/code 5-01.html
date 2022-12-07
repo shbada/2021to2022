@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 전역 실행 컨텍스트가 가장 먼저 실행
+        console.log('This is global context'); // 1
+        
+        function ExContext(){
+            console.log('This is ExContext1'); // 2
+        };
+        
+        function ExContext2(){
+            ExContext(); // 함수 호출
+            console.log('This is ExContext2'); // 3
+        };
+        
+        // 함수 호출시 새로운 컨텍스트가 만들어지고 실행된다
+        ExContext2(); // 함수 호출
+        
+        // 전역 실행 컨텍스트의 실행이 완료되면 모든 실행이 끝난다
+    </script>
+</head>
+<body>
+
+</body>
+</html>

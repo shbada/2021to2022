@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+         var Person = function(arg) {
+             // private 멤버로 name 변수 선언
+             var name = arg ? arg : "zzoon";
+             // this 객체의 프로퍼티로 선언하면 외부에서 new 키워드로 생성한 객체로 접근할 수 있다
+             // public 메서드로 선언
+             this.getName = function() {
+                  return name;
+             }
+             // public 메서드로 선언
+             this.setName = function(arg) {
+                  name = arg;
+             }
+        };
+        
+        var me = new Person();
+        // public 메서드가 클로저 역할을 하면서, private 멤버인 name 변수에 접근할 수 있다
+        console.log(me.getName()); // zzoon
+        me.setName('iam');
+        
+        console.log(me.getName()); // iam
+        console.log(me.name); // undefined       
+    </script>
+</head>
+<body>
+
+</body>
+</html>

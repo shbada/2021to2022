@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 배열 생성
+        var arr= ['bar'];
+        
+        // 유사 배열 객체 생성
+        var obj = {
+            name:'foo',
+            length:1
+        };
+        
+        // 배열에 push() 함수 사용 가능
+        arr.push('baz');
+        console.log(arr); // ['bar', 'baz']
+        
+        // 에러 발생
+        obj.push(obj); // error
+    </script>
+</head>
+<body>
+
+</body>
+</html>

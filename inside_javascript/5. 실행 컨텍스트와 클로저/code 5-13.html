@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function callLater(obj, a, b){
+            // 반환되는 함수 : 클로저
+            return (function(){
+                obj['sum'] = a+b;
+                console.log(obj['sum']);
+            });
+        };
+        
+        var sumObj = {
+            sum:0
+        };
+        
+        // 변수 func에 함수를 반환받아 setTimeout() 함수의 첫 번쨰 인자로 넣어주면 된다
+        var func = callLater(sumObj,1,2);
+        
+        // 웹 브라우저에서 제공하는 함수
+        // 첫번째 인자로 넘겨지는 함수 실행의 스케줄링을 할 수 있다
+        setTimeout(func,500);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

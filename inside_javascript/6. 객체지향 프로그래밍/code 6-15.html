@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var person = function(arg) {
+             var name = undefined;
+             return {
+                  _init : function(arg) {
+                       name = arg ? arg : 'zzoon';
+                  },
+                  getName : function() {
+                       return name;
+                  },
+                  setName : function(arg) {
+                       name = arg;
+                  }
+             };
+        };
+        
+        Person = subClass(person());
+        var iam = new Person('iam');
+        console.log(iam.getName());
+        Student = Person.subClass();
+        var student = new Student('student');
+        console.log(student.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 빈 배열 생성
+        var emptyArr = [];
+        console.log(emptyArr[0]); // undefined
+        
+        // 배열 요소 동적 생성
+        emptyArr[0] = 100;
+        emptyArr[3] = 'eight';
+        emptyArr[7] = true;
+        
+        // 값이 할당되지 않은 인덱스의 요소는 undefined 값을 기본으로 가진다
+        console.log(emptyArr);
+        console.log(emptyArr.length); // 8 (마지막 추가한 위치 + 1)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        
+        /*
+            1. 전역 실행 컨텍스트
+            
+            [변수객체]
+            value:value1
+            printFunc
+            this
+            
+            [Scope]
+            0 전역객체
+            ------------------------->printFunc 실행
+            
+            2. printFunc 실행 컨텍스트
+            
+            [변수객체]
+            value:Value2
+            printValue
+            this
+            
+            [scope]
+            1 printFunc 변수 객체
+            0 전역 객체
+            --------------------------->printValue 실행
+            
+            3. printValue 실행 컨텍스트
+            
+            [변수객체]
+            this
+            
+            [scope]
+            2 printValue 변수객체
+            1 printFunc 변수객체
+            0 전역객체
+        */
+        var value = "value1";
+
+        function printFunc(func) {
+            var value = "value2";
+
+            function printValue() {
+                return value;
+            }
+
+            console.log(printValue());
+        }
+
+        printFunc();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 생성자 함수
+        function Person(name,age,gender){
+            this.name=name;
+            this.age=age;
+            this.gender=gender;
+        };
+        
+        // foo 빈 객체 생성
+        var foo = {};
+        
+        // apply() 메서드 호출
+        // 1. 첫번째 인자: foo
+        // -> Person() 함수에서 this로 바인딩된다.
+        // 2. 두번째 인자
+        // -> 호출하려는 Person() 함수의 인자 name,age,gender로 각각 전달된다.
+        
+        // 결론
+        // -> Person('foo',30,'man') 함수를 호출하면서 this를 foo객체에 명시적으로 바인딩하는 것을 의미
+        Person.apply(foo,['foo',30,'man']);
+        
+        console.log(foo);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
