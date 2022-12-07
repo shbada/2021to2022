@@ -1,0 +1,10 @@
+pwd
+> /Users/kimseohae/Documents/private-seohae/workspace/studyolle_jpa/src/main/resources/static
+
+npm init
+npm install bootstrap
+npm install jquery --save
+npm install @yaireo/tagify
+
+git ignore 추가 : src/main/resources/static/node_modules
+
