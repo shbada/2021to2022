@@ -1,0 +1,9 @@
+type ModifyMessageResponse {
+    ok: Boolean!
+    error: String
+    changedMessage: String
+}
+
+type Mutation {
+    ModifyMessage(id: Int!, nextMessage: String!): ModifyMessageResponse!
+}

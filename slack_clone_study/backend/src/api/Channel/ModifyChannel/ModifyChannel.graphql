@@ -1,0 +1,9 @@
+type ModifyChannelResponse {
+    ok: Boolean!
+    error: String
+    changedName: String
+}
+
+type Mutation {
+    ModifyChannel(id: Int!, nextName: String!): ModifyChannelResponse!
+}
