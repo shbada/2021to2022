@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  batch:
+    jdbc: # 내장 DB 일때 설정 가능
+      initialize-schema: embedded
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/inflearn_batch?useUnicode=true&characterEncoding=utf8
+      username: inflearn_batch
+      password: inflearn_batch
+      driver-class-name: com.mysql.jdbc.Driver
+  batch:
+    jdbc: # schema-mysql.sql 항상 실행
+      # 오류 발생 : Table 을 모두 삭제했는데, 자동 실행하는 부분이 never 일때는 테이블도 자동으로 생성되지 않기 때문
+      # initialize-schema: never
+      initialize-schema: always
+    job:
+      enabled: false # spring batch 자동실행 방지
+      # names: batchJob1 # 여기에 기재된 job 이 실행된다. 존재하지않는 job 을 실행시키면 에러 없이, 아무런 배치잡이 수행되지않는다.
+
+      # BatchProperties 의 name 에 저장되고 BatchAutoConfiguration 의 jobLauncherApplicationRunner() 에서 setJobNames 에서 job 이 셋팅된다.
+      # --batch.name=batchJob1, batchJob2 (, 구분으로 여러개 job 수행 가능)
+      # 넘어온 name 은 JobLauncherApplicationRunner 의 executeLocalJobs()에서 simpleMatch()로 name 매치를 판단한다.
+      names: ${job.name:NONE} # --job.name=batchJob1 로 실행시키겠다는 의미. 아무런 파라미터로 넘기지 않으면 NONE이라는 이름으로 실행되어 아무런 배치잡이 수행되지 않는다.
