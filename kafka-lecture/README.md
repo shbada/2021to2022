@@ -36,4 +36,4 @@
 |kafka-console-producer.sh|수강완료|2022/10/20|-|
 |kafka-console-consumer.sh|수강완료|2022/11/09|-|
 |kafka-consumer-groups.sh|수강완료|2022/12/01|-|
-|그외 커맨드 툴.sh|수강완료|2022/12/10|-|
+|그외 커맨드 툴|수강완료|2022/12/10|-|
