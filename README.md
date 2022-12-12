@@ -36,10 +36,10 @@
 ---
 
 #### [8) springbatch-orderamount]()
-> [springbatch practice] 사용자의 주문 일별 집계 배치  
-> blog : https://devfunny.tistory.com/category/Coding/Spring%20Batch
+- [springbatch practice] 사용자의 주문 일별 집계 배치  
+- blog : https://devfunny.tistory.com/category/Coding/Spring%20Batch
 
 ---
 
 #### [9) springbatch_test]()
-> [springbatch-아이템 37개 완료] 블로그 포스팅을 위한 Job Repository
+- [springbatch-아이템 37개 완료] 블로그 포스팅을 위한 Job Repository
