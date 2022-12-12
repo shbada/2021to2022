@@ -11,7 +11,7 @@
 #### [2) kotlin-project](https://github.com/seohaem/kotlin/tree/master/kotlin-project)
 > - 개인 프로젝트 : Kotlin + SpringBoot + DDD 연습
 > - 강의를 통해 공부한 JAVA + SpringBoot 프로젝트를 Kotlin으로 리팩토링하기 : https://github.com/seohaem/jpa/tree/master/studyolle_jpa
-> - 목표 : account, study, tag 간단한 CRUD 연습
+> - 목표 : `account`, `study`, `tag` 간단한 CRUD 연습
 
 ---
 
