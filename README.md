@@ -1,37 +1,37 @@
 # spring-batch
 
 #### [1) csvFileDataBatch]()
-> [Batch job 실습] .csv 파일 읽어오기 + 테스트코드
+- [Batch job 실습] .csv 파일 읽어오기 + 테스트코드
 
 ---
 
 #### [2) spring-batch-start]()
-> [강의] [스프링 배치 - Spring Boot 기반으로 개발하는 Spring Batch](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%EC%B9%98)   
-> 기간 : 2022.01.02 ~2022/04/13
+- [강의] [스프링 배치 - Spring Boot 기반으로 개발하는 Spring Batch](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%EC%B9%98)   
+- 기간 : 2022.01.02 ~2022/04/13
 ---
 
 #### [3) springBatch-project]()
-> [springBatch-project] 여러 Batch Job 생성하여 스프링배치 공부하기
+- [springBatch-project] 여러 Batch Job 생성하여 스프링배치 공부하기
 
 ---
 
 #### [4) springBatch]()
-> [Spring Batch] sample project 연습
+- [Spring Batch] sample project 연습
 
 ---
 
 #### [5) springbatch-app-service]()
-> [스프링 배치] application service (job, scheduler(Quatz))
+- [스프링 배치] application service (job, scheduler(Quatz))
 
 ---
 
 #### [6) springbatch-fastcampus]()
-> 강의 : [한번에 끝내는 Java/Spring 웹 개발 마스터 초격차 패키지 Online - Spring Batch](https://fastcampus.co.kr/dev_online_javaend)   
+- 강의 : [한번에 끝내는 Java/Spring 웹 개발 마스터 초격차 패키지 Online - Spring Batch](https://fastcampus.co.kr/dev_online_javaend)   
 
 ---
 
 #### [7) springbatch-memberProject]()
-> [springbatch 실습 프로젝트] 1. 회원등급 프로젝트
+- [springbatch 실습 프로젝트] 1. 회원등급 프로젝트
 
 ---
 
