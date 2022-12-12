@@ -42,6 +42,6 @@
 ---
 
 #### [9) spring-security-project](https://github.com/seohaem/spring-security/tree/master/spring-security-project)
--1) basic login   
--2) jwt token
+- basic login   
+- jwt token
 
