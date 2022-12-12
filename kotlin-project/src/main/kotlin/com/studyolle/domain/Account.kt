@@ -29,10 +29,6 @@ class Account (
     /* account_tags 테이블 생성 */
     @ManyToMany
     val tags: Set<Tag> = HashSet(),
-
-    /* account_zones 테이블 생성 */
-    @ManyToMany
-    val zones: Set<Zone> = HashSet(),
 ) {
     fun generateEmailCheckToken() {
         emailCheckToken = UUID.randomUUID().toString()

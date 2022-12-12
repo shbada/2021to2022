@@ -26,25 +26,10 @@ class Study(
     @Basic(fetch = FetchType.EAGER)
     val fullDescription: String? = null,
 
-    @Lob
-    @Basic(fetch = FetchType.EAGER)
-    val image: String? = null,
-
     /* study_tags 테이블 생성 */
     @ManyToMany
     val tags: Set<Tag> = HashSet(),
 
-    /* study_zones 테이블 생성 */
-    @ManyToMany
-    val zones: Set<Zone> = HashSet(),
-
-    var publishedDateTime: LocalDateTime? = null,
-    var closedDateTime: LocalDateTime? = null,
-    var recruitingUpdatedDateTime: LocalDateTime? = null,
-    var recruiting : Boolean = false,
-    var published : Boolean = false,
-    var closed : Boolean = false,
-    val useBanner : Boolean = false,
     var memberCount : Int = 0,
 ) {
     fun addManager(account: Account?) {
