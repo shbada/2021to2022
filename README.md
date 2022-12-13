@@ -25,16 +25,7 @@
 
 ---
 
-#### [6) java-concurrency](https://github.com/seohaem/parallel-programming/tree/master/java-concurrency)
-- [책] 멀티 코어를 100% 활용하는 자바 병렬 프로그래밍
-- blog : https://devfunny.tistory.com/category/Book/Effective%20Java
-<table><tr><td>
-    <img width="150" alt="image" src="https://user-images.githubusercontent.com/87924260/206194797-79942aa2-4c41-43be-a39c-5ee886301327.png">
-</td></tr></table>
-
----
-
-#### [7) java-concurrent](https://github.com/seohaem/parallel-programming/tree/master/java-concurrent)
+#### [6) java-concurrent](https://github.com/seohaem/parallel-programming/tree/master/java-concurrent)
 - [JAVA8] concurrent API   
 - 기간 : ~ 2022.06.17 
 
