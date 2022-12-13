@@ -16,10 +16,10 @@
 ---
 
 #### [3) kotlin-step1](https://github.com/seohaem/kotlin/tree/master/kotlin-step1)
-- 강의 : 자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide)
+- 강의 : [자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide)](https://www.inflearn.com/course/java-to-kotlin)
 
 ---
 
 #### [4) kotlin-step2](https://github.com/seohaem/kotlin/tree/master/kotlin-step2)
-- 강의 : 실전! 코틀린과 스프링 부트로 도서관리 애플리케이션 개발하기 (Java 프로젝트 리팩토링)
+- 강의 : [실전! 코틀린과 스프링 부트로 도서관리 애플리케이션 개발하기 (Java 프로젝트 리팩토링)](https://www.inflearn.com/course/java-to-kotlin-2)
 
