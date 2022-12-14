@@ -70,3 +70,12 @@
     <img width="150" alt="image" src="https://user-images.githubusercontent.com/87924260/206160775-913b2285-451d-406e-9bd3-6099e21d83ac.png">
 </td></tr></table>
 
+---
+
+#### [12) java-refactoring](https://github.com/seohaem/java/tree/master/java-refactoring)
+- JAVA 리팩토링 학습
+- 강의 : [코딩으로 학습하는 리팩토링](https://github.com/seohaem/java/tree/master/java-refactoring)
+<table><tr><td>
+    <img width="150" alt="image" src="https://user-images.githubusercontent.com/87924260/207542491-7bc9fc65-8c59-4a9c-b213-2d1005b474b2.png">
+</td></tr></table>
+
