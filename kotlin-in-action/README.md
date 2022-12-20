@@ -23,12 +23,12 @@
 |15|15. 코틀린 중첩 클래스|https://devfunny.tistory.com/763|O|
 |16|16. 봉인된 클래스: 클래스 계층 정의시 클래스 확장 제한 (sealed 변경자)|https://devfunny.tistory.com/764|O|
 |17|17. 클래스의 생성자와 초기화 블록, 주 생성자와 부 생성자|https://devfunny.tistory.com/767|O|
-|18|18. 인터페이스의 프로퍼티 구현, 뒷받침하는 필드(field 식별자), 접근자의 가시성 변경|https://devfunny.tistory.com/771|
-|19|19. 코틀린의 toString(), equals(), hashCode(), copy() 메서드 구현과 자동생성 data 변경자, 클래스 위임 by|https://devfunny.tistory.com/773|
-|20|20. object 키워드 (객체 선언, 동반 객체, 무명 객체)|https://devfunny.tistory.com/781|
-|21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|
-|22|22. 람다식의 로컬 변수 접근, 멤버 참조|https://devfunny.tistory.com/789|
-|23|23. 컬렉션 함수형 API (filter, map, all, any, count, find, groupBy, flatMap, flatten)|https://devfunny.tistory.com/795|
-|24|24. 지연 계산(lazy) 컬렉션 연산 - 시퀀스(sequence) 사용|https://devfunny.tistory.com/804|
-|25|25. SAM 생성자|https://devfunny.tistory.com/819|
-|26|26. 수신 객체 지정 람다 (with, apply)|https://devfunny.tistory.com/820|
+|18|18. 인터페이스의 프로퍼티 구현, 뒷받침하는 필드(field 식별자), 접근자의 가시성 변경|https://devfunny.tistory.com/771|O|
+|19|19. 코틀린의 toString(), equals(), hashCode(), copy() 메서드 구현과 자동생성 data 변경자, 클래스 위임 by|https://devfunny.tistory.com/773|O|
+|20|20. object 키워드 (객체 선언, 동반 객체, 무명 객체)|https://devfunny.tistory.com/781|O|
+|21|21. 람다식과 멤버 참조|https://devfunny.tistory.com/784|O|
+|22|22. 람다식의 로컬 변수 접근, 멤버 참조|https://devfunny.tistory.com/789|O|
+|23|23. 컬렉션 함수형 API (filter, map, all, any, count, find, groupBy, flatMap, flatten)|https://devfunny.tistory.com/795|O|
+|24|24. 지연 계산(lazy) 컬렉션 연산 - 시퀀스(sequence) 사용|https://devfunny.tistory.com/804|O|
+|25|25. SAM 생성자|https://devfunny.tistory.com/819|O|
+|26|26. 수신 객체 지정 람다 (with, apply)|https://devfunny.tistory.com/820|O|
