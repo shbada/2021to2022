@@ -1,6 +1,6 @@
 # kotlin
 
-#### [1) JAVA-Thread-Practice](https://github.com/seohaem/kotlin/tree/master/kotlin-in-action)
+#### [1) kotlin-in-action](https://github.com/seohaem/kotlin/tree/master/kotlin-in-action)
 - 코틀린 입문하기
 <table><tr><td>
     <img width="150" alt="image" src="https://user-images.githubusercontent.com/87924260/206187890-3655859a-0030-40b5-9251-d7862db4b635.png">
