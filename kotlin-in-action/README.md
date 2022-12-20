@@ -3,15 +3,15 @@
 
 
 ##### 포스팅 바로가기
-| | | |
-|-|-|-|
-|순번|제목|URL|
-|1|1. Hello Kotlin 기본 코드 분석하기|https://devfunny.tistory.com/733|
-|2|2. 변수, 문자열 템플릿|https://devfunny.tistory.com/734|
-|3|3. 클래스, 프로퍼티|https://devfunny.tistory.com/735|
-|4|4. enum 과 when, 클래스 계층과 스마트 캐스트|https://devfunny.tistory.com/737|
-|5|5. while과 for 루프, Map 이터레이션, in으로 원소검사|https://devfunny.tistory.com/738|
-|6|6. 예외처리 (throw, try~catch~finally)|https://devfunny.tistory.com/739|
+| | | | |
+|-|-|-|-|
+|순번|제목|URL|복습|
+|1|1. Hello Kotlin 기본 코드 분석하기|https://devfunny.tistory.com/733|O|
+|2|2. 변수, 문자열 템플릿|https://devfunny.tistory.com/734|O|
+|3|3. 클래스, 프로퍼티|https://devfunny.tistory.com/735|O|
+|4|4. enum 과 when, 클래스 계층과 스마트 캐스트|https://devfunny.tistory.com/737|O|
+|5|5. while과 for 루프, Map 이터레이션, in으로 원소검사|https://devfunny.tistory.com/738|O|
+|6|6. 예외처리 (throw, try~catch~finally)|https://devfunny.tistory.com/739|O|
 |7|7. 코틀린 컬렉션 만들기 (Set, Map, List)|https://devfunny.tistory.com/740|
 |8|8. 코틀린 함수 호출 (매개변수 이름 명시, 디폴트 파라미터, 최상위 함수(유틸리티 클래스 없애기), 최상위 프로퍼티)|https://devfunny.tistory.com/741|
 |9|9. 확장 함수와 확장 프로퍼티|https://devfunny.tistory.com/745|
