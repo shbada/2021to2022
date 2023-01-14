@@ -1,0 +1,28 @@
+package com.designpattern.report._22_template.step1_before;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileProcessor {
+
+    private String path;
+    public FileProcessor(String path) {
+        this.path = path;
+    }
+
+    public int process() {
+        try(BufferedReader reader = new BufferedReader(new FileReader(path))) { // 자동 close
+            int result = 0;
+            String line = null;
+            while((line = reader.readLine()) != null) {
+                // parseInt (int 리턴)
+                // valueOf (Integer 리턴)
+                result += Integer.parseInt(line);
+            }
+            return result;
+        } catch (IOException e) {
+            throw new IllegalArgumentException(path + "에 해당하는 파일이 없습니다.", e);
+        }
+    }
+}
