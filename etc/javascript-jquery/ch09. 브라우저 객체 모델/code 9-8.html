@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        //팝업창을 전체화면으로 생성.
+        var child = window.open('', '', 'width=300, heigth=200');
+        var width = screen.width;
+        var height = screen.height;
+        
+        child.moveTo(0,0);
+        child.resizeTo(width, height);
+        
+        setInterval(function(){
+            child.resize(10,10);
+            child.moveTo(10,10);
+        }, 1000);
+    </script>
+</body>
+</html>

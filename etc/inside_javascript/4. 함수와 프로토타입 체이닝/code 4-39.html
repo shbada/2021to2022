@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(name,age,hobby){
+            this.name=name;
+            this.age=age;
+            this.hobby=hobby;
+        };
+        
+        var foo = new Person('foo',30,'tennis');
+        // 프로토타입 체이닝
+        // 1. foo 객체에는 hasOwnProperty 메서드가 없다
+        // 2. 프로토타입 체이닝 => foo 객체의 부모객체인 Person.prototype에서 찾는다
+        // 3. prototype 프로퍼티에서 알아 봤듯이 함수에 연결된 프로토타입 객체는 디폴트로 constructor프로퍼티만을 가진 객체이므로 hasOwnProperty() 메서드는 없다.
+        // 4. 왜 true가 나왔을까?
+        // => Person.prototype는 Object.prototype을 프로토타입 객체이다
+        // 결론. Object.prototype 객체의 hasOwnProperty() 메서드가 실행되므로 에러가 발생하지 않고 true가 출력된다.
+        console.log(foo.hasOwnProperty('name')); // true
+        console.dir(Person.prototype);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

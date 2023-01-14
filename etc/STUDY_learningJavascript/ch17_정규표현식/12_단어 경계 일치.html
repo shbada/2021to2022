@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 단어 경계 일치는 입력을 소비하지 않는다.
+     * 단어 경계는 알파벳 또는 숫자(\w)로 시작하는 부분, 알파벳이나 숫자가 아닌 문자(\W)로 끝나는 부분, 또는 문자열의 시작이나 끝에 일치한다.
+     * 영어 텍스트 안에 들어가있는 이메일 주소를 찾아서 하이퍼링크로 바꾼다고 해보자.
+     */
+
+    const inputs = [
+        "aaa@doe.com",
+        "aaa@dow.com is my email",
+        "my email is aaa@doe.com",
+        "use aaa@dow.com, my email",
+        "my email:aaa@dom.com"
+    ];
+
+    /**
+     * 단어 경계는 입력을 소비하지 않으므로,
+     * 다시말해 일치하는 이메일 주소인 aaa@doe.com 에서 a가 보존되고 m 다음의 문자 역시 보존되므로,
+     * 교체할 문자열에 '다시 넣는' 방법을 생각할 필요가 없다.
+     */
+
+    /**
+     * /\bcount/ -> count, countdown 은 찾지만 discount, recount 는 찾지 못한다.
+     * /\bcount\B/ -> countdown 은 찾지만 count 는 찾지 못한다.
+     * /\Bcount\b/ -> discount, recount 찾는다.
+     * /\Bcount\B/ -> accountable 찾는다.
+     */
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function parent() {
+            var a = 100;
+            
+            //내부함수
+            var child = function(){
+                console.log(a);
+            }
+            
+            return child;
+        };
+        
+        // child 함수가 리턴되므로 inner 변수는 내부함수 child()를 참조한다
+        var inner = parent();
+        inner();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

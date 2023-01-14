@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        //Person() 생성자 함수
+        function Person(name){
+            this.name = name;
+        }
+        
+        // Person.prototype.constructor는 Person()생성자 함수를 가리킨다.
+        console.log(Person.prototype.constructor); 
+        
+        //foo 객체 생성
+        var foo = new Person('foo');
+        console.log(foo.country);  // undefined
+        
+        // 디폴트 프로토타입 객체 변경
+        // 생성자 함수의 프로토타입 프로퍼티를 변경하게 되면 이 후 생성되는 객체들은 변경된 프로토링크를 지니게 된다. 
+        // 또한 변경 이전 링크는 그대로 유지된다.
+        Person.prototype = {
+            country : 'korea'
+        };
+        
+        console.log(Person.prototype.constructor);  
+        
+        // bar 객체 생성
+        var bar = new Person('bar');
+        console.log(foo.country); // undefined
+        console.log(bar.country); // korea
+        console.log(foo.constructor); // Person() 생성자 함수
+        console.log(bar.constructor); // Object()
+    </script>
+</head>
+<body>
+
+</body>
+</html>

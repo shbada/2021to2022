@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    // <a> 태그에서 href 가 아닌 속성을 전부 제거
+    let html = '<a class="nope" href="/yep">Yep</a>';
+    html = html.replace(/<a .*?(href=".*?").*?>/, '<a $1>');
+
+    // 모든 그룹은 1로 시작하는 숫자를 할당받는다.
+    // 정규식에서 첫번재 그룹은 \1이고, 교체할 문자열에서는 $1이 첫번째 그룹이다.
+
+    const input = "One two three";
+    input.replace(/two/, '($`)'); // One (One ) three;
+
+    // $` : 일치하는 것 앞에 있는 전부를 참조
+    // $& : 일치하는 것 자체
+    // $' : 일치하는 것 뒤에 있는 전부를 참조
+    // $$ : $ 기호 자체
+</script>
+<body>
+
+</body>
+</html>

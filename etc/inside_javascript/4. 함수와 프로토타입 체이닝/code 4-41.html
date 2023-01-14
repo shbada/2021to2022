@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(name){
+            this.name=name;
+        };
+        
+        var foo = new Person('foo');
+        // foo 객체에는 sayHello() 메서드가 정의되어있지 않다
+        // foo.sayHello();
+        
+        // 동적으로 sayHello() 추가
+        Person.prototype.sayHello = function(){
+            console.log('Hello');
+        }
+        
+        // foo 객체에는 sayHello() 메서드가 없지만,
+        // 프로토타입 체이닝: Person.prototype 객체에서 sayHello() 메서드를 검색
+        // 정상적으로 출력된다
+        foo.sayHello(); // Hello
+    </script>
+</head>
+<body>
+
+</body>
+</html>

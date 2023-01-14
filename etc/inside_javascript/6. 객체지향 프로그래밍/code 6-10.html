@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var Person = function(arg) {
+        var name = arg ? arg : "zzoon" ; //private
+        return {
+            getName : function() {
+                return name; ////private 멤버에 접근 가능
+            },
+            setName : function(arg) {
+                name = arg;
+            }
+        };
+     };
+        
+     var me = Person(); //Person 함수를 호출하여 객체를 반환받는다.
+     console.log(me.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

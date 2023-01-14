@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.12 이터레이터와 제너레이터</title>
+</head>
+<script>
+    /**
+     yield 문은, 제너레이터가 마지막의 문이더라도 제너레이터를 끝내지 않는다.
+     제너레이터에서 return 문을 사용하면 그 위치와 관계없이 done 이 true 가 되고,
+     value 프로퍼티는 return 이 반환하는 값이 된다.
+     */
+
+    function* abc() {
+        yield 'a';
+        yield 'b';
+        return 'c';
+    }
+
+    const it = abc();
+    it.next(); // value: 'a', done: false
+    it.next(); // value: 'b', done: false
+    it.next(); // value: 'c', done: true
+
+    /** 제너레이터를 사용할때는 보통 done 이 true 이면 value 프로퍼티에 주의를 기울이지 않는다. */
+    for (let l of abc()) {
+        console.log(l); // "a", "B"는 출력되지만 done이 true인 "c"는 출력되지않는다.
+    }
+
+    /**
+     따라서 제너레이터에서 중요한 값을 return 으로 반환하려 하지 말고,
+     제너레이터가 반환하는 값을 사용하려 할때는 yield 를 써야하고,
+     return 은 제너레이터를 중간에 종료하는 목적으로 사용해야 한다.
+     */
+</script>
+<body>
+
+</body>
+</html>

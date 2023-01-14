@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        function Rectrangle(w, h){
+            var width = w;
+            var height = h;
+            
+            this.getWidth = function() { return width };
+            this.getHeight = function() { return height };
+            this.setWidth = function(w) {
+                if(w<0){
+                    throw '길이는 음수 일 수 없습니다.';
+                } else{
+                    width = w;
+                }
+            };
+            
+            this.setHeight = function(h) {
+                if(h<0){
+                    throw '길이는 음수 일 수 없습니다.';
+                } else{
+                    height = h;
+                }
+            };
+        }
+        
+        Rectrangle.prototype.getArea = function() {
+            return this.getWidth() * this.getHeight();
+        };
+    </script>
+    <script>
+        function Square(length){
+            this.base = Rectrangle;
+            this.base(length, length);
+        }
+        
+        Square.prototype = Rectrangle.prototype;
+        Square.prototype.constructor = Square;
+        
+        var rectrangle = new Rectrangle(5,7);
+        var square = new Square(5);
+        console.log(rectrangle.getArea() + ": "+square.getArea());
+        console.dir(Square);
+        
+        var square = new Square(5);
+        console.log(square instanceof Rectrangle);
+    </script>
+</body>
+</html>

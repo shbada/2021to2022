@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        var ptimitiveNumber = 273; //기본자료형 숫자
+        var objectNumber = new Number(273); //생성자 함수 사용 -> 객체
+        
+        //속성과 메서드는 객체가 가질 수 있다.
+        //하지만, 기본 자료형에도 속성과 메서드가 있다.
+        //기본 자료형의 속성이나 메서드를 사용하면 -> 객체로 변환된다.
+        
+        var output = '';
+        output += typeof(prmitiveNumber) +':'+primitiveNumber+\n;
+        output += typeof(objectNumber) +':'+objectNumber;
+        console.log(output);
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    const d = new Date(Date.UTC(1930, 4, 10));
+
+    d.getFullYear(); // 1815
+
+    /**
+     * 각 시간 및 날짜를 알수있는 메서드들이 있다. (한번 읽어보면 된다. p 326)
+     * UTC 기준 메서드도 있다. (한번 읽어보면 된다. p 326)
+     */
+
+    console.log("-----------------");
+
+    /**
+     * 날짜 비교
+     * @type {Date}
+     */
+    const d1 = new Date(1996, 2, 1);
+    const d2 = new Date(2009, 4, 27);
+
+    console.log(d1>d2); // false
+    console.log(d1<d2); // true
+
+    console.log("------------------");
+
+    /**
+     * 날짜 연산
+     * @type {number}
+     */
+    const msDiff = d2- d1 ;
+    const daysDiff = msDiff/1000/60/60/24;
+
+    // 밀리초
+    console.log(msDiff); // 4177404000000 ms
+    console.log(daysDiff); // 4834.96 days
+
+    /**
+     * Array.prototype.sort -> 날짜 정렬
+     * moment.js > add (날짜 더하기)
+     * moment.js > subtract (날짜 빼기)
+     * moment.js > 메서드 체인연결 가능 ex) moment().add(10, 'hours').subtract(3, 'days');
+     * moment.js > fromNow() -> 시간 단위를 다른 단위로 나타냄 ex) subtract(300, 'days').fromNow() ---> 10 months ago
+     */
+</script>
+<body>
+
+</body>
+</html>

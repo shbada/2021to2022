@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        /** 전개 연산자를 사용한 배열 복제 */
+        
+        const originalArray = [1,2,3,4,5];
+        
+        //배열 복제
+        const newArray = [...originalArray];
+        
+        //원본 배열의 요소 변경
+        originalArray[0] = 52;
+        originalArray[1] = 273;
+        
+        console.log(originalArray);
+        console.log(newArray); //변경되지않음
+    </script>
+</body>
+</html>

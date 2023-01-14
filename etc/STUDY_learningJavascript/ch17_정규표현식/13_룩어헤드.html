@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    /**
+     * 입력을 소비하지 않는다.
+     * 하위 표현식도 소비하지않고 찾을 수 있다.
+     * 문자열 겹치는 상황이 필요하고, 룩어헤드를 써서 단순화시킬 수 있는 패턴이 많다.
+     * 주로 "비밀번호가 규칙에 맞는지" 검사할때 사용한다.
+     */
+
+    function validPassword(p) {
+        return /[A-Z]/.test(p) && // 대문자가 최소 1개
+                    /[a-z]/.test(p) && // 소문자가 최소 1개
+                    /[0-9]/.test(p) && // 숫자가 최소 1개
+                    !/[^a-zA-Z0-9]/.test(p); // 영문&숫자
+
+
+        // 위 정규식을 하나로 묶고싶다면, 룩어헤드를 사용한다.
+        function validPasswordLoog(p) {
+            return /(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?!.*[^a-zA-Z0-9])/.test(p);
+
+
+        }
+    }
+</script>
+<body>
+
+</body>
+</html>

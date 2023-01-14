@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Person(name){
+            this.name=name;
+        };
+        
+        // Person() 생성자 함수로 생성된 foo 객체는 Person() 함수의 프로토타입 객체를 [[Prototype]]링크로 연결
+        var foo = new Person('foo');
+        
+        console.dir(Person);
+        console.dir(foo);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

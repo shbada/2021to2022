@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        for (var i = 0; i < 3; i++){
+            // 1초(1000밀리 초) * i초 후에 i를 출력
+            ((i) => {
+                setTimeout(() =>{
+                    console.log(i);
+                }, 1000 * i);
+            })(i);
+        }
+    </script>
+</body>
+</html>

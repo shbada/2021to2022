@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.14 비동기적 프로그래밍</title>
+</head>
+<script>
+    function countdown() {
+        let i; // 변수 i가 들어가있는 클로저 생성
+        console.log("CountDown: ");
+
+        // for 루프 안에서 만드는 콜백은 모두 i에 접근 가능하다.
+        // 그들이 접근하는 i는 똑같은 i이다. (위 선언된 변수 i)
+        for (i=5; i>=0; i--) {
+            setTimeout(function () {
+                console.log(i===0 ? "go!" : i);
+            }, (5-i)*1000);
+        }
+    }
+
+    countdown();
+
+    function countdown2() {
+        console.log("CountDown: ");
+
+        // i는 블록스코프 변수이다.
+        for (let i=5; i>=0; i--) {
+            setTimeout(function () {
+                console.log(i===0 ? "go!" : i);
+            }, (5-i)*1000);
+        }
+    }
+
+    countdown2();
+
+    /**
+     오류 우선 콜백 패턴.
+     콜백과 관련된 에러를 처리할 방법의 표준이 필요했기 때문에 나타났다.
+     콜백의 첫번째 매개변수에 에러 객체를 쓰자는 것이다.
+     에러가 null 이거나 undefined 이면 에러가 없는 것이다.
+     */
+
+    function errorLog(err, data) {
+        if (err) return console.error('error');
+    }
+
+    /**
+     콜백 헬.
+
+     콜백을 사용해 비동기적으로 실행할 수 있긴 하지만, 한번에 여러가지를 기다려야 한다면
+     콜백을 관리하기가 상당히 어려워진다.
+     */
+
+    function f() {
+        console.log('a');
+        function f1() {
+            console.log('b');
+            function f2() {
+                console.log('c');
+            }
+        }
+    }
+
+    /**
+     콜백이 우연히 두번 호출되거나, 아예 호출되지않는 경우를 방지하는 안전장치가 없다.
+     콜백이 정확히 한번만 호출될 것을 가정하고 코드를 작성한다면 보장이 되지않는다.
+     비동기적 코드가 늘어나면 늘어날수록 버그가 없고 관리하기 쉬운 코드를 작성하기는 매우 어려워진다.
+
+     '프라미스'의 등장.
+
+     프라미스는 콜백의 단점을 해결하려는 시도 속에서 만들어졌다.
+     안전하고 관리하기 쉬운 코드를 만들 수 있게된다.
+
+     프라미스는 콜백의 대체자가 아닌 콜백을 사용한다.
+     프라미스는 콜백을 예측 가능한 패턴으로 사용할 수 있게하며, 프라미스 없이 콜백만 사용했을때
+     나타날 수 있는 엉뚱한 현상이나 찾기 힘든 버그를 상당수 해결한다.
+
+     프라미스 기반 비동기적 함수를 호출하면 그 함수는 Promise 인스턴스를 반환한다.
+     프라미스는 성공/실패 단 두가지 뿐이다.
+     성공한 프라미스가 나중에 실패하는 일은 절대 일어날 수 없다.
+     성공이든 실패든 단 한번만 일어난다.
+
+     프라미스는 객체이므로 어디든 전달할 수 있다.
+     비동기적 처리를 다른 함수에서 처리하게 하고 싶다면 프라미스를 넘기기만 하면 된다.
+     */
+
+    function countdown2(seconds) {
+        // Promise 사용 (resolve : 성공, reject : 실패)
+        return new Promise(function (resolve, reject) {
+            for (let i = seconds; i > 0; i--) {
+                setTimeout(function () {
+                    if (i>0) console.log(i + '...');
+                    else resolve(console.log("Go!"));
+                }, (seconds-i)*1000);
+            }
+        })
+    }
+
+    /**
+     resolve (성공), reject (실패) 는 함수이다.
+     resolve 를 여러번 호출하든, 섞어서 호출하든 결과는 같다.
+     첫번째 호출한 것만 의미가 있다.
+     */
+
+    countdown2(5).then( // 반환된 프라미스를 변수에 할당하지 않고 then 핸들러로 바로 호출했다.
+        function () {
+            console.log("completed");
+        },
+
+        function (err) {
+            console.log("error" + err.message);
+        }
+    )
+
+    /**
+     위 countdown 함수에 일부러 에러를 내보자.
+     */
+
+    function countdown3(seconds) {
+        // Promise 사용 (resolve : 성공, reject : 실패)
+        return new Promise(function (resolve, reject) {
+            for (let i = seconds; i > 0; i--) {
+                setTimeout(function () {
+                    if (i===13) return reject(new Error("Oh my got")); // 에러발생
+                    if (i>0) console.log(i + '...');
+                    else resolve(console.log("Go!"));
+                }, (seconds-i)*1000);
+            }
+        })
+    }
+
+    /**
+     변수 i가 13일때 에러가 발생한다.
+     하지만 콘솔에는 12부터 다시 카운트를 기록한다.
+     reject, resolve 가 함수를 멈추지 않고, 프라미스의 상태를 관리한다.
+
+     프라미스는 진행상황을 알려주지 않는다.
+     프라미스가 완료되거나 파기될뿐 진행상태에 대한 개념은 없다.
+     */
+
+
+</script>
+<body>
+
+</body>
+</html>

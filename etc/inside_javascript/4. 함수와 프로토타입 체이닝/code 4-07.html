@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        add(2,3); // Error
+        
+        // 함수 표현식 방식으로 정의될시, 함수 호이스팅이 발생하지 않는다
+        add = function (x, y) {
+            return x+y;
+         };
+        
+        add(3, 4);   // 7
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

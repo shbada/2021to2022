@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        모던 웹을 위한 javascript + jquery 입문 (3판)
+    </title>
+</head>
+<body>
+    <script>
+        var primitiveNumber = 273;
+        var objectNumber = new Number(273);
+        
+        //Number 생성자 함수의 프로토타입에 메서드를 추가
+        Number.prototype.method = function() {
+            return 'Method on Prorotype';
+        }
+        
+        var output = '';
+        output += primitiveNumber.method() + '\n';
+        output += objectNumber.method();
+        
+        console.log(output);
+        console.dir(Number);
+    </script>
+</body>
+</html>

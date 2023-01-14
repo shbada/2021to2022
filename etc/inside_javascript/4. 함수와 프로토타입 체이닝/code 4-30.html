@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // new를 붙히지않고 생성자 함수 호출시의 에러
+        var qux = Person('qux',20,'man');
+        console.log(qux); // undefined
+        
+        // 생성자 함수
+        function Person(name,age,gender){
+            this.name=name;
+            this.age=age;
+            this.gender=gender;
+        };
+        
+        console.log(window.name); // qux
+        console.log(window.age); // 20
+        console.log(window.gender); // man
+    </script>
+</head>
+<body>
+
+</body>
+</html>

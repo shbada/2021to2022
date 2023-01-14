@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 클래스이자 생성자의 역할
+        function Person(arg){
+            this.name=arg;
+            this.getName=function(){
+                return this.name;
+            };
+            this.setName=function(){
+                this.name=value;
+            };
+        };
+        
+        // me : Person의 인스턴스
+        var me = new Person('zzoon');
+        console.log(me.getName());
+        me.setName('jamJhoo');
+        console.log(me.getName());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHAPTER.14 비동기적 프로그래밍</title>
+</head>
+<script>
+    /**
+     제너레이터는 원래 동기적인 성격을 가졌지만, 프라미스와 결합하면 비동기 코드를 효율적으로 관리할 수 있다.
+     */
+
+    function nfcall(f, ...args) {
+        return new Promise(function (resolve, reject) {
+            f.call(null, ...args, function (err, ...args) {
+                if (err) return reject(err);
+                resolve(args.length<2 ? args[0] : args);
+            })
+        })
+    }
+
+    function ptimeout(delay) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(resolve, delay);
+        })
+    }
+
+    /** 제너레이터는 원래 동기적이다. 제너레이터와의 통신을 관리하고 비동기적 호출을 하는 함수를 만들어보자. */
+
+    function grun(g) {
+        const it = g();
+        (function iterate(val) {
+            const x = it.next(val);
+            if (!x.done) {
+                if (x.value instanceof Promise) {
+                    x.value.then(iterate).catch(err => it.throw(err));
+                } else {
+                    setTimeout(iterate, 0, x.value);
+                }
+            }
+        })();
+    }
+
+    /**
+     위 grun 함수는 제너레이터 재귀 실행기이다.
+     grun 에 제너레이터 함수를 넘기면 해당 함수가 실행된다.
+     yield 로 값을 넘긴 제너레이터는 이터레이터에서 next 를 호출할때까지 기다린다.
+     grun 은 그 과정을 재귀적으로 반복한다.
+     이터레이터에서 프라미스를 반환하면 grun은 프라미스가 완료될때까지 기다린다음
+     이터레이터 실행을 재개한다.
+     이터레이터가 값을 반환하면 이터레이터 실행을 즉시 재개한다.
+
+     위처럼 제너레이터 실행기를 직접 만들지 말고,
+     이미 만들어져있는 좋은 코드를 가져오는 것을 권장한다.
+     */
+</script>
+<body>
+
+</body>
+</html>

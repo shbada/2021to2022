@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 스터디</title>
+</head>
+<script>
+    // action 데이터 속성에 "highlight"가 들어있는 요소 모두 찾기
+    const highlightActions = document.querySelectorAll('[data-action="highlight"]');
+
+    console.log(highlightActions[0].dataset);
+
+    highlightActions[0].dataset.containing = "giraffe";
+    // 대소문자 구분
+    highlightActions[0].dataset.caseSensitive = "true";
+</script>
+<body>
+    <button data-action="highlight" data-containing="unique">
+        Highlight paragraphs Containing "unique"
+    </button>
+    <button data-action="removeHilights">
+        Remove highlights
+    </button>
+</body>
+<style>
+
+</style>
+</html>
