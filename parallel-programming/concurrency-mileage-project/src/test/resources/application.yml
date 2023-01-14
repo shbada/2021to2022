@@ -1,0 +1,13 @@
+spring:
+  # H2Database
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  # JPA
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
