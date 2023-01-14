@@ -1,0 +1,27 @@
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false  # LAZY 로딩시 비어있는 bean 은 serialize 제외
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # Postgres Database
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shopping
+    username: shpping
+    password: shpping
+    driver-class-name: org.postgresql.Driver
+  # Thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+app:
+  host: http://localhost:8080

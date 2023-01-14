@@ -1,0 +1,10 @@
+type Message { #message에 대한 model typedef
+  id: Int!
+  nickname: String!
+  contents: String!
+  thumbnail: String!
+  innerChannel: Channel!
+  innerChannelId: Int!
+  createdAt: String!
+  updatedAt: String
+}

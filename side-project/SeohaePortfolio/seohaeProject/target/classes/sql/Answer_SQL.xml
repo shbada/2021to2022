@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="answerSql">
+	<insert id="insertAnswer" parameterType="com.co.kr.question.vo.QuestionVo">
+	    <![CDATA[
+	        INSERT INTO ANSWER
+	        (
+	            Q_IDX,
+	            A_IDX,
+				A_USER_ID,
+				A_DESC,
+				A_REG_DE
+	        )
+	        VALUES
+	        (
+	            #{qIdx}, 
+	            seq_answer.NEXTVAL,
+	            #{aUserId}, 
+	            #{aDesc}, 
+	            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+	        )
+	    ]]>
+	    
+	    /*com.co.kr.answer.dao.AnswerDao.insertAnswer - 답변글 작성완료  */
+	</insert>
+	
+	<select id="answerDetail" parameterType="int" resultType="com.co.kr.answer.vo.AnswerVo">
+		SELECT
+			Q_IDX,
+			A_IDX,
+			A_DESC,
+			A_VIEW_CNT,
+			A_USER_ID,
+			A_REG_DE,
+			A_YN
+		FROM ANSWER
+		WHERE 1=1
+		<if test="value != '' and value != null ">
+			AND A_IDX = #{aIdx}
+		</if>
+		
+		/*com.co.kr.answer.dao.AnswerDao.answerDetail - 답변글 상세정보  */
+	</select>
+	
+	<update id="answerUpdateCnt" parameterType="int">
+		<![CDATA[
+			UPDATE ANSWER
+				SET
+					A_VIEW_CNT = A_VIEW_CNT + 1
+				WHERE A_IDX = #{aIdx}		
+		]]>
+		
+	/*com.co.kr.answer.dao.AnswerDao.answerUpdateCnt - 조회수 변경  */
+	</update>
+	
+	<select id="answerLikeCnt" resultType="int">
+			SELECT COUNT(A_IDX) FROM ANS_LIKE_BOARD WHERE 1=1 AND A_IDX = #{aIdx}	
+			
+       /*com.co.kr.answer.dao.AnswerDao.answerLikeCnt - 답변글  추천 여부 조회  */
+	</select>
+
+	<select id="answerLike" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="com.co.kr.answer.vo.AnswerVo">
+			SELECT  Q_IDX,
+					A_IDX,
+					USER_ID,
+					REG_DE
+				FROM ANS_LIKE_BOARD
+				WHERE A_IDX = #{aIdx}
+                AND USER_ID = #{aUserId}
+                
+       /*com.co.kr.answer.dao.AnswerDao.answerLike - 답변글 추천수 조회  */
+	</select>
+	
+	<insert id="insertAnswerLike" parameterType="com.co.kr.answer.vo.AnswerVo">
+      <![CDATA[
+         INSERT 
+           INTO ANS_LIKE_BOARD(
+             Q_IDX,
+             A_IDX,
+             USER_ID,
+             REG_DE
+           ) VALUES (
+             #{qIdx},
+             #{aIdx},
+             #{aUserId},
+             TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+           )
+       ]]>
+       /*com.co.kr.answer.dao.AnswerDao.insertAnswerLike - 답변글 추천수 완료  */
+   </insert>
+   
+   <select id="findqUserId" resultType="String">
+			SELECT A_USER_ID FROM ANSWER WHERE 1=1 AND A_IDX = #{aIdx}	
+			
+       /*com.co.kr.answer.dao.AnswerDao.findqUserId - 답변글 작성자 아이디 찾기  */
+	</select>
+	
+   <select id="findqQUserId" resultType="String">
+			SELECT Q_USER_ID FROM QUESTION WHERE 1=1 AND Q_IDX = #{qIdx}	
+			
+       /*com.co.kr.answer.dao.AnswerDao.findqUserId - 질문글 작성자 아이디 찾기  */
+	</select>
+	
+	<select id="answerPickCheck" parameterType="com.co.kr.answer.vo.AnswerVo" resultType="int">
+		SELECT COUNT(*) FROM ANSWER WHERE A_YN='Y' AND Q_IDX=#{qIdx}
+
+        /*com.co.kr.answer.dao.AnswerDao.answerPickCheck - 채택여부 확인  */
+	</select>
+	
+	<update id="answerPickSave" parameterType="com.co.kr.answer.vo.AnswerVo">
+		<![CDATA[
+			UPDATE ANSWER
+				SET
+					A_YN = 'Y'
+				WHERE A_IDX = #{aIdx}		
+		]]>
+		
+	/*com.co.kr.answer.dao.AnswerDao.answerPickSave - 답글 채택완료 */
+	</update>
+	
+	<update id="questionUpdate" parameterType="com.co.kr.answer.vo.AnswerVo">
+		<![CDATA[
+			UPDATE QUESTION
+				SET
+					Q_ANS_YN = 'Y'
+				WHERE Q_IDX = #{qIdx}		
+		]]>
+		
+	/*com.co.kr.answer.dao.AnswerDao.answerPickSave - 질문글 채택여부 변경 */
+	</update>
+</mapper>

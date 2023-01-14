@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+#Redis
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+# feign URL
+feign:
+  batch-api:
+    url: http://localhost:6060
+  httpclient:
+    connection-timeout: 1
+

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="replySql">
+	<sql id="paging_header">
+		SELECT *
+			FROM (
+				SELECT ROWNUM RNUM, S.*
+					FROM(
+	</sql>
+	
+	<sql id="paging_footer">
+				)S
+			)A
+		WHERE RNUM BETWEEN #{startRowNo} AND #{endRowNo}
+	</sql>
+
+	<insert id="freeBoardReplyWrite" parameterType="com.co.kr.board.reply.vo.ReplyVo">
+		<![CDATA[
+         INSERT 
+           INTO FREE_BOARD_REPLY(
+           	 FREE_BOR_REPLY_IDX,
+             FREE_BOR_IDX,
+             REPLY_TEXT,
+             REPLYER,
+             USER_ID,
+             SECRET_REPLY,
+             REG_DE
+           ) VALUES (
+             FREE_BOR_REPLY_SEQ.NEXTVAL,
+             #{freeBorIdx},
+             #{replyText},
+             #{replyer},
+             #{userId},
+             #{secretReply},
+             TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS ')
+           )
+       ]]>
+       /* com.co.kr.board.reply.controller.ReplyController.freeBoardReplyWrite */
+	</insert>
+	
+	<select id="freeBoardJsonListReply" resultType="com.co.kr.board.reply.vo.ReplyVo">
+		  SELECT
+           	 FREE_BOR_REPLY_IDX,
+             FREE_BOR_IDX,
+             REPLY_TEXT,
+             REPLYER,
+             R.USER_ID,
+             R.REG_DE
+            FROM FREE_BOARD_REPLY R, SH_USER_INFO U
+            WHERE R.REPLYER = U.USER_NM
+            	AND FREE_BOR_IDX = #{freeBorIdx}
+            ORDER BY FREE_BOR_REPLY_IDX
+		
+		
+      /* com.co.kr.board.reply.controller.ReplyController.freeBoardJsonListReply */
+	</select>
+	
+	<select id="freeBoardListReplyCount" parameterType="com.co.kr.board.reply.vo.ReplyVo" resultType="int">
+		  SELECT COUNT(FREE_BOR_IDX)
+			 FROM FREE_BOARD_REPLY
+		WHERE 1=1
+		AND FREE_BOR_IDX = #{freeBorIdx}
+		
+      /* com.co.kr.board.reply.controller.ReplyController.freeBoardListReplyCount */
+	</select> 
+	
+	<select id="freeBoardListReply" resultType="com.co.kr.board.reply.vo.ReplyVo">
+		 <include refid="paging_header" />
+		  SELECT
+           	 R.FREE_BOR_REPLY_IDX,
+             R.FREE_BOR_IDX,
+             R.REPLY_TEXT,
+             R.REPLYER,
+             R.USER_ID,
+             R.REG_DE,
+             R.UPDATE_DE,
+             R.SECRET_REPLY,
+             (SELECT USER_ID FROM FREE_BOARD WHERE FREE_BOR_IDX = R.FREE_BOR_IDX) AS WRITER 
+            FROM FREE_BOARD_REPLY R, FREE_BOARD F
+            WHERE R.FREE_BOR_IDX = F.FREE_BOR_IDX
+            	AND R.FREE_BOR_IDX = #{freeBorIdx}
+            ORDER BY FREE_BOR_REPLY_IDX
+            
+          <include refid="paging_footer" />
+		
+      /* com.co.kr.board.reply.controller.ReplyController.freeBoardListReply */
+	</select>
+	<delete id="replyOneDelete">
+			DELETE FROM FREE_BOARD_REPLY WHERE FREE_BOR_REPLY_IDX = #{freeBorReplyIdx}
+			
+       /* com.co.kr.board.reply.controller.ReplyController.replyOneDelete */
+	</delete>
+	<update id="replyOneUpdate" parameterType="com.co.kr.board.reply.vo.ReplyVo">
+			UPDATE FREE_BOARD_REPLY
+				SET REPLY_TEXT = #{replyText},
+					SECRET_REPLY = #{secretReply},
+					UPDATE_DE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+				WHERE FREE_BOR_REPLY_IDX = #{freeBorReplyIdx}
+				
+      /* com.co.kr.board.reply.controller.ReplyController.replyOneUpdate */
+	</update>
+</mapper>

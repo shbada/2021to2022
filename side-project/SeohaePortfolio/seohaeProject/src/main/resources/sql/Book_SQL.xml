@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookSql">
+    <select id="bookList" resultType="com.co.kr.book.vo.BookVo"> 
+        SELECT
+			RANK() OVER(ORDER BY PD_NO ASC) RM,
+			PD_NO,
+			PD_CG,
+			PD_INFO,
+			PD_URL,
+			PD_NAME,
+			PD_PRICE
+		FROM BOOK
+		WHERE
+		1=1
+		AND USE_YN = 'Y'
+		ORDER BY PD_NO DESC
+		
+	/* com.co.kr.book.dao.BookDao.bookList - 판매교재 목록 조회 */
+    </select>
+    
+    <insert id="insertBook" parameterType="com.co.kr.book.vo.BookVo" useGeneratedKeys="true" keyProperty="pdNo">
+         <selectKey keyProperty="pdNo" resultType="int" order="BEFORE">
+        SELECT BOOK_SEQ.NEXTVAL FROM DUAL
+    	</selectKey>
+		INSERT
+			INTO BOOK(
+				PD_NO,
+				PD_CG,
+				PD_NAME,
+				PD_PRICE,
+				PD_INFO,
+				PD_URL,
+				REG_DE
+			) VALUES(
+				#{pdNo},
+				#{pdCg},
+				#{pdName},
+				#{pdPrice},
+				#{pdInfo},
+				#{pdUrl},
+				TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			) 
+			
+	/* com.co.kr.book.dao.BookDao.insertBook - 판매교재 등록완료  */
+	</insert>
+	
+	<select id="bookDetail" resultType="com.co.kr.book.vo.BookVo">
+       SELECT
+			PD_NO,
+			PD_CG,
+			PD_URL,
+			PD_NAME,
+			PD_INFO,
+			PD_PRICE
+		FROM BOOK
+		WHERE
+		1=1
+		AND PD_NO = #{pdNo}
+		
+	/* com.co.kr.book.dao.BookDao.bookDetail - 판매교재 상세정보  */
+    </select>
+    
+    <update id="bookUpdateSave" parameterType="com.co.kr.book.vo.BookVo">
+		<![CDATA[
+			UPDATE BOOK
+				SET 
+					PD_NAME = #{pdName},
+					PD_PRICE = #{pdPrice},
+					PD_INFO = #{pdInfo},
+					PD_URL = #{pdUrl}
+				WHERE PD_NO = #{pdNo}
+		]]>
+		
+	/* com.co.kr.book.dao.BookDao.bookUpdateSave - 판매교재 수정완료  */
+	</update>
+	
+	 <delete id="bookDelete" parameterType="int">
+        DELETE FROM BOOK WHERE PD_NO = #{pdNo}
+        
+    /* com.co.kr.book.dao.BookDao.bookDelete - 판매교재 삭제  */
+    </delete>
+	
+    <select id="fileInfo" resultType="String">
+        SELECT     
+        PD_URL
+       		FROM BOOK
+       			WHERE PD_NO = #{pdNo}
+    
+    /* com.co.kr.book.dao.BookDao.fileInfo - 판매교재  파일정보  */
+    </select>
+</mapper>

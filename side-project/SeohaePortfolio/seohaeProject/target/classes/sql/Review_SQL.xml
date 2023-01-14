@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewSql">
+<insert id="insertReview"  parameterType="com.co.kr.review.vo.ReviewVo" useGeneratedKeys="true" keyProperty="no">
+	<selectKey keyProperty="no" resultType="int" order="BEFORE">
+        SELECT REVIEW_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+		INSERT
+			INTO REVIEW(
+				NO,
+				SUBJECT,
+				WRITER,
+				REVIEW_LEVEL,
+				CONTENTS,
+				<if test='url !=null and url != "" '>
+				URL,
+				</if>
+				REG_DE,
+				PD_NO
+			) VALUES(
+				seq_review.NEXTVAL, 
+				#{subject},
+				#{writer},
+				#{reviewLevel},
+				#{contents},
+				<if test='url !=null and url != "" '>
+				#{url},
+				</if>
+				TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+				#{pdNo}
+			) 
+	</insert>
+	
+	<select id="getReviewCount" resultType="int">
+		SELECT COUNT(*) FROM REVIEW WHERE 1=1
+		<if test="search!=null and search!='' ">
+		AND (SUBJECT LIKE '%' || #{search} || '%' OR WRITER LIKE '%' || #{search} || '%')
+		</if>
+	</select>
+	
+	<select id="review" parameterType="com.co.kr.review.vo.ReviewVo" resultType="com.co.kr.review.vo.ReviewVo">
+		SELECT 
+   			A.RM,
+			A.NO,
+			A.SUBJECT, 
+			A.REVIEW_LEVEL,
+			A.CONTENTS, 
+			A.WRITER,
+			A.URL,
+			A.REG_DE
+		FROM (
+      SELECT ROWNUM rnum,
+      S.*
+      FROM
+      (
+        SELECT
+          RANK() OVER(ORDER BY NO ASC)RM,
+          R.NO, 
+          R.SUBJECT, 
+          R.REVIEW_LEVEL,
+          R.CONTENTS, 
+          R.WRITER,
+          R.URL,
+          R.REG_DE
+        FROM REVIEW R
+        WHERE
+          1 = 1
+         <if test='search !=null and search != "" '>
+         	AND (SUBJECT LIKE '%' || #{search} || '%' OR WRITER LIKE '%' || #{search} || '%')
+         </if>
+         <if test="pdNo !=null and pdNo !='' ">
+         	AND PD_NO = #{pdNo}
+         </if>
+        AND USE_YN = 'Y'
+        ORDER BY NO DESC
+      ) S
+    ) A
+    WHERE rnum BETWEEN #{startRowNo} and #{endRowNo}
+	</select>
+	
+	<select id="bookDetail" parameterType="com.co.kr.review.vo.ReviewVo" resultType="com.co.kr.book.vo.BookVo">
+		SELECT
+			P.PD_NO,
+			P.PD_NAME,
+			P.PD_URL,
+			P.PD_INFO,
+			P.PD_PRICE
+				FROM BOOK P
+					WHERE P.PD_NO = #{pdNo}
+					
+	/* com.co.kr.cart.dao.CartDao.bookDetail - 상품 정보 가져오기 */
+	</select>
+
+</mapper>

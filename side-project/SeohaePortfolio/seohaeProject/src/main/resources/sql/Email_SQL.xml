@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mailSql">
+   <select id="findAccount" resultType="com.co.kr.user.vo.UserVo">
+		SELECT USER_ID
+			FROM USERS
+		WHERE USER_EMAIL = #{userEmail}
+		
+		/*com.co.kr.user.dao.userDao.findAccount - 아이디 찾기 */
+	</select>
+	
+	<update id="userChangePwUpdate">
+		UPDATE USERS
+			  SET 
+			  	  USER_PW = #{userPw}
+			WHERE USER_ID = #{userId}
+		/*com.co.kr.user.dao.userDao.userChangePwUpdate - 회원 비밀번호 변경 */
+	</update>
+</mapper>

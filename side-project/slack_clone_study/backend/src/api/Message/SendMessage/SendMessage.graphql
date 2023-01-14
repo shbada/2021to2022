@@ -1,0 +1,13 @@
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  SendMessage(
+    nickname: String!
+    contents: String!
+    thumbnail: String!
+    innerChannelId: Int!
+  ): SendMessageResponse!
+}

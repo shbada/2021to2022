@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oneSql">
+	<select id="oneList" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="com.co.kr.oneto.one.vo.OneVo">
+	SELECT
+ 			A.REQ_NO,
+			A.REQ_TITLE,
+			A.USER_ID,
+			A.REQ_DESC,
+     		( SUBSTR(REG_DE, 0, 4)||'-'|| SUBSTR(REG_DE, 5, 2)||'-'||SUBSTR(REG_DE, 7, 2)) AS REG_DE,
+            A.REQ_RE_YN,
+            A.REQ_RE_YN,
+			B.REQ_RE_NO,
+			B.REQ_RE_DESC,
+     		( SUBSTR(REG_RE_DE, 0, 4)||'-'|| SUBSTR(REG_RE_DE, 5, 2)||'-'||SUBSTR(REG_RE_DE, 7, 2)) AS REG_RE_DE,
+            B.USE_YN
+		FROM ONETOONE A LEFT OUTER JOIN ONETOONE_RE B
+			ON A.REQ_NO = B.REQ_RE_NO
+			WHERE A.USER_ID = #{userId}
+		ORDER BY A.REQ_NO DESC
+      
+      /* com.co.kr.oneto.one.controller.OneController.oneList - 게시판 리스트 조회*/
+	</select>
+	
+	<select id="oneListCount" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="int">
+		SELECT COUNT(O.REQ_NO)
+			 FROM ONETOONE O JOIN ONETOONE_RE R
+				ON 1=1
+				AND USER_ID = #{userId}
+ 
+     /* com.co.kr.oneto.one.controller.OneController.oneListCount -게시글 전체 개수 가져오기 */
+      
+	</select>
+	
+	<insert id="oneWriteSave" parameterType="com.co.kr.oneto.one.vo.OneVo">
+      <![CDATA[
+         INSERT 
+           INTO ONETOONE(
+             REQ_NO,
+             REQ_TITLE,
+             USER_ID,
+             REQ_DESC,
+             REG_DE
+           ) VALUES (
+             (SELECT NVL(MAX(REQ_NO)+1,1) FROM ONETOONE),
+             #{reqTitle},
+             #{userId},
+             #{reqDesc},
+             TO_CHAR(SYSDATE, 'YYYYMMDD')
+           )
+       ]]>
+       /* com.co.kr.oneto.one.controller.OneController.oneWriteSave -작성된 문의내역 저장*/
+    </insert>
+	
+	<select id="freeBoardIdx" resultType="int">
+			SELECT NVL(MAX(REQ_NO), 1) FROM ONETOONE
+       /* com.co.kr.oneto.one.controller.OneController.freeBoardIdx -게시글 번호 가져오기 */
+	</select>
+	
+	<select id="oneDetail" parameterType="com.co.kr.oneto.one.vo.OneVo" resultType="com.co.kr.oneto.one.vo.OneVo">
+			SELECT  F.REQ_NO,
+                    F.REQ_TITLE,
+                    F.USER_ID,
+                    F.REQ_DESC,
+                    F.REG_DE,
+                    F.REQ_RE_YN
+                FROM ONETOONE F
+	                WHERE 1=1
+	                <if test="reqNo != '' and reqNo != null">
+	                AND REQ_NO = #{reqNo}
+	                </if>
+       /* com.co.kr.oneto.one.controller.OneController.oneDetail -문의내역글 상세페이지*/
+	</select>
+</mapper>

@@ -1,0 +1,18 @@
+spring:
+  # Postgres Database
+  datasource:
+    url: jdbc:postgresql://localhost:5432/studyolledb
+    username: studyolle
+    password: studyolle
+    driver-class-name: org.postgresql.Driver
+  # Thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
