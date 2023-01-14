@@ -1,0 +1,23 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: apigateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE  # 유레카에 등록되어있는 name
+          predicates: # 조건절 (사용자 정보의 path 정보가 아래와 같으면 무조건 8081로 보낸다)
+            - Path=/userService/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/orderService/**
+eureka:
+  client:
+    fetch-registry: true  # true: 유레카 등록
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

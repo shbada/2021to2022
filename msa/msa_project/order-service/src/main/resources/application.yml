@@ -1,0 +1,53 @@
+server:
+  port: 0  # 동적 포트
+  servlet:
+    context-path: /orderService
+
+spring:
+  application:
+    name: order-service  # eureka 에서 보여지는 service application 명은 대소문자 구분 없음
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true # 외부에서 접속 허용
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: create  # 자동으로 테이블 생성 (drop->create) # 선언 안할시, 스프링부트는 create-drop으로 실행 (마지막에 drop 한다-초기화)
+    properties:
+      hibernate:
+        show_sql: true  # 실행 SQL (System.out) - 운영에서 찍으면 안되므로 주석처리
+        format_sql: true
+
+eureka:
+  # 동적 포트로 인한 선언
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true  # 등록
+    fetch-registry: true
+    service-url: # user-service 는 eureka 클라이언트 역할인데, 서버의 위치를 지정
+      defaultZone: http://127.0.0.1:8761/eureka  # eureka url
+
+
+logging.level:
+  org.hibernate.SQL: debug # hibernate 실행 SQL (logger)
+  # 파라미터 남기기 (이것만 쓰면 binding param 이라고 로그가 남는데, 더 편하게 사용을 위해 gradle에 추가 (com.github.gavlyukovskiy))
+  org.hibernate.type: trace
+#  org.hibernate.type: trace
+
+elasticsearch:
+  host: 127.0.0.1
+  port: 9200
+
+# feign URL
+feign:
+  elasticsearch-api:
+    url: http://localhost:9200

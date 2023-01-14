@@ -1,0 +1,109 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: apigateway-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter   # GlobalFilter.java
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          #uri: http://localhost:8081/ # localhost:8081/first-service/**
+          uri: lb://MY-FIRST_SERVICE  # 유레카에 등록되어있는 name
+          predicates: # 조건절 (사용자 정보의 path 정보가 아래와 같으면 무조건 8081로 보낸다)
+            - Path=/first-service/**
+          filters:
+            #            - AddRequestHeader=first-request, first-request-header2  # key, value
+            #            - AddResponseHeader=first-response, first-response-header2
+            - CustomFilter  # CustomFilter.java 파일로 지정
+        - id: second-service
+          #uri: http://localhost:8082/ # localhost:8081/second-service/**
+          uri: lb://MY-SECOND_SERVICE  # 유레카에 등록되어있는 name
+          predicates: # 조건절 (사용자 정보의 path 정보가 아래와 같으면 무조건 8082로 보낸다)
+            - Path=/second-service/**
+          filters:
+            #            - AddRequestHeader=second-request, second-request-header2  # key, value
+            #            - AddResponseHeader=second-response, second-response-header2
+            - name: CustomFilter  # CustomFilter.java 파일로 지정
+            - name: LoggingFilter  # LoggingFilter.java 파일로 지정
+              args: # 매개변수 적으려면 위에 name: 을 적어야한다.
+                baseMessage: Spring Cloud Gateway Global Filter
+                preLogger: true
+                postLogger: true
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login # 이 URL 로 들어오면 아래 filter 설정
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie # 요청되어진 헤더값 삭제 > POST 전달값은 매번 새로운 데이터로 인식하기 위해서
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # user-service 를 제거하겠다는 의미 (service 에 계속 url 을 적지않기위해)
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users # 이 URL 로 들어오면 아래 filter 설정
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie # 요청되어진 헤더값 삭제 > POST 전달값은 매번 새로운 데이터로 인식하기 위해서
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # user-service 를 제거하겠다는 의미 (service 에 계속 url 을 적지않기위해)
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/** # 이 URL 로 들어오면 아래 filter 설정
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie # 요청되어진 헤더값 삭제 > POST 전달값은 매번 새로운 데이터로 인식하기 위해서
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # user-service 를 제거하겠다는 의미 (service 에 계속 url 을 적지않기위해)
+            - AuthorizationHeaderFilter  # filter 추가 (jwt token)
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/acturator/**
+            - Method=GET, POST  # GET, POST 모두 사용
+          filters:
+            - RemoveRequestHeader=Cookie # 요청되어진 헤더값 삭제 > POST 전달값은 매번 새로운 데이터로 인식하기 위해서
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # user-service 를 제거하겠다는 의미 (service 에 계속 url 을 적지않기위해)
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-service/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
+
+eureka:
+  client:
+    fetch-registry: true  # true: 유레카 등록
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+# gateway 는 비동기 방식이라 Tomcat 이 아닌 Netty 가 띄어진다.
+
+# service 와 동일하게
+token:
+  secret: user_token
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, bursefresh  # httptrace 사용위해 appliction.java 에 bean 등록 필요 (httpTraceRepository 메서드)
+        #bursefresh (POST) : response http status 204
+
