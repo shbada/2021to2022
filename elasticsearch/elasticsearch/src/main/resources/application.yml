@@ -1,0 +1,15 @@
+elasticsearch:
+  host: 127.0.0.1
+  port: 9200
+
+spring:
+  h2:
+    console:
+      enabled: true
+
+# feign URL
+feign:
+  open-api:
+    url: http://openapi.seoul.go.kr:8088/
+  elk-api:
+    url: http://localhost:9200
