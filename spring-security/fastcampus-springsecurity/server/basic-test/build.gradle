@@ -1,0 +1,9 @@
+
+
+dependencies {
+    implementation("$boot:spring-boot-starter-web")
+
+    // 참조가 되도록 추가
+    compile project(":comp-common-utils")
+}
+

@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.jwt'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-devtools")
+    implementation("com.auth0:java-jwt:3.18.2")  // oauth0
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+	implementation("com.fasterxml.jackson.core:jackson-annotations")
+//    implementation("io.jsonwebtoken:jjwt:0.9.1") // okta
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.h2database:h2")
+
+	compileOnly("org.projectlombok:lombok")
+	testCompileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
+	testAnnotationProcessor("org.projectlombok:lombok")
+}
+
+test {
+	useJUnitPlatform()
+}
