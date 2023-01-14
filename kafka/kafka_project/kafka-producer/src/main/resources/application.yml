@@ -1,0 +1,8 @@
+server:
+  port: 5050  # 동적 포트
+  servlet:
+    context-path: /kafkaProducer
+
+spring:
+  application:
+    name: kafka-producer

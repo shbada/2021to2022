@@ -1,0 +1,22 @@
+# record-listener
+#spring:
+#  kafka:
+#    consumer:
+#      bootstrap-servers: localhost:9092
+
+# batch-listener
+#spring:
+#  kafka:
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#    listener:
+#      type: BATCH
+
+# batch-commit-listener
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: my-kafka:9092
+    listener:
+      type: BATCH
+      ack-mode: MANUAL_IMMEDIATE
