@@ -3,7 +3,7 @@
 #### 1회독. 강의 수강 완료 (2021/11/14 ~ 2022/01/29)
 #### 2회독. 코드 복습 및 '자바 ORM 표준 JPA 프로그래밍' 책 내용 적용하면서 프로젝트 계속해서 구현하기
 #### 3회독. 2회독 중지 / 해당 프로젝트를 Kotlin 으로 리팩토링하기 (Kotlin + SpringBoot + DDD)
-- https://github.com/seohaem/kotlin-project
+- https://github.com/seohaebada/kotlin-project
 
 ---
 ### 1회독. 강의 수강 

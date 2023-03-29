@@ -2,7 +2,7 @@
 [동시성 제어] 프로젝트로 동시성제어 공부하기
 
 ### 강의 github
-- https://github.com/seohaem/concurrency-stock
+- https://github.com/seohaebada/concurrency-stock
   - 위 내용을 프로젝트로 실습해보는 과정
 
 ### package
